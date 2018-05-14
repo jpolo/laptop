@@ -1,0 +1,21 @@
+---
+- name: Ensure apt-transport-https is installed.
+  apt: name=apt-transport-https state=present
+
+- name: Add Atom apt key.
+  apt_key:
+    url: https://packagecloud.io/AtomEditor/atom/gpgkey
+    state: "{{ atom_package_state }}"
+
+- name: Add Atom repositories.
+  apt_repository:
+    #repo:  "deb https://packagecloud.io/slacktechnologies/slack/{{ansible_distribution|lower}} {{ ansible_distribution_release }} main"
+    repo: "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main"
+    update_cache: yes
+    state: present
+    mode: 644
+
+- name: Ensure Atom package is present
+  apt:
+    name: atom
+    state: "{{ atom_package_state }}"

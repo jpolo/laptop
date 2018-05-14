@@ -1,0 +1,14 @@
+---
+# tasks file for ansible-role-ide
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "../vars/{{ ansible_distribution }}.yml"
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/default.yml"
+  when: mercurial_package_name is not defined
+
+- name: Install Mercurial
+  package:
+    name: "{{ mercurial_package_name }}"
+    state: "{{mercurial_package_state}}"

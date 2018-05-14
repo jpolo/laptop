@@ -1,0 +1,53 @@
+galaxy_info:
+  author: jpolo
+  description:
+  company: Auchan Direct
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+  license: license (GPLv2, CC-BY, etc)
+  min_ansible_version: 2.0
+  platforms:
+  - name: EL
+    versions:
+    - all
+  - name: Fedora
+    versions:
+    - all
+  - name: opensuse
+    versions:
+    - all
+  #- name: SmartOS
+  #  versions:
+  #  - all
+  #  - any
+  - name: Windows
+    versions:
+    - all
+  #- name: GenericBSD
+  #  versions:
+  #  - all
+  #  - any
+  - name: FreeBSD
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: SLES
+    versions:
+    - all
+  #- name: GenericLinux
+  #  versions:
+  #  - all
+  #  - any
+  - name: Debian
+    versions:
+    - all
+
+  galaxy_tags:
+    - git
+    - scm
+
+dependencies: []

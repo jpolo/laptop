@@ -1,0 +1,41 @@
+---
+- name: Ensure requirements are installed
+  apt:
+    name: "{{ apt_requirement_item }}"
+    state: present
+  with_items:
+      - unzip
+      - python-httplib2
+      - libxi6
+      - libgconf-2-4
+      - libnss3
+      - libfontconfig1
+  loop_control:
+    loop_var: apt_requirement_item
+
+- name: Check current ChromeDriver version
+  shell: /usr/local/bin/chromedriver --version | sed -ne 's/[^0-9]*\(\([0-9]\.\)\{0,4\}[0-9][^.]\).*/\1/p'
+  failed_when: no
+  changed_when: no
+  register: chromedriver_local_version
+
+- name: Get the latest release for ChromeDriver
+  uri:
+    url: "{{chromedriver_url}}/LATEST_RELEASE"
+    return_content: yes
+  register: chromedriver_webpage
+
+- name: override ChromeDriver version variable when latest is desired
+  set_fact:
+    chromedriver_version: "{{ chromedriver_webpage.content | trim }}"
+  when: chromedriver_version == "latest"
+
+- name: Install ChromeDriver when absent or current version is not desired version
+  unarchive:
+    src: "{{chromedriver_url}}/{{ chromedriver_version }}/chromedriver_linux{{ '64' if ansible_architecture == 'x86_64' else '32' }}.zip"
+    dest: /usr/local/bin
+    copy: no
+    mode: 0755
+  become: true
+  when:
+    - not chromedriver_local_version.stdout or chromedriver_local_version.stdout is version_compare(chromedriver_version ,'!=')

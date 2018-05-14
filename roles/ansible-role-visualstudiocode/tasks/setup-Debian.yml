@@ -1,0 +1,29 @@
+---
+- name: Ensure apt-transport-https is installed.
+  apt:
+    name: "{{ apt_transport_https_item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+  loop_control:
+    loop_var: apt_transport_https_item
+
+- name: Add Microsoft apt key.
+  apt_key:
+    url: http://packages.microsoft.com/keys/microsoft.asc
+    state: present
+    id: EB3E94ADBE1229CF
+
+- name: Add Microsoft repository.
+  apt_repository:
+    # repo:  "deb https://packages.microsoft.com/repos/vscode/{{ansible_distribution|lower}} {{ ansible_distribution_release }} main"
+    repo:  "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    update_cache: yes
+    state: present
+    mode: 644
+
+- name: Ensure VisualStudioCode package is present
+  apt:
+    name: "{{ visualstudiocode_package_name }}"
+    state: "{{ visualstudiocode_package_state }}"

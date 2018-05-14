@@ -1,0 +1,8 @@
+---
+slack_arch: "{% if ansible_architecture == 'x86_64' %}amd64{% else %}i386{% endif %}"
+
+slack_deb : 'slack-desktop-{{slack_version}}-{{slack_arch}}.deb'
+slack_deb_url : '{{slack_mirror_linux}}/{{slack_deb}}'
+
+slack_rpm : 'slack-{{slack_version}}-0.1.fc21.{{ansible_architecture}}.rpm'
+slack_rpm_url : '{{slack_mirror_linux}}/{{slack_rpm}}'

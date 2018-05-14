@@ -1,0 +1,99 @@
+---
+- hosts: localhost
+  connection: local
+  remote_user: root
+  vars:
+    github_access_token: ""
+    user_workspace: "{{ansible_env.HOME}}/Workspace"
+    ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
+    ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
+    nodejs_version: '8.x'
+
+  roles:
+    - { role: ansible-role-pip, become: true }
+    - { role: ansible-role-git, become: true }
+    - { role: ansible-role-mercurial, become: true }
+    - { role: ansible-role-buildessential, become: true }
+    - { role: ansible-role-chromedriver, become: true }
+    - { role: ansible-role-docker, become: true, ignore_errors: yes }
+    - { role: ansible-role-zsh, become: true }
+    - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
+    - { role: ansible-role-nodejs, become: true, ignore_errors: yes }
+    - { role: ansible-role-slack, become: true, ignore_errors: yes }
+    - { role: ansible-role-java, become: true, ignore_errors: yes }
+    - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes }
+    - { role: ansible-role-atom, become: true, ignore_errors: yes }
+    - { role: ansible-role-yarn, become: true, ignore_errors: yes }
+    - { role: ansible-role-docker-compose, become: true }
+  tasks:
+    - name: Add SSH Known Hosts
+      known_hosts:
+        path: /etc/ssh/ssh_known_hosts
+        name: "{{ item }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item) }}"
+      with_items:
+        - github.com
+        - bitbucket.org
+      become: true
+
+    - name: Install DEV packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python3.6
+        - python3.6-dev
+      become: true
+
+    - name: PIP Install
+      pip:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - pipenv
+      become: true
+
+    - name: Ensure ~/Workspace exists
+      file: >
+          state=directory
+          name="{{ user_workspace }}"
+          owner={{ ansible_env.USER }}
+          group={{ ansible_env.USER }}
+
+    - name: Install APM packages
+      apm:
+        name: "{{item}}"
+        state: present
+      with_items:
+        - atom-ide-ui
+        - sync-settings
+        - ide-css
+        - ide-flowtype
+        - ide-php
+        - ide-typescript
+        - ide-python
+        - ide-reason
+        - autocomplete-json
+        - docblockr
+        - editorconfig
+        - file-icons
+        - language-babel
+        - language-reason
+        - language-robot-framework
+        - linter
+        - linter-eslint
+        - linter-jsonlint
+        - linter-markdown
+        - linter-flake8
+        - minimap
+        - sort-lines
+        - teletype
+
+    - name: Create SSH key
+      command: >
+          ssh-keygen -t rsa -b 4096 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_rsa }}
+          creates={{ ssh_id_rsa_pub }}
+
+    - name: Read SSH public key to authorize
+      shell: cat {{ssh_id_rsa_pub}}
+      register: ssh_pub_key

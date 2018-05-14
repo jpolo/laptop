@@ -1,0 +1,6 @@
+---
+- name: Download Slack RPM
+  get_url: url='{{slack_rpm_url}}' dest='/tmp/{{slack_rpm}}'
+
+- name: Install Slack
+  yum: name='/tmp/{{slack_rpm}}' state=present

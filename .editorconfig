@@ -1,0 +1,60 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+continuation_indent_size = 4
+curly_bracket_next_line = false
+end_of_line = lf
+indent_brace_style = Stroustrup
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+spaces_around_brackets = outside
+spaces_around_operators = true
+trim_trailing_whitespace = true
+
+# Python
+[*.{py,robot}]
+indent_style = space
+indent_size = 4
+
+# Javascript
+[*.{js,jsx,ts,tsx}]
+indent_style = space
+indent_size = 2
+max_line_length = 120
+quote_type = single
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+# CSS
+[*.{css,scss,less}]
+indent_style = space
+indent_size = 2
+max_line_length = 120
+quote_type = single
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab
+
+# Windows files
+[{*.bat,*reg,*.ps1,*.vbs,*.cs,*.fs,*.ahk}]
+end_of_line = crlf
+
+# Markdown
+[*.{md,mdwn,mdown,markdown,apib}]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = false

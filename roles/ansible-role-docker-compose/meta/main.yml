@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  author: jpolo
+  description: Docker Compose installation
+  company: Auchan Direct
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.2
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
+    - name: Debian
+      versions:
+      - all
+    - name: Ubuntu
+      versions:
+      - all
+  galaxy_tags:
+    - docker
+    - docker.io
+    - docker-compose
+  dependencies: []

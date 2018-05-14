@@ -1,0 +1,4 @@
+---
+docker_compose_package_name: docker-compose
+docker_compose_package_version:
+docker_compose_package_state: present

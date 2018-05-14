@@ -1,0 +1,27 @@
+---
+# tasks file for ansible-role-shell
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "../vars/{{ ansible_distribution }}.yml"
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/default.yml"
+  when: zsh_package_name is not defined
+
+- name: Install ZSH package
+  package:
+    name: "{{ zsh_package_name }}"
+    state: "{{zsh_package_state}}"
+
+- name: Configure ZSH
+  template:
+    src=zshrc.j2
+    dest={{ ansible_env.HOME }}/.zshrc
+    backup=yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Configure Shell to ZSH
+  user:
+    name={{ ansible_env.USER }}
+    shell=/bin/zsh
+  become_user: "{{ ansible_env.USER }}"

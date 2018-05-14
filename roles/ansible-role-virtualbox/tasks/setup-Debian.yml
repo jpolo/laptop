@@ -1,0 +1,26 @@
+- name: Ensure apt-transport-https is installed.
+  apt:
+    name: "{{ apt_transport_https_item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+  loop_control:
+    loop_var: apt_transport_https_item
+
+- name: Add Virtualbox apt key.
+  apt_key:
+    url: "{{virtualbox_apt_key_url}}"
+    state: present
+
+- name: Add Virtualbox repositories.
+  apt_repository:
+    repo: "{{virtualbox_apt_repository}}"
+    update_cache: yes
+    state: present
+    mode: 644
+
+- name: Install Virtualbox
+  package:
+     name: "{{ virtualbox_package_name }}"
+     state: "{{ virtualbox_package_state }}"

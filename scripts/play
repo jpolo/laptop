@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(dirname "$0")"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+CONFIG_DIR="$ROOT_DIR/etc"
+TEST_DIR="$ROOT_DIR/tests"
+ROLE_DIR="$ROOT_DIR/roles"
+ROLE_TARGET_DIR="$ROOT_DIR/target/roles"
+
+
+# Install ansible
+source "$SCRIPT_DIR/_functions.sh"
+install_ansible
+
+# Install local roles
+mkdir -p $ROLE_TARGET_DIR
+cp -a $ROLE_DIR/. $ROLE_TARGET_DIR
+
+# Install dependencies
+{ echo '[defaults]'; echo "roles_path = $ROLE_TARGET_DIR"; } > $ROOT_DIR/ansible.cfg
+# ansible-galaxy install -r $CONFIG_DIR/requirements.yml -p $ROLE_TARGET_DIR
+ansible-playbook -i $CONFIG_DIR/inventory $CONFIG_DIR/main.yml --ask-become-pass

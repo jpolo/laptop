@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: jpolo
+  description: ChromeWebDriver installation
+  company: Auchan Direct
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.2
+  platforms:
+    - name: Debian
+      versions:
+      - all
+    - name: Ubuntu
+      versions:
+      - all
+  galaxy_tags:
+    - npm
+    - yarn
+  dependencies: []
