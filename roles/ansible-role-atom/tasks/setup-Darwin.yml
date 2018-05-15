@@ -1,0 +1,5 @@
+- name: Install Atom
+  homebrew_cask:
+    name: "atom"
+    state: "{{atom_package_state}}"
+  become: false
