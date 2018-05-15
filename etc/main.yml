@@ -13,7 +13,6 @@
     - { role: ansible-role-git, become: true }
     - { role: ansible-role-mercurial, become: true }
     - { role: ansible-role-buildessential, become: true }
-    - { role: ansible-role-chromedriver, become: true }
     - { role: ansible-role-docker, become: true, ignore_errors: yes }
     - { role: ansible-role-zsh, become: true }
     - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
@@ -23,6 +22,7 @@
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes }
     - { role: ansible-role-atom, become: true, ignore_errors: yes }
     - { role: ansible-role-yarn, become: true, ignore_errors: yes }
+    - { role: ansible-role-chromedriver, become: true }
     - { role: ansible-role-pip, become: true }
     - { role: ansible-role-docker-compose, become: true }
   tasks:
