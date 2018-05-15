@@ -53,10 +53,22 @@ install_ansible_deb()
   sudo apt-get install -qq ansible
 }
 
+install_ansible_macos()
+{
+  # Install Homebrew
+  if ! [ -x "$(command -v brew)" ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  check_ansible || brew install ansible
+}
+
 install_ansible_all()
 {
-  if [ -n "$(which apt-get)" ]; then
+  if [ -x "$(command -v apt-get)" ]; then
     install_ansible_deb
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    install_ansible_macos
   else
     return 1
   fi
