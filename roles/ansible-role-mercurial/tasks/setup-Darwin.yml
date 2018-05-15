@@ -1,0 +1,5 @@
+- name: Install Mercurial
+  package:
+    name: "mercurial"
+    state: "{{mercurial_package_state}}"
+  become: false
