@@ -1,0 +1,4 @@
+- name: Install Java
+  package:
+    name: "openjdk-8-jdk"
+    state: "{{java_package_state}}"

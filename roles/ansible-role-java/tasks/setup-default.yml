@@ -1,0 +1,4 @@
+- name: Install Java
+  package:
+    name: "java"
+    state: "{{java_package_state}}"
