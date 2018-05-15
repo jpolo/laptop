@@ -1,3 +1,0 @@
----
-# tasks file for ansible-role-git
-git_package_name: git
