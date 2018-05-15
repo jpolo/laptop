@@ -1,0 +1,5 @@
+- name: Install YARN
+  package:
+    name: "yarn"
+    state: "{{yarn_package_state}}"
+  become: false
