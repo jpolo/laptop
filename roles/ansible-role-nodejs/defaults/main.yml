@@ -3,6 +3,8 @@
 # Version numbers from Nodesource: https://github.com/nodesource/distributions
 nodejs_version: "4.x"
 
+nodejs_package_state: "present"
+
 # The user for whom the npm packages will be installed.
 # nodejs_install_npm_user: username
 
