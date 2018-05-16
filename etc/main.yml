@@ -22,9 +22,9 @@
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes }
     - { role: ansible-role-atom, become: true, ignore_errors: yes }
     - { role: ansible-role-yarn, become: true, ignore_errors: yes }
-    - { role: ansible-role-chromedriver, become: true }
-    - { role: ansible-role-pip, become: true }
-    - { role: ansible-role-docker-compose, become: true }
+    #- { role: ansible-role-chromedriver, become: true }
+    #- { role: ansible-role-pip, become: true }
+    #- { role: ansible-role-docker-compose, become: true }
   tasks:
     - name: Add SSH Known Hosts
       known_hosts:
@@ -36,29 +36,11 @@
         - bitbucket.org
       become: true
 
-    - name: Install DEV packages
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - python3.6
-        - python3.6-dev
-      become: true
-
-    - name: PIP Install
-      pip:
-        name: "{{item}}"
-        state: latest
-      with_items:
-        - pipenv
-      become: true
-
     - name: Ensure ~/Workspace exists
       file: >
           state=directory
           name="{{ user_workspace }}"
           owner={{ ansible_env.USER }}
-          group={{ ansible_env.USER }}
 
     - name: Install APM packages
       apm:
