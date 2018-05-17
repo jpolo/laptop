@@ -2,7 +2,7 @@
 galaxy_info:
   author: jpolo
   description: Node.js installation for Linux
-  company: Auchan
+  company: 
   license: "license (BSD, MIT)"
   min_ansible_version: 1.2
   platforms:
