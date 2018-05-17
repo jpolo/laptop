@@ -1,5 +1,5 @@
-- name: Install NodeJS
+- name: Install PHP Composer
   package:
-    name: "node@8"
-    state: "{{nodejs_package_state}}"
+    name: "composer"
+    state: "{{composer_package_state}}"
   become: false
