@@ -55,6 +55,11 @@ install_ansible_deb()
 
 install_ansible_macos()
 {
+  # Install XCode
+  if ! [ -x "$(command -v gcc)" ]; then
+    xcode-select --install
+  fi
+
   # Install Homebrew
   if ! [ -x "$(command -v brew)" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
