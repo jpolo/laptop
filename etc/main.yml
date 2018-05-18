@@ -11,7 +11,7 @@
 
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
-    - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['always'] }
+    - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-git, become: true, ignore_errors: yes, tags: ['scm'] }
     - { role: ansible-role-mercurial, become: true, ignore_errors: yes, tags: ['scm'] }
     - { role: ansible-role-slack, become: true, ignore_errors: yes }
@@ -27,6 +27,14 @@
     #- { role: ansible-role-pip, become: true }
     #- { role: ansible-role-docker-compose, become: true }
   tasks:
+    - name: Install iTerm2
+      homebrew_cask:
+        name: "iterm2"
+        state: present
+      become: false
+      when: ansible_os_family == 'Darwin'
+      tags: ['console']
+
     - name: Add SSH Known Hosts
       known_hosts:
         path: /etc/ssh/ssh_known_hosts
@@ -43,13 +51,25 @@
           name="{{ user_workspace }}"
           owner={{ ansible_env.USER }}
 
-    - name: Install APM packages
+    - name: Install Common APM packages
       apm:
         name: "{{item}}"
         state: present
       with_items:
         - atom-ide-ui
+        - editorconfig
+        - file-icons
+        - linter
+        - minimap
+        - sort-lines
         - sync-settings
+        - teletype
+      tags: ['ide']
+    - name: Install Specific APM packages
+      apm:
+        name: "{{item}}"
+        state: present
+      with_items:
         - ide-css
         - ide-flowtype
         - ide-php
@@ -58,19 +78,13 @@
         - ide-reason
         - autocomplete-json
         - docblockr
-        - editorconfig
-        - file-icons
         - language-babel
         - language-reason
         - language-robot-framework
-        - linter
         - linter-eslint
         - linter-jsonlint
         - linter-markdown
         - linter-flake8
-        - minimap
-        - sort-lines
-        - teletype
 
     - name: Create SSH key
       command: >
