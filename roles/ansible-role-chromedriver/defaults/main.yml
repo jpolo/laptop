@@ -1,3 +1,4 @@
 ---
 chromedriver_version: latest
 chromedriver_url: http://chromedriver.storage.googleapis.com
+chromedriver_package_state: present

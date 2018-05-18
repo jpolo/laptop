@@ -1,0 +1,5 @@
+- name: Install ChromeDriver
+  homebrew_cask:
+    name: "chromedriver"
+    state: "{{chromedriver_package_state}}"
+  become: false
