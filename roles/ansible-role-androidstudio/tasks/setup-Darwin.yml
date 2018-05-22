@@ -1,0 +1,5 @@
+- name: Install Android Studio
+  homebrew_cask:
+    name: "android-studio"
+    state: "{{androidstudio_package_state}}"
+  become: false

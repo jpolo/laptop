@@ -21,6 +21,7 @@
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java'] }
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-atom, become: true, ignore_errors: yes, tags: ['ide'] }
+    - { role: ansible-role-androidstudio, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-yarn, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
     - { role: ansible-role-chromedriver, become: true }
