@@ -18,7 +18,7 @@
     - { role: ansible-role-docker, become: true, ignore_errors: yes }
     - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
     - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
-    - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java'] }
+    - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-atom, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-androidstudio, become: true, ignore_errors: yes, tags: ['ide'] }

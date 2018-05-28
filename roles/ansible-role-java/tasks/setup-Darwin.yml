@@ -1,4 +1,4 @@
 - name: Install Java
   homebrew_cask:
-    name: "java"
+    name: "caskroom/versions/java8"
     state: "{{java_package_state}}"
