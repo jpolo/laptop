@@ -1,3 +1,4 @@
 ---
-# java_package_name: 
+# java_package_name:
 java_package_state: present
+#java_package_version: 8

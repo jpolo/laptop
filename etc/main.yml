@@ -8,6 +8,7 @@
     ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
     ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
     nodejs_version: '8.x'
+    java_package_version: '8'
 
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
