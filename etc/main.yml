@@ -7,7 +7,7 @@
     user_workspace: "{{ansible_env.HOME}}/Workspace"
     ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
     ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
-    nodejs_version: '8.x'
+    nodejs_package_version: '8'
     java_package_version: '8'
 
   roles:
