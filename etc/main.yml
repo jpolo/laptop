@@ -25,6 +25,7 @@
     - { role: ansible-role-androidstudio, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-yarn, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
+    - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-chromedriver, become: true }
     #- { role: ansible-role-pip, become: true }
     #- { role: ansible-role-docker-compose, become: true }
