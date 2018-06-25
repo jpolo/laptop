@@ -2,20 +2,19 @@
 galaxy_info:
   author: jpolo
   description: YARN installation
-  company: 
+  company:
   license: "license (BSD, MIT)"
   min_ansible_version: 1.2
   platforms:
-    - name: EL
+    - name: Darwin
       versions:
-      - 6
-      - 7
+        - all
     - name: Debian
       versions:
-      - all
+        - all
     - name: Ubuntu
       versions:
-      - all
+        - all
   galaxy_tags:
     - npm
     - yarn

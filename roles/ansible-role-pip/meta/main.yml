@@ -6,10 +6,15 @@ galaxy_info:
   min_ansible_version: 1.9
   github_branch: master
   platforms:
+    - name: Darwin
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
     - name: Ubuntu
       versions:
-        - trusty
-        - xenial
+        - all
   galaxy_tags:
     - development
     - python
