@@ -21,16 +21,25 @@ fi
 }
 
 -antigen-library-filepath () {
-	echo "$_ANTIGEN_INSTALL_DIR/antigen.zsh"
+  if [[ $DISTRO == "DARWIN" ]]; then
+    echo "/usr/local/share/antigen/antigen.zsh"
+  else
+    echo "$_ANTIGEN_INSTALL_DIR/antigen.zsh"
+  fi
+}
+
+-antigen-load () {
+  if [[ ! -f $(-antigen-library-filepath) ]]; then
+    -antigen-install
+  fi
 }
 
 -antigen-install () {
-  local antigen_lib=$(-antigen-library-filepath)
-  if [[ ! -d $_ANTIGEN_INSTALL_DIR ]]; then
+  if [[ $DISTRO == "DARWIN" ]]; then
+    echo "antigen not found. Try brew install antigen"
+    exit 1
+  else
     mkdir -p $_ANTIGEN_INSTALL_DIR
-  fi
-
-  if [[ ! -f $antigen_lib ]]; then
     curl -L git.io/antigen > $_ANTIGEN_INSTALL_DIR/antigen.zsh
   fi
 }
@@ -47,9 +56,8 @@ if ! ${XDG_SESSION_ID+"false"}; then
 fi
 
 ## Load / Clone antigen
--antigen-install
+-antigen-load
 source $(-antigen-library-filepath)
-
 
 ## Load Base
 antigen use oh-my-zsh
@@ -80,7 +88,6 @@ fi
 # Mac OS X plugins
 if [[ $DISTRO == DARWIN ]]; then
 	antigen bundle osx
-  antigen bundle brew
 fi
 
 ## Load everything in .zshrc.d/

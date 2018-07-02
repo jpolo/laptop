@@ -1,4 +1,0 @@
-- name: Install ZSH package
-  package:
-    name: "zsh"
-    state: "{{zsh_package_state}}"
