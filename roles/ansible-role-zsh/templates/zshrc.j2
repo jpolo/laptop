@@ -37,7 +37,6 @@ fi
 -antigen-install () {
   if [[ $DISTRO == "DARWIN" ]]; then
     echo "antigen not found. Try brew install antigen"
-    exit 1
   else
     mkdir -p $_ANTIGEN_INSTALL_DIR
     curl -L git.io/antigen > $_ANTIGEN_INSTALL_DIR/antigen.zsh
