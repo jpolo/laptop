@@ -68,9 +68,6 @@ antigen bundles <<EOF
   command-not-found
   cp
   git
-  hg
-  pip
-  python
   chrissicool/zsh-256color
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
@@ -81,18 +78,19 @@ EOF
 ## Load distro specific plugins
 # Arch Linux plugins
 if [[ $DISTRO == ARCH ]]; then
-	antigen bundle archlinux
+  antigen bundle archlinux
+elif [[ $DISTRO == DARWIN ]]; then
+  antigen bundle osx
 fi
 
-# Mac OS X plugins
-if [[ $DISTRO == DARWIN ]]; then
-	antigen bundle osx
+## Load from plugins file
+if [[ -f ~/.zsh_plugins.txt ]]; then
+  antibody bundle < ~/.zsh_plugins.txt
 fi
 
 ## Load everything in .zshrc.d/
 if [[ -d $_ZSH_AUTOLOAD_DIR/ ]]; then
-  # for i in $_ZSH_AUTOLOAD_DIR/*.(zsh|sh);
-  for i in $(find "$_ZSH_AUTOLOAD_DIR/" -iname "*.?sh");
+  for i in $(find "$_ZSH_AUTOLOAD_DIR/" -maxdepth 1 -type f -name "*.sh");
   do
     . $i;
   done
@@ -102,5 +100,5 @@ antigen apply
 
 # Improve PATH with local/bin
 if [ -d ~/.local/bin/ ]; then
-	export PATH=$PATH:~/.local/bin/
+  export PATH=$PATH:~/.local/bin/
 fi
