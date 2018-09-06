@@ -1,0 +1,8 @@
+- name: Install Android Tools
+  homebrew_cask:
+    name: "{{androidtools_item}}"
+    state: "{{androidtools_package_state}}"
+  with_items:
+    - android-tools-adb
+  loop_control:
+    loop_var: androidtools_item
