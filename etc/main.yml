@@ -55,7 +55,18 @@
           name="{{ user_workspace }}"
           owner={{ ansible_env.USER }}
 
-    - name: Install Common APM packages
+    - name: Install VSCode extensions
+      vscode:
+        name: "{{item}}"
+        state: present
+      with_items:
+        - EditorConfig.EditorConfig
+        - Shan.code-settings-sync
+        - eamodio.gitlens
+        - MS-CEINTL.vscode-language-pack-fr
+      tags: ['ide']
+
+    - name: Install APM packages
       apm:
         name: "{{item}}"
         state: present
@@ -69,27 +80,6 @@
         - sync-settings
         - teletype
       tags: ['ide']
-    - name: Install Specific APM packages
-      apm:
-        name: "{{item}}"
-        state: present
-      with_items:
-        - ide-css
-        - ide-flowtype
-        - ide-php
-        - ide-typescript
-        - ide-python
-        - ide-reason
-        - autocomplete-json
-        - docblockr
-        - language-babel
-        - language-reason
-        - language-robot-framework
-        - linter-eslint
-        - linter-jsonlint
-        - linter-markdown
-        - linter-flake8
-
     - name: Create SSH key
       command: >
           ssh-keygen -t rsa -b 4096 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_rsa }}
