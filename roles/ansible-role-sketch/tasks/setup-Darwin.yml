@@ -1,0 +1,5 @@
+- name: Install Sketch
+  homebrew_cask:
+    name: "sketch"
+    state: "{{sketch_package_state}}"
+  become: false
