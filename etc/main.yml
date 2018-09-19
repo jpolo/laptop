@@ -46,6 +46,14 @@
       when: ansible_os_family == 'Darwin'
       tags: ['ios']
 
+    - name: Install Google Drive Stream
+      homebrew_cask:
+        name: "google-drive-file-stream"
+        state: present
+      become: false
+      when: ansible_os_family == 'Darwin'
+      tags: ['google']
+
     - name: Add SSH Known Hosts
       known_hosts:
         path: /etc/ssh/ssh_known_hosts
