@@ -29,6 +29,7 @@
     - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
     - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
+    - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
   tasks:
     - name: Install iTerm2
       homebrew_cask:
