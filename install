@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+RELEASE="master"
+DOWNLOAD="https://github.com/jpolo/laptop/archive/$RELEASE.tar.gz"
+PACKAGE_NAME=ansible-playbook-laptop
+PACKAGE_ARCHIVE="$PACKAGE_NAME.tar.gz"
+
+set -e
+
+echo '==================================='
+echo 'Laptop installer'
+echo '==================================='
+echo
+
+# Remove old laptop playbook
+if [[ ! -x $PACKAGE_ARCHIVE ]]; then
+	echo "[Info] Remove $PACKAGE_NAME playbook"
+	rm -rf /tmp/$PACKAGE_NAME*
+fi
+
+
+# Download and run laptop playbook
+echo "[Info] Download $PACKAGE_NAME playbook"
+cd /tmp
+curl -fsSL -o $PACKAGE_ARCHIVE $DOWNLOAD
+tar zxf $PACKAGE_ARCHIVE
+
+# Modify the PATH
+# This should be subsequently updated in shell settings
+export PATH=/usr/local/bin:$PATH
+
+
+echo "[Info] Run $PACKAGE_NAME playbook"
+cd /tmp/$PACKAGE_NAME-*
+./scripts/deploy
+
