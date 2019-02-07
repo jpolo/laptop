@@ -41,6 +41,14 @@
       when: ansible_os_family == 'Darwin'
       tags: ['ios']
 
+    - name: Install Skitch
+      homebrew_cask:
+        name: "skitch"
+        state: present
+      become: false
+      when: ansible_os_family == 'Darwin'
+      tags: ['desktop']
+
     - name: Install Google Drive Stream
       homebrew_cask:
         name: "google-drive-file-stream"
