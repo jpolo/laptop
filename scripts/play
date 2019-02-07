@@ -19,5 +19,5 @@ cp -a $ROLE_DIR/. $ROLE_TARGET_DIR
 
 # Install dependencies
 { echo '[defaults]'; echo "roles_path = $ROLE_TARGET_DIR"; } > ./ansible.cfg
-# ansible-galaxy install -r $CONFIG_DIR/requirements.yml -p $ROLE_TARGET_DIR
+ansible-galaxy install -r $CONFIG_DIR/requirements.yml -p $ROLE_TARGET_DIR
 ansible-playbook -i $CONFIG_DIR/inventory $CONFIG_DIR/main.yml --ask-become-pass $@
