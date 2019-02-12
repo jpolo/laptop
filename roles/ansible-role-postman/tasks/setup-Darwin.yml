@@ -1,0 +1,5 @@
+- name: Install Postman
+  homebrew_cask:
+    name: "postman"
+    state: "{{postman_package_state}}"
+  become: false

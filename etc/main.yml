@@ -22,6 +22,13 @@
       - skitch
       - google-drive-file-stream
 
+    vscode_extensions:
+      - EditorConfig.EditorConfig
+      - Shan.code-settings-sync
+      - eamodio.gitlens
+      - ms-vsliveshare.vsliveshare
+      - MS-CEINTL.vscode-language-pack-fr
+
     appstore_signin_dialog: yes
     appstore_installed_apps:
       - { id: 497799835, name: "Xcode" }
@@ -51,6 +58,8 @@
     - { role: ansible-role-term, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
+    - { role: ansible-role-postman, become: true, ignore_errors: yes, tags: ['api', 'web'] }
+
   tasks:
 
     - name: Install global Composer packages.
@@ -127,13 +136,9 @@
       vscode:
         name: "{{item}}"
         state: present
-      with_items:
-        - EditorConfig.EditorConfig
-        - Shan.code-settings-sync
-        - eamodio.gitlens
-        - ms-vsliveshare.vsliveshare
-        - MS-CEINTL.vscode-language-pack-fr
-      tags: ['ide']
+      with_items: "{{ vscode_extensions }}"
+      tags: ['ide', 'vscode']
+      ignore_errors: yes
 
     - name: Create SSH key
       command: >
