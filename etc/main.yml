@@ -21,6 +21,7 @@
     homebrew_cask_packages:
       - skitch
       - google-drive-file-stream
+      - mysqlworkbench
 
     appstore_signin_dialog: yes
     appstore_installed_apps:
