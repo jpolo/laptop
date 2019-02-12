@@ -131,6 +131,7 @@
         - EditorConfig.EditorConfig
         - Shan.code-settings-sync
         - eamodio.gitlens
+        - ms-vsliveshare.vsliveshare
         - MS-CEINTL.vscode-language-pack-fr
       tags: ['ide']
 
