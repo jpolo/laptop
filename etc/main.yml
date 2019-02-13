@@ -21,6 +21,7 @@
     homebrew_cask_packages:
       - skitch
       - google-drive-file-stream
+      - mysqlworkbench
 
     vscode_extensions:
       - EditorConfig.EditorConfig
@@ -69,6 +70,10 @@
         # Ansible 2.4 supports `global_command` making `working_dir` optional.
         working_dir: "{{ lookup('env', 'COMPOSER_HOME') | default('~/.composer', true) }}"
       with_items: "{{ composer_packages }}"
+
+    - name: Install PHP 5.6 in /usr/local/php5/
+      command: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
+      when: ansible_os_family == 'Darwin'
 
     - name: Install global NPM packages.
       npm:
