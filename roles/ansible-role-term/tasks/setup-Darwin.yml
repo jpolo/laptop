@@ -3,3 +3,15 @@
     name: "iterm2"
     state: "{{term_package_state}}"
   become: false
+
+- name: Ensure command line "duti" is present
+  homebrew:
+    name: duti
+    state: present
+
+- name: Associate *.command files to iTerm2
+  command: >
+    duti -s com.googlecode.iterm2 .command all
+  register: duti_result
+  changed_when: false
+  failed_when: false
