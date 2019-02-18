@@ -78,7 +78,7 @@
       register: php5_dir
 
     - name: Install PHP 5.6 in /usr/local/php5/
-      command: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
+      shell: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
       args:
         warn: false
       when:
