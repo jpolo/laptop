@@ -36,6 +36,7 @@
 
     npm_packages:
       - name: yarn
+      - name: react-native-cli
 
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
@@ -71,9 +72,18 @@
         working_dir: "{{ lookup('env', 'COMPOSER_HOME') | default('~/.composer', true) }}"
       with_items: "{{ composer_packages }}"
 
+    - name: Check if php5 directory exists.
+      stat:
+        path: /usr/local/php5/
+      register: php5_dir
+
     - name: Install PHP 5.6 in /usr/local/php5/
       command: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
-      when: ansible_os_family == 'Darwin'
+      args:
+        warn: false
+      when:
+        - ansible_os_family == 'Darwin'
+        - not php5_dir.stat.exists
 
     - name: Install global NPM packages.
       npm:
