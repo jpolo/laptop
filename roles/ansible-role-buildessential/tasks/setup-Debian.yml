@@ -1,6 +1,6 @@
 - name: Install Build Essential packages
   package:
-    name: "{{ item }}"
+    name: "{{ buildessential_item }}"
     state: present
   with_items:
     - autoconf
@@ -25,3 +25,5 @@
     - libxslt-dev
     - libyaml-dev
     - zlib1g-dev
+  loop_control:
+    loop_var: buildessential_item
