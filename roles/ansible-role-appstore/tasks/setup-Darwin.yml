@@ -1,0 +1,44 @@
+---
+- name: Ensure MAS is installed.
+  homebrew:
+    name: mas
+    state: present
+  become: false
+
+- name: Get MAS account status
+  command: mas account
+  register: mas_account_result
+  failed_when: mas_account_result.rc > 1
+  changed_when: false
+
+- name: Sign in to MAS when email and password are provided.
+  command: 'mas signin "{{ appstore_email }}" "{{ appstore_password }}"'
+  register: mas_signin_result
+  when:
+    - mas_account_result.rc == 1
+    - appstore_email
+    - appstore_password
+    - not appstore_signin_dialog
+
+- name: Sign in to MAS when email is provided, and complete password and 2FA using dialog.
+  command: 'mas signin "{{ appstore_email }}" "{{ appstore_password }}" --dialog'
+  register: mas_signin_result
+  when:
+    - appstore_signin_dialog
+    - mas_account_result.rc == 1
+    - appstore_email
+
+- name: List installed MAS apps.
+  command: mas list
+  register: mas_list
+  check_mode: no
+  changed_when: false
+
+- name: Ensure configured MAS apps are installed.
+  command: mas install "{{ item.id|default(item) }}"
+  with_items: "{{ appstore_installed_apps }}"
+  when: (item.id | default(item) | string) not in mas_list.stdout
+
+- name: Upgrade all apps.
+  command: mas upgrade
+  when: appstore_upgrade_all_apps
