@@ -1,3 +1,6 @@
 ---
 # visualstudiocode_package_name: code
 visualstudiocode_package_state: present
+visualstudiocode_git_editor: true
+
+
