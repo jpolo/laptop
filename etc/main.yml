@@ -2,6 +2,10 @@
 - hosts: localhost
   connection: local
   remote_user: root
+  vars_prompt:
+    - name: "user_email"
+      prompt: "Email (optional)"
+      private: no
   vars:
     github_access_token: ""
     user_workspace: "{{ansible_env.HOME}}/Workspace"
@@ -161,6 +165,7 @@
         scope: global
         value: "vscode"
       become: false
+      tags: ['git']
 
     - name: Set GIT code.editor
       git_config:
@@ -168,6 +173,16 @@
         scope: global
         value: "{{ visualstudiocode_git_editor }}"
       become: false
+      tags: ['git']
+
+    - name: Set GIT user.email
+      git_config:
+        name: user.email
+        scope: global
+        value: "{{ user_email }}"
+      become: false
+      when: user_email|bool == true
+      tags: ['git']
 
     - name: Create SSH key
       command: >
