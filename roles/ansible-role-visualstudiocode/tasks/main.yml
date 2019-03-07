@@ -6,27 +6,9 @@
     - "./setup-{{ ansible_os_family }}.yml"
     - "./setup-default.yml"
 
-- name: Configure GIT installation
-  set_fact:
-    vscode_git_install: "{{ visualstudiocode_package_state != 'absent' and visualstudiocode_git_editor }}"
-
-- name: Set GIT code.editor
-  git_config:
-    name: core.editor
-    scope: global
-    value: "{{ 'code --wait' if vscode_git_install else '' }}"
-  become: false
-
 - name: Add GIT diff.tool
   git_config:
     name: difftool.vscode.cmd
     scope: global
-    value: "{{ 'code --wait --diff $LOCAL $REMOTE' if vscode_git_install else '' }}"
-  become: false
-
-- name: Set GIT diff
-  git_config:
-    name: diff.tool
-    scope: global
-    value: "vscode"
+    value: "{{ visualstudiocode_git_diff if visualstudiocode_package_state != 'absent' else '' }}"
   become: false

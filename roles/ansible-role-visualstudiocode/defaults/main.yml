@@ -1,6 +1,9 @@
 ---
 # visualstudiocode_package_name: code
 visualstudiocode_package_state: present
-visualstudiocode_git_editor: true
+visualstudiocode_git_install: "{{visualstudiocode_package_state != 'absent'}}"
+visualstudiocode_git_editor: "code --wait"
+visualstudiocode_git_diff: "code --wait --diff $LOCAL $REMOTE"
+
 
 

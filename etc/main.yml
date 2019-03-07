@@ -155,6 +155,20 @@
       tags: ['ide', 'vscode']
       ignore_errors: yes
 
+    - name: Set GIT diff
+      git_config:
+        name: diff.tool
+        scope: global
+        value: "vscode"
+      become: false
+
+    - name: Set GIT code.editor
+      git_config:
+        name: core.editor
+        scope: global
+        value: "{{ visualstudiocode_git_editor }}"
+      become: false
+
     - name: Create SSH key
       command: >
           ssh-keygen -t rsa -b 4096 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_rsa }}
