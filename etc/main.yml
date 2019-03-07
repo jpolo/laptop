@@ -6,6 +6,9 @@
     - name: "user_email"
       prompt: "Email (optional)"
       private: no
+    - name: "user_name"
+      prompt: "FirstName LastName (optional)"
+      private: no
   vars:
     github_access_token: ""
     user_workspace: "{{ansible_env.HOME}}/Workspace"
@@ -182,6 +185,15 @@
         value: "{{ user_email }}"
       become: false
       when: user_email|bool == true
+      tags: ['git']
+
+    - name: Set GIT user.name
+      git_config:
+        name: user.name
+        scope: global
+        value: "{{ user_name }}"
+      become: false
+      when: user_name|bool == true
       tags: ['git']
 
     - name: Create SSH key
