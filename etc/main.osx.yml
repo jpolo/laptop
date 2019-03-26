@@ -1,0 +1,20 @@
+- name: "AppStore - Disable app updates"
+  osx_defaults:
+    domain: '/Library/Preferences/com.apple.commerce'
+    key: 'AutoUpdate'
+    type: bool
+    value: false
+  become: true
+  notify: restart AppStore
+
+- name: Install Homebrew packages.
+  homebrew:
+    name: "{{ homebrew_packages }}"
+    state: present
+  become: false
+
+- name: Install Homebrew Cask packages.
+  homebrew_cask:
+    name: "{{ homebrew_cask_packages }}"
+    state: present
+  become: false

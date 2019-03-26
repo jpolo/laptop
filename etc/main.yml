@@ -66,7 +66,7 @@
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-term, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
-    - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
+    # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, become: true, ignore_errors: yes, tags: ['api', 'web'] }
 
   tasks:
@@ -121,20 +121,8 @@
       with_items: "{{ gem_packages }}"
       when: gem_packages
 
-    - name: Install Homebrew packages.
-      homebrew:
-        name: "{{ homebrew_packages }}"
-        state: present
-      become: false
-      ignore_errors: yes
-      when: ansible_os_family == 'Darwin'
-
-    - name: Install Homebrew Cask packages.
-      homebrew_cask:
-        name: "{{ homebrew_cask_packages }}"
-        state: present
-      become: false
-      ignore_errors: yes
+    - name: Include specific OSX configuration
+      include: "main.osx.yml"
       when: ansible_os_family == 'Darwin'
 
     - name: Add SSH Known Hosts
