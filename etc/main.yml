@@ -29,6 +29,7 @@
       - skitch
       - google-drive-file-stream
       - mysqlworkbench
+      - apache-couchdb
 
     vscode_extensions:
       - EditorConfig.EditorConfig
