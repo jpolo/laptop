@@ -7,6 +7,12 @@
   become: true
   notify: restart AppStore
 
+- name: Install Homebrew tap.
+  homebrew_tap:
+    name: "{{ homebrew_taps }}"
+    state: present
+  become: false
+
 - name: Install Homebrew packages.
   homebrew:
     name: "{{ homebrew_packages }}"

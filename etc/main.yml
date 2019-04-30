@@ -22,8 +22,12 @@
     gem_packages: []
     pip_packages: []
 
+    homebrew_taps:
+      - wix/brew
+
     homebrew_packages:
       - cocoapods
+      - applesimutils
 
     homebrew_cask_packages:
       - skitch
