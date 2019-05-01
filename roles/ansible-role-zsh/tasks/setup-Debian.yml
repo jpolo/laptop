@@ -4,6 +4,6 @@
     state: "{{zsh_package_state}}"
   with_items:
     - zsh
-    - zsh-antigen
+    - zplug
   loop_control:
     loop_var: zsh_package_item
