@@ -19,20 +19,24 @@
     atom_package_state: absent
 
     composer_packages: []
-    gem_packages: []
+
+    gem_packages:
+      - name: cocoapods
+      - name: cocoapods-repo-update
+
     pip_packages: []
 
     homebrew_taps:
       - wix/brew
 
     homebrew_packages:
-      - cocoapods
       - applesimutils
 
     homebrew_cask_packages:
       - skitch
       - google-drive-file-stream
       - mysqlworkbench
+      - notion
 
     vscode_extensions:
       - EditorConfig.EditorConfig
@@ -74,6 +78,10 @@
     - { role: ansible-role-postman, become: true, ignore_errors: yes, tags: ['api', 'web'] }
 
   tasks:
+    - name: Uninstall cocoapods brew
+      package:
+        name: cocoapods
+        state: absent
 
     - name: Install global Composer packages.
       composer:
