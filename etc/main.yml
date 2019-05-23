@@ -22,6 +22,7 @@
 
     gem_packages:
       - name: cocoapods
+        version: 1.6.2
       - name: cocoapods-repo-update
 
     pip_packages: []
@@ -36,7 +37,6 @@
       - skitch
       - google-drive-file-stream
       - mysqlworkbench
-      - notion
 
     vscode_extensions:
       - EditorConfig.EditorConfig
@@ -82,6 +82,7 @@
       package:
         name: cocoapods
         state: absent
+      become: false
 
     - name: Install global Composer packages.
       composer:
@@ -112,7 +113,6 @@
         global: yes
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ npm_packages }}"
-      when: npm_packages|bool
 
     - name: Install global Pip packages.
       pip:
@@ -121,7 +121,6 @@
         version: "{{ item.version | default(omit) }}"
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
-      when: pip_packages|bool
 
     - name: Install global Ruby gems.
       gem:
@@ -131,7 +130,7 @@
         user_install: no
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ gem_packages }}"
-      when: gem_packages|bool
+      become: true
 
     - name: Include specific OSX configuration
       include: "main.osx.yml"
