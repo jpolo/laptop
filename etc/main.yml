@@ -104,7 +104,7 @@
         global: yes
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ npm_packages }}"
-      when: npm_packages
+      when: npm_packages|bool
 
     - name: Install global Pip packages.
       pip:
@@ -113,7 +113,7 @@
         version: "{{ item.version | default(omit) }}"
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
-      when: pip_packages
+      when: pip_packages|bool
 
     - name: Install global Ruby gems.
       gem:
@@ -123,7 +123,7 @@
         user_install: no
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ gem_packages }}"
-      when: gem_packages
+      when: gem_packages|bool
 
     - name: Include specific OSX configuration
       include: "main.osx.yml"
