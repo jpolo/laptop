@@ -34,7 +34,6 @@
       - applesimutils
 
     homebrew_cask_packages:
-      - skitch
       - google-drive-file-stream
       - mysqlworkbench
 
@@ -57,6 +56,7 @@
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-git, become: true, ignore_errors: yes, tags: ['scm'] }
+    - { role: ansible-role-keepass, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-mercurial, become: true, ignore_errors: yes, tags: ['scm'] }
     - { role: ansible-role-atom, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-slack, become: true, ignore_errors: yes, tags: ['com'] }
