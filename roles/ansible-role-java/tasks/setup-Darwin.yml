@@ -1,6 +1,5 @@
-- name: Install Java
+- name: Install OpenJDK
   homebrew_cask:
-    name: "{% if java_package_version is defined %}homebrew/cask-versions/java{{java_package_version}}{% else %}java{% endif %}"
+    name: "{% if java_package_version is defined %}adoptopenjdk{{java_package_version}}{% else %}adoptopenjdk{% endif %}"
     state: "{{java_package_state}}"
-  when: java_package_version is defined
   become: false
