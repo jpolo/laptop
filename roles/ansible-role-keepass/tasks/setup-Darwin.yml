@@ -1,0 +1,5 @@
+- name: Install KeyPass Client
+  homebrew_cask:
+    name: "macpass"
+    state: "{{keepass_package_state}}"
+  become: false

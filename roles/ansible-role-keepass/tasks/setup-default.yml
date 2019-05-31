@@ -1,0 +1,4 @@
+- name: Install KeyPass Client
+  package:
+    name: "keepass"
+    state: "{{keepass_package_state}}"
