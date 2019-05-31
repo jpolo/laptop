@@ -16,6 +16,6 @@ galaxy_info:
       versions:
         - all
   galaxy_tags:
-    - npm
-    - yarn
+    - chrome
+    - chromedriver
   dependencies: []
