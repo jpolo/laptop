@@ -1,0 +1,5 @@
+- name: Install Firefox Developer Edition
+  homebrew_cask:
+    name: "firefox-developer-edition"
+    state: "{{firefox_developer_edition_package_state}}"
+  become: false
