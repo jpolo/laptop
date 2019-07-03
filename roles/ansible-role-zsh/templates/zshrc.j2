@@ -70,11 +70,11 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]];then
   # Load theme file
   zplug 'themes/pygmalion', from:oh-my-zsh, as:theme
   # Load Plugins
+  zplug "chrissicool/zsh-256color"
   zplug "zsh-users/zsh-autosuggestions"
   zplug "zsh-users/zsh-completions"
-  zplug "zsh-users/zsh-history-substring-search"
-  zplug "zsh-users/zsh-syntax-highlighting", defer:3
-  zplug "chrissicool/zsh-256color"
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+  zplug "zsh-users/zsh-history-substring-search", defer:3
   # zplug "lib/clipboard", from:oh-my-zsh
   zplug "lib/compfix", from:oh-my-zsh
   zplug "lib/completion", from:oh-my-zsh
