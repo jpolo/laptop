@@ -67,6 +67,10 @@ _ZSH_PLUGINS="$HOME/.zshrc.d"
 
 if [[ -f "$ZPLUG_HOME/init.zsh" ]];then
   source "$ZPLUG_HOME/init.zsh"
+
+  # Launch zplug self manager plugin
+  zplug "zplug/zplug", hook-build:'zplug --self-manage'
+
   # Load theme file
   zplug 'themes/pygmalion', from:oh-my-zsh, as:theme
   # Load Plugins
