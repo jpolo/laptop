@@ -15,7 +15,7 @@
     ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
     ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
     # nodejs_package_version: '8'
-    java_package_version: '8'
+    # java_package_version: '8'
     atom_package_state: absent
 
     composer_packages: []
