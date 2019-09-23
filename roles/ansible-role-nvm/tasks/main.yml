@@ -6,8 +6,5 @@
     - "./setup-{{ ansible_os_family }}.yml"
     - "./setup-default.yml"
 
-- name: Configure NVM in shell
-  include_tasks: setup-shell.yml
-  when: nvm_shell_init
 
 

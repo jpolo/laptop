@@ -1,5 +1,36 @@
+- set_fact:
+    nvm_shell_profile_scripts:
+      - .bashrc
+      - .zshrc
+
 - name: Install NVM
   homebrew:
     name: "nvm"
     state: "{{nvm_package_state}}"
   become: false
+
+- name: Create RC files if needed
+  file: state=touch path={{ ansible_env.HOME }}/{{ file_create_item }}
+  with_items: "{{nvm_shell_profile_scripts}}"
+  loop_control:
+    loop_var: file_create_item
+  become: false
+
+- name: Set NVM_DIR in shell profiles
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/{{ rcfile_item }}"
+    line: 'export NVM_DIR="$HOME/.nvm"'
+    regexp: '^export NVM_DIR='
+  with_items: "{{ nvm_shell_profile_scripts }}"
+  loop_control:
+    loop_var: rcfile_item
+
+- name: Source nvm.sh in shell profiles
+  lineinfile:
+    dest: "{{ ansible_env.HOME }}/{{ rcfile_source_item }}"
+    line: '[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh" # This loads nvm'
+    insertafter: '^export NVM_DIR='
+    regexp: "/nvm.sh"
+  with_items: "{{ nvm_shell_profile_scripts }}"
+  loop_control:
+    loop_var: rcfile_source_item
