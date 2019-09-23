@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: jpolo
+  description: NVM installation
+  company:
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.2
+  platforms:
+    - name: Darwin
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - nvm
+    - node
+    - nodejs
+  dependencies: []

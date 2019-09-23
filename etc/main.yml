@@ -77,7 +77,7 @@
     # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, become: true, ignore_errors: yes, tags: ['api', 'web'] }
     - { role: ansible-role-firefox-developer-edition, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
-
+    - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['console'] }
 
   tasks:
     - name: Uninstall cocoapods brew

@@ -1,0 +1,5 @@
+- name: Install NVM
+  homebrew:
+    name: "nvm"
+    state: "{{nvm_package_state}}"
+  become: false

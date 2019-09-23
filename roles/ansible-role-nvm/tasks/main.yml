@@ -1,0 +1,13 @@
+---
+- include: "{{ item }}"
+  with_first_found:
+    - "./setup-{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "./setup-{{ ansible_distribution }}.yml"
+    - "./setup-{{ ansible_os_family }}.yml"
+    - "./setup-default.yml"
+
+- name: Configure NVM in shell
+  include_tasks: setup-shell.yml
+  when: nvm_shell_init
+
+
