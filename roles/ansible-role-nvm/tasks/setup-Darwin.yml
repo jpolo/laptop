@@ -10,7 +10,9 @@
   become: false
 
 - name: Create RC files if needed
-  file: state=touch path={{ ansible_env.HOME }}/{{ file_create_item }}
+  file:
+    path: "{{ ansible_env.HOME }}/{{ file_create_item }}"
+    state: file
   with_items: "{{nvm_shell_profile_scripts}}"
   loop_control:
     loop_var: file_create_item
