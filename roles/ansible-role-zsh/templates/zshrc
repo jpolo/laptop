@@ -21,7 +21,7 @@ fi
 
 ## Functions
 
--zplug-init-path () {
+-zplug-prefix () {
   if [[ $OS_FAMILY == "Debian" ]]; then
     echo "/usr/share/zplug"
   elif [[ $OS_FAMILY == "Darwin" ]]; then
@@ -60,7 +60,7 @@ fi
 }
 
 ## Load ZPlug
-export ZPLUG_HOME=$(-zplug-init-path)
+export ZPLUG_HOME=$(-zplug-prefix)
 _ZSH_PLUGINS="$HOME/.zshrc.d"
 
 if [[ -f "$ZPLUG_HOME/init.zsh" ]];then
