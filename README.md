@@ -1,4 +1,5 @@
-A collection of roles to setup a developer machine
+# A collection of roles to setup a developer machine
+
 =========
 
 ## Launch installation
