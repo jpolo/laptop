@@ -1,3 +1,9 @@
+- name: Install OpenJDK tap.
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: present
+  become: false
+
 - name: Install OpenJDK
   homebrew_cask:
     name: "{% if java_package_version is defined %}adoptopenjdk{{java_package_version}}{% else %}adoptopenjdk{% endif %}"
