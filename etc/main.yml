@@ -144,6 +144,7 @@
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item) }}"
       with_items:
         - github.com
+        - gitlab.com
         - bitbucket.org
       become: true
       ignore_errors: yes
