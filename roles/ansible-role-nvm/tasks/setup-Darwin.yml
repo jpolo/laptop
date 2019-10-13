@@ -9,30 +9,16 @@
     state: "{{nvm_package_state}}"
   become: false
 
-- name: Create RC files if needed
-  file:
-    path: "{{ ansible_env.HOME }}/{{ file_create_item }}"
-    state: file
-  with_items: "{{nvm_shell_profile_scripts}}"
-  loop_control:
-    loop_var: file_create_item
-  become: false
-
-- name: Set NVM_DIR in shell profiles
-  lineinfile:
-    dest: "{{ ansible_env.HOME }}/{{ rcfile_item }}"
-    line: 'export NVM_DIR="$HOME/.nvm"'
-    regexp: '^export NVM_DIR='
+- name: Configure RC Files
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/{{ rcfile_item }}"
+    backup: yes
+    marker: "# {mark} NVM setup"
+    insertbefore: EOF
+    block: "{{ lookup('file', './templates/shellrc') }}"
+    create: yes
+    validate: "zsh %s"
+  become_user: "{{ ansible_env.USER }}"
   with_items: "{{ nvm_shell_profile_scripts }}"
   loop_control:
     loop_var: rcfile_item
-
-- name: Source nvm.sh in shell profiles
-  lineinfile:
-    dest: "{{ ansible_env.HOME }}/{{ rcfile_source_item }}"
-    line: '[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh" --no-use # This loads nvm'
-    insertafter: '^export NVM_DIR='
-    regexp: "/nvm.sh"
-  with_items: "{{ nvm_shell_profile_scripts }}"
-  loop_control:
-    loop_var: rcfile_source_item

@@ -1,0 +1,12 @@
+-nvm-prefix () {
+  if [[ $OS_FAMILY == "Debian" ]]; then
+    echo "/usr/share/nvm"
+  elif [[ $OS_FAMILY == "Darwin" ]]; then
+    echo "/usr/local/opt/nvm"
+  else
+    echo "$HOME/.nvm"
+  fi
+}
+
+export NVM_DIR=~/.nvm
+source "$(-nvm-prefix)/nvm.sh" --no-use
