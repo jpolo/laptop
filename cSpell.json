@@ -2,6 +2,15 @@
   "version": "0.1",
   "language": "en",
   "words": [
-    "zplug"
+    "zplug",
+    "esac",
+    "elif",
+    "OSTYPE",
+    "prezto"
+  ],
+  "ignoreWords": [
+    "chrissicool",
+    "mafredri",
+    "sindresorhus"
   ]
 }
