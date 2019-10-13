@@ -70,23 +70,16 @@ if [[ -f "$ZPLUG_HOME/init.zsh" ]];then
   zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
   # Load theme file
-  zplug 'themes/pygmalion', from:oh-my-zsh, as:theme
+  zplug mafredri/zsh-async, from:github
+  zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+
   # Load Plugins
   zplug "chrissicool/zsh-256color"
   zplug "zsh-users/zsh-autosuggestions"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
   zplug "zsh-users/zsh-history-substring-search", defer:3
-  # zplug "lib/clipboard", from:oh-my-zsh
-  zplug "lib/compfix", from:oh-my-zsh
-  zplug "lib/completion", from:oh-my-zsh
-  zplug "lib/correction", from:oh-my-zsh
-  zplug "lib/grep", from:oh-my-zsh
-  zplug "lib/history", from:oh-my-zsh
-  # zplug "lib/key-bindings", from:oh-my-zsh
-  # zplug "plugins/git", from:oh-my-zsh, if:"(( $+commands[git] ))"
-  # zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]", defer:3
-
+  zplug "modules/completion", from:prezto
   # zplug "$_ZSH_PLUGINS", from:local
 
   -zsh-load-plugins
