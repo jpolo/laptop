@@ -1,12 +1,12 @@
--nvm-prefix () {
-  if [[ $OS_FAMILY == "Debian" ]]; then
-    echo "/usr/share/nvm"
-  elif [[ $OS_FAMILY == "Darwin" ]]; then
-    echo "/usr/local/opt/nvm"
-  else
-    echo "$HOME/.nvm"
-  fi
-}
 
-export NVM_DIR=~/.nvm
-source "$(-nvm-prefix)/nvm.sh" --no-use
+if [ -x "$(command -v apt-get)" ]; then
+  # Debian distributions
+  export NVM_DIR="/usr/share/nvm"
+elif [ -x "$(command -v brew)" ]; then
+  # MacOS
+  export NVM_DIR="/usr/local/opt/nvm"
+else
+  export NVM_DIR="$HOME/.nvm"
+fi
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
