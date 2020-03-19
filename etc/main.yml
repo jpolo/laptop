@@ -197,10 +197,16 @@
       when: user_name|bool == true
       tags: ['git']
 
+    - name: Check if SSH key exists
+      stat:
+        path: "{{ ssh_id_rsa }}"
+        register: ssh_id_rsa_stat
+
     - name: Create SSH key
       command: >
           ssh-keygen -t rsa -b 4096 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_rsa }}
           creates={{ ssh_id_rsa_pub }}
+      when: ssh_id_rsa_stat.stat.exists == False
 
     - name: Read SSH public key to authorize
       shell: cat {{ssh_id_rsa_pub}}
