@@ -1,0 +1,4 @@
+- name: Install Terraform
+  package:
+    name: "terraform"
+    state: "{{terraform_package_state}}"
