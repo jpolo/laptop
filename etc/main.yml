@@ -210,7 +210,7 @@
     - name: Check if SSH key exists
       stat:
         path: "{{ ssh_id_rsa }}"
-        register: ssh_id_rsa_stat
+      register: ssh_id_rsa_stat
 
     - name: Create SSH key
       command: >
