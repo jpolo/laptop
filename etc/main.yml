@@ -218,6 +218,6 @@
           creates={{ ssh_id_rsa_pub }}
       when: ssh_id_rsa_stat.stat.exists == False
 
-    - name: Read SSH public key to authorize
-      shell: cat {{ssh_id_rsa_pub}}
-      register: ssh_pub_key
+    # - name: Read SSH public key to authorize
+    #   shell: cat {{ssh_id_rsa_pub}}
+    #   register: ssh_pub_key
