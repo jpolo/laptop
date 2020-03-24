@@ -51,6 +51,15 @@
       - name: yarn
       - name: react-native-cli
 
+  pre_tasks:
+    - name: Check if Password is correct
+      become: true
+      command: echo "Password is correct"
+      run_once: true
+      tags:
+        - always
+      ignore_errors: no
+
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
