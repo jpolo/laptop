@@ -4,7 +4,6 @@
     state: "{{androidtools_package_state}}"
   become: false
   with_items:
-    - android-platform-tools
     - android-file-transfer
   loop_control:
     loop_var: androidtools_item
