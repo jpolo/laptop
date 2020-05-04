@@ -1,5 +1,10 @@
 - name: Install Sketch
   homebrew_cask:
-    name: "sketch"
+    name: "{{sketch_package_item}}"
     state: "{{sketch_package_state}}"
+  with_items:
+    - sketch
+    - sketch-toolbox
+  loop_control:
+    loop_var: sketch_package_item
   become: false
