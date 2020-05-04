@@ -43,6 +43,9 @@
       - ms-vsliveshare.vsliveshare
       - MS-CEINTL.vscode-language-pack-fr
 
+    sketch_plugins:
+      - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
+
     appstore_signin_dialog: yes
     appstore_installed_apps:
       - { id: 497799835, name: "Xcode" }
