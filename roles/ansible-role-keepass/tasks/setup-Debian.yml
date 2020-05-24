@@ -1,0 +1,4 @@
+- name: Install Keepass 2
+  package:
+    name: "keepass2"
+    state: "{{keepass_package_state}}"
