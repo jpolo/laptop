@@ -48,9 +48,9 @@ check_ansible()
 
 install_ansible_deb()
 {
-  sudo apt-get install -qq software-properties-common && \
+  sudo apt install -qq software-properties-common && \
   sudo apt-add-repository -y -u ppa:ansible/ansible && \
-  sudo apt-get install -qq ansible
+  sudo apt install -qq ansible
 }
 
 install_ansible_macos()
@@ -70,7 +70,7 @@ install_ansible_macos()
 
 install_ansible_all()
 {
-  if [ -x "$(command -v apt-get)" ]; then
+  if [ -x "$(command -v apt)" ]; then
     install_ansible_deb
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_ansible_macos
