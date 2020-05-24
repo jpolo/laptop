@@ -60,11 +60,12 @@ fi
 }
 
 ## Load ZPlug
-export ZPLUG_HOME=$(-zplug-prefix)
+export ZPLUG_HOME="$HOME/.zplug"
+_ZPLUG_PREFIX=$(-zplug-prefix)
 _ZSH_PLUGINS="$HOME/.zshrc.d"
 
-if [[ -f "$ZPLUG_HOME/init.zsh" ]];then
-  source "$ZPLUG_HOME/init.zsh"
+if [[ -f "$_ZPLUG_PREFIX/init.zsh" ]];then
+  source "$_ZPLUG_PREFIX/init.zsh"
 
   # Launch zplug self manager plugin
   zplug "zplug/zplug", hook-build:'zplug --self-manage'
