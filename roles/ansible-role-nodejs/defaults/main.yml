@@ -1,4 +1,5 @@
 ---
+nodejs_lts_version: '12'
 #nodejs_package_version: '8'
 
 nodejs_package_state: "present"

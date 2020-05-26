@@ -14,8 +14,8 @@
     state: present
     mode: 644
   with_items:
-    - "deb https://deb.nodesource.com/node_{{ nodejs_package_version }}.x {{ ansible_distribution_release }} main"
-    - "deb-src https://deb.nodesource.com/node_{{ nodejs_package_version }}.x {{ ansible_distribution_release }} main"
+    - "deb https://deb.nodesource.com/node_{{ nodejs_package_version|default(nodejs_lts_version) }}.x {{ ansible_distribution_release }} main"
+    - "deb-src https://deb.nodesource.com/node_{{ nodejs_package_version|default(nodejs_lts_version) }}.x {{ ansible_distribution_release }} main"
 
 - name: Ensure Node.js and npm are installed.
-  apt: "name=nodejs={{ nodejs_package_version }}.* state=present"
+  apt: "name=nodejs={{ nodejs_package_version|default(nodejs_lts_version) }}.* state=present"
