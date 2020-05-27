@@ -1,16 +1,17 @@
 {
-  "version": "0.1",
-  "language": "en",
-  "words": [
-    "zplug",
-    "esac",
-    "elif",
-    "OSTYPE",
-    "prezto"
-  ],
-  "ignoreWords": [
-    "chrissicool",
-    "mafredri",
-    "sindresorhus"
-  ]
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "elif",
+        "esac",
+        "flatpak",
+        "OSTYPE",
+        "prezto",
+        "zplug"
+    ],
+    "ignoreWords": [
+        "chrissicool",
+        "mafredri",
+        "sindresorhus"
+    ]
 }
