@@ -1,6 +1,8 @@
 ---
 - name: Ensure apt-transport-https is installed.
-  apt: name=apt-transport-https state=present
+  apt:
+    name: ['apt-transport-https', 'ca-certificates']
+    state: present
 
 - name: Add Slack apt key.
   apt_key:

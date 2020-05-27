@@ -1,13 +1,8 @@
 ---
 - name: Ensure apt-transport-https is installed.
   apt:
-    name: "{{ apt_transport_https_item }}"
+    name: ['apt-transport-https', 'ca-certificates']
     state: present
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-  loop_control:
-    loop_var: apt_transport_https_item
 
 - name: Add Docker apt key.
   apt_key:
@@ -23,9 +18,5 @@
 
 - name: Ensure Docker package is present
   apt:
-    name: "{{docker_apt_item}}"
+    name: 'docker.io'
     state: "{{docker_package_state}}"
-  with_items:
-    - "{{docker_package_name}}"
-  loop_control:
-    loop_var: docker_apt_item

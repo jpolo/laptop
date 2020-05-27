@@ -1,13 +1,8 @@
 ---
 - name: Ensure apt-transport-https is installed.
   apt:
-    name: "{{ apt_transport_https_item }}"
+    name: ['apt-transport-https', 'ca-certificates']
     state: present
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-  loop_control:
-    loop_var: apt_transport_https_item
 
 - name: Add Microsoft apt key.
   apt_key:

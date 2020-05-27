@@ -1,17 +1,8 @@
 ---
 - name: Ensure requirements are installed
   apt:
-    name: "{{ apt_requirement_item }}"
+    name: ['unzip', 'python-httplib2', 'libxi6', 'libgconf-2-4', 'libnss3', 'libfontconfig1']
     state: present
-  with_items:
-      - unzip
-      - python-httplib2
-      - libxi6
-      - libgconf-2-4
-      - libnss3
-      - libfontconfig1
-  loop_control:
-    loop_var: apt_requirement_item
 
 - name: Check current ChromeDriver version
   shell: /usr/local/bin/chromedriver --version | sed -ne 's/[^0-9]*\(\([0-9]\.\)\{0,4\}[0-9][^.]\).*/\1/p'
