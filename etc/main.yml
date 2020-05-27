@@ -83,7 +83,7 @@
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
     - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
-    - { role: ansible-role-term, become: true, ignore_errors: yes, tags: ['console'] }
+    - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
     # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, ignore_errors: yes, tags: ['api', 'web'] }
