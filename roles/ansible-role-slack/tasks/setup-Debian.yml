@@ -1,21 +1,19 @@
 ---
-- name: Ensure apt-transport-https is installed.
-  apt:
-    name: ['apt-transport-https', 'ca-certificates']
+- name: Ensure flatpak is present
+  package:
+    name: flatpak
     state: present
+  become: true
 
-- name: Add Slack apt key.
-  apt_key:
-    url: https://packagecloud.io/slacktechnologies/slack/gpgkey
+- name: Add the flathub flatpak repository
+  flatpak_remote:
+    name: flathub
     state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
 
-- name: Add Slack repositories.
-  apt_repository:
-    #repo:  "deb https://packagecloud.io/slacktechnologies/slack/{{ansible_distribution|lower}} {{ ansible_distribution_release }} main"
-    repo: "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main"
-    update_cache: yes
-    state: present
-    mode: 644
-
-- name: Ensure Slack package is present
-  apt: "name=slack-desktop state=present"
+- name: Install Slack
+  flatpak:
+    name: com.slack.Slack
+    state: "{{slack_package_state}}"
+    method: user
