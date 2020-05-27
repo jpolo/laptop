@@ -1,4 +1,18 @@
-- name: Install Keepass 2
+- name: Ensure flatpak is present
   package:
-    name: "keepass2"
+    name: flatpak
+    state: present
+  become: true
+
+- name: Add the flathub flatpak repository
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: Install KeePassXC
+  flatpak:
+    name: org.keepassxc.KeePassXC
     state: "{{keepass_package_state}}"
+    method: user
