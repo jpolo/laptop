@@ -76,7 +76,7 @@
     - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes, tags: ['ide'] }
-    - { role: ansible-role-androidstudio, become: true, ignore_errors: yes, tags: ['ide', 'android'] }
+    - { role: ansible-role-androidstudio, become: false, ignore_errors: yes, tags: ['ide', 'android'] }
     - { role: ansible-role-androidtools, become: true, ignore_errors: yes, tags: ['ide', 'android'] }
     - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
     - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
