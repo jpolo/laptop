@@ -21,7 +21,7 @@
 
     gem_packages:
       - name: cocoapods
-        version: 1.9.1
+        version: 1.9.3
       - name: cocoapods-repo-update
 
     pip_packages: []
@@ -92,11 +92,6 @@
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
 
   tasks:
-    - name: Uninstall cocoapods brew
-      package:
-        name: cocoapods
-        state: absent
-      become: false
 
     - name: Install global Composer packages.
       composer:
