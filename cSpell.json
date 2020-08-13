@@ -2,9 +2,13 @@
     "version": "0.1",
     "language": "en",
     "words": [
+        "androidstudio",
+        "ansible",
+        "cocoapods",
         "elif",
         "esac",
         "flatpak",
+        "keepass",
         "OSTYPE",
         "prezto",
         "zplug"
