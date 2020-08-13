@@ -70,7 +70,7 @@ install_ansible_macos()
 
 install_ansible_all()
 {
-  if [ -x "$(command -v apt)" ]; then
+  if [ -x "$(command -v apt-get)" ]; then
     install_ansible_deb
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_ansible_macos
@@ -81,20 +81,17 @@ install_ansible_all()
 
 install_ansible()
 {
-  local check_message="* Checking ansible executable"
+  # 1. Try to install
+  local installation_message="* Install ansible executable"
+  if [ -z check_ansible ];then
+    log_success_msg "$installation_message"
+  else
+    install_ansible_all && \
+    log_success_msg "$installation_message" || \
+    log_failure_msg "$installation_message";
+  fi;
 
-  # 1. Check that previously installed
-  check_ansible && \
-  log_success_msg "$check_message" && \
-  return 0
-
-  # 2. Try to install
-  local installation_message="* Installing ansible from repository"
-  install_ansible_all && \
-  log_success_msg "$installation_message" || \
-  log_failure_msg "$installation_message";
-
-  # 3. Check installation
+  # 2. Check installation
   check_ansible && \
   log_success_msg "$check_message" || \
   log_failure_msg "$check_message"
