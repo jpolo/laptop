@@ -5,7 +5,6 @@
     type: bool
     value: false
   become: true
-  notify: restart AppStore
 
 - name: Install Homebrew tap.
   homebrew_tap:
