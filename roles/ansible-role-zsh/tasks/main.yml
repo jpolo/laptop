@@ -14,7 +14,8 @@
     insertbefore: BOF
     block: "{{ lookup('file', './templates/zshrc') }}"
     create: yes
-    validate: "zsh %s"
+    # https://github.com/zplug/zplug/issues/393
+    validate: "env ZPLUG_PIPE_FIX=true zsh -n %s"
   become_user: "{{ ansible_env.USER }}"
 
 - name: Configure Shell to ZSH
