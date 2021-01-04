@@ -1,5 +1,5 @@
 - name: Install Android Tools
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{{androidtools_item}}"
     state: "{{androidtools_package_state}}"
   become: false

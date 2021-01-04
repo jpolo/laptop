@@ -5,7 +5,7 @@
   become: false
 
 - name: Install OpenJDK
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{% if java_package_version is defined %}adoptopenjdk{{java_package_version}}{% else %}adoptopenjdk{% endif %}"
     state: "{{java_package_state}}"
   become: false

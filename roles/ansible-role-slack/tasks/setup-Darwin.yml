@@ -1,4 +1,4 @@
 - name: Install Slack
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "slack"
     state: "{{slack_package_state}}"

@@ -1,5 +1,5 @@
 - name: Install Docker
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "docker"
     state: "{{docker_package_state}}"
   become: false

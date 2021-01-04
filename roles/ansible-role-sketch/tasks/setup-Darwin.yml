@@ -3,7 +3,7 @@
     sketch_plugins_dir: "/Users/{{ ansible_env.USER }}/Library/Application Support/com.bohemiancoding.sketch3/Plugins"
 
 - name: Install Sketch
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{{sketch_package_item}}"
     state: "{{sketch_package_state}}"
   with_items:

@@ -1,5 +1,5 @@
 - name: Install iTerm2
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "iterm2"
     state: "{{term_package_state}}"
   become: false

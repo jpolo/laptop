@@ -19,7 +19,7 @@
   become: false
 
 - name: Install Homebrew Cask packages.
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{{ homebrew_cask_packages }}"
     state: present
   become: false

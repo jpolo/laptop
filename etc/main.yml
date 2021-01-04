@@ -135,6 +135,12 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
 
+    - name: Load rbenv
+      lineinfile:
+        dest: "{{ ansible_env.HOME }}/.zshenv"
+        line: 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi'
+        regexp: eval.*rbenv
+
     - name: Install global Ruby gems.
       gem:
         name: "{{ item.name | default(item) }}"
