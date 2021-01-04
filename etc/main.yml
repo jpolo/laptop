@@ -21,7 +21,7 @@
 
     gem_packages:
       - name: cocoapods
-        version: 1.9.3
+        version: 1.10.0
       - name: cocoapods-repo-update
 
     pip_packages: []
@@ -134,12 +134,6 @@
         version: "{{ item.version | default(omit) }}"
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
-
-    - name: Load rbenv
-      lineinfile:
-        dest: "{{ ansible_env.HOME }}/.zshenv"
-        line: 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi'
-        regexp: eval.*rbenv
 
     - name: Install global Ruby gems.
       gem:
