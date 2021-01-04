@@ -31,6 +31,8 @@
 
     homebrew_packages:
       - applesimutils
+      - rbenv
+      - ruby-build
 
     homebrew_cask_packages:
       - google-drive-file-stream
@@ -91,6 +93,9 @@
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
 
   tasks:
+    - name: Include specific OSX configuration
+      include: "main.osx.yml"
+      when: ansible_os_family == 'Darwin'
 
     - name: Install global Composer packages.
       composer:
@@ -139,10 +144,6 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ gem_packages }}"
       become: true
-
-    - name: Include specific OSX configuration
-      include: "main.osx.yml"
-      when: ansible_os_family == 'Darwin'
 
     - name: Add SSH Known Hosts
       known_hosts:
