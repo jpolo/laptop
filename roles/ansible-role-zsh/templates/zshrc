@@ -59,6 +59,11 @@ fi
   fi
 }
 
+-zsh-rbenv-load() {
+  # Support for rbenv
+  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+}
+
 ## Load ZPlug
 export ZPLUG_HOME="$HOME/.zplug"
 _ZPLUG_PREFIX=$(-zplug-prefix)
@@ -90,6 +95,8 @@ else
   -zsh-load-plugins
 fi;
 
+# Load rbenv
+-zsh-rbenv-load
 
 # Improve PATH with local/bin
 if [ -d ~/.local/bin/ ]; then
