@@ -22,7 +22,6 @@
     gem_packages:
       - name: cocoapods
         version: 1.10.0
-      - name: cocoapods-repo-update
 
     pip_packages: []
 
