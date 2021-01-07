@@ -59,6 +59,10 @@ fi
   fi
 }
 
+-zsh-jenv-load() {
+  # Support for rbenv
+  if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+}
 -zsh-rbenv-load() {
   # Support for rbenv
   if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -95,8 +99,9 @@ else
   -zsh-load-plugins
 fi;
 
-# Load rbenv
+# Load rbenv; jenv, ...
 -zsh-rbenv-load
+-zsh-jenv-load
 
 # Improve PATH with local/bin
 if [ -d ~/.local/bin/ ]; then
