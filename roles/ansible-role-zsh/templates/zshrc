@@ -102,8 +102,3 @@ fi;
 # Load rbenv; jenv, ...
 -zsh-rbenv-load
 -zsh-jenv-load
-
-# Improve PATH with local/bin
-if [ -d ~/.local/bin/ ]; then
-  export PATH=$PATH:~/.local/bin/
-fi
