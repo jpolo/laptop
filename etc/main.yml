@@ -37,6 +37,7 @@
     homebrew_cask_packages:
       - google-drive-file-stream
       - mysqlworkbench
+      - spectacle
 
     vscode_extensions:
       - EditorConfig.EditorConfig
