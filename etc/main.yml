@@ -32,6 +32,7 @@
       - applesimutils
       - rbenv
       - ruby-build
+      - jenv
 
     homebrew_cask_packages:
       - google-drive-file-stream
