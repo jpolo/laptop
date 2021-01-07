@@ -44,8 +44,8 @@
       - ms-vsliveshare.vsliveshare
       - MS-CEINTL.vscode-language-pack-fr
 
-    sketch_plugins:
-      - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
+    # sketch_plugins:
+    #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
 
     appstore_signin_dialog: yes
     appstore_installed_apps:
@@ -82,7 +82,7 @@
     - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
     - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
-    - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
+    # - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
