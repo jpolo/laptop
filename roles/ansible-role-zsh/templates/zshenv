@@ -4,6 +4,31 @@ skip_global_compinit=1
 # http://disq.us/p/f55b78
 setopt noglobalrcs
 
+# Make sure XDG dirs are set
+_xdg-init-dirs () {
+  # Init default platform directories
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences/
+    local XDG_CACHE_HOME_DEFAULT=$HOME/Library/
+    local XDG_DATA_HOME_DEFAULT=$HOME/Library/Caches/
+  else
+    local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
+    local XDG_CACHE_DEFAULT=$HOME/.cache
+    local XDG_DATA_DEFAULT=$HOME/.local/share
+  fi
+  # export variables
+  [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
+  [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
+  [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
+
+  # Source file
+  [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
+    . ${XDG_CONFIG_HOME}/user-dirs.dirs
+    # TODO export variables
+  }
+}
+_xdg-init-dirs;
+
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
