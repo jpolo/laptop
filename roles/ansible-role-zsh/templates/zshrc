@@ -1,104 +1,87 @@
-
-## Operating system detection
-OS_FAMILY=Unknown
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  OS_DISTRIBUTION=$(cat /etc/*-release | grep -w NAME | cut -d= -f2 | tr -d '"')
-
-  case "$OS_DISTRIBUTION" in
-  "RedHat" | "Fedora" | "CentOS" | "SLC" | "Amazon")
-      OS_FAMILY=RedHat
-      ;;
-  "Ubuntu" | "Debian" | "Mint" | "SteamOS")
-      OS_FAMILY=Debian
-      ;;
-  esac
-
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  OS_FAMILY=Darwin
-else
-  # Unknown.
-fi
+typeset -A ZINIT
 
 ## Functions
+_zsh-zinit-install () {
+  ZINIT_HOME=$XDG_CACHE_HOME/zsh/zinit
+  ZINIT[HOME_DIR]=$ZINIT_HOME
+  ZINIT[ZCOMPDUMP_PATH]=$XDG_CACHE_HOME/zsh/zcompdump
 
--zplug-prefix () {
-  if [[ $OS_FAMILY == "Debian" ]]; then
-    echo "/usr/share/zplug"
-  elif [[ $OS_FAMILY == "Darwin" ]]; then
-    echo "/usr/local/opt/zplug"
+  if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
+    git clone https://github.com/zdharma/zinit $ZINIT_HOME/bin
+    zcompile $ZINIT_HOME/bin/zinit.zsh
+  fi
+
+  if [[ -f "$ZINIT_HOME/bin/zinit.zsh" ]];then
+    source $ZINIT_HOME/bin/zinit.zsh
   else
-    echo "$HOME/.zplug"
-  fi
+    echo "zinit cannot be installed"
+  fi;
 }
 
--zplug-load () {
-  if ! zplug check; then
-    zplug install
-  fi
-  # source plugins and add commands to the PATH
-  zplug load
+_zsh-zinit-plugins () {
+  local load=light
+  #zinit $load rupa/z
+
+  # Theme
+  zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+  zinit $load sindresorhus/pure
+
+  zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
+  zinit $load trapd00r/LS_COLORS
+
+  # Fish like suggestions
+  zinit ice wait"0a" lucid atload"_zsh_autosuggest_start"
+  zinit $load zsh-users/zsh-autosuggestions
+
+  zinit ice wait:0a lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+  zinit $load zsh-users/zsh-history-substring-search
+
+  ##
+  # Completions
+  ##
+  zinit ice wait"0b" lucid blockf
+  zinit $load zsh-users/zsh-completions
+
+  zinit snippet PZT::modules/completion
+  zinit snippet PZT::modules/spectrum
+  zinit snippet PZT::modules/history
+
+  zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
+  zinit $load zdharma/fast-syntax-highlighting
 }
 
--zplug-failed () {
-  COMMAND_HINT='Try to install it.'
-  if [[ $OS_FAMILY == "Darwin" ]]; then
-    COMMAND_HINT="Try `brew install zplug`"
-  elif [[ $OS_FAMILY == "Debian" ]]; then
-    COMMAND_HINT="Try `sudo apt install zplug`"
-  fi
-  echo "zplug not found. $COMMAND_HINT"
-}
-
--zsh-load-plugins() {
+_zsh-load-plugins () {
+  local directory=$1
   ## Load everything in .zshrc.d/
-  if [[ -d "$_ZSH_PLUGINS/" ]]; then
-    for i in $(find "$_ZSH_PLUGINS/" -maxdepth 1 -type f -name "*.sh");
+  if [[ -d "$directory/" ]]; then
+    for i in $(find "$directory/" -maxdepth 1 -type f -name "*.sh");
     do
       . $i;
     done
   fi
 }
 
--zsh-jenv-load() {
+_zsh-jenv-load () {
   # Support for rbenv
   if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 }
--zsh-rbenv-load() {
+
+_zsh-rbenv-load () {
   # Support for rbenv
-  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+  if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
 }
 
-## Load ZPlug
-export ZPLUG_HOME="$HOME/.zplug"
-_ZPLUG_PREFIX=$(-zplug-prefix)
-_ZSH_PLUGINS="$HOME/.zshrc.d"
+_zsh-nvm-load () {
+  # Support for nvm
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+}
 
-if [[ -f "$_ZPLUG_PREFIX/init.zsh" ]];then
-  source "$_ZPLUG_PREFIX/init.zsh"
-
-  # Launch zplug self manager plugin
-  zplug "zplug/zplug", hook-build:'zplug --self-manage'
-
-  # Load theme file
-  zplug mafredri/zsh-async, from:github
-  zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-
-  # Load Plugins
-  zplug "zsh-users/zsh-autosuggestions"
-  zplug "zsh-users/zsh-completions"
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
-  zplug "zsh-users/zsh-history-substring-search", defer:3
-  zplug "modules/completion", from:prezto
-  zplug "modules/spectrum", from:prezto
-  # zplug "$_ZSH_PLUGINS", from:local
-
-  -zsh-load-plugins
-  -zplug-load
-else
-  -zplug-failed
-  -zsh-load-plugins
-fi;
-
+## Launch
+_zsh-zinit-install
+_zsh-zinit-plugins
 # Load rbenv; jenv, ...
--zsh-rbenv-load
--zsh-jenv-load
+_zsh-rbenv-load
+_zsh-jenv-load
+_zsh-nvm-load
+
+_zsh-load-plugins "$HOME/.zshrc.d"
