@@ -8,13 +8,13 @@ setopt noglobalrcs
 _xdg-init-dirs () {
   # Init default platform directories
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences/
-    local XDG_CACHE_HOME_DEFAULT=$HOME/Library/
-    local XDG_DATA_HOME_DEFAULT=$HOME/Library/Caches/
+    local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences
+    local XDG_CACHE_HOME_DEFAULT=$HOME/Library/Caches
+    local XDG_DATA_HOME_DEFAULT=$HOME/Library
   else
     local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
-    local XDG_CACHE_DEFAULT=$HOME/.cache
-    local XDG_DATA_DEFAULT=$HOME/.local/share
+    local XDG_CACHE_HOME_DEFAULT=$HOME/.cache
+    local XDG_DATA_HOME_DEFAULT=$HOME/.local/share
   fi
   # export variables
   [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
