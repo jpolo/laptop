@@ -31,15 +31,15 @@ _xdg-init-dirs;
 
 # jenv, rbenv, etc
 export CP_HOME_DIR="$XDG_CACHE_HOME/cocoapods"
-export GEM_HOME="$XDG_DATA_HOME"/gem
-export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem/specs
+export GEM_HOME="$XDG_DATA_HOME/gem"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem/specs"
 export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
 export JENV_ROOT="$XDG_DATA_HOME/jenv"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/repl_history"
-export npm_config_cache="$XDG_CACHE_HOME"/npm
-export npm_config_init_module="$XDG_DATA_HOME"/npm/config/npm-init.js
-export npm_config_prefix="$XDG_DATA_HOME"/npm
-export npm_config_userconfig="$XDG_CONFIG_HOME"/npm/config
+export npm_config_cache="$XDG_CACHE_HOME/npm"
+export npm_config_init_module="$XDG_DATA_HOME/npm/config/npm-init.js"
+export npm_config_prefix="$XDG_DATA_HOME/npm"
+export npm_config_userconfig="$XDG_CONFIG_HOME/npm/config"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 
