@@ -1,7 +1,7 @@
 - set_fact:
     nvm_shell_profile_scripts:
       - .bashrc
-      - .zshrc
+      # - .zshrc
 
 - name: Install NVM
   homebrew:
