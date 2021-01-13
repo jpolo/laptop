@@ -47,6 +47,7 @@ _zsh-zinit-plugins () {
     OMZ::lib/history.zsh \
     OMZ::lib/spectrum.zsh \
     OMZ::plugins/jenv/jenv.plugin.zsh \
+    OMZ::plugins/pyenv/pyenv.plugin.zsh \
     OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
