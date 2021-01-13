@@ -31,6 +31,8 @@ _xdg-init-dirs;
 
 # jenv, rbenv, etc
 export CP_HOME_DIR="$XDG_CACHE_HOME/cocoapods"
+export GEM_HOME="$XDG_DATA_HOME"/gem
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem/specs
 export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
 export JENV_ROOT="$XDG_DATA_HOME/jenv"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/repl_history"
