@@ -42,9 +42,12 @@ _zsh-zinit-plugins () {
   zinit ice wait"0b" lucid blockf
   zinit $load zsh-users/zsh-completions
 
-  zinit snippet PZT::modules/completion
-  zinit snippet PZT::modules/spectrum
-  zinit snippet PZT::modules/history
+  zinit wait lucid for \
+    OMZ::lib/completion.zsh \
+    OMZ::lib/history.zsh \
+    OMZ::lib/spectrum.zsh \
+    OMZ::plugins/jenv/jenv.plugin.zsh \
+    OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
   zinit $load zdharma/fast-syntax-highlighting
@@ -61,16 +64,6 @@ _zsh-load-plugins () {
   fi
 }
 
-_zsh-jenv-load () {
-  # Support for rbenv
-  if which jenv > /dev/null; then eval "$(jenv init -)"; fi
-}
-
-_zsh-rbenv-load () {
-  # Support for rbenv
-  if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
-}
-
 _zsh-nvm-load () {
   # Support for nvm
  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -80,8 +73,6 @@ _zsh-nvm-load () {
 _zsh-zinit-install
 _zsh-zinit-plugins
 # Load rbenv; jenv, ...
-_zsh-rbenv-load
-_zsh-jenv-load
 _zsh-nvm-load
 
 _zsh-load-plugins "$HOME/.zshrc.d"
