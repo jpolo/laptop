@@ -40,10 +40,12 @@
       - spectacle
 
     vscode_extensions:
-      - EditorConfig.EditorConfig
+      - coenraads.bracket-pair-colorizer
       - eamodio.gitlens
+      - EditorConfig.EditorConfig
       - ms-vsliveshare.vsliveshare
       - ms-vsliveshare.vsliveshare-audio
+      - wayou.vscode-todo-highlight
 
     # sketch_plugins:
     #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
