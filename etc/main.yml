@@ -43,7 +43,7 @@
       - EditorConfig.EditorConfig
       - eamodio.gitlens
       - ms-vsliveshare.vsliveshare
-      - MS-CEINTL.vscode-language-pack-fr
+      - ms-vsliveshare.vsliveshare-audio
 
     # sketch_plugins:
     #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
