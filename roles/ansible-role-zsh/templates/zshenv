@@ -30,6 +30,8 @@ _xdg-init-dirs () {
 _xdg-init-dirs;
 
 # jenv, rbenv, etc
+# export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
@@ -40,7 +42,6 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_DEVDIR="$XDG_CACHE_HOME/node-gyp"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-# export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
 # Ensure that a non-login, non-interactive shell has a defined environment.
@@ -69,8 +70,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
-if [ -d "$HOME/.cargo/bin" ] ; then
-    export PATH="$PATH:$HOME/.cargo/bin"
+if [ -d "$CARGO_HOME/bin" ] ; then
+    export PATH="$PATH:$CARGO_HOME/bin"
     alias exa-grid='exa --long --grid'
     alias exa-tree='exa --long --tree'
 fi
