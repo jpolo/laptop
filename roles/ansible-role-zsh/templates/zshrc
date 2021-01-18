@@ -48,6 +48,7 @@ _zsh-zinit-plugins () {
     OMZ::lib/spectrum.zsh \
     OMZ::plugins/jenv/jenv.plugin.zsh \
     OMZ::plugins/pyenv/pyenv.plugin.zsh \
+    OMZ::plugins/nvm/nvm.plugin.zsh \
     OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
@@ -65,15 +66,8 @@ _zsh-load-plugins () {
   fi
 }
 
-_zsh-nvm-load () {
-  # Support for nvm
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-}
-
 ## Launch
 _zsh-zinit-install
 _zsh-zinit-plugins
-# Load rbenv; jenv, ...
-_zsh-nvm-load
 
 _zsh-load-plugins "$HOME/.zshrc.d"
