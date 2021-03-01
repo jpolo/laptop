@@ -70,7 +70,7 @@ install_ansible_macos()
 
 install_ansible_all()
 {
-  if [ -x "$(command -v apt-get)" ]; then
+  if ! command -v apt &> /dev/null; then
     install_ansible_deb
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     install_ansible_macos
