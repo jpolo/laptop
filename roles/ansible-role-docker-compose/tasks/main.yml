@@ -1,6 +1,0 @@
----
-- name: Installing docker compose
-  pip:
-    name: "{{docker_compose_package_name}}"
-    version: "{{ docker_compose_package_version if docker_compose_package_version else omit }}"
-    state: "{{docker_compose_package_state}}"
