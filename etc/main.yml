@@ -107,11 +107,13 @@
         # Ansible 2.4 supports `global_command` making `working_dir` optional.
         working_dir: "{{ lookup('env', 'COMPOSER_HOME') | default('~/.composer', true) }}"
       with_items: "{{ composer_packages }}"
+      ignore_errors: yes
 
     - name: Check if php5 directory exists.
       stat:
         path: /usr/local/php5/
       register: php5_dir
+      ignore_errors: yes
 
     - name: Install PHP 5.6 in /usr/local/php5/
       shell: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
@@ -120,6 +122,7 @@
       when:
         - ansible_os_family == 'Darwin'
         - not php5_dir.stat.exists
+      ignore_errors: yes
 
     - name: Install global NPM packages.
       npm:
@@ -129,6 +132,7 @@
         global: yes
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ npm_packages }}"
+      ignore_errors: yes
 
     - name: Install global Pip packages.
       pip:
@@ -137,6 +141,7 @@
         version: "{{ item.version | default(omit) }}"
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
+      ignore_errors: yes
 
     - name: Install global Ruby gems.
       gem:
@@ -147,6 +152,7 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ gem_packages }}"
       become: true
+      ignore_errors: yes
 
     - name: Add SSH Known Hosts
       known_hosts:
@@ -165,6 +171,7 @@
           state=directory
           name="{{ user_workspace }}"
           owner={{ ansible_env.USER }}
+      ignore_errors: yes
 
     - name: Install VSCode extensions
       vscode:
