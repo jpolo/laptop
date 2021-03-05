@@ -22,3 +22,4 @@ docs/man/man3/*
 *.sublime-workspace
 #Ansible
 *.retry
+collections
