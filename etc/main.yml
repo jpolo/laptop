@@ -76,6 +76,7 @@
     # - { role: ansible-role-atom, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-slack, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-docker, become: true, ignore_errors: yes }
+    - { role: ansible-role-docker-compose, become: true, ignore_errors: yes }
     - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
     # - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
