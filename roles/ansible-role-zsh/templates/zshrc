@@ -48,11 +48,15 @@ _zsh-zinit-plugins () {
     OMZ::lib/spectrum.zsh \
     OMZ::plugins/jenv/jenv.plugin.zsh \
     OMZ::plugins/pyenv/pyenv.plugin.zsh \
-    OMZ::plugins/nvm/nvm.plugin.zsh \
+    #OMZ::plugins/nvm/nvm.plugin.zsh \
     OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
   zinit $load zdharma/fast-syntax-highlighting
+
+  # NVM
+  export NVM_LAZY_LOAD=true
+  zinit light lukechilds/zsh-nvm
 }
 
 _zsh-load-plugins () {
