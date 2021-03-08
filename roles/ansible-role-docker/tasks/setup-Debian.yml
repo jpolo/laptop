@@ -18,13 +18,11 @@
 
 - name: Ensure Docker package is present
   apt:
-    name: "{{docker_item}}"
+    name: [
+      docker-ce,
+      docker-ce-cli,
+      docker-ce-rootless-extras,
+      containerd.io
+    ]
     state: "{{docker_package_state}}"
-  with_items:
-    - docker-ce
-    - docker-ce-cli
-    - docker-ce-rootless-extras
-    - containerd.io
-  loop_control:
-    loop_var: docker_item
 
