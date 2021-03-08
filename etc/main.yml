@@ -25,6 +25,9 @@
 
     pip_packages: []
 
+    apt_packages:
+      - rbenv
+
     homebrew_taps:
       - wix/brew
 
@@ -67,6 +70,14 @@
         - always
       ignore_errors: no
 
+    - name: Include specific OSX configuration
+      include: "main.osx.yml"
+      when: ansible_os_family == 'Darwin'
+
+    - name: Include specific Debian configuration
+      include: "main.debian.yml"
+      when: ansible_os_family == 'Debian'
+
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
@@ -96,9 +107,6 @@
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
 
   tasks:
-    - name: Include specific OSX configuration
-      include: "main.osx.yml"
-      when: ansible_os_family == 'Darwin'
 
     - name: Install global Composer packages.
       composer:
@@ -143,8 +151,11 @@
       with_items: "{{ pip_packages }}"
       ignore_errors: yes
 
+    - name: Install Ruby
+      script: rvm
+
     - name: Install global Ruby gems.
-      gem:
+      community.general.gem:
         name: "{{ item.name | default(item) }}"
         state: "{{ item.state | default('present') }}"
         version: "{{ item.version | default(omit) }}"
