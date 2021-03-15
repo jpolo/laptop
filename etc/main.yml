@@ -38,7 +38,7 @@
       - jenv
 
     homebrew_cask_packages:
-      - google-drive-file-stream
+      - google-drive
       - mysqlworkbench
       - spectacle
 
