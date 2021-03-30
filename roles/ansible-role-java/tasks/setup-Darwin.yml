@@ -1,6 +1,6 @@
 - name: Install OpenJDK tap.
   homebrew_tap:
-    name: homebrew/cask-versions
+    name: AdoptOpenJDK/openjdk
     state: present
   become: false
 
