@@ -103,7 +103,8 @@
     # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, ignore_errors: yes, tags: ['api', 'web'] }
     - { role: ansible-role-firefox-developer-edition, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
-    - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['console'] }
+    - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['lang', 'node'] }
+    - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
 
   tasks:
@@ -150,9 +151,6 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
       ignore_errors: yes
-
-    - name: Install Ruby
-      script: rvm
 
     - name: Install global Ruby gems.
       community.general.gem:

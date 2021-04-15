@@ -1,0 +1,5 @@
+---
+- name: Install rbenv
+  community.general.homebrew:
+    name: rbenv
+    state: "{{rbenv_package_state}}"

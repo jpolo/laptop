@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Julien Polo
+  description: Installs rbenv
+  company:
+  license: BSD
+  min_ansible_version: 1.9
+  github_branch: master
+  platforms:
+    - name: Darwin
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - development
+    - ruby
+    - rbenv
+dependencies: []
