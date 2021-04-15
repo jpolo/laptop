@@ -42,13 +42,13 @@ _zsh-zinit-plugins () {
   zinit ice wait"0b" lucid blockf
   zinit $load zsh-users/zsh-completions
 
+  #OMZ::plugins/nvm/nvm.plugin.zsh \
   zinit wait lucid for \
     OMZ::lib/completion.zsh \
     OMZ::lib/history.zsh \
     OMZ::lib/spectrum.zsh \
     OMZ::plugins/jenv/jenv.plugin.zsh \
     OMZ::plugins/pyenv/pyenv.plugin.zsh \
-    #OMZ::plugins/nvm/nvm.plugin.zsh \
     OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
