@@ -14,7 +14,7 @@
     user_workspace: "{{ansible_env.HOME}}/Workspace"
     ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
     ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
-    java_package_version: '8'
+    java_package_version: '15'
     atom_package_state: absent
 
     composer_packages: []
@@ -95,6 +95,7 @@
     - { role: ansible-role-androidtools, become: true, ignore_errors: yes, tags: ['ide', 'android'] }
     - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
     - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
+    - { role: ansible-role-flipper-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
     # - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
