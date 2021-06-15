@@ -17,9 +17,11 @@
     name: "{{ homebrew_packages }}"
     state: present
   become: false
+  ignore_errors: yes
 
 - name: Install Homebrew Cask packages.
   community.general.homebrew_cask:
     name: "{{ homebrew_cask_packages }}"
     state: present
   become: false
+  ignore_errors: yes
