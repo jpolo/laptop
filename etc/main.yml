@@ -59,7 +59,6 @@
 
     npm_packages:
       - name: yarn
-      - name: react-native-cli
 
   pre_tasks:
     - name: Check if Password is correct
@@ -143,6 +142,7 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ npm_packages }}"
       ignore_errors: yes
+      become: false
 
     - name: Install global Pip packages.
       pip:
