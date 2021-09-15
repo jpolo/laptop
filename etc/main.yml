@@ -43,7 +43,6 @@
       - spectacle
 
     vscode_extensions:
-      - coenraads.bracket-pair-colorizer
       - eamodio.gitlens
       - EditorConfig.EditorConfig
       - ms-vsliveshare.vsliveshare
