@@ -91,9 +91,9 @@
     - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-androidstudio, become: false, ignore_errors: yes, tags: ['ide', 'android'] }
     - { role: ansible-role-androidtools, become: true, ignore_errors: yes, tags: ['ide', 'android'] }
-    - { role: ansible-role-composer, become: true, ignore_errors: yes, tags: ['php'] }
     - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-flipper-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
+    - { role: ansible-role-chrome, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
     # - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
@@ -101,7 +101,6 @@
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
     # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, ignore_errors: yes, tags: ['api', 'web'] }
-    - { role: ansible-role-firefox-developer-edition, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
     - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['lang', 'node'] }
     - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
@@ -115,21 +114,6 @@
         # Ansible 2.4 supports `global_command` making `working_dir` optional.
         working_dir: "{{ lookup('env', 'COMPOSER_HOME') | default('~/.composer', true) }}"
       with_items: "{{ composer_packages }}"
-      ignore_errors: yes
-
-    - name: Check if php5 directory exists.
-      stat:
-        path: /usr/local/php5/
-      register: php5_dir
-      ignore_errors: yes
-
-    - name: Install PHP 5.6 in /usr/local/php5/
-      shell: curl -s https://php-osx.liip.ch/install.sh | bash -s force 5.6
-      args:
-        warn: false
-      when:
-        - ansible_os_family == 'Darwin'
-        - not php5_dir.stat.exists
       ignore_errors: yes
 
     - name: Install global NPM packages.
@@ -212,7 +196,7 @@
         scope: global
         value: "{{ user_email }}"
       become: false
-      when: user_email|bool == true
+      when: user_email| length > 0
       tags: ['git']
 
     - name: Set GIT user.name
@@ -221,7 +205,7 @@
         scope: global
         value: "{{ user_name }}"
       become: false
-      when: user_name|bool == true
+      when: user_name| length > 0
       tags: ['git']
 
     - name: Check if SSH key exists
