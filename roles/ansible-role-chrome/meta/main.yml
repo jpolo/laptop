@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: jpolo
+  description: Google Chrome installation
+  company:
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.2
+  platforms:
+    - name: Darwin
+      versions:
+        - all
+  galaxy_tags:
+    - chrome
+    - browser
+  dependencies: []

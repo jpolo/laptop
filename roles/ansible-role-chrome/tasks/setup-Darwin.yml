@@ -1,0 +1,5 @@
+- name: Install Chrome Browser
+  community.general.homebrew_cask:
+    name: "google-chrome"
+    state: "{{chrome_package_state}}"
+  become: false
