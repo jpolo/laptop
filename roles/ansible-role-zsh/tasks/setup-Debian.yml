@@ -4,6 +4,5 @@
     state: "{{zsh_package_state}}"
   with_items:
     - zsh
-    - zplug
   loop_control:
     loop_var: zsh_package_item
