@@ -7,7 +7,7 @@ _zsh-zinit-install () {
   ZINIT[ZCOMPDUMP_PATH]=$XDG_CACHE_HOME/zsh/zcompdump
 
   if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
-    git clone https://github.com/zdharma/zinit $ZINIT_HOME/bin
+    git clone https://github.com/zdharma-continuum/zinit $ZINIT_HOME/bin
     zcompile $ZINIT_HOME/bin/zinit.zsh
   fi
 
@@ -52,7 +52,7 @@ _zsh-zinit-plugins () {
     OMZ::plugins/rbenv/rbenv.plugin.zsh
 
   zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
-  zinit $load zdharma/fast-syntax-highlighting
+  zinit $load zdharma-continuum/fast-syntax-highlighting
 
   # NVM
   export NVM_LAZY_LOAD=true
