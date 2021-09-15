@@ -67,6 +67,7 @@
       tags:
         - always
       ignore_errors: no
+      changed_when: false
 
     - name: Include specific OSX configuration
       include: "main.osx.yml"
