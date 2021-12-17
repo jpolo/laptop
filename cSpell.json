@@ -10,7 +10,8 @@
         "flatpak",
         "keepass",
         "OSTYPE",
-        "prezto"
+        "prezto",
+        "zplug"
     ],
     "ignoreWords": [
         "chrissicool",
