@@ -1,0 +1,5 @@
+- name: Install Webp
+  package:
+    name: "webp"
+    state: "{{webp_package_state}}"
+  become: false
