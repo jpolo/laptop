@@ -1,5 +1,5 @@
 ---
-- name: Ensure Watchman package is present
+- name: Install Watchman
   apt:
     name: 'watchman'
     state: "{{watchman_package_state}}"
