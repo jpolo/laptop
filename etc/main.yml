@@ -83,7 +83,6 @@
     - { role: ansible-role-git, become: true, ignore_errors: yes, tags: ['scm'] }
     - { role: ansible-role-keepass, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-mercurial, become: true, ignore_errors: yes, tags: ['scm'] }
-    # - { role: ansible-role-atom, become: true, ignore_errors: yes, tags: ['ide'] }
     - { role: ansible-role-slack, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-docker, become: true, ignore_errors: yes }
     - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
@@ -96,13 +95,13 @@
     - { role: ansible-role-flipper-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-chrome, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
-    # - { role: ansible-role-sketch, become: true, ignore_errors: yes, tags: ['design'] }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-webp, become: true, ignore_errors: yes, tags: ['image'] }
     # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
     - { role: ansible-role-postman, ignore_errors: yes, tags: ['api', 'web'] }
+    - { role: ansible-role-drawio, ignore_errors: yes, tags: ['schema', 'diagram'] }
     - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['lang', 'node'] }
     - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
