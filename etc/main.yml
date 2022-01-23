@@ -70,11 +70,11 @@
       changed_when: false
 
     - name: Include specific OSX configuration
-      include: "main.osx.yml"
+      include_tasks: "main.osx.yml"
       when: ansible_os_family == 'Darwin'
 
     - name: Include specific Debian configuration
-      include: "main.debian.yml"
+      include_tasks: "main.debian.yml"
       when: ansible_os_family == 'Debian'
 
   roles:
