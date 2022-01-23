@@ -5,6 +5,3 @@
     - "./setup-{{ ansible_distribution }}.yml"
     - "./setup-{{ ansible_os_family }}.yml"
     - "./setup-default.yml"
-
-- include_tasks: setup-docker-compose.yml
-  when: docker_compose_install | bool
