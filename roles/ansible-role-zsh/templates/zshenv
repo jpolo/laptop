@@ -74,8 +74,6 @@ fi
 
 if [ -d "$CARGO_HOME/bin" ] ; then
     export PATH="$PATH:$CARGO_HOME/bin"
-    alias exa-grid='exa --long --grid'
-    alias exa-tree='exa --long --tree'
 fi
 
 if [ -d "$HOME/.yarn/bin" ] ; then
