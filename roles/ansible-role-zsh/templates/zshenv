@@ -76,6 +76,10 @@ if [ -d "$CARGO_HOME/bin" ] ; then
     export PATH="$PATH:$CARGO_HOME/bin"
 fi
 
+if [ -d "$GEM_HOME/bin" ] ; then
+    export PATH="$PATH:$GEM_HOME/bin"
+fi
+
 if [ -d "$HOME/.yarn/bin" ] ; then
     export PATH="$PATH:$HOME/.yarn/bin"
 fi
