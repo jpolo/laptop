@@ -25,15 +25,13 @@
 
     pip_packages: []
 
-    apt_packages:
-      - rbenv
+    apt_packages: []
 
     homebrew_taps:
       - wix/brew
 
     homebrew_packages:
       - applesimutils
-      - rbenv
       - ruby-build
       - jenv
 
