@@ -46,6 +46,7 @@
       - ms-vsliveshare.vsliveshare
       - ms-vsliveshare.vsliveshare-audio
       - wayou.vscode-todo-highlight
+      - gitlab.gitlab-workflow
 
     # sketch_plugins:
     #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
