@@ -44,7 +44,6 @@
       - eamodio.gitlens
       - EditorConfig.EditorConfig
       - ms-vsliveshare.vsliveshare
-      - ms-vsliveshare.vsliveshare-audio
       - wayou.vscode-todo-highlight
       - gitlab.gitlab-workflow
       - github.vscode-pull-request-github
