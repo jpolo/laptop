@@ -39,7 +39,6 @@
 
     homebrew_cask_packages:
       - google-drive
-      - mysqlworkbench
       - spectacle
 
     vscode_extensions:
