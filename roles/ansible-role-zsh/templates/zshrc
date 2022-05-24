@@ -47,6 +47,7 @@ _zsh-zinit-plugins () {
     OMZ::lib/completion.zsh \
     OMZ::lib/history.zsh \
     OMZ::lib/spectrum.zsh \
+    OMZ::plugins/dotenv/dotenv.plugin.zsh \
     OMZ::plugins/jenv/jenv.plugin.zsh \
     OMZ::plugins/pyenv/pyenv.plugin.zsh \
     OMZ::plugins/rbenv/rbenv.plugin.zsh
