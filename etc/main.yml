@@ -46,7 +46,7 @@
       - wayou.vscode-todo-highlight
       - gitlab.gitlab-workflow
       - github.vscode-pull-request-github
-      - visualstudioexptteam.vscodeintel
+      - VisualStudioExptTeam.vscodeintellicode
 
     # sketch_plugins:
     #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
