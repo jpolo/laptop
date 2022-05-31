@@ -40,6 +40,15 @@ _zsh-zinit-plugins () {
   # Completions
   ##
   zinit ice wait"0b" lucid blockf
+  # Brew completions
+  if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+
+  # Zsh completions
   zinit $load zsh-users/zsh-completions
 
   #OMZ::plugins/nvm/nvm.plugin.zsh \
