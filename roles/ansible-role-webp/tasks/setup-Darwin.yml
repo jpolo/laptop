@@ -6,7 +6,7 @@
 
 - name: Install Automator scripts
   ansible.posix.synchronize:
-    src: "{{role_path}}/templates/automator/{{webp_automator_item|quote}}"
+    src: "{{role_path}}/templates/automator/{{webp_automator_item}}"
     dest: "{{ansible_env.HOME}}/Library/Services/"
   loop_control:
     loop_var: webp_automator_item
