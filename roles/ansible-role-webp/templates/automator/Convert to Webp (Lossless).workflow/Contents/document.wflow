@@ -81,7 +81,7 @@
 
 for f in "$@"
 do
-/usr/local/bin/cwebp -lossless "$f" -o "$(autoincr "${f%.*}.webp")"
+cwebp -lossless "$f" -o "$(autoincr "${f%.*}.webp")"
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
