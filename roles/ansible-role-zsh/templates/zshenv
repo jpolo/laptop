@@ -52,6 +52,8 @@ export NPM_CONFIG_DEVDIR="$XDG_CACHE_HOME/node-gyp"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
