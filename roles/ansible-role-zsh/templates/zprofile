@@ -45,11 +45,15 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 
+if [ -f "/opt/homebrew/bin/brew" ] ; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
 # Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+# if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprofile"
+# fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/Application" ] ; then
@@ -99,3 +103,6 @@ fi
 if [ -d "/usr/local/bin" ] ; then
     export PATH="$PATH:/usr/local/bin"
 fi
+
+# Make unique PATH
+typeset -U PATH

@@ -65,7 +65,7 @@ _zsh-zinit-plugins () {
   zinit $load zdharma-continuum/fast-syntax-highlighting
 
   # NVM
-  export NVM_LAZY_LOAD=true
+  # export NVM_LAZY_LOAD=true
   zinit light lukechilds/zsh-nvm
 }
 
@@ -83,5 +83,4 @@ _zsh-load-plugins () {
 ## Launch
 _zsh-zinit-install
 _zsh-zinit-plugins
-
 _zsh-load-plugins "$HOME/.zshrc.d"
