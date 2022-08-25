@@ -1,11 +1,5 @@
-- name: Enable Hashicorp tap
-  homebrew_tap:
-    name: hashicorp/tap
-    state: "{{terraform_package_state}}"
-  become: false
-
-- name: Install Terraform
+- name: Install Terraform (via tfenv)
   package:
-    name: "hashicorp/tap/terraform"
+    name: "tfenv"
     state: "{{terraform_package_state}}"
   become: false
