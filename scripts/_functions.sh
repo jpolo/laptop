@@ -56,15 +56,35 @@ install_ansible_deb()
 
 install_ansible_macos()
 {
+  # Install Rosetta
+  local rosetta_installation_message="* Ensure Rosetta 2"
+  if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
+    sudo softwareupdate --install-rosetta  --agree-to-license && \
+    log_success_msg "$rosetta_installation_message" || \
+    log_failure_msg "$rosetta_installation_message";
+  else
+    log_success_msg "$rosetta_installation_message"
+  fi
+
   # Install XCode
+  local xcode_installation_message="* Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
-    xcode-select --install
+    xcode-select --install && \
+    log_success_msg "$xcode_installation_message" || \
+    log_failure_msg "$xcode_installation_message";
+  else
+    log_success_msg "$xcode_installation_message"
   fi
 
   # Install Homebrew
+  local brew_installation_message="* Ensure Brew"
   if ! [ -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "$(/opt/homebrew/bin/brew shellenv)" && \
+    log_success_msg "$brew_installation_message" || \
+    log_failure_msg "$brew_installation_message";
+  else
+    log_success_msg "$brew_installation_message"
   fi
 
   check_ansible || brew install ansible
@@ -84,7 +104,7 @@ install_ansible_all()
 install_ansible()
 {
   # 1. Try to install
-  local installation_message="* Install ansible executable"
+  local installation_message="* Ensure Ansible"
   if [ -z check_ansible ];then
     log_success_msg "$installation_message"
   else
@@ -97,4 +117,9 @@ install_ansible()
   check_ansible && \
   log_success_msg "$check_message" || \
   log_failure_msg "$check_message"
+}
+
+function is_arm()
+{
+  test arm64 = $(uname -m)
 }
