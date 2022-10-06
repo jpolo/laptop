@@ -6,6 +6,45 @@
     value: false
   become: true
 
+- name: "MacOS - Show File Extensions"
+  osx_defaults:
+    key: 'AppleShowAllExtensions'
+    type: bool
+    value: true
+  become: false
+
+- name: "MacOS - Disable auto capitalization"
+  osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSAutomaticCapitalizationEnabled'
+    type: bool
+    value: false
+  become: false
+
+- name: "MacOS - Disables smart dashes"
+  osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSAutomaticDashSubstitutionEnabled'
+    type: bool
+    value: false
+  become: false
+
+- name: "MacOS - Disables automatic period substitutions"
+  osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSAutomaticPeriodSubstitutionEnabled'
+    type: bool
+    value: false
+  become: false
+
+- name: "MacOS - Disables smart quotes"
+  osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSAutomaticQuoteSubstitutionEnabled'
+    type: bool
+    value: false
+  become: false
+
 - name: Install Homebrew tap.
   homebrew_tap:
     name: "{{ homebrew_taps }}"
