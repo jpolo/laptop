@@ -84,6 +84,7 @@
     - { role: ansible-role-mercurial, become: true, ignore_errors: yes, tags: ['scm'] }
     - { role: ansible-role-slack, ignore_errors: yes, tags: ['com'] }
     - { role: ansible-role-docker, become: true, ignore_errors: yes }
+    - { role: ansible-role-discord, become: true, ignore_errors: yes }
     - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
     # - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
