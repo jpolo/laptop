@@ -59,6 +59,6 @@ if [ -z "$EDITOR" ]; then
     # nothing
   fi
 fi
-if [ -z "$VISUAL" && ! -z "$EDITOR" ]; then
+if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
 fi
