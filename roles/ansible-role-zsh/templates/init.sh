@@ -46,3 +46,19 @@ zinit $load zdharma-continuum/fast-syntax-highlighting
 # NVM
 # export NVM_LAZY_LOAD=true
 zinit light lukechilds/zsh-nvm
+
+##
+# Editor
+##
+if [ -z "$EDITOR" ]; then
+  if [[ -n $SSH_CONNECTION ]]; then # SSH mode
+    export EDITOR='nano'
+  elif type code &>/dev/null; then
+    export EDITOR='code --wait'
+  else # Local terminal mode
+    # nothing
+  fi
+fi
+if [ -z "$VISUAL" && ! -z "$EDITOR" ]; then
+  export VISUAL="$EDITOR"
+fi
