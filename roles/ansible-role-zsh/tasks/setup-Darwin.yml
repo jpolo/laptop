@@ -7,3 +7,9 @@
   loop_control:
     loop_var: zsh_package_item
   become: false
+
+- name: Ensure $XDG_DATA_HOME/zsh directory exists
+  file:
+    state: directory
+    name: "{{ ansible_env.HOME }}/Library/zsh"
+  become: false

@@ -26,6 +26,13 @@
     validate: "zsh -n %s"
   become_user: "{{ ansible_env.USER }}"
 
+- name: Configure ZSH Startup ($XDG_DATA_HOME/zsh/00_init.sh)
+  copy:
+    src: './templates/init.sh'
+    dest: "{{ ansible_env.XDG_DATA_HOME }}/zsh/00_init.sh"
+    validate: "zsh -n %s"
+  become_user: "{{ ansible_env.USER }}"
+
 - name: Configure Shell to ZSH
   user:
     name={{ ansible_env.USER }}

@@ -166,6 +166,7 @@
           name="{{ user_workspace }}"
           owner={{ ansible_env.USER }}
       ignore_errors: yes
+      become: false
 
     - name: Install VSCode extensions
       vscode:
@@ -175,27 +176,20 @@
       tags: ['ide', 'vscode']
       ignore_errors: yes
 
-    - name: Set GIT diff
-      git_config:
-        name: diff.tool
-        scope: global
-        value: "vscode"
+    - name: Ensure $XDG_CONFIG_HOME/git directory exists
+      file:
+        state: directory
+        name: "{{ ansible_env.XDG_CONFIG_HOME }}/git"
+        owner: "{{ ansible_env.USER }}"
+      ignore_errors: yes
       become: false
-      tags: ['git']
-
-    - name: Set GIT code.editor
-      git_config:
-        name: core.editor
-        scope: global
-        value: "{{ visualstudiocode_git_editor }}"
-      become: false
-      tags: ['git']
 
     - name: Set GIT user.email
       git_config:
         name: user.email
-        scope: global
+        scope: file
         value: "{{ user_email }}"
+        file: "{{ ansible_env.XDG_CONFIG_HOME }}/git/config"
       become: false
       when: user_email| length > 0
       tags: ['git']
@@ -203,8 +197,9 @@
     - name: Set GIT user.name
       git_config:
         name: user.name
-        scope: global
+        scope: file
         value: "{{ user_name }}"
+        file: "{{ ansible_env.XDG_CONFIG_HOME }}/git/config"
       become: false
       when: user_name| length > 0
       tags: ['git']
