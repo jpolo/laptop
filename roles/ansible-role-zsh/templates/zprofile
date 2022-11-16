@@ -67,12 +67,13 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=`gem environment gemdir`/bin:$PATH
 fi
 if [ -d "$HOME/Library/Android/sdk/" ]; then
-  export ANDROID_HOME="$HOME/Library/Android/sdk/"
+  export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk/"
 elif [ -d "/usr/local/opt/android-sdk" ]; then
-  export ANDROID_HOME="/usr/local/opt/android-sdk"
+  export ANDROID_SDK_ROOT="/usr/local/opt/android-sdk"
 fi
-if [ ! -z "$ANDROID_HOME" ]; then
-  export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+if [ ! -z "$ANDROID_SDK_ROOT" ]; then
+  export ANDROID_HOME=$ANDROID_SDK_ROOT
+  export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 fi
 
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
