@@ -1,0 +1,7 @@
+---
+build_essential_packages:
+  - gh
+  - imagemagick
+  - jq
+  - openssl
+  - wget
