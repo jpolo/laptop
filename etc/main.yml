@@ -2,13 +2,6 @@
 - hosts: localhost
   connection: local
   remote_user: root
-  vars_prompt:
-    - name: "user_email"
-      prompt: "Email (optional)"
-      private: no
-    - name: "user_name"
-      prompt: "FirstName LastName (optional)"
-      private: no
   vars:
     github_access_token: ""
     user_workspace: "{{ansible_env.HOME}}/Workspace"
@@ -176,33 +169,21 @@
       tags: ['ide', 'vscode']
       ignore_errors: yes
 
-    - name: Ensure $XDG_CONFIG_HOME/git directory exists
-      file:
-        state: directory
-        name: "{{ ansible_env.XDG_CONFIG_HOME }}/git"
-        owner: "{{ ansible_env.USER }}"
-      ignore_errors: yes
-      become: false
-
-    - name: Set GIT user.email
+    - name: Read GIT user.email
       git_config:
         name: user.email
-        scope: file
-        value: "{{ user_email }}"
-        file: "{{ ansible_env.XDG_CONFIG_HOME }}/git/config"
+        scope: global
       become: false
-      when: user_email| length > 0
       tags: ['git']
+      register: git_user_email
 
-    - name: Set GIT user.name
+    - name: Read GIT user.name
       git_config:
         name: user.name
-        scope: file
-        value: "{{ user_name }}"
-        file: "{{ ansible_env.XDG_CONFIG_HOME }}/git/config"
+        scope: global
       become: false
-      when: user_name| length > 0
       tags: ['git']
+      register: git_user_name
 
     - name: Check if SSH key exists
       stat:
@@ -215,6 +196,18 @@
           creates={{ ssh_id_rsa_pub }}
       when: ssh_id_rsa_stat.stat.exists == False
 
-    # - name: Read SSH public key to authorize
-    #   shell: cat {{ssh_id_rsa_pub}}
-    #   register: ssh_pub_key
+    - name: Check Git Email
+      ansible.builtin.assert:
+        that:
+        - git_user_email.config_value | length > 0
+        success_msg: "git config user.mail : {{git_user_email.config_value}}"
+        fail_msg: "No git user.email set. Please run `git config --global user.email 'first.last@company.com'`"
+      ignore_errors: yes
+
+    - name: Check Git Name
+      ansible.builtin.assert:
+        that:
+        - git_user_name.config_value | length > 0
+        success_msg: "git config user.mail : {{git_user_name.config_value}}"
+        fail_msg: "No git user.name set. Please run `git config --global user.name 'FirstName LastName'`"
+      ignore_errors: yes
