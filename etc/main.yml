@@ -4,7 +4,7 @@
   remote_user: root
   vars:
     github_access_token: ""
-    user_workspace: "{{ansible_env.HOME}}/Workspace"
+    user_workspace: "{{ansible_env.HOME}}/Code"
     ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
     ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
     java_package_version: '15'
@@ -153,11 +153,11 @@
       become: true
       ignore_errors: yes
 
-    - name: Ensure ~/Workspace exists
-      file: >
-          state=directory
-          name="{{ user_workspace }}"
-          owner={{ ansible_env.USER }}
+    - name: Ensure ~/Code exists
+      file:
+        state: directory
+        name: "{{ user_workspace }}"
+        owner: {{ ansible_env.USER }}
       ignore_errors: yes
       become: false
 
