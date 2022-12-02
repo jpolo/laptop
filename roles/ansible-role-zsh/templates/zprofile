@@ -73,7 +73,7 @@ elif [ -d "/usr/local/opt/android-sdk" ]; then
 fi
 if [ ! -z "$ANDROID_SDK_ROOT" ]; then
   export ANDROID_HOME=$ANDROID_SDK_ROOT
-  export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+  export PATH="$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 fi
 
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
