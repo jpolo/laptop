@@ -72,12 +72,8 @@ elif [ -d "/usr/local/opt/android-sdk" ]; then
   export ANDROID_SDK_ROOT="/usr/local/opt/android-sdk"
 fi
 if [ ! -z "$ANDROID_SDK_ROOT" ]; then
-  if [ -d "$ANDROID_SDK_ROOT/platform-tools" ]; then
-    export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
-  fi
-  if [ -d "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" ]; then
-    export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
-  fi
+  export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+  export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 fi
 
 # https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
