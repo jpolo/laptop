@@ -72,7 +72,6 @@ elif [ -d "/usr/local/opt/android-sdk" ]; then
   export ANDROID_SDK_ROOT="/usr/local/opt/android-sdk"
 fi
 if [ ! -z "$ANDROID_SDK_ROOT" ]; then
-  export ANDROID_HOME=$ANDROID_SDK_ROOT
   export PATH="$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools"
 fi
 
