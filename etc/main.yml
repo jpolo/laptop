@@ -30,7 +30,7 @@
 
     homebrew_cask_packages:
       - google-drive
-      - spectacle
+      - rectangle
 
     vscode_extensions:
       - eamodio.gitlens
