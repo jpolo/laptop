@@ -50,6 +50,7 @@
 
     npm_packages:
       - name: yarn
+      - name: gitmoji-cli
 
   pre_tasks:
     - name: Check if Password is correct
