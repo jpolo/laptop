@@ -5,8 +5,8 @@
   vars:
     github_access_token: ""
     user_workspace: "{{ansible_env.HOME}}/Code"
-    ssh_id_rsa: "{{ansible_env.HOME}}/.ssh/id_rsa"
-    ssh_id_rsa_pub: "{{ssh_id_rsa}}.pub"
+    ssh_id_ed25519: "{{ansible_env.HOME}}/.ssh/id_ed25519"
+    ssh_id_ed25519_pub: "{{ssh_id_ed25519}}.pub"
     java_package_version: '15'
     atom_package_state: absent
 
@@ -188,14 +188,14 @@
 
     - name: Check if SSH key exists
       stat:
-        path: "{{ ssh_id_rsa }}"
-      register: ssh_id_rsa_stat
+        path: "{{ ssh_id_ed25519 }}"
+      register: ssh_id_ed25519_stat
 
     - name: Create SSH key
       command: >
-          ssh-keygen -t rsa -b 4096 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_rsa }}
-          creates={{ ssh_id_rsa_pub }}
-      when: ssh_id_rsa_stat.stat.exists == False
+          ssh-keygen -t ed25519 -C "{{ansible_env.USER}}@{{ inventory_hostname_short }}" -N '' -o -f {{ ssh_id_ed25519 }}
+          creates={{ ssh_id_ed25519_pub }}
+      when: ssh_id_ed25519_stat.stat.exists == False
 
     - name: Check Git Email
       ansible.builtin.assert:
