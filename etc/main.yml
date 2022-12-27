@@ -197,6 +197,21 @@
           creates={{ ssh_id_ed25519_pub }}
       when: ssh_id_ed25519_stat.stat.exists == False
 
+    - name: Test SSH key (github.com)
+      shell: ssh -T git@github.com >/dev/null 2>&1
+      register: git_ssh_setup
+      failed_when: git_ssh_setup.rc >= 2
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Check SSH key (github.com)
+      ansible.builtin.assert:
+        that:
+        - git_ssh_setup.rc == 1 or git_ssh_setup.rc == 0
+        success_msg: "SSH valid on github.com"
+        fail_msg: "SSH invalid on github.com. Please register on https://github.com/settings/keys"
+      ignore_errors: yes
+
     - name: Check Git Email
       ansible.builtin.assert:
         that:
