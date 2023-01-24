@@ -2,15 +2,15 @@
 galaxy_info:
   author: jpolo
   description: Terminal installation
-  company:
+  company: ''
   license: "license (BSD, MIT)"
-  min_ansible_version: 1.2
+  min_ansible_version: '2.0'
   platforms:
-    - name: Darwin
+    - name: macOS
       versions:
         - all
   galaxy_tags:
     - term
     - cli
     - console
-  dependencies: []
+dependencies: []

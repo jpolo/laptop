@@ -1,12 +1,12 @@
 galaxy_info:
   author: Julien Polo
   description: Installs rbenv
-  company:
+  company: ''
   license: BSD
-  min_ansible_version: 1.9
+  min_ansible_version: '2.0'
   github_branch: master
   platforms:
-    - name: Darwin
+    - name: macOS
       versions:
         - all
     - name: Debian

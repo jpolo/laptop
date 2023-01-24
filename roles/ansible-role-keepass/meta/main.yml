@@ -1,15 +1,15 @@
 galaxy_info:
   author: jpolo
   description:
-  company:
+  company: ''
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
   # issue_tracker_url: http://example.com/issue/tracker
   license: license (GPLv2, CC-BY, etc)
-  min_ansible_version: 2.0
+  min_ansible_version: '2.0'
   platforms:
-    - name: Darwin
+    - name: macOS
       versions:
         - all
     - name: Debian
