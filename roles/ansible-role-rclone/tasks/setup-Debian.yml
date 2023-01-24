@@ -1,0 +1,4 @@
+- name: Install RClone
+  package:
+     name: "rclone"
+     state: "{{ rclone_package_state }}"
