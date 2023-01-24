@@ -1,5 +1,5 @@
 - name: Install RClone
-  community.general.homebrew_cask:
+  community.general.homebrew:
     name: "rclone"
     state: "{{rclone_package_state}}"
   become: false
