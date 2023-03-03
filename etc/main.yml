@@ -12,9 +12,9 @@
 
     composer_packages: []
 
-    gem_packages:
-      - name: cocoapods
-        version: 1.10.0
+    gem_packages: []
+      # - name: cocoapods
+      #   version: 1.10.0
 
     pip_packages: []
 
@@ -132,6 +132,7 @@
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ pip_packages }}"
       ignore_errors: yes
+      become: false
 
     - name: Install global Ruby gems.
       community.general.gem:
@@ -141,7 +142,7 @@
         user_install: no
         executable: "{{ item.executable | default(omit) }}"
       with_items: "{{ gem_packages }}"
-      become: true
+      become: false
       ignore_errors: yes
 
     - name: Add SSH Known Hosts
