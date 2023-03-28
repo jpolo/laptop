@@ -147,14 +147,14 @@
 
     - name: Add SSH Known Hosts
       known_hosts:
-        path: /etc/ssh/ssh_known_hosts
+        path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
         name: "{{ item }}"
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item) }}"
       with_items:
         - github.com
         - gitlab.com
         - bitbucket.org
-      become: true
+      become: false
       ignore_errors: yes
 
     - name: Ensure ~/Code exists
