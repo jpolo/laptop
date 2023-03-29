@@ -99,7 +99,7 @@
     - { role: ansible-role-postman, ignore_errors: yes, tags: ['api', 'web'] }
     - { role: ansible-role-drawio, ignore_errors: yes, tags: ['schema', 'diagram'] }
     # - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['lang', 'node'] }
-    - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
+    # - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
     - { role: ansible-role-terraform, become: true, ignore_errors: yes, tags: ['devops'] }
 
   tasks:

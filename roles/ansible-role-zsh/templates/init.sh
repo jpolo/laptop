@@ -38,7 +38,8 @@ zinit wait lucid for \
   OMZ::plugins/dotenv/dotenv.plugin.zsh \
   OMZ::plugins/jenv/jenv.plugin.zsh \
   OMZ::plugins/pyenv/pyenv.plugin.zsh \
-  OMZ::plugins/rbenv/rbenv.plugin.zsh
+  OMZ::plugins/rbenv/rbenv.plugin.zsh \
+  OMZ::plugins/rvm/rvm.plugin.zsh
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
 zinit $load zdharma-continuum/fast-syntax-highlighting
