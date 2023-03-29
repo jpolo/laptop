@@ -27,6 +27,7 @@
       - applesimutils
       - ruby-build
       - jenv
+      - libpq
 
     homebrew_cask_packages:
       - google-drive
