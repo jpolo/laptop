@@ -11,7 +11,7 @@ ROLE_DIR="$ROOT_DIR/roles"
 COLLECTION_DIR="$ROOT_DIR/collections"
 
 export ANSIBLE_COLLECTIONS_PATHS="$ANSIBLE_COLLECTIONS_PATHS:$COLLECTION_DIR"
-export ANSIBLE_ROLES_PATH="$ANSIBLE_ROLES_PATH:$ROLE_DIR"
+export ANSIBLE_ROLES_PATH="$ANSIBLE_ROLES_PATH:$COLLECTION_DIR:$ROLE_DIR"
 
 # Install ansible
 install_ansible
@@ -21,5 +21,5 @@ install_ansible
 #cp -a $ROLE_DIR/. $ROLE_TARGET_DIR
 
 # Install dependencies
-ansible-galaxy collection install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
+ansible-galaxy install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
 ansible-playbook -i $CONFIG_DIR/inventory $CONFIG_DIR/main.yml --ask-become-pass $@
