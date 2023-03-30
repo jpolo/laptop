@@ -93,6 +93,12 @@
     - { role: ansible-role-chrome, become: true, ignore_errors: yes, tags: ['browser', 'web'] }
     - { role: ansible-role-chromedriver, become: true, ignore_errors: yes }
     - { role: ansible-role-notion, become: true, ignore_errors: yes, tags: ['com'] }
+    - { role: rvm.ruby,
+        become: false,
+        ignore_errors: yes,
+        tags: ['ruby'],
+        rvm1_user: "{{ ansible_env.USER }}",
+        rvm1_rubies: ['ruby-3.2.1'] }
     - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-webp, become: true, ignore_errors: yes, tags: ['image'] }
