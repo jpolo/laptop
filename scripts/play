@@ -21,6 +21,6 @@ install_ansible
 #cp -a $ROLE_DIR/. $ROLE_TARGET_DIR
 
 # Install dependencies
-ansible-galaxy collections install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
-ansible-galaxy roles install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
+ansible-galaxy collection install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
+ansible-galaxy role install -r $CONFIG_DIR/requirements.yml -p "$COLLECTION_DIR"
 ansible-playbook -i $CONFIG_DIR/inventory $CONFIG_DIR/main.yml --ask-become-pass $@
