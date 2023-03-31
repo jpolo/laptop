@@ -99,6 +99,7 @@
         ignore_errors: yes,
         tags: ['ruby'],
         rvm1_user: "{{ ansible_env.USER }}",
+        rvm1_install_path: "{{ ansible_env.rvm_path }}",
         rvm1_rubies: ['ruby-3.2.1'] }
     - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-watchman, become: true, ignore_errors: yes, tags: ['console'] }

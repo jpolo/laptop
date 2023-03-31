@@ -5,29 +5,36 @@ skip_global_compinit=1
 setopt noglobalrcs
 
 # Make sure XDG dirs are set
-_xdg-init-dirs () {
-  # Init default platform directories
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences
-    local XDG_CACHE_HOME_DEFAULT=$HOME/Library/Caches
-    local XDG_DATA_HOME_DEFAULT=$HOME/Library
-  else
-    local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
-    local XDG_CACHE_HOME_DEFAULT=$HOME/.cache
-    local XDG_DATA_HOME_DEFAULT=$HOME/.local/share
-  fi
-  # export variables
-  [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
-  [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
-  [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
 
-  # Source file
-  [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
-    . ${XDG_CONFIG_HOME}/user-dirs.dirs
-    # TODO export variables
-  }
+# Init default platform directories
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences
+  local XDG_CACHE_HOME_DEFAULT=$HOME/Library/Caches
+  local XDG_DATA_HOME_DEFAULT=$HOME/Library
+else
+  local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
+  local XDG_CACHE_HOME_DEFAULT=$HOME/.cache
+  local XDG_DATA_HOME_DEFAULT=$HOME/.local/share
+fi
+# export variables
+[[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
+[[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
+[[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
+
+# Source file
+[[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
+  . ${XDG_CONFIG_HOME}/user-dirs.dirs
+  # TODO export variables
 }
-_xdg-init-dirs;
+
+_path_append() {
+  for ARG in "$@"
+  do
+    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$ARG"
+    fi
+  done
+}
 
 # jenv, rbenv, etc
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
@@ -50,7 +57,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 # export NPM_CONFIG_INIT_MODULE="$XDG_DATA_HOME"/npm/config/npm-init.js
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_DEVDIR="$XDG_CACHE_HOME/node-gyp"
-export RVM_DIR="$XDG_DATA_HOME/rvm"
+export rvm_path="$XDG_DATA_HOME/rvm"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
@@ -87,57 +94,28 @@ fi
 # fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/Application" ] ; then
-    export PATH="$PATH:$HOME/Application"
+_path_append "$HOME/Application"
+_path_append "$HOME/Applications"
+_path_append "$HOME/bin"
+_path_append "$HOME/.bin"
+_path_append "$HOME/.local/bin"
+if [ ! -z "$CARGO_HOME" ]; then
+  _path_append "$CARGO_HOME/bin"
 fi
-
-if [ -d "$HOME/Applications" ] ; then
-    export PATH="$PATH:$HOME/Applications"
-fi
-
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$PATH:$HOME/bin"
-fi
-
-if [ -d "$HOME/.bin" ] ; then
-    export PATH="$PATH:$HOME/.bin"
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$PATH:$HOME/.local/bin"
-fi
-
-if [ -d "$CARGO_HOME/bin" ] ; then
-    export PATH="$PATH:$CARGO_HOME/bin"
-fi
-
-# if [ -d "$GEM_HOME/bin" ] ; then
-#     export PATH="$PATH:$GEM_HOME/bin"
+# if [ ! -z "$GEM_HOME" ]; then
+#   _path_append "$GEM_HOME/bin"
 # fi
-
-if [ -d "$HOME/.yarn/bin" ] ; then
-    export PATH="$PATH:$HOME/.yarn/bin"
-fi
-
-if [ -d "/home/linuxbrew/.linuxbrew/bin" ] ; then
-    export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-fi
-
-if [ -d "/snap/bin" ] ; then
-    export PATH="$PATH:/snap/bin"
-fi
-
-if [ -d "/usr/sbin" ] ; then
-    export PATH="$PATH:/usr/sbin"
-fi
-
-if [ -d "/usr/local/bin" ] ; then
-    export PATH="$PATH:/usr/local/bin"
-fi
-
-if [ -d "$RVM_DIR/bin" ] ; then
-    export PATH="$PATH:$RVM_DIR/bin"
+_path_append "$HOME/.yarn/bin"
+_path_append "/home/linuxbrew/.linuxbrew/bin"
+_path_append "/snap/bin"
+_path_append "/usr/sbin"
+_path_append "/usr/local/bin"
+if [ ! -z "$rvm_path" ]; then
+  _path_append "$rvm_path/bin"
 fi
 
 # Make unique PATH
 typeset -U PATH
+
+# Clean functions
+unset -f _path_append
