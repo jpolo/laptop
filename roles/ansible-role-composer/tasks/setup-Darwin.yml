@@ -1,5 +1,0 @@
-- name: Install PHP Composer
-  package:
-    name: "composer"
-    state: "{{composer_package_state}}"
-  become: false

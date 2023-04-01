@@ -18,6 +18,9 @@ NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
 
+HOMEBREW_NO_INSTALL_CLEANUP=1
+HOMEBREW_NO_ENV_HINTS=1
+
 log_info_msg()
 {
     echo -n -e "${@}"
@@ -38,23 +41,21 @@ log_failure_msg()
     return 0
 }
 
-check_ansible()
+is_arm()
 {
-  if [ -x "$(command -v ansible)" ] ; then
+  test arm64 = $(uname -m)
+}
+
+command_exists()
+{
+  if [ -x "$(command -v $1)" ] ; then
     return 0
   else
     return 1
   fi
 }
 
-install_ansible_deb()
-{
-  sudo apt install -qq software-properties-common && \
-  sudo apt-add-repository -y -u ppa:ansible/ansible && \
-  sudo apt install -qq ansible
-}
-
-install_ansible_macos()
+ensure_rosetta2()
 {
   # Install Rosetta
   local rosetta_installation_message="* Ensure Rosetta 2"
@@ -65,7 +66,10 @@ install_ansible_macos()
   else
     log_success_msg "$rosetta_installation_message"
   fi
+}
 
+ensure_xcode()
+{
   # Install XCode
   local xcode_installation_message="* Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
@@ -75,7 +79,10 @@ install_ansible_macos()
   else
     log_success_msg "$xcode_installation_message"
   fi
+}
 
+ensure_brew()
+{
   # Install Homebrew
   local brew_installation_message="* Ensure Brew"
   if ! [ -x "$(command -v brew)" ]; then
@@ -86,40 +93,46 @@ install_ansible_macos()
   else
     log_success_msg "$brew_installation_message"
   fi
-
-  check_ansible || brew install ansible
 }
 
-install_ansible_all()
+ensure_package()
+{
+  local executable="$1"
+  local package=${2:-$executable}
+  local installation_message="* Ensure $executable"
+
+  if brew list $1 &>/dev/null; then
+    log_success_msg "$installation_message"
+  else
+    brew install $package --quiet && \
+    log_success_msg "$installation_message" || \
+    log_failure_msg "$installation_message";
+  fi
+}
+
+bootstrap_debian()
+{
+  # sudo apt install -qq software-properties-common && \
+  # sudo apt install -qq ansible
+  return 0
+}
+
+bootstrap_macos()
+{
+  ensure_rosetta2
+  ensure_xcode
+  ensure_brew
+}
+
+bootstrap()
 {
   if ! command -v apt &> /dev/null; then
-    install_ansible_deb
+    bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    install_ansible_macos
+    bootstrap_macos
   else
     return 1
   fi
 }
 
-install_ansible()
-{
-  # 1. Try to install
-  local installation_message="* Ensure Ansible"
-  if [ -z check_ansible ];then
-    log_success_msg "$installation_message"
-  else
-    install_ansible_all && \
-    log_success_msg "$installation_message" || \
-    log_failure_msg "$installation_message";
-  fi;
 
-  # 2. Check installation
-  check_ansible && \
-  log_success_msg "$check_message" || \
-  log_failure_msg "$check_message"
-}
-
-function is_arm()
-{
-  test arm64 = $(uname -m)
-}

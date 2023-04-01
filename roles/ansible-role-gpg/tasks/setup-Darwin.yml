@@ -1,5 +1,0 @@
-- name: Install GPG
-  community.general.homebrew:
-    name: "gnupg"
-    state: "{{gnupg_package_state}}"
-  become: false

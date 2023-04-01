@@ -1,4 +1,0 @@
-- name: Install Postman
-  community.general.homebrew_cask:
-    name: "postman"
-    state: "{{postman_package_state}}"

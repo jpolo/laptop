@@ -34,5 +34,5 @@ export PATH=/usr/local/bin:$PATH
 
 echo "[Info] Run $PACKAGE_NAME playbook"
 cd $DOWNLOAD_DIR$PACKAGE_NAME
-$DOWNLOAD_DIR$PACKAGE_NAME/scripts/play
+$DOWNLOAD_DIR$PACKAGE_NAME/src/main.sh
 

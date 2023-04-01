@@ -1,6 +1,0 @@
----
-sketch_package_state: present
-
-# A list of git repository url
-# ex: [https://github.com/ddwht/sketch-dynamic-button.git]
-sketch_plugins: []
