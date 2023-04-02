@@ -1,4 +1,0 @@
-- name: Install Android Studio
-  community.general.homebrew_cask:
-    name: "android-studio"
-    state: "{{androidstudio_package_state}}"
