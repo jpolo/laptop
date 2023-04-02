@@ -20,9 +20,6 @@ BRACKET="\\033[1;34m"
 
 PACKAGE_MANAGER=unknown
 
-HOMEBREW_NO_INSTALL_CLEANUP=1
-HOMEBREW_NO_ENV_HINTS=1
-
 log_info_msg()
 {
     echo -n -e "${@}"

@@ -5,6 +5,9 @@ source "$SCRIPT_DIR/_functions.sh"
 cd "$SCRIPT_DIR/.."
 ROOT_DIR=$(pwd)
 
+HOMEBREW_NO_INSTALL_CLEANUP=1
+HOMEBREW_NO_ENV_HINTS=1
+
 bootstrap
 
 # Default settings
@@ -21,6 +24,7 @@ ensure_defaults_bool "" NSAutomaticTextCompletionEnabled false
 # Install programs
 ensure_package "android-studio"
 ensure_package "chromedriver"
+ensure_package "coreutils"
 ensure_package "discord"
 ensure_package "docker"
 ensure_package "drawio"
@@ -28,12 +32,15 @@ ensure_package "flipper"
 ensure_package "git"
 ensure_package "google-chrome"
 ensure_package "google-drive"
+ensure_package "gh"
 ensure_package "gpg"
+ensure_package "imagemagick"
 ensure_package "iterm2"
 ensure_package "macpass"
 ensure_package "mercurial"
 ensure_package "notion"
 ensure_package "postman"
+ensure_package "openssl"
 ensure_package "rectangle"
 ensure_package "rbenv"
 ensure_package "rclone"
@@ -41,5 +48,9 @@ ensure_package "slack"
 ensure_package "tfenv"
 ensure_package "virtualbox"
 ensure_package "visual-studio-code"
+ensure_package "universal-ctags"
 ensure_package "watchman"
 
+# Install library
+ensure_package "libpq"
+ensure_package "libyaml"
