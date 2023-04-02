@@ -60,21 +60,12 @@
       ignore_errors: no
       changed_when: false
 
-    - name: Include specific OSX configuration
-      include_tasks: "main.osx.yml"
-      when: ansible_os_family == 'Darwin'
-
-    - name: Include specific Debian configuration
-      include_tasks: "main.debian.yml"
-      when: ansible_os_family == 'Debian'
-
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
     # - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
     # - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
-    - { role: ansible-role-flipper-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: rvm.ruby,
         become: false,
         ignore_errors: yes,
@@ -90,14 +81,6 @@
 
   tasks:
 
-    - name: Install global Composer packages.
-      composer:
-        command: "{{ (item.state | default('present') == 'absent') | ternary('remove', 'require') }}"
-        arguments: "{{ item.name | default(item) }} {{ item.version | default('@stable') }}"
-        # Ansible 2.4 supports `global_command` making `working_dir` optional.
-        working_dir: "{{ lookup('env', 'COMPOSER_HOME') | default('~/.composer', true) }}"
-      with_items: "{{ composer_packages }}"
-      ignore_errors: yes
 
     - name: Install global NPM packages.
       npm:

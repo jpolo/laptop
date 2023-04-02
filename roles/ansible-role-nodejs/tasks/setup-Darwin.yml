@@ -1,5 +1,0 @@
-- name: Install NodeJS
-  package:
-    name: "{% if nodejs_package_version is defined %}node@{{nodejs_package_version}}{% else %}node{% endif %}"
-    state: "{{nodejs_package_state}}"
-  become: false

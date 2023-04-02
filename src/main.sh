@@ -7,6 +7,17 @@ ROOT_DIR=$(pwd)
 
 bootstrap
 
+# Default settings
+ensure_defaults_bool "" AppleShowAllExtensions true
+ensure_defaults_bool "" NSAutomaticCapitalizationEnabled false
+ensure_defaults_bool "" NSAutomaticDashSubstitutionEnabled false
+ensure_defaults_bool "" NSAutomaticPeriodSubstitutionEnabled false
+ensure_defaults_bool "" NSAutomaticQuoteSubstitutionEnabled false
+ensure_defaults_bool "" NSAutomaticSpellingCorrectionEnabled false
+ensure_defaults_bool "" NSAutomaticTextCompletionEnabled false
+# ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate false
+
+
 # Install programs
 ensure_package "android-studio"
 ensure_package "chromedriver"

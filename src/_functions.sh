@@ -43,6 +43,13 @@ log_failure_msg()
     return 0
 }
 
+log_pass_msg()
+{
+    echo -n -e "${@}"
+    echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
+    return 0
+}
+
 is_arm()
 {
   test arm64 = $(uname -m)
@@ -50,7 +57,7 @@ is_arm()
 
 command_exists()
 {
-  if [ -x "$(command -v $1)" ] ; then
+  if [ -x "$(command -v $1)" ]; then
     return 0
   else
     return 1
@@ -60,7 +67,7 @@ command_exists()
 ensure_rosetta2()
 {
   # Install Rosetta
-  local rosetta_installation_message="* Ensure Rosetta 2"
+  local rosetta_installation_message="- Ensure Rosetta 2"
   if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
     sudo softwareupdate --install-rosetta  --agree-to-license && \
     log_success_msg "$rosetta_installation_message" || \
@@ -73,7 +80,7 @@ ensure_rosetta2()
 ensure_xcode()
 {
   # Install XCode
-  local xcode_installation_message="* Ensure Build tools"
+  local xcode_installation_message="- Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
     xcode-select --install && \
     log_success_msg "$xcode_installation_message" || \
@@ -86,7 +93,7 @@ ensure_xcode()
 ensure_brew()
 {
   # Install Homebrew
-  local brew_installation_message="* Ensure Brew"
+  local brew_installation_message="- Ensure Brew"
   if ! [ -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/opt/homebrew/bin/brew shellenv)" && \
@@ -101,7 +108,7 @@ ensure_package()
 {
   local executable="$1"
   local package=${2:-$executable}
-  local installation_message="* Ensure $executable"
+  local installation_message="- Ensure $executable"
 
   if [ $PACKAGE_MANAGER == "brew" ];then
     if brew list $1 &>/dev/null; then
@@ -111,6 +118,21 @@ ensure_package()
       log_success_msg "$installation_message" || \
       log_failure_msg "$installation_message";
     fi
+  fi
+}
+
+ensure_defaults_bool()
+{
+  local domain="$1"
+  local key="$2"
+  local value="$3"
+  local installation_message="- Ensure defaults $domain $key=$value"
+  if command_exists "defaults";then
+    defaults write -g $domain $key -bool $value && \
+    log_success_msg $installation_message || \
+    log_failure_msg "$installation_message";
+  else
+    log_pass_msg $installation_message
   fi
 }
 
