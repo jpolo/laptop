@@ -1,7 +1,0 @@
----
-
-collections:
-  - community.general
-
-roles:
-  - name: rvm.ruby

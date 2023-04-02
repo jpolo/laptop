@@ -1,5 +1,0 @@
-- name: Install VirtualBox
-  community.general.homebrew_cask:
-    name: "virtualbox"
-    state: "{{virtualbox_package_state}}"
-  become: false

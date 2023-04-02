@@ -18,6 +18,8 @@ NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
 
+PACKAGE_MANAGER=unknown
+
 HOMEBREW_NO_INSTALL_CLEANUP=1
 HOMEBREW_NO_ENV_HINTS=1
 
@@ -101,12 +103,14 @@ ensure_package()
   local package=${2:-$executable}
   local installation_message="* Ensure $executable"
 
-  if brew list $1 &>/dev/null; then
-    log_success_msg "$installation_message"
-  else
-    brew install $package --quiet && \
-    log_success_msg "$installation_message" || \
-    log_failure_msg "$installation_message";
+  if [ $PACKAGE_MANAGER == "brew" ];then
+    if brew list $1 &>/dev/null; then
+      log_success_msg "$installation_message"
+    else
+      brew install $package --quiet && \
+      log_success_msg "$installation_message" || \
+      log_failure_msg "$installation_message";
+    fi
   fi
 }
 
@@ -119,6 +123,7 @@ bootstrap_debian()
 
 bootstrap_macos()
 {
+  PACKAGE_MANAGER=brew
   ensure_rosetta2
   ensure_xcode
   ensure_brew

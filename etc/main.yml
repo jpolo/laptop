@@ -29,10 +29,6 @@
       - jenv
       - libpq
 
-    homebrew_cask_packages:
-      - google-drive
-      - rectangle
-
     vscode_extensions:
       - eamodio.gitlens
       - EditorConfig.EditorConfig
@@ -75,11 +71,8 @@
   roles:
     - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
-    - { role: ansible-role-virtualbox, become: true, ignore_errors: yes }
     # - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
     - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
-    - { role: ansible-role-visualstudiocode, become: true, ignore_errors: yes, tags: ['ide'] }
-    - { role: ansible-role-androidtools, become: true, ignore_errors: yes, tags: ['ide', 'android'] }
     # - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: ansible-role-flipper-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
     - { role: rvm.ruby,

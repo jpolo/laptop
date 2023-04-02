@@ -1,9 +1,0 @@
-- name: Install Android Tools
-  package:
-    name: "{{androidtools_item}}"
-    state: "{{androidtools_package_state}}"
-  with_items:
-    - android-tools-adb
-    - android-tools-fastboot
-  loop_control:
-    loop_var: androidtools_item

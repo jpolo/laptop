@@ -1,5 +1,0 @@
-- name: Install Debian packages.
-  apt:
-    name: "{{ apt_packages }}"
-    state: present
-  become: true

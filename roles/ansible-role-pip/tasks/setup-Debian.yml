@@ -1,5 +1,0 @@
----
-- name: Install pip
-  apt:
-    name: python-pip
-    state: "{{pip_package_state}}"
