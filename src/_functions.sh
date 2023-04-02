@@ -136,6 +136,33 @@ ensure_defaults_bool()
   fi
 }
 
+set_zsh()
+{
+  local shell_path;
+  shell_path="$(command -v zsh)"
+
+  # if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+  #   sudo sh -c "echo $shell_path >> /etc/shells"
+  # fi
+  sudo chsh -s "$shell_path" "$USER"
+}
+
+ensure_zsh()
+{
+  local message="- Ensure ZSH as shell"
+
+  case "$SHELL" in
+  */zsh)
+    log_success_msg $message
+    ;;
+  *)
+    set_zsh && \
+    log_success_msg $message || \
+    log_failure_msg "$message"
+    ;;
+  esac
+}
+
 bootstrap_debian()
 {
   # sudo apt install -qq software-properties-common && \
@@ -148,6 +175,7 @@ bootstrap_macos()
   PACKAGE_MANAGER=brew
   ensure_rosetta2
   ensure_xcode
+  ensure_zsh
   ensure_brew
 }
 
