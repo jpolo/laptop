@@ -57,3 +57,6 @@ ensure_package "yarn"
 ensure_package "openssl"
 ensure_package "libpq"
 ensure_package "libyaml"
+
+# Ensure Code
+ensure_directory "~/Code"

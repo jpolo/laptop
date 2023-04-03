@@ -160,6 +160,19 @@ ensure_zsh()
   esac
 }
 
+ensure_directory()
+{
+  local directory="$1"
+  local message="- Ensure directory $directory"
+  if [ ! -d $directory ]; then
+    mkdir -p $directory && \
+    log_success_msg $message || \
+    log_failure_msg "$message"
+  else
+    log_success_msg $message
+  fi
+}
+
 bootstrap_debian()
 {
   # sudo apt install -qq software-properties-common && \

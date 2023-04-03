@@ -8,17 +8,11 @@
     ssh_id_ed25519: "{{ansible_env.HOME}}/.ssh/id_ed25519"
     ssh_id_ed25519_pub: "{{ssh_id_ed25519}}.pub"
     java_package_version: '15'
-    atom_package_state: absent
-
-    composer_packages: []
 
     gem_packages: []
       # - name: cocoapods
       #   version: 1.10.0
 
-    pip_packages: []
-
-    apt_packages: []
 
     homebrew_taps:
       - wix/brew
@@ -39,45 +33,13 @@
       - redhat.vscode-yaml
       # - VisualStudioExptTeam.vscodeintellicode
 
-    # sketch_plugins:
-    #   - https://github.com/BaguetteEngineering/annotations-sketch-plugin/releases/latest/download/annotations.sketchplugin.zip
-
-    appstore_signin_dialog: yes
-    appstore_installed_apps:
-      - { id: 497799835, name: "Xcode" }
-
     npm_packages:
       - name: yarn
       - name: gitmoji-cli
 
-  pre_tasks:
-    - name: Check if Password is correct
-      become: true
-      command: echo "Password is correct"
-      run_once: true
-      tags:
-        - always
-      ignore_errors: no
-      changed_when: false
-
   roles:
-    - { role: ansible-role-buildessential, become: true, ignore_errors: yes, tags: ['always'] }
     - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
-    # - { role: ansible-role-nodejs, become: true, ignore_errors: yes, tags: ['js'] }
-    - { role: ansible-role-java, become: true, ignore_errors: yes, tags: ['java', 'android'] }
-    # - { role: ansible-role-react-native-debugger, become: true, ignore_errors: yes, tags: ['ios', 'android', 'react'] }
-    - { role: rvm.ruby,
-        become: false,
-        ignore_errors: yes,
-        tags: ['ruby'],
-        rvm1_user: "{{ ansible_env.USER }}",
-        rvm1_install_path: "{{ ansible_env.rvm_path }}",
-        rvm1_rubies: ['ruby-3.2.1'] }
-    - { role: ansible-role-term, ignore_errors: yes, tags: ['console'] }
     - { role: ansible-role-webp, become: true, ignore_errors: yes, tags: ['image'] }
-    # - { role: ansible-role-appstore, ignore_errors: yes, when: appstore_installed_apps, tags: ['appstore'] }
-    # - { role: ansible-role-nvm, become: true, ignore_errors: yes, tags: ['lang', 'node'] }
-    # - { role: ansible-role-rbenv, become: true, ignore_errors: yes, tags: ['lang', 'ruby'] }
 
   tasks:
 
@@ -93,27 +55,6 @@
       ignore_errors: yes
       become: false
 
-    - name: Install global Pip packages.
-      pip:
-        name: "{{ item.name | default(item) }}"
-        state: "{{ item.state | default('present') }}"
-        version: "{{ item.version | default(omit) }}"
-        executable: "{{ item.executable | default(omit) }}"
-      with_items: "{{ pip_packages }}"
-      ignore_errors: yes
-      become: false
-
-    - name: Install global Ruby gems.
-      community.general.gem:
-        name: "{{ item.name | default(item) }}"
-        state: "{{ item.state | default('present') }}"
-        version: "{{ item.version | default(omit) }}"
-        user_install: no
-        executable: "{{ item.executable | default(omit) }}"
-      with_items: "{{ gem_packages }}"
-      become: false
-      ignore_errors: yes
-
     - name: Add SSH Known Hosts
       known_hosts:
         path: "{{ ansible_env.HOME }}/.ssh/known_hosts"
@@ -126,13 +67,6 @@
       become: false
       ignore_errors: yes
 
-    - name: Ensure ~/Code exists
-      file:
-        state: directory
-        name: "{{ user_workspace }}"
-        owner: "{{ ansible_env.USER }}"
-      ignore_errors: yes
-      become: false
 
     - name: Install VSCode extensions
       vscode:
