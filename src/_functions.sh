@@ -106,6 +106,8 @@ ensure_package()
   local executable="$1"
   local package=${2:-$executable}
   local installation_message="- Ensure $executable"
+  HOMEBREW_NO_INSTALL_CLEANUP=1
+  HOMEBREW_NO_ENV_HINTS=1
 
   if [ $PACKAGE_MANAGER == "brew" ];then
     if brew list $1 &>/dev/null; then
@@ -171,6 +173,17 @@ ensure_directory()
   else
     log_success_msg $message
   fi
+}
+
+ensure_file_template()
+{
+  local template="$1"
+  local target="$2"
+  local message="- Ensure file $target"
+
+  cp "$TEMPLATE_DIR/$template" "$target" && \
+  log_success_msg $message || \
+  log_failure_msg "$message"
 }
 
 bootstrap_debian()

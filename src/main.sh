@@ -5,8 +5,8 @@ source "$SCRIPT_DIR/_functions.sh"
 cd "$SCRIPT_DIR/.."
 ROOT_DIR=$(pwd)
 
-HOMEBREW_NO_INSTALL_CLEANUP=1
-HOMEBREW_NO_ENV_HINTS=1
+TEMPLATE_DIR="$ROOT_DIR/resource"
+
 
 bootstrap
 
@@ -59,4 +59,8 @@ ensure_package "libpq"
 ensure_package "libyaml"
 
 # Ensure Code
-ensure_directory "~/Code"
+ensure_directory ~/Code
+
+ensure_file_template "zprofile" ~/.zprofile
+ensure_file_template "zshrc" ~/.zshrc
+
