@@ -23,6 +23,7 @@ ensure_package "libyaml"
 
 # Install programs
 ensure_package "android-studio"
+ensure_package "asdf"
 ensure_package "chromedriver"
 ensure_package "coreutils"
 ensure_package "discord"
