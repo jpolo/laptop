@@ -131,6 +131,37 @@ ensure_package()
   fi
 }
 
+ensure_asdf_plugin()
+{
+  local name="$1"
+  local url="$2"
+  local message="- Ensure asdf plugin $name"
+
+  if ! asdf plugin-list | grep -Fq "$name"; then
+    asdf plugin-add "$name" "$url" && \
+    log_success_msg "$message" || \
+    log_failure_msg "$message";
+  else
+    log_success_msg "$message"
+  fi
+}
+
+ensure_asdf_language()
+{
+  local language="$1"
+  local version=$2 || "$(asdf list-all "$language" | grep -v "[a-z]" | tail -1)"
+
+  local message="- Ensure asdf $language $version"
+  if ! asdf list "$language" | grep -Fq "$version"; then
+    asdf install "$language" "$version" && \
+    asdf global "$language" "$version"  && \
+    log_success_msg "$message" || \
+    log_failure_msg "$message";
+  else
+    log_success_msg "$message"
+  fi
+}
+
 ensure_defaults_bool()
 {
   local domain="$1"
