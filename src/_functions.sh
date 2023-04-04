@@ -149,10 +149,10 @@ ensure_asdf_plugin()
 ensure_asdf_language()
 {
   local language="$1"
-  local version=$2 || "$(asdf list-all "$language" | grep -v "[a-z]" | tail -1)"
+  local version=$2 || "latest"
 
   local message="- Ensure asdf $language $version"
-  if ! asdf list "$language" | grep -Fq "$version"; then
+  if ! asdf list "$language" &>/dev/null; then
     asdf install "$language" "$version" && \
     asdf global "$language" "$version"  && \
     log_success_msg "$message" || \
