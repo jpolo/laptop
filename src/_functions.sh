@@ -1,12 +1,25 @@
 #!/usr/bin/env bash
 
+if [ -z "${LAPTOP_ROOT_DIR}" ]; then
+  SCRIPT_DIR="$(dirname "$0")"
+  cd "$SCRIPT_DIR/.."
+  export LAPTOP_ROOT_DIR=$(pwd)
+  export LAPTOP_TEMPLATE_DIR="$LAPTOP_ROOT_DIR/resource"
+  export LAPTOP_SOURCE_DIR="$LAPTOP_ROOT_DIR/src"
+
+  export LAPTOP_PACKAGE_MANAGER=unknown
+  if [ -x "$(command -v brew)" ]; then
+    export LAPTOP_PACKAGE_MANAGER=brew
+  fi
+fi
+
 ## Screen Dimensions
 # Find current screen size
-if [ -z "${COLUMNS}" ]; then
+#if [ -z "${COLUMNS}" ]; then
    #COLUMNS=$(stty size)
    #COLUMNS=${COLUMNS##* }
-   COLUMNS=80
-fi
+COLUMNS=80
+#fi
 
 # When using remote connections, such as a serial port, stty size returns 0
 if [ "${COLUMNS}" = "0" ]; then
@@ -18,7 +31,8 @@ NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
 
-PACKAGE_MANAGER=unknown
+export HOMEBREW_NO_INSTALL_CLEANUP=true
+export HOMEBREW_NO_ENV_HINTS=true
 
 log_info_msg()
 {
@@ -106,10 +120,7 @@ ensure_package()
   local executable="$1"
   local package=${2:-$executable}
   local installation_message="- Ensure $executable"
-  HOMEBREW_NO_INSTALL_CLEANUP=1
-  HOMEBREW_NO_ENV_HINTS=1
-
-  if [ $PACKAGE_MANAGER == "brew" ];then
+  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
     if brew list $1 &>/dev/null; then
       log_success_msg "$installation_message"
     else
@@ -181,7 +192,8 @@ ensure_file_template()
   local target="$2"
   local message="- Ensure file $target"
 
-  cp "$TEMPLATE_DIR/$template" "$target" && \
+  mkdir -p $(dirname $target)
+  cp "$LAPTOP_TEMPLATE_DIR/$template" "$target" && \
   log_success_msg $message || \
   log_failure_msg "$message"
 }
@@ -195,7 +207,6 @@ bootstrap_debian()
 
 bootstrap_macos()
 {
-  PACKAGE_MANAGER=brew
   ensure_rosetta2
   ensure_xcode
   ensure_zsh
