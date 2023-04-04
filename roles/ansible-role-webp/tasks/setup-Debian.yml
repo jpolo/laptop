@@ -1,5 +1,0 @@
----
-- name: Install Webp
-  apt:
-    name: 'webp'
-    state: "{{webp_package_state}}"

@@ -52,6 +52,7 @@ ensure_package "virtualbox"
 ensure_package "visual-studio-code"
 ensure_package "universal-ctags"
 ensure_package "watchman"
+ensure_package "webp"
 ensure_package "wget"
 ensure_package "yarn"
 
