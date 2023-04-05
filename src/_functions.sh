@@ -298,7 +298,7 @@ _laptop_bootstrap() {
   fi
 }
 
-_laptop_execute() {
+_laptop_shell() {
   local shell=$1
   local script=$2
   env -i $shell --login $script
