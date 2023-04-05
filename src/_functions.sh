@@ -213,30 +213,30 @@ ensure_file_template() {
   log_failure_msg "$message"
 }
 
-_laptop-bootstrap_debian() {
+_laptop_bootstrap_debian() {
   # sudo apt install -qq software-properties-common && \
   # sudo apt install -qq ansible
   return 0
 }
 
-_laptop-bootstrap_macos() {
+_laptop_bootstrap_macos() {
   ensure_rosetta2
   ensure_xcode
   ensure_zsh
   ensure_brew
 }
 
-_laptop-bootstrap() {
+_laptop_bootstrap() {
   if ! command -v apt &> /dev/null; then
-    _laptop-bootstrap_debian
+    _laptop_bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    _laptop-bootstrap_macos
+    _laptop_bootstrap_macos
   else
     return 1
   fi
 }
 
-_laptop-execute() {
+_laptop_execute() {
   local shell=$1
   local script=$2
   env -i $shell --login $script
