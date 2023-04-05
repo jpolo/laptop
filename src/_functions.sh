@@ -31,6 +31,7 @@ NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
 COLOR_WARNING='\033[1;33m'
+COLOR_INFO='\033[32m'
 
 export HOMEBREW_NO_INSTALL_CLEANUP=true
 export HOMEBREW_NO_ENV_HINTS=true
@@ -60,6 +61,14 @@ log_pass_msg() {
 
 is_arm() {
   test arm64 = $(uname -m)
+}
+
+ewarn() {
+  echo -e "${COLOR_WARNING}Warning: ${@}${NORMAL}"
+}
+
+einfo() {
+  echo -e "${COLOR_INFO}Info: ${@}${NORMAL}"
 }
 
 command_exists() {
@@ -205,9 +214,11 @@ _laptop_ensure_rosetta2() {
 _laptop_ensure_brew() {
   # Install Homebrew
   local brew_installation_message="- Ensure Brew"
-  if ! [ -x "$(command -v brew)" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)" && \
+  local brew_present=$(env -i zsh --login -c 'command -v brew');
+
+  if [ -z "$brew_present" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+    # eval "$(/opt/homebrew/bin/brew shellenv)" && \
     log_success_msg "$brew_installation_message" || \
     log_failure_msg "$brew_installation_message";
   else

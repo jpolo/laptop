@@ -75,7 +75,6 @@ ensure_asdf_language "ruby" "latest"
 ensure_asdf_language "nodejs" "latest"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
 
-
 test_ssh_key "git@github.com" || \
-  echo "SSH invalid on github.com. Please register on https://github.com/settings/keys"
+  ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
 

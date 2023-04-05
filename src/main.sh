@@ -7,4 +7,4 @@ _laptop_execute bash "$LAPTOP_SOURCE_DIR/0-bootstrap.sh"
 _laptop_execute zsh  "$LAPTOP_SOURCE_DIR/1-configure-shell.zsh"
 _laptop_execute zsh "$LAPTOP_SOURCE_DIR/2-configure-all.zsh"
 
-echo -e "${COLOR_WARNING}Warning: ZSH configuration was potentially modified, please close/open a new terminal to see changes.${NORMAL}"
+einfo "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
