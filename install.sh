@@ -2,9 +2,9 @@
 
 RELEASE="master"
 DOWNLOAD="https://github.com/jpolo/laptop/archive/$RELEASE.tar.gz"
-PACKAGE_NAME=ansible-playbook-laptop
+PACKAGE_NAME=laptop-installer
 PACKAGE_ARCHIVE="$PACKAGE_NAME.tar.gz"
-DOWNLOAD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'jpolo-laptop')
+DOWNLOAD_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop-installer')
 
 set -e
 
@@ -34,5 +34,5 @@ export PATH=/usr/local/bin:$PATH
 
 echo "[Info] Run $PACKAGE_NAME playbook"
 cd $DOWNLOAD_DIR$PACKAGE_NAME
-$DOWNLOAD_DIR$PACKAGE_NAME/scripts/play
+$DOWNLOAD_DIR$PACKAGE_NAME/src/main.sh
 

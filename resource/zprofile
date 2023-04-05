@@ -1,0 +1,125 @@
+# https://blog.patshead.com/2011/04/improve-your-oh-my-zsh-startup-time-maybe.html
+skip_global_compinit=1
+
+# http://disq.us/p/f55b78
+setopt noglobalrcs
+
+# Make sure XDG dirs are set
+
+# Init default platform directories
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences
+  local XDG_CACHE_HOME_DEFAULT=$HOME/Library/Caches
+  local XDG_DATA_HOME_DEFAULT=$HOME/Library
+else
+  local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
+  local XDG_CACHE_HOME_DEFAULT=$HOME/.cache
+  local XDG_DATA_HOME_DEFAULT=$HOME/.local/share
+fi
+# export variables
+[[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
+[[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
+[[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
+
+# Source file
+[[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
+  . ${XDG_CONFIG_HOME}/user-dirs.dirs
+  # TODO export variables
+}
+
+_path_append() {
+  for ARG in "$@"
+  do
+    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$ARG"
+    fi
+  done
+}
+
+# jenv, rbenv, etc
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export ELM_HOME="$XDG_CONFIG_HOME/elm"
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
+export GEM_HOME="$XDG_DATA_HOME/gem"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
+export JENV_ROOT="$XDG_DATA_HOME/jenv"
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/repl_history"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
+# export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
+# export NPM_CONFIG_INIT_MODULE="$XDG_DATA_HOME"/npm/config/npm-init.js
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_DEVDIR="$XDG_CACHE_HOME/node-gyp"
+# export rvm_path="$XDG_DATA_HOME/rvm"
+export NVM_DIR="$XDG_DATA_HOME/nvm"
+# export ASDF_DIR="$XDG_DATA_HOME/asdf"
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+export SOLARGRAPH_CACHE="$XDG_CACHE_HOME/solargraph"
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export VSCODE_EXTENSIONS="$XDG_DATA_HOME/code-oss/extensions"
+
+# Initialize brew
+for prefix in "/opt/homebrew" "/usr/local"
+do
+  if [ -f "$prefix/bin/brew" ] ; then
+    eval "$($prefix/bin/brew shellenv)"
+  fi
+done
+
+if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
+  export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
+
+if [ -z "$ANDROID_HOME" ]; then
+  if [ -d "$HOME/Library/Android/sdk" ]; then
+    export ANDROID_HOME="$HOME/Library/Android/sdk"
+  elif [ -d "/usr/local/opt/android-sdk" ]; then
+    export ANDROID_HOME="/usr/local/opt/android-sdk"
+  fi
+  if [ ! -z "$ANDROID_HOME" ]; then
+    export PATH="$PATH:$ANDROID_HOME/platform-tools"
+    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+  fi
+fi
+
+# https://github.com/sorin-ionescu/prezto/blob/master/runcoms/zshenv
+# Ensure that a non-login, non-interactive shell has a defined environment.
+# if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprofile"
+# fi
+
+# set PATH so it includes user's private bin if it exists
+_path_append "$HOME/Application"
+_path_append "$HOME/Applications"
+_path_append "$HOME/bin"
+_path_append "$HOME/.bin"
+_path_append "$HOME/.local/bin"
+if [ ! -z "$CARGO_HOME" ]; then
+  _path_append "$CARGO_HOME/bin"
+fi
+if [ ! -z "$GEM_HOME" ]; then
+  _path_append "$GEM_HOME/bin"
+fi
+_path_append "$HOME/.yarn/bin"
+_path_append "/home/linuxbrew/.linuxbrew/bin"
+_path_append "/snap/bin"
+_path_append "/usr/sbin"
+_path_append "/usr/local/bin"
+
+# Make unique PATH
+typeset -U PATH
+
+# Clean functions
+unset -f _path_append

@@ -1,5 +1,0 @@
-- name: Install GIT
-  package:
-    name: "git"
-    state: "{{git_package_state}}"
-  become: false

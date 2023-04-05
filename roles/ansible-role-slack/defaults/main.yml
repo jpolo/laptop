@@ -1,4 +1,0 @@
----
-slack_version : '2.2.1'
-slack_mirror_linux : 'https://downloads.slack-edge.com/linux_releases'
-slack_package_state: present

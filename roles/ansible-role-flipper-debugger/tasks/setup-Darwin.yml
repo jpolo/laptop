@@ -1,5 +1,0 @@
-- name: Install Flipper Debugger
-  community.general.homebrew_cask:
-    name: "flipper"
-    state: "{{flipperdebugger_package_state}}"
-  become: false

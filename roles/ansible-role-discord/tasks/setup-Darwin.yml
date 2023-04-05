@@ -1,5 +1,0 @@
-- name: Install Discord
-  community.general.homebrew_cask:
-    name: "discord"
-    state: "{{discord_package_state}}"
-  become: false

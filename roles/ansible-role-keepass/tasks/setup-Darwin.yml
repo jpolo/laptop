@@ -1,4 +1,0 @@
-- name: Install KeePass Client
-  community.general.homebrew_cask:
-    name: "macpass"
-    state: "{{keepass_package_state}}"

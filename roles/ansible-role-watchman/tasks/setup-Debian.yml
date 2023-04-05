@@ -1,5 +1,0 @@
----
-- name: Install Watchman
-  apt:
-    name: 'watchman'
-    state: "{{watchman_package_state}}"

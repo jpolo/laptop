@@ -1,5 +1,0 @@
-- name: Install Watchman
-  package:
-    name: "watchman"
-    state: "{{watchman_package_state}}"
-  become: false

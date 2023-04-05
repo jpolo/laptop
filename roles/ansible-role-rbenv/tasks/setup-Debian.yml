@@ -1,5 +1,0 @@
----
-- name: Install rbenv
-  apt:
-    name: rbenv
-    state: "{{rbenv_package_state}}"

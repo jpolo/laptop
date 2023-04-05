@@ -1,6 +1,0 @@
-- name: Install Draw.io
-  community.general.homebrew_cask:
-    name: drawio
-    state: "{{drawio_package_state}}"
-  become: false
-

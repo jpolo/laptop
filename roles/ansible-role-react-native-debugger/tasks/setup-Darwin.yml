@@ -1,5 +1,0 @@
-- name: Install React Native Debugger
-  community.general.homebrew_cask:
-    name: "react-native-debugger"
-    state: "{{reactnativedebugger_package_state}}"
-  become: false

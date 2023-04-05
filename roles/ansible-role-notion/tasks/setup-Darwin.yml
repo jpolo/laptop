@@ -1,5 +1,0 @@
-- name: Install Notion
-  community.general.homebrew_cask:
-    name: "notion"
-    state: "{{notion_package_state}}"
-  become: false

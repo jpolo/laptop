@@ -1,5 +1,0 @@
-- name: Install Visual Studio Code
-  community.general.homebrew_cask:
-    name: "visual-studio-code"
-    state: "{{visualstudiocode_package_state}}"
-  become: false
