@@ -151,6 +151,16 @@ ensure_asdf_language() {
   fi
 }
 
+ensure_git_config() {
+  local name="$1"
+  local value="$2"
+  local message="- Ensure git config $name=$value"
+
+  git config --global $name $value && \
+    log_success_msg "$message" || \
+    log_failure_msg "$message";
+}
+
 ensure_defaults_bool() {
   local domain="$1"
   local key="$2"

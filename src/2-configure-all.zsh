@@ -65,3 +65,6 @@ ensure_asdf_language "ruby" "latest"
 ensure_asdf_language "nodejs" "latest"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
 
+# Configure git
+# https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
+ensure_git_config "push.default" "current"
