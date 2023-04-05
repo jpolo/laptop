@@ -70,43 +70,6 @@ command_exists() {
   fi
 }
 
-ensure_rosetta2() {
-  # Install Rosetta
-  local rosetta_installation_message="- Ensure Rosetta 2"
-  if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
-    sudo softwareupdate --install-rosetta  --agree-to-license && \
-    log_success_msg "$rosetta_installation_message" || \
-    log_failure_msg "$rosetta_installation_message";
-  else
-    log_success_msg "$rosetta_installation_message"
-  fi
-}
-
-ensure_xcode() {
-  # Install XCode
-  local xcode_installation_message="- Ensure Build tools"
-  if ! [ -x "$(command -v gcc)" ]; then
-    xcode-select --install && \
-    log_success_msg "$xcode_installation_message" || \
-    log_failure_msg "$xcode_installation_message";
-  else
-    log_success_msg "$xcode_installation_message"
-  fi
-}
-
-ensure_brew() {
-  # Install Homebrew
-  local brew_installation_message="- Ensure Brew"
-  if ! [ -x "$(command -v brew)" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)" && \
-    log_success_msg "$brew_installation_message" || \
-    log_failure_msg "$brew_installation_message";
-  else
-    log_success_msg "$brew_installation_message"
-  fi
-}
-
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
@@ -175,31 +138,6 @@ ensure_defaults_bool() {
   fi
 }
 
-set_zsh() {
-  local shell_path;
-  shell_path="$(command -v zsh)"
-
-  # if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-  #   sudo sh -c "echo $shell_path >> /etc/shells"
-  # fi
-  sudo chsh -s "$shell_path" "$USER"
-}
-
-ensure_zsh() {
-  local message="- Ensure ZSH as shell"
-
-  case "$SHELL" in
-  */zsh)
-    log_success_msg $message
-    ;;
-  *)
-    set_zsh && \
-    log_success_msg $message || \
-    log_failure_msg "$message"
-    ;;
-  esac
-}
-
 ensure_directory() {
   local directory="$1"
   local message="- Ensure directory $directory"
@@ -233,6 +171,59 @@ ensure_file_template() {
   log_failure_msg "$message"
 }
 
+_laptop_ensure_rosetta2() {
+  # Install Rosetta
+  local rosetta_installation_message="- Ensure Rosetta 2"
+  if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
+    sudo softwareupdate --install-rosetta  --agree-to-license && \
+    log_success_msg "$rosetta_installation_message" || \
+    log_failure_msg "$rosetta_installation_message";
+  else
+    log_success_msg "$rosetta_installation_message"
+  fi
+}
+
+_laptop_ensure_brew() {
+  # Install Homebrew
+  local brew_installation_message="- Ensure Brew"
+  if ! [ -x "$(command -v brew)" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)" && \
+    log_success_msg "$brew_installation_message" || \
+    log_failure_msg "$brew_installation_message";
+  else
+    log_success_msg "$brew_installation_message"
+  fi
+}
+
+_laptop_ensure_zsh() {
+  local message="- Ensure ZSH as shell"
+
+  case "$SHELL" in
+  */zsh)
+    log_success_msg $message
+    ;;
+  *)
+    local shell_path="$(command -v zsh)"
+    sudo chsh -s "$shell_path" "$USER" && \
+    log_success_msg $message || \
+    log_failure_msg "$message"
+    ;;
+  esac
+}
+
+_laptop_ensure_xcode() {
+  # Install XCode
+  local xcode_installation_message="- Ensure Build tools"
+  if ! [ -x "$(command -v gcc)" ]; then
+    xcode-select --install && \
+    log_success_msg "$xcode_installation_message" || \
+    log_failure_msg "$xcode_installation_message";
+  else
+    log_success_msg "$xcode_installation_message"
+  fi
+}
+
 _laptop_bootstrap_debian() {
   # sudo apt install -qq software-properties-common && \
   # sudo apt install -qq ansible
@@ -240,10 +231,10 @@ _laptop_bootstrap_debian() {
 }
 
 _laptop_bootstrap_macos() {
-  ensure_rosetta2
-  ensure_xcode
-  ensure_zsh
-  ensure_brew
+  _laptop_ensure_rosetta2
+  _laptop_ensure_xcode
+  _laptop_ensure_zsh
+  _laptop_ensure_brew
 }
 
 _laptop_bootstrap() {
