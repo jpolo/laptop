@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 SCRIPT_DIR="$(dirname "$0")"
 source "$SCRIPT_DIR/_functions.sh"
@@ -64,3 +64,4 @@ ensure_asdf_plugin "python"
 ensure_asdf_language "ruby" "latest"
 ensure_asdf_language "nodejs" "latest"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
+
