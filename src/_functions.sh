@@ -34,40 +34,34 @@ BRACKET="\\033[1;34m"
 export HOMEBREW_NO_INSTALL_CLEANUP=true
 export HOMEBREW_NO_ENV_HINTS=true
 
-log_info_msg()
-{
-    echo -n -e "${@}"
-    return 0
+log_info_msg() {
+  echo -n -e "${@}"
+  return 0
 }
 
-log_success_msg()
-{
-    echo -n -e "${@}"
-    echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
-    return 0
+log_success_msg() {
+  echo -n -e "${@}"
+  echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
+  return 0
 }
 
-log_failure_msg()
-{
-    echo -n -e "${@}"
-    echo -e "${SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
-    return 0
+log_failure_msg() {
+  echo -n -e "${@}"
+  echo -e "${SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
+  return 0
 }
 
-log_pass_msg()
-{
-    echo -n -e "${@}"
-    echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
-    return 0
+log_pass_msg() {
+  echo -n -e "${@}"
+  echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
+  return 0
 }
 
-is_arm()
-{
+is_arm() {
   test arm64 = $(uname -m)
 }
 
-command_exists()
-{
+command_exists() {
   if [ -x "$(command -v $1)" ]; then
     return 0
   else
@@ -75,8 +69,7 @@ command_exists()
   fi
 }
 
-ensure_rosetta2()
-{
+ensure_rosetta2() {
   # Install Rosetta
   local rosetta_installation_message="- Ensure Rosetta 2"
   if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
@@ -88,8 +81,7 @@ ensure_rosetta2()
   fi
 }
 
-ensure_xcode()
-{
+ensure_xcode() {
   # Install XCode
   local xcode_installation_message="- Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
@@ -101,8 +93,7 @@ ensure_xcode()
   fi
 }
 
-ensure_brew()
-{
+ensure_brew() {
   # Install Homebrew
   local brew_installation_message="- Ensure Brew"
   if ! [ -x "$(command -v brew)" ]; then
@@ -115,8 +106,7 @@ ensure_brew()
   fi
 }
 
-ensure_package()
-{
+ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
   local installation_message="- Ensure $executable"
@@ -131,8 +121,7 @@ ensure_package()
   fi
 }
 
-ensure_asdf_plugin()
-{
+ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
   local message="- Ensure asdf plugin $name"
@@ -146,8 +135,7 @@ ensure_asdf_plugin()
   fi
 }
 
-ensure_asdf_language()
-{
+ensure_asdf_language() {
   local language="$1"
   local version=$2 || "latest"
 
@@ -162,8 +150,7 @@ ensure_asdf_language()
   fi
 }
 
-ensure_defaults_bool()
-{
+ensure_defaults_bool() {
   local domain="$1"
   local key="$2"
   local value="$3"
@@ -177,8 +164,7 @@ ensure_defaults_bool()
   fi
 }
 
-set_zsh()
-{
+set_zsh() {
   local shell_path;
   shell_path="$(command -v zsh)"
 
@@ -188,8 +174,7 @@ set_zsh()
   sudo chsh -s "$shell_path" "$USER"
 }
 
-ensure_zsh()
-{
+ensure_zsh() {
   local message="- Ensure ZSH as shell"
 
   case "$SHELL" in
@@ -204,8 +189,7 @@ ensure_zsh()
   esac
 }
 
-ensure_directory()
-{
+ensure_directory() {
   local directory="$1"
   local message="- Ensure directory $directory"
   if [ ! -d $directory ]; then
@@ -217,8 +201,7 @@ ensure_directory()
   fi
 }
 
-ensure_file_template()
-{
+ensure_file_template() {
   local template="$1"
   local target="$2"
   local message="- Ensure file $target"
@@ -229,27 +212,24 @@ ensure_file_template()
   log_failure_msg "$message"
 }
 
-bootstrap_debian()
-{
+_laptop-bootstrap_debian() {
   # sudo apt install -qq software-properties-common && \
   # sudo apt install -qq ansible
   return 0
 }
 
-bootstrap_macos()
-{
+_laptop-bootstrap_macos() {
   ensure_rosetta2
   ensure_xcode
   ensure_zsh
   ensure_brew
 }
 
-bootstrap()
-{
+_laptop-bootstrap() {
   if ! command -v apt &> /dev/null; then
-    bootstrap_debian
+    _laptop-bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    bootstrap_macos
+    _laptop-bootstrap_macos
   else
     return 1
   fi
