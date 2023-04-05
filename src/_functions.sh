@@ -60,6 +60,19 @@ log_pass_msg() {
   return 0
 }
 
+log_exec() {
+  local output=$({ $@; } 2>&1 >/dev/null)
+  local exit_code=$?
+  if [ -z $exit_code ]; then
+    log_success_msg
+  else
+    log_failure_msg
+    eerror Command failed \
+      "\\n|  > $@" \
+      "\\n|  $output"
+  fi
+}
+
 is_arm() {
   test arm64 = $(uname -m)
 }
@@ -98,13 +111,13 @@ ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
   local installation_message="- Ensure $executable"
+
+  log_info_msg "$installation_message"
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
     if brew list $1 &>/dev/null; then
-      log_success_msg "$installation_message"
+      log_success_msg
     else
-      brew install $package --quiet && \
-      log_success_msg "$installation_message" || \
-      log_failure_msg "$installation_message";
+      log_exec brew install $package --quiet
     fi
   fi
 }
@@ -303,5 +316,7 @@ _laptop_shell() {
   local script=$2
   env -i $shell --login $script
 }
+
+
 
 
