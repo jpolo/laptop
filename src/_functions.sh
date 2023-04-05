@@ -70,6 +70,16 @@ command_exists() {
   fi
 }
 
+test_ssh_key() {
+  local host="$1"
+  ssh -T $host >/dev/null 2>&1
+  if [ $? -ge 2 ]; then
+    return -1
+  else
+    return 0
+  fi
+}
+
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
