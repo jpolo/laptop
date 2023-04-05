@@ -30,6 +30,7 @@ SET_COL="\\033[${COL}G"
 NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
+COLOR_ERROR='\033[31m'
 COLOR_WARNING='\033[1;33m'
 COLOR_INFO='\033[32m'
 
@@ -63,12 +64,16 @@ is_arm() {
   test arm64 = $(uname -m)
 }
 
+eerror() {
+  echo -e "${COLOR_ERROR}Error: ${NORMAL}${@}" >&2
+}
+
 ewarn() {
-  echo -e "${COLOR_WARNING}Warning: ${@}${NORMAL}"
+  echo -e "${COLOR_WARNING}Warning: ${NORMAL}${@}"
 }
 
 einfo() {
-  echo -e "${COLOR_INFO}Info: ${@}${NORMAL}"
+  echo -e "${COLOR_INFO}Info: ${NORMAL}${@}"
 }
 
 command_exists() {
@@ -149,6 +154,22 @@ ensure_git_config() {
     log_failure_msg "$message";
   else
     log_success_msg "$message"
+  fi
+}
+
+ensure_ssh_key() {
+  local ssh_key=~/.ssh/id_ed25519
+  local message="- Ensure SSH key $ssh_key"
+  local email=$(git config --global user.email)
+  if [ -z "$email" ];then
+    eerror "git config user.email is empty";
+    log_failure_msg "$message"
+  elif ! [ -f "$ssh_key" ]; then
+    ssh-keygen -t ed25519 -C "$email" -N '' -o -f $ssh_key && \
+    log_success_msg $message || \
+    log_failure_msg "$message";
+  else
+    log_success_msg $message
   fi
 }
 

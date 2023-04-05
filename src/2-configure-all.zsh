@@ -16,6 +16,8 @@ ensure_git_config "fetch.prune" "true"
 ensure_git_config "user.email"
 ensure_git_config "user.name"
 
+ensure_ssh_key
+
 # Default settings
 ensure_defaults_bool "" AppleShowAllExtensions true
 ensure_defaults_bool "" NSAutomaticCapitalizationEnabled false
