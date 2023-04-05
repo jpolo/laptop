@@ -212,6 +212,16 @@ ensure_directory() {
   fi
 }
 
+ensure_file() {
+  local file_path="$1"
+  local message="- Ensure file $file_path"
+
+  mkdir -p $(dirname $file_path) && \
+  touch "$file_path" && \
+  log_success_msg $message || \
+  log_failure_msg "$message"
+}
+
 ensure_file_template() {
   local template="$1"
   local target="$2"

@@ -77,22 +77,6 @@
       ignore_errors: yes
 
 
-    - name: Enable GIT push.autoSetupRemote
-      git_config:
-        name: push.autoSetupRemote
-        scope: global
-        value: true
-      become: false
-      tags: ['git']
-
-    - name: Enable GIT fetch.prune
-      git_config:
-        name: fetch.prune
-        scope: global
-        value: true
-      become: false
-      tags: ['git']
-
     - name: Read GIT user.email
       git_config:
         name: user.email
