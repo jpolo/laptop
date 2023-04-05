@@ -6,6 +6,16 @@ source "$SCRIPT_DIR/_functions.sh"
 # Ensure Code
 ensure_directory ~/Code
 
+# Configure git
+ensure_file "$XDG_CONFIG_HOME/git/config"
+
+# https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
+ensure_git_config "push.default" "current"
+ensure_git_config "push.autoSetupRemote" "true"
+ensure_git_config "fetch.prune" "true"
+ensure_git_config "user.email"
+ensure_git_config "user.name"
+
 # Default settings
 ensure_defaults_bool "" AppleShowAllExtensions true
 ensure_defaults_bool "" NSAutomaticCapitalizationEnabled false
@@ -65,11 +75,4 @@ ensure_asdf_language "ruby" "latest"
 ensure_asdf_language "nodejs" "latest"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
 
-# Configure git
-ensure_file "$XDG_CONFIG_HOME/git/config"
-
-# https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
-ensure_git_config "push.default" "current"
-ensure_git_config "push.autoSetupRemote" "true"
-ensure_git_config "fetch.prune" "true"
 

@@ -3,8 +3,6 @@
   connection: local
   remote_user: root
   vars:
-    github_access_token: ""
-    user_workspace: "{{ansible_env.HOME}}/Code"
     ssh_id_ed25519: "{{ansible_env.HOME}}/.ssh/id_ed25519"
     ssh_id_ed25519_pub: "{{ssh_id_ed25519}}.pub"
     java_package_version: '15'
@@ -13,15 +11,6 @@
       # - name: cocoapods
       #   version: 1.10.0
 
-
-    homebrew_taps:
-      - wix/brew
-
-    homebrew_packages:
-      - applesimutils
-      - ruby-build
-      - jenv
-      - libpq
 
     vscode_extensions:
       - eamodio.gitlens
@@ -33,27 +22,7 @@
       - redhat.vscode-yaml
       # - VisualStudioExptTeam.vscodeintellicode
 
-    npm_packages:
-      - name: yarn
-      - name: gitmoji-cli
-
-  roles:
-    - { role: ansible-role-zsh, become: true, ignore_errors: yes, tags: ['console'] }
-    - { role: ansible-role-webp, become: true, ignore_errors: yes, tags: ['image'] }
-
   tasks:
-
-
-    - name: Install global NPM packages.
-      npm:
-        name: "{{ item.name | default(item) }}"
-        state: "{{ item.state | default('present') }}"
-        version: "{{ item.version | default(omit) }}"
-        global: yes
-        executable: "{{ item.executable | default(omit) }}"
-      with_items: "{{ npm_packages }}"
-      ignore_errors: yes
-      become: false
 
     - name: Add SSH Known Hosts
       known_hosts:
@@ -67,31 +36,6 @@
       become: false
       ignore_errors: yes
 
-
-    - name: Install VSCode extensions
-      vscode:
-        name: "{{item}}"
-        state: present
-      with_items: "{{ vscode_extensions }}"
-      tags: ['ide', 'vscode']
-      ignore_errors: yes
-
-
-    - name: Read GIT user.email
-      git_config:
-        name: user.email
-        scope: global
-      become: false
-      tags: ['git']
-      register: git_user_email
-
-    - name: Read GIT user.name
-      git_config:
-        name: user.name
-        scope: global
-      become: false
-      tags: ['git']
-      register: git_user_name
 
     - name: Check if SSH key exists
       stat:
@@ -117,20 +61,4 @@
         - git_ssh_setup.rc == 1 or git_ssh_setup.rc == 0
         success_msg: "SSH valid on github.com"
         fail_msg: "SSH invalid on github.com. Please register on https://github.com/settings/keys"
-      ignore_errors: yes
-
-    - name: Check Git Email
-      ansible.builtin.assert:
-        that:
-        - git_user_email.config_value | length > 0
-        success_msg: "git config user.mail : {{git_user_email.config_value}}"
-        fail_msg: "No git user.email set. Please run `git config --global user.email 'first.last@company.com'`"
-      ignore_errors: yes
-
-    - name: Check Git Name
-      ansible.builtin.assert:
-        that:
-        - git_user_name.config_value | length > 0
-        success_msg: "git config user.mail : {{git_user_name.config_value}}"
-        fail_msg: "No git user.name set. Please run `git config --global user.name 'FirstName LastName'`"
       ignore_errors: yes

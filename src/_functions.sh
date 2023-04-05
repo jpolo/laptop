@@ -119,9 +119,18 @@ ensure_git_config() {
   local value="$2"
   local message="- Ensure git config $name=$value"
 
-  git config --global $name $value && \
+  if [ -z "$(git config --global $name)" ]; then
+    if [ -z "${value}" ]; then
+      echo "Git: Please enter value for '$name'"
+      read value
+    fi
+
+    git config --global $name $value && \
     log_success_msg "$message" || \
     log_failure_msg "$message";
+  else
+    log_success_msg "$message"
+  fi
 }
 
 ensure_defaults_bool() {
