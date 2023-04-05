@@ -30,6 +30,7 @@ SET_COL="\\033[${COL}G"
 NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
 BRACKET="\\033[1;34m"
+COLOR_WARNING='\033[1;33m'
 
 export HOMEBREW_NO_INSTALL_CLEANUP=true
 export HOMEBREW_NO_ENV_HINTS=true
@@ -233,6 +234,12 @@ _laptop-bootstrap() {
   else
     return 1
   fi
+}
+
+_laptop-execute() {
+  local shell=$1
+  local script=$2
+  env -i $shell --login $script
 }
 
 
