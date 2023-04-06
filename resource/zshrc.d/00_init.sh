@@ -43,7 +43,7 @@ zinit $load zdharma-continuum/fast-syntax-highlighting
 
 # NVM
 # export NVM_LAZY_LOAD=true
-zinit light lukechilds/zsh-nvm
+# zinit light lukechilds/zsh-nvm
 
 ##
 # Editor
