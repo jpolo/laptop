@@ -7,7 +7,7 @@
 2. Run the installation command :
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/main/install.sh | bash
 ```
 
 ------------------
