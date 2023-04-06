@@ -75,7 +75,7 @@ test_ssh_key() {
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
-  local installation_message="- Ensure $executable"
+  local installation_message="- Ensure package '$executable'"
 
   _laptop_step_start "$installation_message"
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
@@ -90,7 +90,7 @@ ensure_package() {
 ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
-  _laptop_step_start "- Ensure asdf plugin $name"
+  _laptop_step_start "- Ensure asdf plugin '$name'"
 
   if ! asdf plugin-list | grep -Fq "$name"; then
     _laptop_step_exec asdf plugin-add "$name" "$url"
@@ -103,7 +103,7 @@ ensure_asdf_language() {
   local language="$1"
   local version=$2 || "latest"
 
-  _laptop_step_start "- Ensure asdf $language $version"
+  _laptop_step_start "- Ensure asdf '$language' '$version'"
   if ! asdf list "$language" &>/dev/null; then
     _laptop_step_exec \
       asdf install "$language" "$version" && \
@@ -117,7 +117,7 @@ ensure_git_config() {
   local name="$1"
   local value="$2"
 
-  _laptop_step_start "- Ensure git config $name=$value"
+  _laptop_step_start "- Ensure git config '$name'='${value:-"<custom>"}'"
   if [ -z "$(git config --global $name)" ]; then
     if [ -z "${value}" ]; then
       echo "Git: Please enter value for '$name'"
@@ -134,7 +134,7 @@ ensure_ssh_key() {
   local ssh_key=~/.ssh/id_ed25519
   local email=$(git config --global user.email)
 
-  _laptop_step_start "- Ensure SSH key $ssh_key"
+  _laptop_step_start "- Ensure SSH key '$ssh_key'"
   if [ -z "$email" ];then
     _laptop_step_fail
     eerror "git config user.email is empty";
@@ -149,7 +149,7 @@ ensure_defaults_bool() {
   local domain="$1"
   local key="$2"
   local value="$3"
-  _laptop_step_start "- Ensure defaults $domain $key=$value"
+  _laptop_step_start "- Ensure defaults '$domain' '$key'='$value'"
   if command_exists "defaults"; then
     _laptop_step_exec defaults write -g $domain $key -bool $value;
   else
@@ -159,7 +159,7 @@ ensure_defaults_bool() {
 
 ensure_directory() {
   local directory="$1"
-  _laptop_step_start "- Ensure directory $directory"
+  _laptop_step_start "- Ensure directory '$directory'"
   if [ ! -d $directory ]; then
     _laptop_step_exec mkdir -p $directory
   else
@@ -169,7 +169,7 @@ ensure_directory() {
 
 ensure_file() {
   local file_path="$1"
-  _laptop_step_start "- Ensure file $file_path"
+  _laptop_step_start "- Ensure file '$file_path'"
 
   _laptop_step_exec \
     mkdir -p $(dirname $file_path) && \
@@ -179,7 +179,7 @@ ensure_file() {
 ensure_file_template() {
   local template="$1"
   local target="$2"
-  _laptop_step_start "- Ensure file $target"
+  _laptop_step_start "- Ensure file '$target'"
   _laptop_step_exec \
     mkdir -p $(dirname $target)
     cp "$LAPTOP_TEMPLATE_DIR/$template" "$target"
@@ -198,7 +198,7 @@ _laptop_ensure_rosetta2() {
 _laptop_ensure_brew() {
   # Install Homebrew
   local brew_present=$(env -i zsh --login -c 'command -v brew');
-  _laptop_step_start "- Ensure Brew"
+  _laptop_step_start "- Ensure package manager 'brew'"
 
   if [ -z "$brew_present" ]; then
     _laptop_step_exec /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -209,7 +209,7 @@ _laptop_ensure_brew() {
 }
 
 _laptop_ensure_zsh() {
-  _laptop_step_start "- Ensure ZSH as shell"
+  _laptop_step_start "- Ensure shell 'zsh'"
 
   case "$SHELL" in
   */zsh)
