@@ -9,6 +9,7 @@ ensure_directory ~/Code
 # Configure git
 ensure_file "$XDG_CONFIG_HOME/git/config"
 
+ensure_package "git"
 # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
 ensure_git_config "push.default" "current"
 ensure_git_config "push.autoSetupRemote" "true"
@@ -43,7 +44,6 @@ ensure_package "discord"
 # ensure_package "docker"
 ensure_package "drawio"
 ensure_package "flipper"
-ensure_package "git"
 ensure_package "google-chrome"
 ensure_package "google-drive"
 ensure_package "gh"
