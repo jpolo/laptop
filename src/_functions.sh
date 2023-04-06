@@ -61,12 +61,15 @@ log_pass_msg() {
 }
 
 log_exec() {
-  local output=$({ $@; } 2>&1 >/dev/null)
+  local command=$@
+  local output;
+  { output=$( { { "$@" ; } 1>&3 ; } 2>&1); } 3>&1
   local exit_code=$?
-  if [ -z $exit_code ]; then
+
+  if [ "$exit_code" = "0" ]; then
     log_success_msg
   else
-    log_failure_msg
+    log_failure_msg $exit_code
     eerror Command failed \
       "\\n|  > $@" \
       "\\n|  $output"
@@ -125,14 +128,12 @@ ensure_package() {
 ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
-  local message="- Ensure asdf plugin $name"
+  log_info_msg "- Ensure asdf plugin $name"
 
   if ! asdf plugin-list | grep -Fq "$name"; then
-    asdf plugin-add "$name" "$url" && \
-    log_success_msg "$message" || \
-    log_failure_msg "$message";
+    log_exec asdf plugin-add "$name" "$url"
   else
-    log_success_msg "$message"
+    log_success_msg
   fi
 }
 
@@ -140,49 +141,45 @@ ensure_asdf_language() {
   local language="$1"
   local version=$2 || "latest"
 
-  local message="- Ensure asdf $language $version"
+  log_info_msg "- Ensure asdf $language $version"
   if ! asdf list "$language" &>/dev/null; then
-    asdf install "$language" "$version" && \
-    asdf global "$language" "$version"  && \
-    log_success_msg "$message" || \
-    log_failure_msg "$message";
+    log_exec \
+      asdf install "$language" "$version" && \
+      asdf global "$language" "$version"
   else
-    log_success_msg "$message"
+    log_success_msg
   fi
 }
 
 ensure_git_config() {
   local name="$1"
   local value="$2"
-  local message="- Ensure git config $name=$value"
 
+  log_info_msg "- Ensure git config $name=$value"
   if [ -z "$(git config --global $name)" ]; then
     if [ -z "${value}" ]; then
       echo "Git: Please enter value for '$name'"
       read value
     fi
 
-    git config --global $name $value && \
-    log_success_msg "$message" || \
-    log_failure_msg "$message";
+    log_exec git config --global $name $value
   else
-    log_success_msg "$message"
+    log_success_msg
   fi
 }
 
 ensure_ssh_key() {
   local ssh_key=~/.ssh/id_ed25519
-  local message="- Ensure SSH key $ssh_key"
   local email=$(git config --global user.email)
+
+  log_info_msg "- Ensure SSH key $ssh_key"
   if [ -z "$email" ];then
+    log_failure_msg
     eerror "git config user.email is empty";
-    log_failure_msg "$message"
   elif ! [ -f "$ssh_key" ]; then
-    ssh-keygen -t ed25519 -C "$email" -N '' -o -f $ssh_key && \
-    log_success_msg $message || \
-    log_failure_msg "$message";
+    log_exec ssh-keygen -t ed25519 -C "$email" -N '' -o -f $ssh_key
   else
-    log_success_msg $message
+    log_success_msg
   fi
 }
 
@@ -190,36 +187,31 @@ ensure_defaults_bool() {
   local domain="$1"
   local key="$2"
   local value="$3"
-  local installation_message="- Ensure defaults $domain $key=$value"
-  if command_exists "defaults";then
-    defaults write -g $domain $key -bool $value && \
-    log_success_msg $installation_message || \
-    log_failure_msg "$installation_message";
+  log_info_msg "- Ensure defaults $domain $key=$value"
+  if command_exists "defaults"; then
+    log_exec defaults write -g $domain $key -bool $value;
   else
-    log_pass_msg $installation_message
+    log_pass_msg
   fi
 }
 
 ensure_directory() {
   local directory="$1"
-  local message="- Ensure directory $directory"
+  log_info_msg "- Ensure directory $directory"
   if [ ! -d $directory ]; then
-    mkdir -p $directory && \
-    log_success_msg $message || \
-    log_failure_msg "$message"
+    log_exec mkdir -p $directory
   else
-    log_success_msg $message
+    log_success_msg
   fi
 }
 
 ensure_file() {
   local file_path="$1"
-  local message="- Ensure file $file_path"
+  log_info_msg "- Ensure file $file_path"
 
-  mkdir -p $(dirname $file_path) && \
-  touch "$file_path" && \
-  log_success_msg $message || \
-  log_failure_msg "$message"
+  log_exec \
+    mkdir -p $(dirname $file_path) && \
+    touch "$file_path"
 }
 
 ensure_file_template() {
@@ -227,64 +219,55 @@ ensure_file_template() {
   local target="$2"
   local message="- Ensure file $target"
 
-  mkdir -p $(dirname $target)
-  cp "$LAPTOP_TEMPLATE_DIR/$template" "$target" && \
-  log_success_msg $message || \
-  log_failure_msg "$message"
+  log_exec \
+    mkdir -p $(dirname $target)
+    cp "$LAPTOP_TEMPLATE_DIR/$template" "$target"
 }
 
 _laptop_ensure_rosetta2() {
   # Install Rosetta
-  local rosetta_installation_message="- Ensure Rosetta 2"
+  log_info_msg "- Ensure Rosetta 2"
   if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
-    sudo softwareupdate --install-rosetta  --agree-to-license && \
-    log_success_msg "$rosetta_installation_message" || \
-    log_failure_msg "$rosetta_installation_message";
+    log_exec sudo softwareupdate --install-rosetta  --agree-to-license
   else
-    log_success_msg "$rosetta_installation_message"
+    log_success_msg
   fi
 }
 
 _laptop_ensure_brew() {
   # Install Homebrew
-  local brew_installation_message="- Ensure Brew"
   local brew_present=$(env -i zsh --login -c 'command -v brew');
+  log_info_msg "- Ensure Brew"
 
   if [ -z "$brew_present" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-    # eval "$(/opt/homebrew/bin/brew shellenv)" && \
-    log_success_msg "$brew_installation_message" || \
-    log_failure_msg "$brew_installation_message";
+    log_exec /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
   else
-    log_success_msg "$brew_installation_message"
+    log_success_msg
   fi
 }
 
 _laptop_ensure_zsh() {
-  local message="- Ensure ZSH as shell"
+  log_info_msg "- Ensure ZSH as shell"
 
   case "$SHELL" in
   */zsh)
-    log_success_msg $message
+    log_success_msg
     ;;
   *)
     local shell_path="$(command -v zsh)"
-    sudo chsh -s "$shell_path" "$USER" && \
-    log_success_msg $message || \
-    log_failure_msg "$message"
+    log_exec sudo chsh -s "$shell_path" "$USER"
     ;;
   esac
 }
 
 _laptop_ensure_xcode() {
   # Install XCode
-  local xcode_installation_message="- Ensure Build tools"
+  log_info_msg "- Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
-    xcode-select --install && \
-    log_success_msg "$xcode_installation_message" || \
-    log_failure_msg "$xcode_installation_message";
+    log_exec xcode-select --install;
   else
-    log_success_msg "$xcode_installation_message"
+    log_success_msg
   fi
 }
 
