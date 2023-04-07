@@ -84,6 +84,8 @@ ensure_package() {
     else
       _laptop_step_exec brew install $package --quiet
     fi
+  else
+    _laptop_step_fail
   fi
 }
 
