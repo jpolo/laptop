@@ -203,7 +203,7 @@ _laptop_ensure_brew() {
   _laptop_step_start "- Ensure package manager 'brew'"
 
   if [ -z "$brew_present" ]; then
-    curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash && \
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
     # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
     _laptop_step_ok
   else
