@@ -34,9 +34,6 @@ COLOR_ERROR='\033[31m'
 COLOR_WARNING='\033[1;33m'
 COLOR_INFO='\033[32m'
 
-export HOMEBREW_NO_INSTALL_CLEANUP=true
-export HOMEBREW_NO_ENV_HINTS=true
-
 
 is_arm() {
   test arm64 = $(uname -m)
@@ -79,6 +76,11 @@ ensure_package() {
 
   _laptop_step_start "$installation_message"
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+
+    HOMEBREW_NO_AUTO_UPDATE=1
+    HOMEBREW_NO_INSTALL_CLEANUP=1
+    HOMEBREW_NO_ENV_HINTS=1
+
     if brew list $1 &>/dev/null; then
       _laptop_step_ok
     else
