@@ -74,7 +74,7 @@ ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 ensure_asdf_plugin "python"
 
 ensure_asdf_language "ruby" "latest"
-ensure_asdf_language "nodejs" "latest"
+ensure_asdf_language "nodejs" "lts"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
 
 test_ssh_key "git@github.com" || \
