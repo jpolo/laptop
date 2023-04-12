@@ -113,7 +113,8 @@ ensure_asdf_language() {
       asdf install "$language" "$version" && \
       asdf global "$language" "$version"
   else
-    _laptop_step_ok
+    _laptop_step_exec \
+      asdf global "$language" "$version"
   fi
 }
 
