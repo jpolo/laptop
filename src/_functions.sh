@@ -77,9 +77,9 @@ ensure_package() {
   _laptop_step_start "$installation_message"
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
 
-    HOMEBREW_NO_AUTO_UPDATE=1
-    HOMEBREW_NO_INSTALL_CLEANUP=1
-    HOMEBREW_NO_ENV_HINTS=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_NO_INSTALL_CLEANUP=1
+    export HOMEBREW_NO_ENV_HINTS=1
 
     if brew list $1 &>/dev/null; then
       _laptop_step_ok
