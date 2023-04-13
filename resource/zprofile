@@ -77,11 +77,6 @@ do
   fi
 done
 
-if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
-  export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-fi
-
 if [ -z "$ANDROID_HOME" ]; then
   if [ -d "$HOME/Library/Android/sdk" ]; then
     export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -99,6 +94,13 @@ fi
 # if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 #   source "${ZDOTDIR:-$HOME}/.zprofile"
 # fi
+
+# Some homebrew paths
+if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
+  export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
+_path_append "$HOMEBREW_PREFIX/opt/libpq/bin"
 
 # set PATH so it includes user's private bin if it exists
 _path_append "$HOME/Application"
