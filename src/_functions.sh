@@ -108,7 +108,7 @@ ensure_asdf_language() {
   local version=$2 || "latest"
 
   _laptop_step_start "- Ensure asdf '$language' '$version'"
-  if ! asdf list "$language" &>/dev/null; then
+  if ! asdf list "$language" | grep -Fq "$version"; then
     _laptop_step_exec \
       asdf install "$language" "$version" && \
       asdf global "$language" "$version"
