@@ -33,6 +33,7 @@ ensure_defaults_bool "" NSAutomaticTextCompletionEnabled false
 ensure_package "openssl"
 ensure_package "libpq"
 ensure_package "libyaml"
+ensure_package "vips"
 
 # Install programs
 ensure_package "android-studio"
