@@ -30,9 +30,10 @@ ensure_defaults_bool "" NSAutomaticTextCompletionEnabled false
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate false
 
 # Install library
-ensure_package "openssl"
+ensure_package "graphviz"
 ensure_package "libpq"
 ensure_package "libyaml"
+ensure_package "openssl"
 ensure_package "vips"
 
 # Install programs
