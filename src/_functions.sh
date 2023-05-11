@@ -34,6 +34,10 @@ COLOR_ERROR='\033[31m'
 COLOR_WARNING='\033[1;33m'
 COLOR_INFO='\033[32m'
 
+BREW_CASK_PACKAGES=(
+  "docker"
+);
+
 
 is_arm() {
   test arm64 = $(uname -m)
@@ -80,11 +84,16 @@ ensure_package() {
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_INSTALL_CLEANUP=1
     export HOMEBREW_NO_ENV_HINTS=1
+    local brew_args=("--quiet")
+
+    if [[ " ${BREW_CASK_PACKAGES[*]} " =~ " ${package} " ]]; then
+      brew_args+=("--cask")
+    fi
 
     if brew list $1 &>/dev/null; then
       _laptop_step_ok
     else
-      _laptop_step_exec brew install $package --quiet
+      _laptop_step_exec brew install "${brew_args[@]}" $package
     fi
   else
     _laptop_step_fail
