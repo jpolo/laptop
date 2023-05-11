@@ -8,9 +8,6 @@ zinit $load sindresorhus/pure
 zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
 zinit $load trapd00r/LS_COLORS
 
-# ZSH Autopair plugin
-zinit $load "hlissner/zsh-autopair"
-
 # Fish like suggestions
 zinit ice wait"0a" lucid atload"_zsh_autosuggest_start"
 zinit $load zsh-users/zsh-autosuggestions
@@ -35,11 +32,14 @@ zinit $load zsh-users/zsh-completions
 
 #OMZ::plugins/nvm/nvm.plugin.zsh \
 zinit wait lucid for \
+  OMZ::lib/correction.zsh \
   OMZ::lib/completion.zsh \
+  OMZ::lib/grep.zsh \
   OMZ::lib/history.zsh \
   OMZ::lib/spectrum.zsh \
   OMZ::plugins/dotenv/dotenv.plugin.zsh \
-  OMZ::plugins/asdf/asdf.plugin.zsh
+  OMZ::plugins/asdf/asdf.plugin.zsh \
+  hlissner/zsh-autopair
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
 zinit $load zdharma-continuum/fast-syntax-highlighting
@@ -47,6 +47,13 @@ zinit $load zdharma-continuum/fast-syntax-highlighting
 # NVM
 # export NVM_LAZY_LOAD=true
 # zinit light lukechilds/zsh-nvm
+
+##
+# History
+##
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=290000
+SAVEHIST=$HISTSIZE
 
 ##
 # Editor
