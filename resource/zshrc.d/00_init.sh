@@ -8,6 +8,9 @@ zinit $load sindresorhus/pure
 zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
 zinit $load trapd00r/LS_COLORS
 
+# ZSH Autopair plugin
+zinit $load "hlissner/zsh-autopair"
+
 # Fish like suggestions
 zinit ice wait"0a" lucid atload"_zsh_autosuggest_start"
 zinit $load zsh-users/zsh-autosuggestions
