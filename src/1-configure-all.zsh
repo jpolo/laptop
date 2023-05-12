@@ -69,6 +69,7 @@ ensure_package "watchman"
 ensure_package "webp"
 ensure_package "wget"
 ensure_package "yarn"
+ensure_package "yq"
 
 # Install ASDF plugins
 ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
