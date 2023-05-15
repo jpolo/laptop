@@ -28,7 +28,10 @@ _zsh-load-plugins () {
   fi
 }
 
+# Load all files *.sh in ~/.zshrc.d
 _zsh-load-plugins "$HOME/.zshrc.d"
+
+# Load all files *.sh in $XDG_DATA_HOME/zsh
 if [ ! -z "$XDG_DATA_HOME" ]; then
   _zsh-load-plugins "$XDG_DATA_HOME/zsh"
 fi
