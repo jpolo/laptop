@@ -16,6 +16,7 @@ else
   echo "zinit cannot be installed"
 fi;
 
+# Find the first command available
 _command-alternative() {
   for command_to_test in "$@"; do
     if type "$command_to_test" &>/dev/null; then
@@ -64,7 +65,7 @@ if [ -z "$PAGER" ]; then
 fi
 if [ -z "$EDITOR" ]; then
   if [[ -n $SSH_CONNECTION ]]; then # SSH mode
-    export EDITOR='nano'
+    export EDITOR=$(_command-alternative nano vim vi)
   elif type code &>/dev/null; then
     export EDITOR='code --wait'
   else # Local terminal mode
