@@ -16,6 +16,15 @@ else
   echo "zinit cannot be installed"
 fi;
 
+_command-alternative() {
+  for command_to_test in "$@"; do
+    if type "$command_to_test" &>/dev/null; then
+      printf "%s" "${command_to_test}"
+      break
+    fi
+  done
+}
+
 # Load plugins
 _zsh-load-plugins () {
   local directory=$1
@@ -48,8 +57,11 @@ fi
 [ -z "$SAVEHIST" ] && SAVEHIST=$HISTSIZE
 
 ##
-# Editor
+# Editor and Pager
 ##
+if [ -z "$PAGER" ]; then
+  export PAGER=$(_command-alternative most less more)
+fi
 if [ -z "$EDITOR" ]; then
   if [[ -n $SSH_CONNECTION ]]; then # SSH mode
     export EDITOR='nano'
@@ -62,3 +74,9 @@ fi
 if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
 fi
+
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+##
+# Cleanup
+##
+unset -f _command-alternative
