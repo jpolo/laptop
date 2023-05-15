@@ -31,6 +31,8 @@ zinit light zsh-users/zsh-completions
 
 #OMZ::plugins/nvm/nvm.plugin.zsh \
 zinit wait lucid for \
+  OMZ::lib/clipboard.zsh \
+	OMZ::lib/compfix.zsh \
   OMZ::lib/correction.zsh \
   OMZ::lib/completion.zsh \
   OMZ::lib/grep.zsh \
@@ -42,7 +44,3 @@ zinit wait lucid for \
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
 zinit light zdharma-continuum/fast-syntax-highlighting
-
-# NVM
-# export NVM_LAZY_LOAD=true
-# zinit light lukechilds/zsh-nvm
