@@ -27,11 +27,38 @@ _zsh-load-plugins () {
     done
   fi
 }
-
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+##
+# Custom scripts
+##
 # Load all files *.sh in ~/.zshrc.d
 _zsh-load-plugins "$HOME/.zshrc.d"
 
 # Load all files *.sh in $XDG_DATA_HOME/zsh
 if [ ! -z "$XDG_DATA_HOME" ]; then
   _zsh-load-plugins "$XDG_DATA_HOME/zsh"
+fi
+
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+##
+# History
+##
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ -z "$HISTSIZE" ] && HISTSIZE=290000
+[ -z "$SAVEHIST" ] && SAVEHIST=$HISTSIZE
+
+##
+# Editor
+##
+if [ -z "$EDITOR" ]; then
+  if [[ -n $SSH_CONNECTION ]]; then # SSH mode
+    export EDITOR='nano'
+  elif type code &>/dev/null; then
+    export EDITOR='code --wait'
+  else # Local terminal mode
+    # nothing
+  fi
+fi
+if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
+  export VISUAL="$EDITOR"
 fi
