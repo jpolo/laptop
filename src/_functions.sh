@@ -193,10 +193,12 @@ ensure_file() {
 ensure_file_template() {
   local template="$1"
   local target="$2"
+  local cp_flags=${@: 3}  
+
   _laptop_step_start "- Ensure file '$target'"
   _laptop_step_exec \
     mkdir -p $(dirname $target)
-    cp "$LAPTOP_TEMPLATE_DIR/$template" "$target"
+    cp $cp_flags "$LAPTOP_TEMPLATE_DIR/$template" "$target"
 }
 
 ensure_vscode_extension() {
