@@ -89,12 +89,14 @@ fi
 if [ -z "$EDITOR" ]; then
   if [[ -n $SSH_CONNECTION ]]; then # SSH mode
     export EDITOR=$(_command-alternative nano vim vi)
-  elif type code &>/dev/null; then
-    export EDITOR='code --wait'
-  else # Local terminal mode
-    # nothing
+  else
+    export EDITOR=$(_command-alternative code subl nano vim vi)
   fi
 fi
+if [[ $EDITOR == "code" ]]; then
+  export EDITOR="$EDITOR --wait"
+fi
+
 if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
 fi
