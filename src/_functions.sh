@@ -90,7 +90,7 @@ ensure_package() {
       brew_args+=("--cask")
     fi
 
-    if brew list $1 &>/dev/null; then
+    if brew list $package &>/dev/null; then
       _laptop_step_ok
     else
       _laptop_step_exec brew install "${brew_args[@]}" $package
