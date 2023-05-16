@@ -63,15 +63,18 @@ Misc :
 <details>
   <summary>➕ Add a <code>zsh</code> plugin using <code>zinit</code></summary>
 
-  1. Create a shell script in `$XDG_DATA_HOME/zsh`
-  2. Edit the shell script
+  Edit the shell script `$XDG_DATA_HOME/zsh/01_custom.sh` (or create a new one in `$XDG_DATA_HOME/zsh`)
 
-    ```shell
-    # Example $XDG_DATA_HOME/zsh/01_custom.sh
-    zinit snippet OMZP::ruby
-    zinit snippet OMZP::rails
+  Example :
 
-    ```
+  ```shell
+  # Load OhMyZSH ruby plugin
+  zinit snippet OMZP::ruby
+  # Load OhMyZSH rails plugin
+  zinit snippet OMZP::rails
+
+  ```
+
 </details>
 <details>
   <summary>🔄 Update all plugins</summary>
