@@ -49,6 +49,9 @@ if [ ! -z "$XDG_DATA_HOME" ]; then
   _zsh-load-plugins "$XDG_DATA_HOME/zsh"
 fi
 
+# Load .zshrc.local
+[[ -f ~/.zshrc.local ]] && source "$HOME/.zshrc.local"
+
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
 # History
