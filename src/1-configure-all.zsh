@@ -81,6 +81,14 @@ ensure_asdf_language "ruby" "latest"
 ensure_asdf_language "nodejs" "lts"
 ensure_asdf_language "java" "adoptopenjdk-17.0.6+10"
 
+# Install VSCode extensions
+ensure_vscode_extension "EditorConfig.EditorConfig"
+ensure_vscode_extension "eamodio.gitlens"
+ensure_vscode_extension "GitHub.vscode-pull-request-github"
+ensure_vscode_extension "GitLab.gitlab-workflow"
+ensure_vscode_extension "ms-vsliveshare.vsliveshare"
+ensure_vscode_extension "wayou.vscode-todo-highlight"
+
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
 
