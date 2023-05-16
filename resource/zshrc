@@ -1,3 +1,23 @@
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+# ZSH startup script : interactive step
+# .zshenv → .zprofile → >>>.zshrc<<< → .zlogin → .zlogout
+#
+# 🚨 Warning : this file was automatically generated, editing it is not recommended
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+# ❓ HELP
+#
+# CUSTOMIZE CONFIGURATION
+#
+# There are multiple ways to override / extends this configuration :
+# Local only :
+# - Create / modify `~/.zshrc.local`
+# - _OR_ Create a `.sh` file in `~/.zshrc.d/`
+#
+# Shared (could be synchronizable to iCloud, Drive, etc) :
+# - Create a `.sh` file in `$XDG_DATA_HOME/zsh/`
+#
+
 typeset -A ZINIT
 
 # Initialize Zinit
