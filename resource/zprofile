@@ -70,7 +70,7 @@ export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export VSCODE_EXTENSIONS="$XDG_DATA_HOME/code-oss/extensions"
 
 # Initialize brew
-for prefix in "/opt/homebrew" "/usr/local"
+for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew"
 do
   if [ -f "$prefix/bin/brew" ] ; then
     eval "$($prefix/bin/brew shellenv)"
