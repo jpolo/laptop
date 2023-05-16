@@ -212,6 +212,27 @@ ensure_vscode_extension() {
   fi
 }
 
+ensure_vscode_setting() {
+  local jq_query="$1"
+  local vscode_settings_file=""
+  
+  # Vérifier si le système d'exploitation est macOS
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    vscode_settings_file="$HOME/Library/Application Support/Code/User/settings.json"
+  else
+    vscode_settings_file="$HOME/.config/Code/User/settings.json"
+  fi
+
+  # Vérifier si la requête est vide
+  if [ -z "$jq_query" ]; then
+    eerror "La requête est vide."
+    return 1
+  fi
+
+  _laptop_step_start "- Ensure VSCode Setting '$setting_name'"
+  _laptop_step_exec cat "$vscode_settings_file" | jq "$jq_query" | sponge "$vscode_settings_file"
+}
+
 _laptop_ensure_rosetta2() {
   # Install Rosetta
   _laptop_step_start "- Ensure Rosetta 2"
