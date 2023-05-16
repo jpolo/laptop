@@ -11,8 +11,7 @@
 #
 # There are multiple ways to override / extends this configuration :
 # Local only :
-# - Create / modify `~/.zshrc.local`
-# - _OR_ Create a `.sh` file in `~/.zshrc.d/`
+# - Create or modify `~/.zshrc.local`
 #
 # Shared (could be synchronizable to iCloud, Drive, etc) :
 # - Create a `.sh` file in `$XDG_DATA_HOME/zsh/`
@@ -49,7 +48,6 @@ _command-alternative() {
 # Load plugins
 _zsh-load-plugins () {
   local directory=$1
-  ## Load everything in .zshrc.d/
   if [[ -d "$directory/" ]]; then
     for i in $(find "$directory/" -maxdepth 1 -type f -name "*.sh");
     do
@@ -61,8 +59,6 @@ _zsh-load-plugins () {
 ##
 # Custom scripts
 ##
-# Load all files *.sh in ~/.zshrc.d
-_zsh-load-plugins "$HOME/.zshrc.d"
 
 # Load all files *.sh in $XDG_DATA_HOME/zsh
 if [ ! -z "$XDG_DATA_HOME" ]; then
