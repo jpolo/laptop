@@ -1,4 +1,12 @@
-# A collection of roles to setup a developer machine
+# Laptop initialization script
+
+Laptop is a *one-liner* script that will configure a workstation for mobile and web development.
+
+Its core values are :
+
+- Automated : provide all *required* tools with almost no manual action
+- Safe : multiple runs should always work
+- Opiniated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
 
 ## Launch installation
 
@@ -47,6 +55,40 @@ Code Editor :
 Misc :
 
 - [Watchman] for watching for filesystem events
+
+## Configuration
+
+### ZSH Recipes
+
+<details>
+  <summary>➕ Add a <code>zsh</code> plugin using <code>zinit</code></summary>
+
+  1. Create a shell script in `$XDG_DATA_HOME/zsh`
+  2. Edit the shell script
+
+    ```shell
+    # Example $XDG_DATA_HOME/zsh/01_custom.sh
+    zinit snippet OMZP::ruby
+    zinit snippet OMZP::rails
+
+    ```
+</details>
+<details>
+  <summary>🔄 Update all plugins</summary>
+
+  ```console
+  > zinit update
+  ```
+
+</details>
+<details>
+  <summary>🧹 Clean unused plugins</summary>
+
+  ```console
+  > zinit delete --clean
+  ```
+
+</details>
 
 [Git]: https://git-scm.com/
 [GitHub CLI]: https://cli.github.com/
