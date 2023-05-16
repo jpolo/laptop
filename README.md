@@ -39,6 +39,11 @@ Programming language :
   - ✅ Plugin Java
   - ✅ Plugin Python
 
+Code Editor :
+
+- [Visual Studio Code] default visual editor
+- `nano` default text based editor
+
 Misc :
 
 - [Watchman] for watching for filesystem events
@@ -48,5 +53,6 @@ Misc :
 [Homebrew]: http://brew.sh/
 [asdf-vm]: https://github.com/asdf-vm/asdf
 [Watchman]: https://facebook.github.io/watchman/
+[Visual Studio Code]: https://code.visualstudio.com/
 [Zinit]: https://github.com/zdharma-continuum/zinit
 [ZSH]: http://www.zsh.org/
