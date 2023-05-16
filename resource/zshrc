@@ -7,7 +7,8 @@
 
 # ❓ HELP
 #
-# CUSTOMIZE CONFIGURATION
+# 1️/ CUSTOMIZE CONFIGURATION
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 #
 # There are multiple ways to override / extends this configuration :
 # Local only :
@@ -16,6 +17,13 @@
 # Shared (could be synchronizable to iCloud, Drive, etc) :
 # - Create a `.sh` file in `$XDG_DATA_HOME/zsh/`
 #
+# 2/ HOWTO ADD ZSH PLUGIN ?
+# ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+#
+# This file uses zinit plugin manager (https://github.com/zdharma-continuum/zinit)
+#
+# Example 1: Install and load OhMyZSH plugin named "ruby"
+# `zinit snippet OMZP::ruby`
 
 typeset -A ZINIT
 
