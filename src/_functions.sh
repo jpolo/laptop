@@ -203,9 +203,10 @@ ensure_file_template() {
 
 ensure_vscode_extension() {
   local extension_name="$1"
-   _laptop_step_start "- Ensure VSCode '$extension_name'"
+  local list_extensions=$(code --list-extensions);
+  _laptop_step_start "- Ensure VSCode '$extension_name'"
 
-  if code --list-extensions | grep -q $extension_name; then
+  if echo $list_extensions | grep -q $extension_name; then
     _laptop_step_ok
   else
     _laptop_step_exec code --install-extension "$extension_name" --force
