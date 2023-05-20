@@ -231,7 +231,7 @@ ensure_vscode_setting() {
   fi
 
   _laptop_step_start "- Ensure VSCode Setting '$setting_name'"
-  _laptop_step_exec cat "$vscode_settings_file" | jq "$jq_query" | sponge "$vscode_settings_file"
+  _laptop_step_exec jq "$jq_query" "$vscode_settings_file" | sponge "$vscode_settings_file"
 }
 
 _laptop_ensure_rosetta2() {
