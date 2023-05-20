@@ -90,6 +90,10 @@ ensure_vscode_extension "GitLab.gitlab-workflow"
 ensure_vscode_extension "ms-vsliveshare.vsliveshare"
 ensure_vscode_extension "wayou.vscode-todo-highlight"
 
+ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
+ensure_vscode_setting '["git.confirmSync"]' 'false'
+ensure_vscode_setting '["git.autofetch"]' 'true'
+
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
 
