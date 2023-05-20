@@ -214,8 +214,14 @@ ensure_vscode_extension() {
 }
 
 ensure_vscode_setting() {
-  local jq_query="$1"
+  local json_path="$1"
+  local json_value="$2"
   local vscode_settings_file=""
+  local jsonc=(npx -p jsonc-cli jsonc);
+  local jsonc_args=(-v "$json_value")
+  if [ "$json_value" = "" ]; then
+    jsonc_args=("--delete")
+  fi
   
   # Vérifier si le système d'exploitation est macOS
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -225,13 +231,15 @@ ensure_vscode_setting() {
   fi
 
   # Vérifier si la requête est vide
-  if [ -z "$jq_query" ]; then
+  if [ -z "$json_path" ]; then
     eerror "La requête est vide."
     return 1
   fi
 
-  _laptop_step_start "- Ensure VSCode Setting '$setting_name'"
-  _laptop_step_exec jq "$jq_query" "$vscode_settings_file" | sponge "$vscode_settings_file"
+  _laptop_step_start "- Ensure VSCode Setting $json_path=$json_value"
+  
+  cat "$vscode_settings_file" | ${jsonc[@]} modify -n -m -p "$json_path" ${jsonc_args[@]} -f "$vscode_settings_file"
+  _laptop_step_ok
 }
 
 _laptop_ensure_rosetta2() {
