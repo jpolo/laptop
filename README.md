@@ -55,6 +55,7 @@ Code Editor :
 Misc :
 
 - [Watchman] for watching for filesystem events
+- `~/Code` folder to clone all repositories / organize projects
 
 ## Configuration
 
