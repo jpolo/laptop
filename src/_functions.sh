@@ -18,7 +18,7 @@ fi
 #if [ -z "${COLUMNS}" ]; then
    #COLUMNS=$(stty size)
    #COLUMNS=${COLUMNS##* }
-COLUMNS=80
+COLUMNS=100
 #fi
 
 # When using remote connections, such as a serial port, stty size returns 0
