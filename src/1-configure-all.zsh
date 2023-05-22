@@ -93,6 +93,12 @@ ensure_vscode_extension "wayou.vscode-todo-highlight"
 ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
 ensure_vscode_setting '["git.confirmSync"]' 'false'
 ensure_vscode_setting '["git.autofetch"]' 'true'
+# Important settings to disable
+ensure_vscode_setting '["files.insertFinalNewline"]' ''
+ensure_vscode_setting '["files.trimFinalNewlines"]' ''
+ensure_vscode_setting '["files.trimTrailingWhitespace"]' ''
+ensure_vscode_setting '["editor.trimAutoWhitespace"]' ''
+ensure_vscode_setting '["editor.tabSize"]' ''
 
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
