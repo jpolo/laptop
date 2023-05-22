@@ -12,4 +12,14 @@ ensure_file_template "zshrc" ~/.zshrc
 _laptop_shell zsh  "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
 _laptop_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
 
-einfo "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
+einfo "🎉 Finished"
+einfo "$(cat << EOF 
+Next manual steps :
+  🔑 Authorize your SSH key in your git server
+    - Github : https://github.com/settings/keys
+    - Gitlab : https://gitlab.com/-/profile/keys
+    - Gitlab Self Hosted
+  ⤵️ Clone repositories in ~/Code
+EOF
+)"
+ewarn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
