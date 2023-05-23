@@ -351,9 +351,9 @@ _laptop_step_exec() {
   if [ "$exit_code" = "0" ]; then
     _laptop_step_ok
   else
-    _laptop_step_fail $exit_code
-    eerror Command failed \
-      "\\n|  > $@" \
-      "\\n|  $output"
+    _laptop_step_fail
+    eerror "Command failed \
+      \\n|  > $command \
+      \\n|  $output"
   fi
 }
