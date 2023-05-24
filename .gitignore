@@ -23,3 +23,5 @@ docs/man/man3/*
 #Ansible
 *.retry
 collections
+
+test_data
