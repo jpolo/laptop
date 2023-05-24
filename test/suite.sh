@@ -6,3 +6,5 @@ source "./src/_functions.sh"
 
 # Try to run brew installation
 _laptop_ensure_brew
+
+ensure_package "coreutils"
