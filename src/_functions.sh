@@ -43,6 +43,10 @@ is_arm() {
   test arm64 = $(uname -m)
 }
 
+quote() {
+  echo "'$1'"
+}
+
 eerror() {
   echo -e "${COLOR_ERROR}Error: ${NORMAL}${@}" >&2
 }
