@@ -224,12 +224,12 @@ ensure_vscode_setting() {
   local json_path="$1"
   local json_value="$2"
   local vscode_settings_file=""
-  local jsonc=(npx -p jsonc-cli jsonc);
+  local jsonc=(npm exec --package=jsonc-cli -- jsonc);
   local jsonc_args=(-v "$json_value")
   if [ "$json_value" = "" ]; then
     jsonc_args=("--delete")
   fi
-  
+
   # Vérifier si le système d'exploitation est macOS
   if [[ "$OSTYPE" == "darwin"* ]]; then
     vscode_settings_file="$HOME/Library/Application Support/Code/User/settings.json"
