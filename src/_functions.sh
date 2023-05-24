@@ -97,7 +97,7 @@ ensure_package() {
     if brew list $package &>/dev/null; then
       _laptop_step_ok
     else
-      _laptop_step_exec brew install "${brew_args[@]}" $package
+      _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
     fi
   else
     _laptop_step_fail
@@ -179,7 +179,7 @@ ensure_directory() {
   local directory="$1"
   _laptop_step_start "- Ensure directory '$directory'"
   if [ ! -d $directory ]; then
-    _laptop_step_exec mkdir -p $directory
+    _laptop_step_eval "mkdir -p $(quote $directory)"
   else
     _laptop_step_ok
   fi
@@ -189,20 +189,23 @@ ensure_file() {
   local file_path="$1"
   _laptop_step_start "- Ensure file '$file_path'"
 
-  _laptop_step_exec \
-    mkdir -p $(dirname $file_path) && \
-    touch "$file_path"
+  _laptop_step_eval "\
+    mkdir -p $(quote $(dirname $file_path)) && \
+    touch $(quote $file_path)
+    "
 }
 
 ensure_file_template() {
   local template="$1"
   local target="$2"
-  local cp_flags=${@: 3}  
+  local cp_flags=${@: 3}
+  cp_flags+=('-f')
 
   _laptop_step_start "- Ensure file '$target'"
-  _laptop_step_exec \
-    mkdir -p $(dirname $target)
-    cp $cp_flags "$LAPTOP_TEMPLATE_DIR/$template" "$target"
+  _laptop_step_eval "\
+  mkdir -p $(quote $(dirname $target)) && \
+  cp $cp_flags $(quote $LAPTOP_TEMPLATE_DIR/$template) $(quote $target) \
+  "
 }
 
 ensure_vscode_extension() {
