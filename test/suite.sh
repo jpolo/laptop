@@ -15,8 +15,8 @@ ensure_package "asdf"
 ensure_package "asdf"
 
 # Test ensure_asdf_plugin
-ensure_asdf_plugin "nodejs"
-ensure_asdf_plugin "nodejs"
+ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
 # Test ensure_asdf_language
 ensure_asdf_language "nodejs" "lts"
