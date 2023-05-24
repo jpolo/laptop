@@ -18,6 +18,10 @@ ensure_package "asdf"
 ensure_asdf_plugin "nodejs"
 ensure_asdf_plugin "nodejs"
 
+# Test ensure_asdf_language
+ensure_asdf_language "nodejs" "lts"
+ensure_asdf_language "nodejs" "lts"
+
 # Test ensure_directory
 ensure_directory "./folder_create/"
 ensure_directory "./folder_create/"
