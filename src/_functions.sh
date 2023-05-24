@@ -237,9 +237,10 @@ ensure_vscode_setting() {
   fi
 
   _laptop_step_start "- Ensure VSCode Setting $json_path=$json_value"
-  
-  cat "$vscode_settings_file" | ${jsonc[@]} modify -n -m -p "$json_path" ${jsonc_args[@]} -f "$vscode_settings_file"
-  _laptop_step_ok
+  _laptop_step_eval "\
+  cat "$vscode_settings_file" | \
+  ${jsonc[@]} modify -n -m -p "$json_path" ${jsonc_args[@]} -f "$vscode_settings_file"
+  "
 }
 
 _laptop_ensure_rosetta2() {
