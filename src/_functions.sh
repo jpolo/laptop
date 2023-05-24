@@ -357,3 +357,19 @@ _laptop_step_exec() {
       \\n|  $output"
   fi
 }
+
+_laptop_step_eval() {
+  local output;
+  local command="$1"
+  { output=$( { eval "$command"  1>&3 ; } 2>&1); } 3>&1
+  local exit_code=$?
+
+  if [ "$exit_code" = "0" ]; then
+    _laptop_step_ok
+  else
+    _laptop_step_fail
+    eerror "Command failed \
+      \\n|  > $command \
+      \\n|  $output"
+  fi
+}
