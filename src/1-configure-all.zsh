@@ -90,6 +90,8 @@ ensure_vscode_extension "GitLab.gitlab-workflow"
 ensure_vscode_extension "ms-vsliveshare.vsliveshare"
 ensure_vscode_extension "wayou.vscode-todo-highlight"
 
+npm install -g jsonc-cli || true
+
 ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
 ensure_vscode_setting '["git.confirmSync"]' 'false'
 ensure_vscode_setting '["git.autofetch"]' 'true'
