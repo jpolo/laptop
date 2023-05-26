@@ -122,7 +122,6 @@ if [ ! -z "$GEM_HOME" ]; then
   _path_append "$GEM_HOME/bin"
 fi
 _path_append "$HOME/.yarn/bin"
-_path_append "/home/linuxbrew/.linuxbrew/bin"
 _path_append "/snap/bin"
 _path_append "/usr/sbin"
 _path_append "/usr/local/bin"
