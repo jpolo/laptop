@@ -394,3 +394,14 @@ _laptop_step_eval() {
       \\n|  $output"
   fi
 }
+
+_laptop_cleanup() {
+  _laptop_step_start "- Upgrade brew"
+  _laptop_step_eval "brew upgrade --quiet"
+
+  _laptop_step_start "- Upgrade zinit"
+  _laptop_step_exec zinit update --all --no-pager --quiet --parallel
+
+  _laptop_step_start "- Clean zinit"
+  _laptop_step_exec zinit delete --clean --quiet --yes
+}
