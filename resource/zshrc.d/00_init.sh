@@ -46,8 +46,7 @@ zinit snippet OMZL::spectrum.zsh
 zinit snippet OMZP::dotenv
 zinit snippet OMZP::asdf
 
-zinit wait lucid for \
-  hlissner/zsh-autopair
+zinit light hlissner/zsh-autopair
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
 zinit light zdharma-continuum/fast-syntax-highlighting
