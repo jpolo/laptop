@@ -32,13 +32,13 @@ ZINIT_HOME=$XDG_CACHE_HOME/zsh/zinit
 ZINIT[HOME_DIR]=$ZINIT_HOME
 ZINIT[ZCOMPDUMP_PATH]=$XDG_CACHE_HOME/zsh/zcompdump
 
-if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
-  git clone https://github.com/zdharma-continuum/zinit $ZINIT_HOME/bin
-  zcompile $ZINIT_HOME/bin/zinit.zsh
+if [[ ! -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
+  git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME/bin"
+  zcompile "$ZINIT_HOME/bin/zinit.zsh"
 fi
 
 if [[ -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
-  source $ZINIT_HOME/bin/zinit.zsh
+  source "$ZINIT_HOME/bin/zinit.zsh"
 else
   echo "zinit cannot be installed"
 fi;
