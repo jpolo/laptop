@@ -91,8 +91,8 @@ if [ -z "$ANDROID_HOME" ]; then
     export ANDROID_HOME="/usr/local/opt/android-sdk"
   fi
   if [ ! -z "$ANDROID_HOME" ]; then
-    export PATH="$PATH:$ANDROID_HOME/platform-tools"
-    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+    _path_append "$ANDROID_HOME/platform-tools"
+    _path_append "$ANDROID_HOME/cmdline-tools/latest/bin"
   fi
 fi
 
