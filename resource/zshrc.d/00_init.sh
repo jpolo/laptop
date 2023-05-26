@@ -4,8 +4,6 @@
 # 🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-#zinit light rupa/z
-
 # Theme
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
@@ -35,17 +33,20 @@ fi
 # Zsh completions
 zinit light zsh-users/zsh-completions
 
-#OMZ::plugins/nvm/nvm.plugin.zsh \
+# Zsh OMZ libraries
+zinit snippet OMZL::clipboard.zsh
+zinit snippet OMZL::compfix.zsh
+zinit snippet OMZL::correction.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::grep.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::spectrum.zsh
+
+# Zsh OMZ plugins
+zinit snippet OMZP::dotenv
+zinit snippet OMZP::asdf
+
 zinit wait lucid for \
-  OMZ::lib/clipboard.zsh \
-	OMZ::lib/compfix.zsh \
-  OMZ::lib/correction.zsh \
-  OMZ::lib/completion.zsh \
-  OMZ::lib/grep.zsh \
-  OMZ::lib/history.zsh \
-  OMZ::lib/spectrum.zsh \
-  OMZ::plugins/dotenv/dotenv.plugin.zsh \
-  OMZ::plugins/asdf/asdf.plugin.zsh \
   hlissner/zsh-autopair
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
