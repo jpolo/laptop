@@ -34,6 +34,15 @@ fi
   # TODO export variables
 }
 
+_path_prepend() {
+  for ARG in "$@"
+  do
+    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+        PATH="$ARG${PATH:+":$PATH"}"
+    fi
+  done
+}
+
 _path_append() {
   for ARG in "$@"
   do
@@ -110,11 +119,14 @@ fi
 _path_append "$HOMEBREW_PREFIX/opt/libpq/bin"
 
 # set PATH so it includes user's private bin if it exists
-_path_append "$HOME/Application"
-_path_append "$HOME/Applications"
-_path_append "$HOME/bin"
-_path_append "$HOME/.bin"
-_path_append "$HOME/.local/bin"
+_path_prepend "/usr/sbin"
+_path_prepend "/usr/local/bin"
+_path_prepend "/snap/bin"
+_path_prepend "$HOME/Application"
+_path_prepend "$HOME/Applications"
+_path_prepend "$HOME/bin"
+_path_prepend "$HOME/.bin"
+_path_prepend "$HOME/.local/bin"
 if [ ! -z "$CARGO_HOME" ]; then
   _path_append "$CARGO_HOME/bin"
 fi
@@ -122,12 +134,11 @@ if [ ! -z "$GEM_HOME" ]; then
   _path_append "$GEM_HOME/bin"
 fi
 _path_append "$HOME/.yarn/bin"
-_path_append "/snap/bin"
-_path_append "/usr/sbin"
-_path_append "/usr/local/bin"
+
+
 
 # Make unique PATH
 typeset -U PATH
 
 # Clean functions
-unset -f _path_append
+unset -f _path_append _path_prepend
