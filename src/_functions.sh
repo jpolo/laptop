@@ -104,6 +104,20 @@ ensure_package() {
   fi
 }
 
+ensure_npm_package() {
+  local package="$1"
+  local installation_message="- Ensure NPM package '$package'"
+
+  _laptop_step_start "$installation_message"
+  local npm_args=("--quiet --global")
+
+  if [ ! -z "$(npm list --global --parseable "$package")" ]; then
+    _laptop_step_ok
+  else
+    _laptop_step_eval "npm install ${npm_args[@]} $(quote $package)"
+  fi
+}
+
 ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
@@ -323,7 +337,7 @@ _laptop_bootstrap() {
 _laptop_shell() {
   local shell=$1
   local script=$2
-  env -i $shell --login $script
+  env "$shell" --login -i "$script"
 }
 
 _laptop_step_start() {
