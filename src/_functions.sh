@@ -177,13 +177,10 @@ ensure_ssh_key() {
   fi
 }
 
-ensure_defaults_bool() {
-  local domain="$1"
-  local key="$2"
-  local value="$3"
-  _laptop_step_start "- Ensure defaults '$domain' '$key'='$value'"
+ensure_defaults() {
+  _laptop_step_start "- Ensure defaults ${@}"
   if command_exists "defaults"; then
-    _laptop_step_exec defaults write -g $domain $key -bool $value;
+    _laptop_step_exec defaults write -g ${@}
   else
     _laptop_step_pass
   fi

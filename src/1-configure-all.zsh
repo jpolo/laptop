@@ -12,14 +12,14 @@ ensure_file "$XDG_CONFIG_HOME/git/config"
 ensure_ssh_key
 
 # Default settings
-ensure_defaults_bool "" AppleShowAllExtensions true
-ensure_defaults_bool "" NSAutomaticCapitalizationEnabled false
-ensure_defaults_bool "" NSAutomaticDashSubstitutionEnabled false
-ensure_defaults_bool "" NSAutomaticPeriodSubstitutionEnabled false
-ensure_defaults_bool "" NSAutomaticQuoteSubstitutionEnabled false
-ensure_defaults_bool "" NSAutomaticSpellingCorrectionEnabled false
-ensure_defaults_bool "" NSAutomaticTextCompletionEnabled false
-# ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate false
+ensure_defaults AppleShowAllExtensions -bool true
+ensure_defaults NSAutomaticCapitalizationEnabled -bool false
+ensure_defaults NSAutomaticDashSubstitutionEnabled -bool false
+ensure_defaults NSAutomaticPeriodSubstitutionEnabled -bool false
+ensure_defaults NSAutomaticQuoteSubstitutionEnabled -bool false
+ensure_defaults NSAutomaticSpellingCorrectionEnabled -bool false
+ensure_defaults NSAutomaticTextCompletionEnabled -bool false
+# ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
 # Install standard utils
 ensure_package "coreutils"
