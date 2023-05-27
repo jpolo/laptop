@@ -30,6 +30,7 @@ ensure_package "moreutils"
 ensure_package "findutils"
 ensure_package "git"
 ensure_package "gnutls"
+ensure_package "gnupg"
 ensure_package "mercurial"
 
 # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
