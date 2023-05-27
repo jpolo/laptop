@@ -19,6 +19,9 @@ ensure_defaults NSAutomaticPeriodSubstitutionEnabled -bool false
 ensure_defaults NSAutomaticQuoteSubstitutionEnabled -bool false
 ensure_defaults NSAutomaticSpellingCorrectionEnabled -bool false
 ensure_defaults NSAutomaticTextCompletionEnabled -bool false
+# Set sidebar icon size
+ensure_defaults NSTableViewDefaultSizeMode -int 3
+
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
 # Install standard utils
