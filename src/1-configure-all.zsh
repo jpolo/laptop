@@ -51,6 +51,7 @@ ensure_package "vips"
 
 # Install CLI tools
 ensure_package "asdf"
+ensure_package "fzf"
 ensure_package "gh"
 ensure_package "gpg"
 ensure_package "jq"
