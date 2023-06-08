@@ -14,19 +14,23 @@ setopt noglobalrcs
 # Make sure XDG dirs are set
 
 # Init default platform directories
+# https://github.com/adrg/xdg/blob/master/README.md#xdg-base-directory
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  local XDG_CONFIG_HOME_DEFAULT=$HOME/Library/Preferences
-  local XDG_CACHE_HOME_DEFAULT=$HOME/Library/Caches
-  local XDG_DATA_HOME_DEFAULT=$HOME/Library
+  local XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
+  local XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
+  local XDG_DATA_HOME_DEFAULT="$HOME/Library"
+  local XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
 else
-  local XDG_CONFIG_HOME_DEFAULT=$HOME/.config
-  local XDG_CACHE_HOME_DEFAULT=$HOME/.cache
-  local XDG_DATA_HOME_DEFAULT=$HOME/.local/share
+  local XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
+  local XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
+  local XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
+  local XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
 fi
 # export variables
 [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
 [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
 [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
+[[ -n "$XDG_STATE_HOME"  ]] || export XDG_STATE_HOME=$XDG_STATE_HOME_DEFAULT
 
 # Source file
 [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
