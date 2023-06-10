@@ -22,7 +22,7 @@ Next steps :
       - Gitlab Self Hosted
     ⤵️ Clone your repositories in ~/Code
   ZSH :
-    🎨 Customize the zsh prompt theme with `p10k configure`
+    🎨 Customize the zsh prompt theme with "p10k configure"
 EOF
 )"
 ewarn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
