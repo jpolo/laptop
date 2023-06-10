@@ -291,10 +291,13 @@ _laptop_ensure_brew_autodate() {
     brew tap homebrew/autoupdate
   fi
 
-  brew autoupdate stop &>/dev/null || true && \
-  brew autoupdate start &>/dev/null && \
-    _laptop_step_ok || \
-    _laptop_step_fail
+  if ! brew autoupdate status | grep --quiet running; then
+    brew autoupdate start &>/dev/null && \
+      _laptop_step_ok || \
+      _laptop_step_fail
+  else
+    _laptop_step_ok
+  fi
 }
 
 _laptop_ensure_zsh() {
