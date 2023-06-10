@@ -33,6 +33,7 @@ Shell :
 
 - [ZSH] default shell
 - [Zinit] default zsh plugin manager
+- [PowerLevel10k] default zsh theme (customizable)
 
 Source Control Manager :
 
@@ -93,6 +94,14 @@ Misc :
   ```
 
 </details>
+<details>
+  <summary>🎨 Customize ZSH Theme</summary>
+
+  ```console
+  > p10k configure
+  ```
+
+</details>
 
 [Git]: https://git-scm.com/
 [GitHub CLI]: https://cli.github.com/
@@ -102,3 +111,4 @@ Misc :
 [Visual Studio Code]: https://code.visualstudio.com/
 [Zinit]: https://github.com/zdharma-continuum/zinit
 [ZSH]: http://www.zsh.org/
+[PowerLevel10k]: https://github.com/romkatv/powerlevel10k
