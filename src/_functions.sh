@@ -393,17 +393,13 @@ _laptop_step_complete() {
 }
 
 _laptop_step_exec() {
-  local command=$@
-  local output;
-  { output=$( { { "$@" ; } 1>&3 ; } 2>&1); } 3>&1
-  local exit_code=$?
-  _laptop_step_complete "$command" "$exit_code" "$output"
+  _laptop_step_eval "$*"
 }
 
 _laptop_step_eval() {
   local output;
   local command="$1"
-  { output=$( { eval "$command"  1>&3 ; } 2>&1); } 3>&1
+  output=$(eval "$command" 2>&1)
   local exit_code=$?
 
  _laptop_step_complete "$command" "$exit_code" "$output"
