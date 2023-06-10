@@ -5,8 +5,8 @@ source "$SCRIPT_DIR/_functions.sh"
 
 # Bootstrap
 _laptop_bootstrap
-ensure_file_template "zprofile" ~/.zprofile
-ensure_file_template "zshrc" ~/.zshrc
+ensure_file_template "zprofile" "$HOME/.zprofile"
+ensure_file_template "zshrc" "$HOME/.zshrc"
 
 # Installation
 _laptop_shell zsh  "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
