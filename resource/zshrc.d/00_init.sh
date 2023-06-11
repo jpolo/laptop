@@ -52,6 +52,7 @@ zinit snippet OMZL::spectrum.zsh
 # Zsh OMZ plugins
 zinit snippet OMZP::dotenv
 zinit snippet OMZP::asdf
+zinit snippet OMZP::fzf
 
 zinit light hlissner/zsh-autopair
 
