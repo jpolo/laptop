@@ -73,6 +73,7 @@ export GHCUP_USE_XDG_DIRS=1
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GOPATH="$XDG_DATA_HOME/go"
 export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export JENV_ROOT="$XDG_DATA_HOME/jenv"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
