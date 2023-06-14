@@ -73,6 +73,7 @@ export GHCUP_USE_XDG_DIRS=1
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
 export JENV_ROOT="$XDG_DATA_HOME/jenv"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/repl_history"
