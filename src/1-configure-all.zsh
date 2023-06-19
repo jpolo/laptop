@@ -23,6 +23,10 @@ ensure_defaults NSAutomaticTextCompletionEnabled -bool false
 # Set sidebar icon size
 ensure_defaults NSTableViewDefaultSizeMode -int 3
 
+## Screen Capture application
+# Save PNG format
+ensure_defaults com.apple.screencapture type -string "png"
+
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
 # Install standard utils
