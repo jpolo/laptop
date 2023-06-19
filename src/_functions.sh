@@ -180,7 +180,7 @@ ensure_ssh_key() {
 ensure_defaults() {
   _laptop_step_start "- Ensure defaults ${@}"
   if command_exists "defaults"; then
-    _laptop_step_exec defaults write -g ${@}
+    _laptop_step_exec defaults write ${@}
   else
     _laptop_step_pass
   fi

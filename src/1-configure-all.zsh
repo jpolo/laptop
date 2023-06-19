@@ -13,15 +13,15 @@ ensure_file "$XDG_CONFIG_HOME/git/config"
 ensure_ssh_key
 
 # Default settings
-ensure_defaults AppleShowAllExtensions -bool true
-ensure_defaults NSAutomaticCapitalizationEnabled -bool false
-ensure_defaults NSAutomaticDashSubstitutionEnabled -bool false
-ensure_defaults NSAutomaticPeriodSubstitutionEnabled -bool false
-ensure_defaults NSAutomaticQuoteSubstitutionEnabled -bool false
-ensure_defaults NSAutomaticSpellingCorrectionEnabled -bool false
-ensure_defaults NSAutomaticTextCompletionEnabled -bool false
+ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool true
+ensure_defaults NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+ensure_defaults NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+ensure_defaults NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+ensure_defaults NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+ensure_defaults NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+ensure_defaults NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
 # Set sidebar icon size
-ensure_defaults NSTableViewDefaultSizeMode -int 3
+ensure_defaults NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 
 ## Screen Capture application
 # Save PNG format
