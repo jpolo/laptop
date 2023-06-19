@@ -5,6 +5,7 @@ source "$SCRIPT_DIR/_functions.sh"
 
 # Ensure Code
 ensure_directory "$HOME/Code"
+ensure_directory "$HOME/Captures"
 ensure_directory "$HOME/Library/LaunchAgents"
 
 # Configure git
@@ -24,8 +25,12 @@ ensure_defaults NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
 ensure_defaults NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 
 ## Screen Capture application
+ensure_defaults com.apple.screencapture location -string "$HOME/Captures"
 # Save PNG format
 ensure_defaults com.apple.screencapture type -string "png"
+
+killall Finder
+
 
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
