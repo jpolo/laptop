@@ -53,6 +53,16 @@ _xdg_init() {
   [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
   [[ -n "$XDG_STATE_HOME"  ]] || export XDG_STATE_HOME=$XDG_STATE_HOME_DEFAULT
 
+  # XDG directories
+  [[ -n "$XDG_DESKTOP_DIR"     ]] || export XDG_DESKTOP_DIR="$HOME/Desktop"
+  [[ -n "$XDG_DOCUMENTS_DIR"   ]] || export XDG_DOCUMENTS_DIR="$HOME/Documents"
+  [[ -n "$XDG_DOWNLOAD_DIR"    ]] || export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+  [[ -n "$XDG_MUSIC_DIR"       ]] || export XDG_MUSIC_DIR="$HOME/Music"
+  [[ -n "$XDG_PICTURES_DIR"    ]] || export XDG_PICTURES_DIR="$HOME/Pictures"
+  [[ -n "$XDG_PUBLICSHARE_DIR" ]] || export XDG_PUBLICSHARE_DIR="$HOME/Public"
+  [[ -n "$XDG_TEMPLATES_DIR"   ]] || export XDG_TEMPLATES_DIR="$HOME/Templates"
+  [[ -n "$XDG_VIDEOS_DIR"      ]] || export XDG_VIDEOS_DIR="$HOME/Videos"
+
   # Source file
   [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
     . ${XDG_CONFIG_HOME}/user-dirs.dirs
