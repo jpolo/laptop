@@ -59,6 +59,7 @@ ensure_package "openssl"
 ensure_package "vips"
 
 # Install CLI tools
+ensure_package "adr-tools"
 ensure_package "asdf"
 ensure_package "fzf"
 ensure_package "gh"
