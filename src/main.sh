@@ -21,6 +21,7 @@ Next steps :
       - Gitlab : https://gitlab.com/-/profile/keys
       - Gitlab Self Hosted
     ⤵️ Clone your repositories in ~/Code
+    📸 Manage your Capture in ~/Captures
   ZSH :
     🎨 Customize the zsh prompt theme with "p10k configure"
 EOF

@@ -57,6 +57,7 @@ Misc :
 
 - [Watchman] for watching for filesystem events
 - `~/Code` folder to clone all repositories / organize projects
+- `~/Captures` folder to manage screen shots and screen captures
 
 ## Configuration
 
