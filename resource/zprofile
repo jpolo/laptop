@@ -11,32 +11,6 @@ skip_global_compinit=1
 # http://disq.us/p/f55b78
 setopt noglobalrcs
 
-# Make sure XDG dirs are set
-
-# Init default platform directories
-# https://github.com/adrg/xdg/blob/master/README.md#xdg-base-directory
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  local XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
-  local XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
-  local XDG_DATA_HOME_DEFAULT="$HOME/Library"
-  local XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
-else
-  local XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
-  local XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
-  local XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
-  local XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
-fi
-# export variables
-[[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
-[[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
-[[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
-[[ -n "$XDG_STATE_HOME"  ]] || export XDG_STATE_HOME=$XDG_STATE_HOME_DEFAULT
-
-# Source file
-[[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
-  . ${XDG_CONFIG_HOME}/user-dirs.dirs
-  # TODO export variables
-}
 
 _path_prepend() {
   for ARG in "$@"
@@ -55,6 +29,38 @@ _path_append() {
     fi
   done
 }
+
+_xdg_init() {
+  # Make sure XDG dirs are set
+
+  # Init default platform directories
+  # https://github.com/adrg/xdg/blob/master/README.md#xdg-base-directory
+  local XDG_CONFIG_HOME_DEFAULT XDG_CACHE_HOME_DEFAULT XDG_DATA_HOME_DEFAULT XDG_STATE_HOME_DEFAULT
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
+    XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
+    XDG_DATA_HOME_DEFAULT="$HOME/Library"
+    XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
+  else
+    XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
+    XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
+    XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
+    XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
+  fi
+  # export variables
+  [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
+  [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
+  [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
+  [[ -n "$XDG_STATE_HOME"  ]] || export XDG_STATE_HOME=$XDG_STATE_HOME_DEFAULT
+
+  # Source file
+  [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
+    . ${XDG_CONFIG_HOME}/user-dirs.dirs
+    # TODO export variables
+  }
+}
+
+_xdg_init
 
 # jenv, rbenv, etc
 export ANSIBLE_HOME="$XDG_CONFIG_HOME/ansible"
@@ -149,9 +155,8 @@ fi
 _path_append "$HOME/.yarn/bin"
 
 
-
 # Make unique PATH
 typeset -U PATH
 
 # Clean functions
-unset -f _path_append _path_prepend
+unset -f _path_append _path_prepend _xdg_init
