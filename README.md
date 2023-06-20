@@ -1,12 +1,14 @@
 # Laptop initialization script
 
-Laptop is a *one-liner* script that will configure a workstation for mobile and web development.
+The main goal of this project is to help developers to focus on delivering value instead of struggling with the workstation configuration.
+
+The solution provided is a *one-liner* script that will fully configure a workstation for mobile and web development.
 
 Its core values are :
 
-- Automated : provide all *required* tools with almost no manual action
-- Safe : multiple runs should always work
-- Opiniated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
+- 🤖 Automated : provide all *required* tools with almost no manual action
+- ✅ Safe : multiple runs should always work
+- 🧑‍🏫 Opiniated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
 
 ## Launch installation
 
