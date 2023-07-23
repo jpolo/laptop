@@ -285,7 +285,8 @@ _laptop_ensure_brew() {
 }
 
 _laptop_ensure_brew_autodate() {
-  local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate &>/dev/null;echo $?');
+  local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
+
   _laptop_step_start "- Ensure package manager 'brew autoupdate'"
   if [ "$brew_autodate_present" != "0" ]; then
     brew tap homebrew/autoupdate
