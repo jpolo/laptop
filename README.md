@@ -36,6 +36,7 @@ Shell :
 - [ZSH] default shell
 - [Zinit] default zsh plugin manager
 - [PowerLevel10k] default zsh theme (customizable)
+- [SSH] default algorithm `ed25519` [(explanation)](https://docs.gitlab.com/ee/user/ssh.html#ed25519-ssh-keys)
 
 Source Control Manager :
 
@@ -106,12 +107,13 @@ Misc :
 
 </details>
 
+[asdf-vm]: https://github.com/asdf-vm/asdf
 [Git]: https://git-scm.com/
 [GitHub CLI]: https://cli.github.com/
 [Homebrew]: http://brew.sh/
-[asdf-vm]: https://github.com/asdf-vm/asdf
-[Watchman]: https://facebook.github.io/watchman/
+[PowerLevel10k]: https://github.com/romkatv/powerlevel10k
+[SSH]: https://en.wikipedia.org/wiki/Secure_Shell
 [Visual Studio Code]: https://code.visualstudio.com/
+[Watchman]: https://facebook.github.io/watchman/
 [Zinit]: https://github.com/zdharma-continuum/zinit
 [ZSH]: http://www.zsh.org/
-[PowerLevel10k]: https://github.com/romkatv/powerlevel10k
