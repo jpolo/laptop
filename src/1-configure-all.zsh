@@ -11,7 +11,7 @@ ensure_directory "$HOME/Library/LaunchAgents"
 # Configure git
 ensure_file "$XDG_CONFIG_HOME/git/config"
 
-ensure_ssh_key
+ensure_ssh_key "ed25519"
 
 # Default settings
 ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool true

@@ -163,7 +163,8 @@ ensure_git_config() {
 }
 
 ensure_ssh_key() {
-  local ssh_key=~/.ssh/id_ed25519
+  local algorithm=${1:-"ed25519"}
+  local ssh_key="$HOME/.ssh/id_$algorithm"
   local email=$(git config --global user.email)
 
   _laptop_step_start "- Ensure SSH key '$ssh_key'"
@@ -171,7 +172,7 @@ ensure_ssh_key() {
     _laptop_step_fail
     eerror "git config user.email is empty";
   elif ! [ -f "$ssh_key" ]; then
-    _laptop_step_exec ssh-keygen -t ed25519 -C "$email" -N '' -o -f $ssh_key
+    _laptop_step_exec ssh-keygen -t $algorithm -C "$email" -N '' -o -f $ssh_key
   else
     _laptop_step_ok
   fi
