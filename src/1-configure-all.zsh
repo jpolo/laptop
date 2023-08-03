@@ -6,7 +6,6 @@ source "$SCRIPT_DIR/_functions.sh"
 # Ensure Code
 ensure_directory "$HOME/Code"
 ensure_directory "$HOME/Captures"
-ensure_directory "$HOME/Library/LaunchAgents"
 
 # Configure git
 ensure_file "$XDG_CONFIG_HOME/git/config"
