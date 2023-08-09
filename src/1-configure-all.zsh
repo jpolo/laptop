@@ -126,6 +126,7 @@ ensure_vscode_setting '["files.trimFinalNewlines"]' ''
 ensure_vscode_setting '["files.trimTrailingWhitespace"]' ''
 ensure_vscode_setting '["editor.trimAutoWhitespace"]' ''
 ensure_vscode_setting '["editor.tabSize"]' ''
+ensure_vscode_setting '["window.commandCenter"]' 'true'
 
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
