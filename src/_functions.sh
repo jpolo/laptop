@@ -130,7 +130,7 @@ ensure_asdf_plugin() {
   fi
 }
 
-ensure_asdf_language() {
+ensure_asdf_tool() {
   local language="$1"
   local version=$2 || "latest"
 

@@ -18,9 +18,9 @@ ensure_package "asdf"
 ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
-# Test ensure_asdf_language
-ensure_asdf_language "nodejs" "lts"
-ensure_asdf_language "nodejs" "lts"
+# Test ensure_asdf_tool
+ensure_asdf_tool "nodejs" "lts"
+ensure_asdf_tool "nodejs" "lts"
 
 # Test ensure_directory
 ensure_directory "./folder_create/"
