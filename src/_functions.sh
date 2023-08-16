@@ -39,6 +39,10 @@ BREW_CASK_PACKAGES=(
 );
 
 
+LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
+
+
+
 is_arm() {
   test arm64 = $(uname -m)
 }
@@ -318,7 +322,7 @@ _laptop_ensure_brew_autodate() {
 }
 
 _laptop_ensure_shell() {
-  ensure_shell "zsh"
+  ensure_shell $LAPTOP_SHELL
 }
 
 _laptop_ensure_xcode() {
@@ -332,9 +336,7 @@ _laptop_ensure_xcode() {
 }
 
 _laptop_bootstrap_debian() {
-  # sudo apt install -qq software-properties-common && \
-  # sudo apt install -qq ansible
-  return 0
+  _laptop_ensure_shell
 }
 
 _laptop_bootstrap_macos() {
