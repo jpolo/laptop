@@ -9,7 +9,7 @@ ensure_file_template "zprofile" "$HOME/.zprofile"
 ensure_file_template "zshrc" "$HOME/.zshrc"
 
 # Installation
-_laptop_shell zsh  "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
+_laptop_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
 _laptop_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
 
 einfo "🎉 Finished"

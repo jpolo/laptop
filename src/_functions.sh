@@ -77,6 +77,21 @@ test_ssh_key() {
   fi
 }
 
+ensure_shell() {
+  local target_shell="$1";
+  local shell_path;
+
+  _laptop_step_start "- Ensure shell '$target_shell'"
+  if [ -z "$target_shell" ]; then
+    _laptop_step_pass
+  elif [ "$(command -v $target_shell)" != "$SHELL" ];then
+    shell_path="$(command -v $target_shell)"
+    _laptop_step_exec sudo chsh -s "$shell_path" "$USER"
+  else
+    _laptop_step_ok
+  fi
+}
+
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
@@ -302,18 +317,8 @@ _laptop_ensure_brew_autodate() {
   fi
 }
 
-_laptop_ensure_zsh() {
-  _laptop_step_start "- Ensure shell 'zsh'"
-
-  case "$SHELL" in
-  */zsh)
-    _laptop_step_ok
-    ;;
-  *)
-    local shell_path="$(command -v zsh)"
-    _laptop_step_exec sudo chsh -s "$shell_path" "$USER"
-    ;;
-  esac
+_laptop_ensure_shell() {
+  ensure_shell "zsh"
 }
 
 _laptop_ensure_xcode() {
@@ -335,7 +340,7 @@ _laptop_bootstrap_debian() {
 _laptop_bootstrap_macos() {
   _laptop_ensure_rosetta2
   _laptop_ensure_xcode
-  _laptop_ensure_zsh
+  _laptop_ensure_shell
   _laptop_ensure_brew
   _laptop_ensure_brew_autodate
 }
