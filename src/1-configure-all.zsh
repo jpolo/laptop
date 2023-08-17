@@ -101,6 +101,7 @@ ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
 ensure_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 ensure_asdf_plugin "terraform" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git"
 ensure_asdf_plugin "python"
 
 ensure_asdf_tool "ruby" "latest"
