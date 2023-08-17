@@ -128,6 +128,13 @@ ensure_package() {
     else
       _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
     fi
+
+  elif [ $LAPTOP_PACKAGE_MANAGER = "apt-get" ];then
+    if dpkg -s $package &>/dev/null; then
+      _laptop_step_ok
+    else
+      _laptop_step_eval "sudo apt-get install $(quote $package) -yy"
+    fi
   else
     _laptop_step_fail
   fi
