@@ -335,8 +335,18 @@ _laptop_ensure_xcode() {
   fi
 }
 
+_laptop_ensure_apt_updated() {
+  _laptop_step_start "- Ensure APT updated"
+  if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+    _laptop_step_exec sudo apt-get update;
+  else
+    _laptop_step_ok
+  fi
+}
+
 _laptop_bootstrap_debian() {
   _laptop_ensure_shell
+  _laptop_ensure_apt_updated
 }
 
 _laptop_bootstrap_macos() {
