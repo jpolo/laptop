@@ -10,6 +10,10 @@ if [ -z "${LAPTOP_ROOT_DIR}" ]; then
   export LAPTOP_PACKAGE_MANAGER=unknown
   if [ -x "$(command -v brew)" ]; then
     export LAPTOP_PACKAGE_MANAGER=brew
+  elif [ -x "$(command -v apt-get)" ]; then
+    export LAPTOP_PACKAGE_MANAGER=apt-get
+  else
+    return 0
   fi
 fi
 
@@ -36,6 +40,13 @@ COLOR_INFO='\033[32m'
 
 BREW_CASK_PACKAGES=(
   "docker"
+);
+APT_CORE_PACKAGES=(
+  "build-essential"
+  "procps"
+  "curl"
+  "file"
+  "git"
 );
 
 
@@ -343,9 +354,15 @@ _laptop_ensure_apt_updated() {
   fi
 }
 
+_laptop_ensure_apt_core() {
+  _laptop_step_start "- Ensure APT core packages"
+  _laptop_step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
+}
+
 _laptop_bootstrap_debian() {
   _laptop_ensure_shell
   _laptop_ensure_apt_updated
+  _laptop_ensure_apt_core
 }
 
 _laptop_bootstrap_macos() {
@@ -357,7 +374,7 @@ _laptop_bootstrap_macos() {
 }
 
 _laptop_bootstrap() {
-  if ! command -v apt &> /dev/null; then
+  if command -v apt-get &> /dev/null; then
     _laptop_bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     _laptop_bootstrap_macos
