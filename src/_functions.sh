@@ -83,16 +83,15 @@ test_ssh_key() {
 
 ensure_shell() {
   local target_shell="$1";
-  local shell_path;
+  local current_shell="$(basename $SHELL)"
 
   _laptop_step_start "- Ensure shell '$target_shell'"
   if [ -z "$target_shell" ]; then
     _laptop_step_pass
-  elif [ "$(command -v $target_shell)" != "$SHELL" ];then
-    shell_path="$(command -v $target_shell)"
-    _laptop_step_exec sudo chsh -s "$shell_path" "$USER"
-  else
+  elif [ "$current_shell" = "$target_shell" ];then
     _laptop_step_ok
+  else
+    _laptop_step_exec sudo chsh -s "/bin/$target_shell" "$USER"
   fi
 }
 
