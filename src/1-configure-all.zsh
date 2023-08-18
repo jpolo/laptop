@@ -87,7 +87,7 @@ ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git"
 ensure_asdf_plugin "python"
 
 ensure_asdf_tool "ruby" "latest"
-ensure_asdf_tool "nodejs" "lts"
+ensure_asdf_tool "nodejs" "latest"
 ensure_asdf_tool "java" "adoptopenjdk-17.0.6+10"
 ensure_asdf_tool "terraform" "latest"
 
