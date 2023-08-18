@@ -74,6 +74,11 @@ einfo() {
   echo -e "${COLOR_INFO}Info: ${NORMAL}${@}"
 }
 
+function_exists() {
+  declare -f -F $1 > /dev/null
+  return $?
+}
+
 command_exists() {
   if [ -x "$(command -v $1)" ]; then
     return 0
@@ -109,9 +114,25 @@ ensure_shell() {
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
+
+  # Attempt to launch a function named ensure_package__$package" if exists
+  local recipe_function="ensure_package__$package"
+  if function_exists $recipe_function;then
+    $recipe_function
+    return 0
+  else
+    ensure_package_default $executable $package
+  fi
+}
+
+ensure_package_default() {
+  local executable="$1"
+  local package=${2:-$executable}
   local installation_message="- Ensure package '$executable'"
 
   _laptop_step_start "$installation_message"
+
+  # Install using package manager
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
 
     export HOMEBREW_NO_AUTO_UPDATE=1
