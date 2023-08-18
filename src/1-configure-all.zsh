@@ -78,26 +78,6 @@ ensure_package "wget"
 ensure_package "yarn"
 ensure_package "yq"
 
-# Install programs
-ensure_package "android-studio"
-ensure_package "chromedriver"
-ensure_package "discord"
-ensure_package "docker"
-ensure_package "drawio"
-ensure_package "flipper"
-ensure_package "google-chrome"
-ensure_package "google-drive"
-ensure_package "iterm2"
-ensure_package "macpass"
-ensure_package "notion"
-ensure_package "postman"
-ensure_package "rectangle"
-ensure_package "slack"
-# FIXME: Does not work on Apple Silicon M1, M2, etc
-# Error: Cask virtualbox depends on hardware architecture being one of [{:type=>:intel, :bits=>64}], but you are running {:type=>:arm, :bits=>64}.
-# ensure_package "virtualbox"
-ensure_package "visual-studio-code"
-
 # Install ASDF plugins
 ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
 ensure_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
@@ -111,26 +91,50 @@ ensure_asdf_tool "nodejs" "lts"
 ensure_asdf_tool "java" "adoptopenjdk-17.0.6+10"
 ensure_asdf_tool "terraform" "latest"
 
-# Install VSCode extensions
-ensure_vscode_extension "EditorConfig.EditorConfig"
-ensure_vscode_extension "eamodio.gitlens"
-ensure_vscode_extension "GitHub.vscode-pull-request-github"
-ensure_vscode_extension "GitLab.gitlab-workflow"
-ensure_vscode_extension "ms-vsliveshare.vsliveshare"
-ensure_vscode_extension "wayou.vscode-todo-highlight"
 
-ensure_npm_package "jsonc-cli"
+# Install programs (non devcontainers only)
+if [ -z "$LAPTOP_DEVCONTAINER" ];then
+  # Install programs
+  ensure_package "android-studio"
+  ensure_package "chromedriver"
+  ensure_package "discord"
+  ensure_package "docker"
+  ensure_package "drawio"
+  ensure_package "flipper"
+  ensure_package "google-chrome"
+  ensure_package "google-drive"
+  ensure_package "iterm2"
+  ensure_package "macpass"
+  ensure_package "notion"
+  ensure_package "postman"
+  ensure_package "rectangle"
+  ensure_package "slack"
+  # FIXME: Does not work on Apple Silicon M1, M2, etc
+  # Error: Cask virtualbox depends on hardware architecture being one of [{:type=>:intel, :bits=>64}], but you are running {:type=>:arm, :bits=>64}.
+  # ensure_package "virtualbox"
+  ensure_package "visual-studio-code"
 
-ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
-ensure_vscode_setting '["git.confirmSync"]' 'false'
-ensure_vscode_setting '["git.autofetch"]' 'true'
-# Important settings to disable
-ensure_vscode_setting '["files.insertFinalNewline"]' ''
-ensure_vscode_setting '["files.trimFinalNewlines"]' ''
-ensure_vscode_setting '["files.trimTrailingWhitespace"]' ''
-ensure_vscode_setting '["editor.trimAutoWhitespace"]' ''
-ensure_vscode_setting '["editor.tabSize"]' ''
-ensure_vscode_setting '["window.commandCenter"]' 'true'
+  # Install VSCode extensions
+  ensure_vscode_extension "EditorConfig.EditorConfig"
+  ensure_vscode_extension "eamodio.gitlens"
+  ensure_vscode_extension "GitHub.vscode-pull-request-github"
+  ensure_vscode_extension "GitLab.gitlab-workflow"
+  ensure_vscode_extension "ms-vsliveshare.vsliveshare"
+  ensure_vscode_extension "wayou.vscode-todo-highlight"
+
+  # Configure VSCode
+  ensure_npm_package "jsonc-cli"
+  ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
+  ensure_vscode_setting '["git.confirmSync"]' 'false'
+  ensure_vscode_setting '["git.autofetch"]' 'true'
+  # Important settings to disable
+  ensure_vscode_setting '["files.insertFinalNewline"]' ''
+  ensure_vscode_setting '["files.trimFinalNewlines"]' ''
+  ensure_vscode_setting '["files.trimTrailingWhitespace"]' ''
+  ensure_vscode_setting '["editor.trimAutoWhitespace"]' ''
+  ensure_vscode_setting '["editor.tabSize"]' ''
+  ensure_vscode_setting '["window.commandCenter"]' 'true'
+fi
 
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
