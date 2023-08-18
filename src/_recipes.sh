@@ -11,6 +11,14 @@ ensure_package__asdf() {
   fi
 }
 
+ensure_package__gnutls() {
+  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+    ensure_package_default "gnutls"
+  else
+    ensure_package_default "gnutls-bin"
+  fi
+}
+
 ensure_package__libpq() {
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
     ensure_package_default "libpq"
