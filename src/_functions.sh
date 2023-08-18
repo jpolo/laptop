@@ -52,7 +52,9 @@ APT_CORE_PACKAGES=(
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 
-
+if [ -z "$LAPTOP_DEVCONTAINER" ]; then
+  [[ "$(whoami)" = "vscode" ]] && LAPTOP_DEVCONTAINER="true"
+fi
 
 is_arm() {
   test arm64 = $(uname -m)
