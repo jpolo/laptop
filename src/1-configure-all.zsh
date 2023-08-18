@@ -11,7 +11,6 @@ ensure_directory "$HOME/Captures"
 # Configure git
 ensure_file "$XDG_CONFIG_HOME/git/config"
 
-ensure_ssh_key "ed25519"
 
 # Default settings
 ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool true
@@ -31,7 +30,6 @@ ensure_defaults com.apple.screencapture type -string "png"
 
 killall Finder
 
-
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
 # Install standard utils
@@ -50,6 +48,7 @@ ensure_git_config "push.autoSetupRemote" "true"
 ensure_git_config "fetch.prune" "true"
 ensure_git_config "user.email"
 ensure_git_config "user.name"
+ensure_ssh_key "ed25519"
 
 # Install library
 ensure_package "graphviz"
