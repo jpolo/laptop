@@ -109,7 +109,7 @@ ensure_shell() {
   elif [ "$current_shell" = "$target_shell" ];then
     _laptop_step_ok
   else
-    _laptop_step_exec sudo chsh -s "/bin/$target_shell" "$USER"
+    _laptop_step_exec sudo chsh -s "/bin/$target_shell"
   fi
 }
 
