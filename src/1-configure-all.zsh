@@ -38,6 +38,7 @@ killall Finder
 ensure_package "coreutils"
 ensure_package "moreutils"
 ensure_package "findutils"
+ensure_package "curl"
 ensure_package "git"
 ensure_package "gnutls"
 ensure_package "gnupg"
