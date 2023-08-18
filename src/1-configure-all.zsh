@@ -2,6 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$0")"
 source "$SCRIPT_DIR/_functions.sh"
+source "$SCRIPT_DIR/_recipes.sh"
 
 # Ensure Code
 ensure_directory "$HOME/Code"
