@@ -55,8 +55,8 @@ ensure_package "graphviz"
 ensure_package "imagemagick"
 ensure_package "libpq"
 ensure_package "libyaml"
+ensure_package "libvips"
 ensure_package "openssl"
-ensure_package "vips"
 
 # Install CLI tools
 ensure_package "adr-tools"

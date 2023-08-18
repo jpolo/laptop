@@ -16,3 +16,11 @@ ensure_package__libyaml() {
     ensure_package_default "libyaml-dev"
   fi
 }
+
+ensure_package__libvips() {
+  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+    ensure_package_default "vips"
+  else
+    ensure_package_default "libvips-dev"
+  fi
+}
