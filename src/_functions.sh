@@ -344,6 +344,11 @@ _laptop_ensure_brew() {
   fi
 }
 
+_laptop_ensure_brew_updated() {
+  _laptop_step_start "- Upgrade brew"
+  _laptop_step_eval "brew upgrade --quiet"
+}
+
 _laptop_ensure_brew_autodate() {
   local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
 
@@ -400,6 +405,7 @@ _laptop_bootstrap_macos() {
   _laptop_ensure_xcode
   _laptop_ensure_shell
   _laptop_ensure_brew
+  _laptop_ensure_brew_updated
   _laptop_ensure_brew_autodate
 }
 
@@ -471,9 +477,6 @@ _laptop_step_eval() {
 }
 
 _laptop_cleanup() {
-  _laptop_step_start "- Upgrade brew"
-  _laptop_step_eval "brew upgrade --quiet"
-
   _laptop_step_start "- Upgrade zinit"
   _laptop_step_exec zinit update --all --no-pager --quiet --parallel
 
