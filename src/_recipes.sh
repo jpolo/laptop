@@ -6,7 +6,11 @@ ensure_package__asdf() {
     ensure_package_default "asdf"
   else
     if [ ! -d "$asdf_dir" ];then
-      git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.12.0
+      _laptop_step_start "- Ensure asdf installed (via git)"
+      _laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.12.0"
+      source "$asdf_dir/asdf.sh"
+    else 
+      _laptop_step_ok
     fi
   fi
 }
