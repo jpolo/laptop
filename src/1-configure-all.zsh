@@ -8,10 +8,6 @@ source "$SCRIPT_DIR/_recipes.sh"
 ensure_directory "$HOME/Code"
 ensure_directory "$HOME/Captures"
 
-# Configure git
-ensure_file "$XDG_CONFIG_HOME/git/config"
-
-
 # Default settings
 ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool true
 ensure_defaults NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
@@ -42,13 +38,17 @@ ensure_package "gnutls"
 ensure_package "gnupg"
 ensure_package "mercurial"
 
-# https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
-ensure_git_config "push.default" "current"
-ensure_git_config "push.autoSetupRemote" "true"
-ensure_git_config "fetch.prune" "true"
-ensure_git_config "user.email"
-ensure_git_config "user.name"
-ensure_ssh_key "ed25519"
+if [ -z "$LAPTOP_DEVCONTAINER" ];then
+  # Configure git
+  ensure_file "$XDG_CONFIG_HOME/git/config"
+  # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
+  ensure_git_config "push.default" "current"
+  ensure_git_config "push.autoSetupRemote" "true"
+  ensure_git_config "fetch.prune" "true"
+  ensure_git_config "user.email"
+  ensure_git_config "user.name"
+  ensure_ssh_key "ed25519"
+fi
 
 # Install library
 ensure_package "graphviz"
