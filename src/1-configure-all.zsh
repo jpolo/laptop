@@ -29,14 +29,8 @@ killall Finder
 # ensure_defaults_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
 # Install standard utils
-ensure_package "coreutils"
-ensure_package "moreutils"
-ensure_package "findutils"
-ensure_package "curl"
-ensure_package "git"
-ensure_package "gnutls"
-ensure_package "gnupg"
-ensure_package "mercurial"
+ensure_package "pack:core"
+ensure_package "pack:utils"
 
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git
@@ -49,33 +43,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_git_config "user.name"
   ensure_ssh_key "ed25519"
 fi
-
-# Install library
-ensure_package "graphviz"
-ensure_package "imagemagick"
-ensure_package "libpq"
-ensure_package "libyaml"
-ensure_package "libvips"
-ensure_package "openssl"
-
-# Install CLI tools
-ensure_package "adr-tools"
-ensure_package "asdf"
-ensure_package "fzf"
-ensure_package "gh"
-ensure_package "gpg"
-ensure_package "jq"
-ensure_package "pv"
-ensure_package "rclone"
-ensure_package "tmux"
-# ensure_package "trash"
-ensure_package "tree"
-ensure_package "universal-ctags"
-ensure_package "watchman"
-ensure_package "webp"
-ensure_package "wget"
-ensure_package "yarn"
-ensure_package "yq"
 
 # Install ASDF plugins
 ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
