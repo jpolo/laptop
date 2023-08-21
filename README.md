@@ -25,7 +25,8 @@ Its core values are :
 Platform supported :
 
 - ✅ macOS
-- ✅ Debian like distros (Ubuntu, Debian) ⚠️ never tested but should be officially supported
+- ✅ Debian like distros (Ubuntu, Debian)
+  - devcontainers (i.e. Docker) supported
 
 Package Manager :
 
@@ -50,6 +51,8 @@ Programming language :
   - ✅ Plugin NodeJS (+ `npm`, `yarn`)
   - ✅ Plugin Java
   - ✅ Plugin Python
+  - ✅ Plugin Terraform
+  - ✅ Plugin Cocoapods
 
 Code Editor :
 
