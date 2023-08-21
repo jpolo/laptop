@@ -46,7 +46,7 @@ APT_CORE_PACKAGES=(
   "procps"
   "curl"
   "file"
-  "git",
+  "git"
   "software-properties-common"
 );
 
