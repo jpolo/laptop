@@ -164,6 +164,28 @@ ensure_package_default() {
   fi
 }
 
+
+ensure_apt_key() {
+  local repo_key="$1"
+  _laptop_step_start "- Ensure apt key '$repo_url'"
+  _laptop_step_eval "! wget -qO - "$repo_key" | sudo apt-key add -"
+}
+
+ensure_apt_repository() {
+  local repo_url="$1"
+  local repo_key="$2"
+
+  ensure_apt_key "$repo_key"
+
+  _laptop_step_start "- Ensure apt repository '$repo_url'"
+  # Check if the repository is already added
+  if grep -q "^deb .*$repo_url" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+    _laptop_step_ok
+  else
+    _laptop_step_eval "echo 'deb $repo_url' | sudo tee -a /etc/apt/sources.list.d/custom.list >/dev/null && sudo apt-get update"
+  fi
+}
+
 ensure_npm_package() {
   local package="$1"
   local installation_message="- Ensure NPM package '$package'"
