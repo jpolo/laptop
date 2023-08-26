@@ -134,22 +134,7 @@ ensure_package_default() {
 
   # Install using package manager
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
-    _laptop_step_start "- Ensure package '$executable'"
-
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    export HOMEBREW_NO_INSTALL_CLEANUP=1
-    export HOMEBREW_NO_ENV_HINTS=1
-    local brew_args=("--quiet")
-
-    if [[ " ${BREW_CASK_PACKAGES[*]} " =~ " ${package} " ]]; then
-      brew_args+=("--cask")
-    fi
-
-    if brew list $package &>/dev/null; then
-      _laptop_step_ok
-    else
-      _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
-    fi
+    ensure_brew_package "$executable" "$package"
   elif [ $LAPTOP_PACKAGE_MANAGER = "apt-get" ];then
     ensure_apt_package "$executable" "$package"
   else
@@ -160,6 +145,28 @@ ensure_package_default() {
 ensure_brew_updated() {
   _laptop_step_start "- Upgrade brew"
   _laptop_step_eval "brew upgrade --quiet"
+}
+
+ensure_brew_package() {
+  local executable="$1"
+  local package=${2:-$executable}
+
+  _laptop_step_start "- Ensure brew package '$executable'"
+
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_NO_INSTALL_CLEANUP=1
+  export HOMEBREW_NO_ENV_HINTS=1
+  local brew_args=("--quiet")
+
+  if [[ " ${BREW_CASK_PACKAGES[*]} " =~ " ${package} " ]]; then
+    brew_args+=("--cask")
+  fi
+
+  if brew list $package &>/dev/null; then
+    _laptop_step_ok
+  else
+    _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
+  fi
 }
 
 ensure_apt_key() {
