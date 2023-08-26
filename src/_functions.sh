@@ -157,6 +157,10 @@ ensure_package_default() {
   fi
 }
 
+ensure_brew_updated() {
+  _laptop_step_start "- Upgrade brew"
+  _laptop_step_eval "brew upgrade --quiet"
+}
 
 ensure_apt_key() {
   local repo_key="$1"
@@ -176,6 +180,15 @@ ensure_apt_repository() {
     _laptop_step_ok
   else
     _laptop_step_eval "echo 'deb $repo_url' | sudo tee -a /etc/apt/sources.list.d/custom.list >/dev/null && sudo apt-get update"
+  fi
+}
+
+ensure_apt_updated() {
+  _laptop_step_start "- Ensure APT updated"
+  if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+    _laptop_step_exec sudo apt-get update;
+  else
+    _laptop_step_ok
   fi
 }
 
@@ -371,11 +384,6 @@ _laptop_ensure_brew() {
   fi
 }
 
-_laptop_ensure_brew_updated() {
-  _laptop_step_start "- Upgrade brew"
-  _laptop_step_eval "brew upgrade --quiet"
-}
-
 _laptop_ensure_brew_autodate() {
   local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
 
@@ -407,15 +415,6 @@ _laptop_ensure_xcode() {
   fi
 }
 
-_laptop_ensure_apt_updated() {
-  _laptop_step_start "- Ensure APT updated"
-  if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-    _laptop_step_exec sudo apt-get update;
-  else
-    _laptop_step_ok
-  fi
-}
-
 _laptop_ensure_apt_core() {
   _laptop_step_start "- Ensure APT core packages"
   _laptop_step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
@@ -423,7 +422,7 @@ _laptop_ensure_apt_core() {
 
 _laptop_bootstrap_debian() {
   _laptop_ensure_shell
-  _laptop_ensure_apt_updated
+  ensure_apt_updated
   _laptop_ensure_apt_core
 }
 
@@ -432,7 +431,7 @@ _laptop_bootstrap_macos() {
   _laptop_ensure_xcode
   _laptop_ensure_shell
   _laptop_ensure_brew
-  _laptop_ensure_brew_updated
+  ensure_brew_updated
   _laptop_ensure_brew_autodate
 }
 
