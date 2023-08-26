@@ -131,12 +131,10 @@ ensure_package() {
 ensure_package_default() {
   local executable="$1"
   local package=${2:-$executable}
-  local installation_message="- Ensure package '$executable'"
-
-  _laptop_step_start "$installation_message"
 
   # Install using package manager
   if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+    _laptop_step_start "- Ensure package '$executable'"
 
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -152,13 +150,8 @@ ensure_package_default() {
     else
       _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
     fi
-
   elif [ $LAPTOP_PACKAGE_MANAGER = "apt-get" ];then
-    if dpkg -s $package &>/dev/null; then
-      _laptop_step_ok
-    else
-      _laptop_step_eval "sudo apt-get install $(quote $package) -yy"
-    fi
+    ensure_apt_package "$executable" "$package"
   else
     _laptop_step_fail
   fi
@@ -186,11 +179,22 @@ ensure_apt_repository() {
   fi
 }
 
+ensure_apt_package() {
+  local executable="$1"
+  local package=${2:-$executable}
+
+  _laptop_step_start "- Ensure apt package '$executable'"
+  if dpkg -s $package &>/dev/null; then
+    _laptop_step_ok
+  else
+    _laptop_step_eval "sudo apt-get install $(quote $package) -yy"
+  fi
+}
+
 ensure_npm_package() {
   local package="$1"
-  local installation_message="- Ensure NPM package '$package'"
 
-  _laptop_step_start "$installation_message"
+  _laptop_step_start "- Ensure NPM package '$package'"
   local npm_args=("--quiet --global")
 
   if [ ! -z "$(npm list --global --parseable "$package")" ]; then
