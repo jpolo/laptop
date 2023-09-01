@@ -1,9 +1,6 @@
-# EditorConfig is awesome: http://EditorConfig.org
-
-# top-most EditorConfig file
+# http://editorconfig.org
 root = true
 
-# Unix-style newlines with a newline ending every file
 [*]
 charset = utf-8
 continuation_indent_size = 4
@@ -17,44 +14,50 @@ spaces_around_brackets = outside
 spaces_around_operators = true
 trim_trailing_whitespace = true
 
-# Python
-[*.{py,robot}]
-indent_style = space
-indent_size = 4
-
-# Javascript
-[*.{js,jsx,ts,tsx}]
-indent_style = space
+[*.{json,json5,webmanifest}]
 indent_size = 2
-max_line_length = 120
-quote_type = single
-
-[*.json]
 indent_style = space
-indent_size = 2
+insert_final_newline = ignore
 
-[*.yml]
+[*.{yml,yaml}]
+indent_size = 2
 indent_style = space
-indent_size = 2
 
-# CSS
-[*.{css,scss,less}]
-indent_style = space
-indent_size = 2
-max_line_length = 120
-quote_type = single
-
-# Tab indentation (no size specified)
-[Makefile]
-indent_style = tab
-
-# Windows files
-[{*.bat,*reg,*.ps1,*.vbs,*.cs,*.fs,*.ahk}]
+[*.{bat,reg,ps1,vbs,cs,cmd,fs,ahk}]
 end_of_line = crlf
 
-# Markdown
-[*.{md,mdwn,mdown,markdown,apib}]
+[*.{sh,zsh}]
+end_of_line = lf
+
+[*.{css,sass,scss,less,pcss}]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+quote_type = single
+
+[*.{js,jsx,jsm,ts,tsx,cjs,cjs,cjsx,cts,ctsx,mjs,mts,mtsx,js.hbs}]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+quote_type = single
+
+[*.{htm,html,svg,vue}]
+indent_size = 2
+indent_style = space
+
+[*.{md,mdwn,mdown,markdown,mdx,apib}]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = false
+
+[*.{py,robot}]
+indent_size = 4
+indent_style = space
+
+[Makefile,*.{mk,make}]
+indent_style = tab
+
+[*.txt]
+trim_trailing_whitespace = false
+insert_final_newline = false
