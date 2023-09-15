@@ -70,11 +70,15 @@ Misc :
 ### ZSH Recipes
 
 <details>
-  <summary>➕ Add a <code>zsh</code> plugin using <code>zinit</code></summary>
+  <summary>🔧 Override/Customize ZSH configuration</summary>
 
-  Edit the shell script `$XDG_DATA_HOME/zsh/01_custom.sh` (or create a new one in `$XDG_DATA_HOME/zsh`)
+  ⚠️ You should never modify `.zshrc` because any changes will be lost when `laptop` script is run.
 
-  Example :
+  Instead, configuration can be overridden in the following files :
+    - `.zshrc.local` : For local override (that should not be synched between devices)
+    - `$XDG_DATA_HOME/zsh/*.sh` : For generic overrides (zsh plugins, etc). Files are included in alphabetic order, so as a convention each file starts with two digits.
+
+  Example `$XDG_DATA_HOME/zsh/01_custom.sh` :
 
   ```shell
   # Load OhMyZSH ruby plugin
@@ -82,6 +86,14 @@ Misc :
   # Load OhMyZSH rails plugin
   zinit snippet OMZP::rails
 
+  ```
+
+</details>
+<details>
+  <summary>🎨 Customize ZSH Theme</summary>
+
+  ```console
+  > p10k configure
   ```
 
 </details>
@@ -98,14 +110,6 @@ Misc :
 
   ```console
   > zinit delete --clean
-  ```
-
-</details>
-<details>
-  <summary>🎨 Customize ZSH Theme</summary>
-
-  ```console
-  > p10k configure
   ```
 
 </details>
