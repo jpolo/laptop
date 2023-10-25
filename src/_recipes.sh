@@ -9,7 +9,7 @@ ensure_package__asdf() {
       _laptop_step_start "- Ensure asdf installed (via git)"
       _laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.12.0"
       source "$asdf_dir/asdf.sh"
-    else 
+    else
       _laptop_step_ok
     fi
   fi
@@ -79,6 +79,7 @@ ensure_package__pack:core() {
 ensure_package__pack:utils() {
   # A pack of useful tools
   ensure_package "adr-tools"
+  ensure_package "gitmoji"
   ensure_package "pv"
   ensure_package "tmux"
   ensure_package "tree"
