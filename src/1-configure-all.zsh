@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-SCRIPT_DIR="$(dirname "$0")"
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 source "$SCRIPT_DIR/_functions.sh"
 source "$SCRIPT_DIR/_recipes.sh"
 

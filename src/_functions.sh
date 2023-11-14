@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "${LAPTOP_ROOT_DIR}" ]; then
-  SCRIPT_DIR="$(dirname "$0")"
+  SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
   cd "$SCRIPT_DIR/.."
   export LAPTOP_ROOT_DIR=$(pwd)
   export LAPTOP_TEMPLATE_DIR="$LAPTOP_ROOT_DIR/resource"
