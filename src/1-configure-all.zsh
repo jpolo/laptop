@@ -35,6 +35,7 @@ ensure_package "pack:utils"
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git
   ensure_file "$XDG_CONFIG_HOME/git/config"
+  ensure_git_config "core.ignorecase" "false"
   # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
   ensure_git_config "push.default" "current"
   ensure_git_config "push.autoSetupRemote" "true"
