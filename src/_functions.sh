@@ -26,10 +26,10 @@ COLUMNS=100
 #fi
 
 # When using remote connections, such as a serial port, stty size returns 0
-if [ "${COLUMNS}" = "0" ]; then
+if [ "$COLUMNS" = "0" ]; then
    COLUMNS=80
 fi
-COL=$((${COLUMNS} - 8))
+COL=$(($COLUMNS - 8))
 SET_COL="\\033[${COL}G"
 NORMAL="\\033[0;39m"
 SUCCESS="\\033[1;32m"
@@ -78,12 +78,12 @@ einfo() {
 }
 
 function_exists() {
-  declare -f -F $1 > /dev/null
+  declare -f -F "$1" > /dev/null
   return $?
 }
 
 command_exists() {
-  if [ -x "$(command -v $1)" ]; then
+  if [ -x "$(command -v "$1")" ]; then
     return 0
   else
     return 1
@@ -124,7 +124,7 @@ ensure_package() {
     $recipe_function
     return 0
   else
-    ensure_package_default $executable $package
+    ensure_package_default "$executable" "$package"
   fi
 }
 
@@ -204,7 +204,7 @@ ensure_apt_package() {
   local package=${2:-$executable}
 
   _laptop_step_start "- Ensure apt package '$executable'"
-  if dpkg -s $package &>/dev/null; then
+  if dpkg -s "$package" &>/dev/null; then
     _laptop_step_ok
   else
     _laptop_step_eval "sudo apt-get install $(quote $package) -yy"
@@ -256,13 +256,13 @@ ensure_git_config() {
   local value="$2"
 
   _laptop_step_start "- Ensure git config '$name'='${value:-"<custom>"}'"
-  if [ -z "$(git config --global $name)" ]; then
+  if [ -z "$(git config --global "$name")" ]; then
     if [ -z "${value}" ]; then
       echo "Git: Please enter value for '$name'"
       read value
     fi
 
-    _laptop_step_exec git config --global $name $value
+    _laptop_step_exec git config --global "$name" "$value"
   else
     _laptop_step_ok
   fi
@@ -409,7 +409,7 @@ _laptop_ensure_brew_autodate() {
 }
 
 _laptop_ensure_shell() {
-  ensure_shell $LAPTOP_SHELL
+  ensure_shell "$LAPTOP_SHELL"
 }
 
 _laptop_ensure_xcode() {

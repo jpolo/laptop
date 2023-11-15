@@ -2,7 +2,7 @@
 
 ensure_package__asdf() {
   local asdf_dir="${ASDF_DIR:-$HOME/.asdf}"
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "asdf"
   else
     if [ ! -d "$asdf_dir" ];then
@@ -16,7 +16,7 @@ ensure_package__asdf() {
 }
 
 ensure_package__gnutls() {
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "gnutls"
   else
     ensure_package_default "gnutls-bin"
@@ -24,7 +24,7 @@ ensure_package__gnutls() {
 }
 
 ensure_package__libpq() {
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "libpq"
   else
     ensure_package_default "libpq-dev"
@@ -32,7 +32,7 @@ ensure_package__libpq() {
 }
 
 ensure_package__libyaml() {
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "libyaml"
   else
     ensure_package_default "libyaml-dev"
@@ -40,7 +40,7 @@ ensure_package__libyaml() {
 }
 
 ensure_package__libvips() {
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "vips"
   else
     ensure_package_default "libvips-dev"
@@ -92,7 +92,7 @@ ensure_package__pack:utils() {
 }
 
 ensure_package__yarn() {
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "yarn"
   else
     ensure_apt_repository "https://dl.yarnpkg.com/debian/ stable main" "https://dl.yarnpkg.com/debian/pubkey.gpg"
