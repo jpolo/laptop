@@ -80,6 +80,7 @@ ensure_package__pack:utils() {
   # A pack of useful tools
   ensure_package "adr-tools"
   ensure_package "gitmoji"
+  ensure_package "google-cloud-sdk"
   ensure_package "pv"
   ensure_package "tmux"
   ensure_package "tree"
