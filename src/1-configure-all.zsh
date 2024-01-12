@@ -66,6 +66,7 @@ ensure_asdf_plugin "vault" "https://github.com/asdf-community/asdf-hashicorp.git
 ensure_asdf_plugin "waypoint" "https://github.com/asdf-community/asdf-hashicorp.git"
 
 ensure_asdf_plugin "kubectl" "https://github.com/asdf-community/asdf-kubectl.git"
+ensure_asdf_plugin "kustomize" "https://github.com/Banno/asdf-kustomize.git"
 ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git"
 
 
