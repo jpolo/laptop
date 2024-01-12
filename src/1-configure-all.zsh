@@ -49,10 +49,25 @@ fi
 ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
 ensure_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
 ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+ensure_asdf_plugin "python"
+
+# Hashicorp
+ensure_asdf_plugin "boundary" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "consul" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "levant" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "nomad" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "packer" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "sentinel" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "serf" "https://github.com/asdf-community/asdf-hashicorp.git"
 ensure_asdf_plugin "terraform" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "terraform-ls" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "tfc-agent" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "vault" "https://github.com/asdf-community/asdf-hashicorp.git"
+ensure_asdf_plugin "waypoint" "https://github.com/asdf-community/asdf-hashicorp.git"
+
 ensure_asdf_plugin "kubectl" "https://github.com/asdf-community/asdf-kubectl.git"
 ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git"
-ensure_asdf_plugin "python"
+
 
 ensure_asdf_tool "ruby" "latest"
 ensure_asdf_tool "nodejs" "latest"
