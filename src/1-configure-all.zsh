@@ -105,6 +105,10 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_vscode_extension "GitLab.gitlab-workflow"
   ensure_vscode_extension "ms-vsliveshare.vsliveshare"
   ensure_vscode_extension "wayou.vscode-todo-highlight"
+  ensure_vscode_extension "joshbolduc.commitlint"
+  ensure_vscode_extension "streetsidesoftware.code-spell-checker"
+  ensure_vscode_extension "seatonjiang.gitmoji-vscode"
+  ensure_vscode_extension "redhat.vscode-yaml"
 
   # Configure VSCode
   ensure_npm_package "jsonc-cli"
