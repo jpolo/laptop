@@ -15,7 +15,7 @@
 # - Create or modify `~/.zshrc.local`
 #
 # Shared (could be synchronizable to iCloud, Drive, etc) :
-# - Create a `.sh` file in `$XDG_DATA_HOME/zsh/`
+# - Edit  `$XDG_DATA_HOME/zsh/personal.sh`
 #
 # 2/ HOWTO ADD ZSH PLUGIN ?
 # ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
@@ -69,6 +69,16 @@ _command-alternative() {
 }
 
 # Load plugins
+_zsh-load-file() {
+  local file_basename="$1"
+
+  if [ -f "${file_basename}.zsh" ]; then
+    source "${file_basename}.zsh"
+  elif [ -f "${file_basename}.sh" ]; then
+    source "${file_basename}.sh"
+  fi
+}
+
 _zsh-load-plugins () {
   local directory=$1
   if [[ -d "$directory/" ]]; then
@@ -89,6 +99,9 @@ if [ ! -z "$XDG_DATA_HOME" ]; then
 fi
 
 # Load .zshrc.local
+_zsh-load-file "$XDG_DATA_HOME/zsh/global"
+_zsh-load-file "$XDG_DATA_HOME/zsh/organization"
+_zsh-load-file "$XDG_DATA_HOME/zsh/personal"
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
