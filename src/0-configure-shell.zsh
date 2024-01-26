@@ -5,7 +5,9 @@ source "$SCRIPT_DIR/_functions.sh"
 
 # Migrate
 rm -rf "$XDG_DATA_HOME/zsh/00_init.sh"
-mv "$XDG_DATA_HOME/zsh/01_custom.sh" "$XDG_DATA_HOME/zsh/personal.sh" &2>/dev/null || true
+if [ ! -f "$XDG_DATA_HOME/zsh/01_custom.sh" ];then
+  mv "$XDG_DATA_HOME/zsh/01_custom.sh" "$XDG_DATA_HOME/zsh/personal.sh"
+fi
 
 # Ensure ZSH Configuration
 ensure_file_template "zshrc.d/global.sh" "$XDG_DATA_HOME/zsh/global.sh"
