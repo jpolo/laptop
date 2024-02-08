@@ -7,7 +7,7 @@ ensure_package__asdf() {
   else
     if [ ! -d "$asdf_dir" ];then
       _laptop_step_start "- Ensure asdf installed (via git)"
-      _laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.12.0"
+      _laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.14.0"
       source "$asdf_dir/asdf.sh"
     else
       _laptop_step_ok
@@ -20,6 +20,15 @@ ensure_package__gnutls() {
     ensure_package_default "gnutls"
   else
     ensure_package_default "gnutls-bin"
+  fi
+}
+
+ensure_package__heroku() {
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
+    ensure_brew_tap "heroku/brew"
+    ensure_package_default "heroku"
+  else
+    ensure_package_default "heroku"
   fi
 }
 
@@ -81,6 +90,7 @@ ensure_package__pack:utils() {
   ensure_package "adr-tools"
   ensure_package "gitmoji"
   ensure_package "google-cloud-sdk"
+  ensure_package "heroku"
   ensure_package "kubectl"
   ensure_package "pv"
   ensure_package "tmux"

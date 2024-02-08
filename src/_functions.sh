@@ -169,6 +169,12 @@ ensure_brew_package() {
   fi
 }
 
+ensure_brew_tap() {
+  local tap="$1"
+  _laptop_step_start "- Ensure brew tap '$tap'"
+  _laptop_step_eval "brew tap $tap"
+}
+
 ensure_apt_key() {
   local repo_key="$1"
   _laptop_step_start "- Ensure apt key '$repo_url'"
