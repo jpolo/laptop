@@ -50,7 +50,6 @@ zinit snippet OMZL::history.zsh
 zinit snippet OMZL::spectrum.zsh
 
 # Zsh OMZ plugins
-zinit snippet OMZP::dotenv
 zinit snippet OMZP::asdf
 # zinit snippet OMZP::fzf
 
