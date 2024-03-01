@@ -5,7 +5,7 @@ source "$SCRIPT_DIR/_functions.sh"
 
 # Migrate
 rm -rf "$XDG_DATA_HOME/zsh/00_init.sh"
-if [ ! -f "$XDG_DATA_HOME/zsh/01_custom.sh" ];then
+if [  -f "$XDG_DATA_HOME/zsh/01_custom.sh" ];then
   mv "$XDG_DATA_HOME/zsh/01_custom.sh" "$XDG_DATA_HOME/zsh/personal.sh"
 fi
 
