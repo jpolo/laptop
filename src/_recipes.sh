@@ -32,6 +32,15 @@ ensure_package__heroku() {
   fi
 }
 
+ensure_package__font-monaspace() {
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
+    ensure_brew_tap "homebrew/cask-fonts"
+    ensure_package_default "font-monaspace"
+  else
+    ensure_package_default "font-monaspace"
+  fi
+}
+
 ensure_package__libpq() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "libpq"
