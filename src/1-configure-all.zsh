@@ -87,6 +87,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_package "flipper"
   ensure_package "google-chrome"
   ensure_package "google-drive"
+  ensure_package "font-monaspace"
   ensure_package "iterm2"
   ensure_package "macpass"
   ensure_package "notion"
@@ -113,6 +114,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure VSCode
   ensure_npm_package "jsonc-cli"
   ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
+  ensure_vscode_setting '["editor.fontLigatures"]' 'true'
   ensure_vscode_setting '["git.confirmSync"]' 'false'
   ensure_vscode_setting '["git.autofetch"]' 'true'
   # Important settings to disable
