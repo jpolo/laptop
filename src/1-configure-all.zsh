@@ -114,7 +114,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure VSCode
   ensure_npm_package "jsonc-cli"
   ensure_vscode_setting '["editor.bracketPairColorization.enabled"]' 'true'
-  ensure_vscode_setting '["editor.fontFamily"]' '"Monaspace Neon, Menlo, Monaco, Courier New, monospace"'
+  ensure_vscode_setting '["editor.fontFamily"]' '"\"Monaspace Neon\", Menlo, Monaco, Courier New, monospace"'
   ensure_vscode_setting '["editor.fontLigatures"]' 'true'
   ensure_vscode_setting '["git.confirmSync"]' 'false'
   ensure_vscode_setting '["git.autofetch"]' 'true'
