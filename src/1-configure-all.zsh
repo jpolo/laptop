@@ -9,7 +9,7 @@ ensure_directory "$HOME/Code"
 ensure_directory "$HOME/Captures"
 
 # Default settings
-ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool true
+ensure_defaults NSGlobalDomain AppleShowAllExtensions -bool false
 ensure_defaults NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 ensure_defaults NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 ensure_defaults NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
@@ -23,6 +23,19 @@ ensure_defaults NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 ensure_defaults com.apple.screencapture location -string "$HOME/Captures"
 # Save PNG format
 ensure_defaults com.apple.screencapture type -string "png"
+
+# Software updates
+
+# Enable the automatic update check
+ensure_defaults com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+# Download newly available updates in background
+ensure_defaults com.apple.SoftwareUpdate AutomaticDownload -int 1
+# Install System data files & security updates
+ensure_defaults com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+# Automatically download apps purchased on other Macs
+ensure_defaults com.apple.SoftwareUpdate ConfigDataInstall -int 1
+# Turn on app auto-update
+ensure_defaults com.apple.commerce AutoUpdate -bool true
 
 killall Finder
 
