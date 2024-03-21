@@ -10,6 +10,9 @@ if [  -f "$XDG_DATA_HOME/zsh/01_custom.sh" ];then
 fi
 
 # Ensure ZSH Configuration
+if [ ! -f "$HOME/.zshrc.local" ];then
+  ensure_file_template "zshrc.local" "$HOME/.zshrc.local"
+fi
 ensure_file_template "zshrc.d/global.sh" "$XDG_DATA_HOME/zsh/global.sh"
 ensure_file_template "zshrc.d/organization.sh" "$XDG_DATA_HOME/zsh/organization.sh"
 if [ ! -f "$XDG_DATA_HOME/zsh/personal.sh" ];then
