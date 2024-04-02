@@ -105,6 +105,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_package "macpass"
   ensure_package "mongodb-community"
   ensure_package "mongodb-database-tools"
+  ensure_package "mysql"
   ensure_package "notion"
   ensure_package "pgadmin4"
   ensure_package "postman"
