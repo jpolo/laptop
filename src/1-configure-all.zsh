@@ -103,6 +103,8 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_package "google-drive"
   ensure_package "iterm2"
   ensure_package "macpass"
+  ensure_package "mongodb-community"
+  ensure_package "mongodb-database-tools"
   ensure_package "notion"
   ensure_package "postman"
   ensure_package "rectangle"

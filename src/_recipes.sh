@@ -41,6 +41,24 @@ ensure_package__font-monaspace() {
   fi
 }
 
+ensure_package__mongodb-community() {
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
+    ensure_brew_tap "mongodb/brew"
+    ensure_package_default "mongodb-community@6.0"
+  else
+    ensure_package_default "mongodb-community"
+  fi
+}
+
+ensure_package__mongodb-database-tools() {
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
+    ensure_brew_tap "mongodb/brew"
+    ensure_package_default "mongodb-database-tools"
+  else
+    ensure_package_default "mongodb-database-tools"
+  fi
+}
+
 ensure_package__libpq() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     ensure_package_default "libpq"
