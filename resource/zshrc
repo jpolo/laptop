@@ -11,11 +11,14 @@
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 #
 # There are multiple ways to override / extends this configuration :
-# Local only :
-# - Create or modify `~/.zshrc.local`
 #
-# Shared (could be synchronizable to iCloud, Drive, etc) :
-# - Edit  `$XDG_DATA_HOME/zsh/personal.sh`
+# 👉 [Recommended] Shared (could be synchronizable to iCloud, Drive, etc) :
+#
+# > code "$XDG_DATA_HOME/zsh/personal.sh"
+#
+# 👉 Local only :
+#
+# > code "~/.zshrc.local"
 #
 # 2/ HOWTO ADD ZSH PLUGIN ?
 # ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
