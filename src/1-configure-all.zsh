@@ -93,6 +93,7 @@ ensure_asdf_tool "terraform" "latest"
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Install programs
   ensure_package "android-studio"
+  ensure_package "android-sdk"
   ensure_package "chromedriver"
   ensure_package "discord"
   ensure_package "docker"
