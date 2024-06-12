@@ -322,13 +322,11 @@ ensure_file() {
 ensure_file_template() {
   local template="$1"
   local target="$2"
-  local cp_flags=${@: 3}
-  cp_flags+=('-f')
 
   _laptop_step_start "- Ensure file '$target'"
   _laptop_step_eval "\
   mkdir -p $(quote $(dirname $target)) && \
-  cp $cp_flags $(quote $LAPTOP_TEMPLATE_DIR/$template) $(quote $target) \
+  cp -f $(quote $LAPTOP_TEMPLATE_DIR/$template) $(quote $target) \
   "
 }
 
