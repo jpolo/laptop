@@ -85,6 +85,7 @@ ensure_asdf_plugin "gcloud" "https://github.com/jthegedus/asdf-gcloud"
 
 ensure_asdf_tool "ruby" "latest"
 ensure_asdf_tool "nodejs" "latest"
+ensure_asdf_tool "python" "latest"
 ensure_asdf_tool "java" "adoptopenjdk-17.0.6+10"
 ensure_asdf_tool "terraform" "latest"
 
