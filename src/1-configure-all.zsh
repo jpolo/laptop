@@ -98,6 +98,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_package "discord"
   ensure_package "docker"
   ensure_package "drawio"
+  ensure_package "idb-companion"
   ensure_package "flipper"
   ensure_package "font-monaspace"
   ensure_package "google-chrome"
