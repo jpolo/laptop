@@ -80,7 +80,7 @@ ensure_asdf_plugin "waypoint" "https://github.com/asdf-community/asdf-hashicorp.
 
 ensure_asdf_plugin "kubectl" "https://github.com/asdf-community/asdf-kubectl.git"
 ensure_asdf_plugin "kustomize" "https://github.com/Banno/asdf-kustomize.git"
-ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git"
+# ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git" Removed because not working so well, prefer a Gemfile/Gemfile.lock
 ensure_asdf_plugin "gcloud" "https://github.com/jthegedus/asdf-gcloud"
 
 ensure_asdf_tool "ruby" "latest"
