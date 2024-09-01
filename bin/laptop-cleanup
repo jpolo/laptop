@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+ROOT_DIR=$(dirname "$SCRIPT_DIR")
+
+source "$ROOT_DIR/src/_functions.sh"
+
+# Check if the corresponding command exists before attempting to upgrade
+if [[ -n $(which brew) ]]; then
+  _laptop_step_start "- Cleanup brew"
+  _laptop_step_eval "brew cleanup --prune=all"
+fi
