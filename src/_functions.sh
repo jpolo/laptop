@@ -114,6 +114,11 @@ ensure_shell() {
   fi
 }
 
+ensure_zinit_updated() {
+  _laptop_step_start "- Upgrade zinit"
+  _laptop_step_eval "env zsh --login -i -c \"zinit update --all\""
+}
+
 ensure_package() {
   local executable="$1"
   local package=${2:-$executable}
@@ -240,6 +245,11 @@ ensure_asdf_plugin() {
   else
     _laptop_step_ok
   fi
+}
+
+ensure_asdf_updated() {
+  _laptop_step_start "- Upgrade asdf"
+  _laptop_step_exec asdf plugin update --all
 }
 
 ensure_asdf_tool() {
