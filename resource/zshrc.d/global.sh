@@ -57,3 +57,6 @@ zinit light hlissner/zsh-autopair
 
 zinit ice silent wait:0c atload"ZINIT[COMPINIT_OPTS]=-C; zpcompinit"
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Install also as a zsh plugin
+zinit light jpolo/laptop
