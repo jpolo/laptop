@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+ROOT_DIR=$(dirname "$SCRIPT_DIR")
+
+source "$ROOT_DIR/src/_functions.sh"
+
+# Check if the corresponding command exists before attempting to upgrade
+if [[ -n $(which brew) ]]; then
+  ensure_brew_updated
+fi
+
+if [[ -n $(which apt-get) ]]; then
+  ensure_apt_updated
+fi
+
+if [[ -n $(env zsh --login -c "which zinit") ]]; then
+  ensure_zinit_updated
+fi
+
+if [[ -n $(which asdf) ]]; then
+  ensure_asdf_updated
+fi
