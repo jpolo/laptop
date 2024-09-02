@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+###
+### laptop — does several things well
+###
+### Usage: laptop [options] <subcommand>
+###
+### Options:
+###   -h,--help: Show this message.
+###
+### Subcommands:
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+ROOT_DIR=$(dirname "$SCRIPT_DIR")
+
+source "$ROOT_DIR/src/_functions.sh"
+source "$ROOT_DIR/src/command/cleanup.sh"
+source "$ROOT_DIR/src/command/upgrade.sh"
+
+###   cleanup: empty cache and prune unused resources
+###   configure: setup every tool for this device
+###   upgrade: upgrade all tools and packages
+###   help: show this message
+__program_help() {
+  sed -rn 's/^### ?//p' "$0"
+}
+
+# Run the program
+SUBCOMMAND=$1
+case $SUBCOMMAND in
+  "" | "-h" | "--help")
+    __program_help
+    ;;
+  *)
+    shift
+    __program_${SUBCOMMAND} $@
+    if [ $? = 127 ]; then
+      echo "Error: '$SUBCOMMAND' is not a known subcommand." >&2
+      echo "       Run '$SCRIPT_NAME --help' for a list of known subcommands." >&2
+      exit 1
+    fi
+    ;;
+esac
