@@ -5,19 +5,107 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 source "$ROOT_DIR/src/_functions.sh"
 
-# Check if the corresponding command exists before attempting to upgrade
-if [[ -n $(which brew) ]]; then
-  ensure_brew_updated
-fi
+# Usage help
+usage() {
+  echo "Usage: $0 [-h|--help] [-y|--yes]"
+  echo "  -h|--help  Show this help message"
+  echo "  -y|--yes   Skip confirmation and proceed"
+}
 
-if [[ -n $(which apt-get) ]]; then
-  ensure_apt_updated
-fi
+# Parse options
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -y|--yes)
+      confirm="Y"
+      ;;
+    *)
+      echo "Invalid option: $1"
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
 
-if [[ -n $(env zsh --login -c "which zinit") ]]; then
-  ensure_zinit_updated
-fi
+__laptop-upgrade-header() {
+  echo -e $BRACKET
+  cat <<-"EOF"
+  _             _                                                    _
+ | | __ _ _ __ | |_ ___  _ __        _   _ _ __   __ _ _ __ __ _  __| | ___
+ | |/ _` | '_ \| __/ _ \| '_ \ _____| | | | '_ \ / _` | '__/ _` |/ _` |/ _ \
+ | | (_| | |_) | || (_) | |_) |_____| |_| | |_) | (_| | | | (_| | (_| |  __/
+ |_|\__,_| .__/ \__\___/| .__/       \__,_| .__/ \__, |_|  \__,_|\__,_|\___|
+         |_|            |_|               |_|    |___/
+─────────────────────────────────────────────────────────────────────────
 
-if [[ -n $(which asdf) ]]; then
-  ensure_asdf_updated
+EOF
+  echo -e $NORMAL
+}
+
+__laptop-upgrade-confirm() {
+  # Confirm upgrade unless -y is provided
+  if [[ -z "$confirm" ]]; then
+    echo "Continue? (Y/n)"
+    read -r confirm
+  fi
+}
+
+
+__laptop-upgrade-detect() {
+  echo "The following tools were found and will be upgraded :"
+  echo ""
+
+  # Check if the corresponding command exists before attempting to upgrade
+  if [[ -n $(which brew) ]]; then
+    echo "  ✓ brew"
+  fi
+
+  if [[ -n $(which apt-get) ]]; then
+    echo "  ✓ apt-get"
+  fi
+
+  if [[ -n $(env $SHELL --login -c "which zinit") ]]; then
+    echo "  ✓ zinit"
+  fi
+
+  if [[ -n $(which asdf) ]]; then
+    echo "  ✓ asdf"
+  fi
+  echo ""
+}
+
+
+__laptop-upgrade-run() {
+  # Check if the corresponding command exists before attempting to upgrade
+  if [[ -n $(which brew) ]]; then
+    ensure_brew_updated
+  fi
+
+  if [[ -n $(which apt-get) ]]; then
+    ensure_apt_updated
+  fi
+
+  if [[ -n $(env $SHELL --login -c "which zinit") ]]; then
+    ensure_zinit_updated
+  fi
+
+  if [[ -n $(which asdf) ]]; then
+    ensure_asdf_updated
+  fi
+}
+
+__laptop-upgrade-header
+__laptop-upgrade-detect
+__laptop-upgrade-confirm
+if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
+  __laptop-upgrade-run
+
+  einfo "🎉 Upgrade successful"
+else
+  eerror "🛑 Upgrade aborted"
+  exit 1
 fi

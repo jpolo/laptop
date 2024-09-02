@@ -5,8 +5,81 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 source "$ROOT_DIR/src/_functions.sh"
 
-# Check if the corresponding command exists before attempting to upgrade
-if [[ -n $(which brew) ]]; then
-  _laptop_step_start "- Cleanup brew"
-  _laptop_step_eval "brew cleanup --prune=all"
+# Usage help
+usage() {
+  echo "Usage: $0 [-h|--help] [-y|--yes]"
+  echo "  -h|--help  Show this help message"
+  echo "  -y|--yes   Skip confirmation and proceed"
+}
+
+# Parse options
+while [[ "$#" -gt 0 ]]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -y|--yes)
+      confirm="Y"
+      ;;
+    *)
+      echo "Invalid option: $1"
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+__laptop-cleanup-header() {
+  echo -e $BRACKET
+  cat <<-"EOF"
+  _             _                         _
+ | | __ _ _ __ | |_ ___  _ __         ___| | ___  __ _ _ __  _   _ _ __
+ | |/ _` | '_ \| __/ _ \| '_ \ _____ / __| |/ _ \/ _` | '_ \| | | | '_ \
+ | | (_| | |_) | || (_) | |_) |_____| (__| |  __/ (_| | | | | |_| | |_) |
+ |_|\__,_| .__/ \__\___/| .__/       \___|_|\___|\__,_|_| |_|\__,_| .__/
+         |_|            |_|                                       |_|
+───────────────────────────────────────────────────────────────────────────
+
+EOF
+  echo -e $NORMAL
+}
+
+__laptop-cleanup-confirm() {
+  # Confirm upgrade unless -y is provided
+  if [[ -z "$confirm" ]]; then
+    echo "Continue? (Y/n)"
+    read -r confirm
+  fi
+}
+
+__laptop-cleanup-detect() {
+  echo "The following tools were found and will be cleaned up :"
+  echo ""
+  # Check if the corresponding command exists before attempting to upgrade
+  if [[ -n $(which brew) ]]; then
+    echo "  ✓ brew"
+  fi
+  echo ""
+}
+
+__laptop-cleanup-run() {
+  # Check if the corresponding command exists before attempting to upgrade
+  if [[ -n $(which brew) ]]; then
+    _laptop_step_start "- Cleanup brew"
+    _laptop_step_eval "brew cleanup --prune=all"
+  fi
+}
+
+__laptop-cleanup-header
+__laptop-cleanup-detect
+__laptop-cleanup-confirm
+if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
+  __laptop-cleanup-run
+
+  einfo "🎉 Cleanup successful"
+else
+  eerror "🛑 Cleanup aborted"
+  exit 1
 fi
