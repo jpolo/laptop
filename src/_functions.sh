@@ -530,3 +530,18 @@ _laptop_cleanup() {
   _laptop_step_start "- Clean zinit"
   _laptop_step_exec zinit delete --clean --quiet --yes
 }
+
+_laptop-logo() {
+  echo -e $BRACKET
+  cat <<-"EOF"
+    __            __
+   / /___ _____  / /_____  ____
+  / / __ `/ __ \/ __/ __ \/ __ \
+ / / /_/ / /_/ / /_/ /_/ / /_/ /
+/_/\__,_/ .___/\__/\____/ .___/
+       /_/             /_/
+───────────────────────────────────
+
+EOF
+  echo -e $NORMAL
+}

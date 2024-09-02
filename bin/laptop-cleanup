@@ -31,21 +31,6 @@ while [[ "$#" -gt 0 ]]; do
   shift
 done
 
-__laptop-cleanup-header() {
-  echo -e $BRACKET
-  cat <<-"EOF"
-  _             _                         _
- | | __ _ _ __ | |_ ___  _ __         ___| | ___  __ _ _ __  _   _ _ __
- | |/ _` | '_ \| __/ _ \| '_ \ _____ / __| |/ _ \/ _` | '_ \| | | | '_ \
- | | (_| | |_) | || (_) | |_) |_____| (__| |  __/ (_| | | | | |_| | |_) |
- |_|\__,_| .__/ \__\___/| .__/       \___|_|\___|\__,_|_| |_|\__,_| .__/
-         |_|            |_|                                       |_|
-───────────────────────────────────────────────────────────────────────────
-
-EOF
-  echo -e $NORMAL
-}
-
 __laptop-cleanup-confirm() {
   # Confirm upgrade unless -y is provided
   if [[ -z "$confirm" ]]; then
@@ -72,7 +57,7 @@ __laptop-cleanup-run() {
   fi
 }
 
-__laptop-cleanup-header
+_laptop-logo
 __laptop-cleanup-detect
 __laptop-cleanup-confirm
 if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
