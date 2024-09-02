@@ -7,7 +7,7 @@ source "$ROOT_DIR/src/_functions.sh"
 
 # Usage help
 usage() {
-  echo "Usage: $0 [-h|--help] [-y|--yes]"
+  echo "Usage: $(basename "$0") [-h|--help] [-y|--yes]"
   echo "  -h|--help  Show this help message"
   echo "  -y|--yes   Skip confirmation and proceed"
 }
