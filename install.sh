@@ -34,5 +34,5 @@ tar -zxf $PACKAGE_ARCHIVE --directory $DOWNLOAD_DIR$PACKAGE_NAME --strip-compone
 
 echo "[Info] Run $PACKAGE_NAME"
 cd $DOWNLOAD_DIR$PACKAGE_NAME
-$DOWNLOAD_DIR$PACKAGE_NAME/src/main.sh
+$DOWNLOAD_DIR$PACKAGE_NAME/bin/laptop-configure
 
