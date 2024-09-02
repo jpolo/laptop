@@ -99,9 +99,18 @@ command_exists() {
 filter_command_exists() {
   local filtered_array=()
   for tool in "$@"; do
-    if env "$SHELL" --login -c "which $tool" &>/dev/null; then
-      filtered_array+=("$tool")
-    fi
+    case "$tool" in
+      zinit)
+        if env "$SHELL" --login -i -c "which $tool" &>/dev/null; then
+          filtered_array+=("$tool")
+        fi
+        ;;
+      *)
+        if which "$tool" &>/dev/null; then
+          filtered_array+=("$tool")
+        fi
+        ;;
+    esac
   done
   echo "${filtered_array[@]}"
 }
