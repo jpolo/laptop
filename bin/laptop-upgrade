@@ -46,6 +46,9 @@ EOF
   echo -e $NORMAL
 }
 
+__LAPTOP_TOOLS=("brew" "zinit" "asdf")
+__LAPTOP_TOOLS_AVAILABLE=()
+
 __laptop-upgrade-confirm() {
   # Confirm upgrade unless -y is provided
   if [[ -z "$confirm" ]]; then
@@ -54,48 +57,40 @@ __laptop-upgrade-confirm() {
   fi
 }
 
-
 __laptop-upgrade-detect() {
   echo "The following tools were found and will be upgraded :"
   echo ""
 
-  # Check if the corresponding command exists before attempting to upgrade
-  if [[ -n $(which brew) ]]; then
-    echo "  ✓ brew"
-  fi
-
-  if [[ -n $(which apt-get) ]]; then
-    echo "  ✓ apt-get"
-  fi
-
-  if [[ -n $(env $SHELL --login -c "which zinit") ]]; then
-    echo "  ✓ zinit"
-  fi
-
-  if [[ -n $(which asdf) ]]; then
-    echo "  ✓ asdf"
-  fi
+  # Iterate over the tools and check for their existence
+  for tool in "${__LAPTOP_TOOLS[@]}"; do
+    if [[ -n $(env $SHELL --login -c "which $tool") ]]; then
+      __LAPTOP_TOOLS_AVAILABLE+=("$tool")
+      echo "  ✓ $tool"
+    fi
+  done
   echo ""
 }
 
-
 __laptop-upgrade-run() {
-  # Check if the corresponding command exists before attempting to upgrade
-  if [[ -n $(which brew) ]]; then
-    ensure_brew_updated
-  fi
-
-  if [[ -n $(which apt-get) ]]; then
-    ensure_apt_updated
-  fi
-
-  if [[ -n $(env $SHELL --login -c "which zinit") ]]; then
-    ensure_zinit_updated
-  fi
-
-  if [[ -n $(which asdf) ]]; then
-    ensure_asdf_updated
-  fi
+  for tool in "${__LAPTOP_TOOLS_AVAILABLE[@]}"; do
+    case "$tool" in
+      apt-get)
+        ensure_apt_updated
+        ;;
+      asdf)
+        ensure_asdf_updated
+        ;;
+      brew)
+        ensure_brew_updated
+        ;;
+      zinit)
+        ensure_zinit_updated
+        ;;
+      *)
+        echo "Unknown tool: $tool"
+        ;;
+    esac
+  done
 }
 
 __laptop-upgrade-header
