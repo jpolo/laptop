@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-### laptop — does several things well
+### laptop — A tool for maintaining your laptop (cleaning, upgrading, etc)
 ###
 ### Usage: laptop [options] <subcommand>
 ###
@@ -15,6 +15,7 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 source "$ROOT_DIR/src/_functions.sh"
 source "$ROOT_DIR/src/command/cleanup.sh"
+source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"
 
 ###   cleanup: empty cache and prune unused resources
