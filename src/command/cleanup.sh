@@ -24,7 +24,7 @@ __program_cleanup_run() {
         ;;
       docker)
         _laptop_step_start "- Prune docker images"
-        _laptop_step_eval "docker system prune -af"
+        _laptop_step_eval "docker image prune -a"
         ;;
       gem)
         _laptop_step_start "- Cleanup gem"
