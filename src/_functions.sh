@@ -571,14 +571,6 @@ _laptop_step_eval() {
  _laptop_step_complete "$command" "$exit_code" "$output"
 }
 
-_laptop_cleanup() {
-  _laptop_step_start "- Upgrade zinit"
-  _laptop_step_exec zinit update --all --no-pager --quiet --parallel
-
-  _laptop_step_start "- Clean zinit"
-  _laptop_step_exec zinit delete --clean --quiet --yes
-}
-
 _laptop-logo() {
   echo -e $BRACKET
   cat <<-"EOF"

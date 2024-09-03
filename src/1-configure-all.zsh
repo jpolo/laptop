@@ -152,6 +152,3 @@ fi
 test_ssh_key "git@github.com" || \
   ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
 
-# Cleanup
-_laptop_cleanup
-
