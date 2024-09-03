@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_CLEANUP_TOOLS=("brew" "gem" "npm" "pod" "zinit")
+__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "zinit")
 
 __program_cleanup_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
@@ -21,6 +21,10 @@ __program_cleanup_run() {
       brew)
         _laptop_step_start "- Cleanup brew"
         _laptop_step_eval "brew cleanup --prune=all"
+        ;;
+      docker)
+        _laptop_step_start "- Prune docker images"
+        _laptop_step_eval "docker system prune -af"
         ;;
       gem)
         _laptop_step_start "- Cleanup gem"
