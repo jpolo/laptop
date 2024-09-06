@@ -60,8 +60,15 @@ if command -v zi &> /dev/null; then
 
   zi light hlissner/zsh-autopair
 
-  zi ice silent wait:0c atload"ZI[COMPINIT_OPTS]=-C; zpcompinit"
-  zi light zdharma-continuum/fast-syntax-highlighting
+  # Fast highlight
+  # @see https://wiki.zshell.dev/ecosystem/plugins/f-sy-h#performance
+  zi wait lucid for \
+    atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+      z-shell/F-Sy-H \
+    blockf \
+      zsh-users/zsh-completions \
+    atload"!_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions
 
   # Install also as a zsh plugin
   zi light jpolo/laptop
