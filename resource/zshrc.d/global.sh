@@ -28,14 +28,28 @@ zinit light zsh-users/zsh-history-substring-search
 ##
 # Completions
 ##
-zinit ice wait"0b" lucid blockf
-# Brew completions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-  autoload -Uz compinit
-  compinit
-fi
+# Homebrew completions
+zinit for \
+    as'null' \
+    atclone'%atpull' \
+    atpull'
+         ./bin/brew update --preinstall \
+      && ln -sf $PWD/completions/zsh/_brew $ZINIT[COMPLETIONS_DIR] \
+      && rm -f brew.zsh \
+      && ./bin/brew shellenv --dummy-arg > brew.zsh \
+      && zcompile brew.zsh' \
+    depth'3' \
+    nocompletions \
+    sbin'bin/brew' \
+    src'brew.zsh' \
+  homebrew/brew
+
+# gh (github cli) completions
+zi for \
+    from'gh-r' \
+    sbin'**/gh' \
+  cli/cli
 
 # Zsh completions
 zinit light zsh-users/zsh-completions
