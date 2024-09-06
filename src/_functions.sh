@@ -500,7 +500,6 @@ _laptop_bootstrap_macos() {
   _laptop_ensure_xcode
   _laptop_ensure_shell
   _laptop_ensure_brew
-  ensure_brew_updated
   _laptop_ensure_brew_autodate
 }
 
