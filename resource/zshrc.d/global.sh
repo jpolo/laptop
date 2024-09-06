@@ -39,12 +39,6 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# gh (github cli) completions
-zinit for \
-    from'gh-r' \
-    sbin'**/gh' \
-  cli/cli
-
 # Zsh completions
 zinit light zsh-users/zsh-completions
 
