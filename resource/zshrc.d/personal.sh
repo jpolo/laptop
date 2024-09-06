@@ -8,9 +8,9 @@
 # Examples of common plugins
 # ⬇ Uncomment one of these line will install the plugin
 #
-# zinit snippet OMZP::bundler
-# zinit snippet OMZP::git
-# zinit snippet OMZP::ruby
-# zinit snippet OMZP::rails
+# zi snippet OMZP::bundler
+# zi snippet OMZP::git
+# zi snippet OMZP::ruby
+# zi snippet OMZP::rails
 
-# 🟠 DO NOT ENABLE zinit snippet OMZP::dotenv
+# 🟠 DO NOT ENABLE zi snippet OMZP::dotenv

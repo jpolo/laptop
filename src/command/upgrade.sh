@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zinit" "asdf")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf")
 
 __program_upgrade_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -26,8 +26,8 @@ __program_upgrade_run() {
       brew)
         ensure_brew_updated
         ;;
-      zinit)
-        ensure_zinit_updated
+      zi)
+        ensure_zi_updated
         ;;
       *)
         echo "Unknown tool: $tool"

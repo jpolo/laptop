@@ -100,7 +100,7 @@ filter_command_exists() {
   local filtered_array=()
   for tool in "$@"; do
     case "$tool" in
-      zinit)
+      zi)
         if env "$SHELL" --login -i -c "which $tool" &>/dev/null; then
           filtered_array+=("$tool")
         fi
@@ -162,9 +162,9 @@ ensure_shell() {
   fi
 }
 
-ensure_zinit_updated() {
-  _laptop_step_start "- Upgrade zinit"
-  _laptop_step_eval "env zsh --login -i -c \"zinit update --all\""
+ensure_zi_updated() {
+  _laptop_step_start "- Upgrade zi"
+  _laptop_step_eval "env zsh --login -i -c \"zi update --all\""
 }
 
 ensure_package() {

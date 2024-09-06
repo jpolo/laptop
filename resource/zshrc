@@ -23,12 +23,10 @@
 # 2/ HOWTO ADD ZSH PLUGIN ?
 # ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 #
-# This file uses zinit plugin manager (https://github.com/zdharma-continuum/zinit)
+# This file uses zi plugin manager (https://github.com/z-shell/zi)
 #
 # Example 1: Install and load OhMyZSH plugin named "ruby"
-# `zinit snippet OMZP::ruby`
-
-typeset -A ZINIT
+# `zi snippet OMZP::ruby`
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
@@ -44,21 +42,28 @@ fi
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
-# ZSH package manager : zinit
+# ZSH package manager : zi
 ##
-ZINIT_HOME=$XDG_CACHE_HOME/zsh/zinit
-ZINIT[HOME_DIR]=$ZINIT_HOME
-ZINIT[ZCOMPDUMP_PATH]=$XDG_CACHE_HOME/zsh/zcompdump
+ZI_HOME="$XDG_CACHE_HOME/zi"
+typeset -Ag ZI
+typeset -gx ZI[HOME_DIR]="$ZI_HOME"
+typeset -gx ZI[BIN_DIR]="$ZI_HOME/bin"
+typeset -gx ZI[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME/zsh/zcompdump"
 
-if [[ ! -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
-  git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME/bin"
-  zcompile "$ZINIT_HOME/bin/zinit.zsh"
+if [[ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]]; then
+  rm -rf "${ZI[BIN_DIR]}"
+  # compaudit | xargs chown -R "$(whoami)" "$ZI[HOME_DIR]"
+  # compaudit | xargs chmod -R go-w "$ZI[HOME_DIR]"
+  command git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
+  # zcompile "${ZI[BIN_DIR]}/bin/zi.zsh"
 fi
 
-if [[ -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
-  source "$ZINIT_HOME/bin/zinit.zsh"
+if [[ -f "${ZI[BIN_DIR]}/zi.zsh" ]]; then
+  source "${ZI[BIN_DIR]}/zi.zsh"
+  autoload -Uz _zi
+  (( ${+_comps} )) && _comps[zi]=_zi
 else
-  echo "zinit cannot be installed"
+  echo "zi cannot be installed"
 fi;
 
 # Find the first command available

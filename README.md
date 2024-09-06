@@ -35,7 +35,7 @@ Package Manager :
 Shell :
 
 - [ZSH] default shell
-- [Zinit] default zsh plugin manager
+- [ZShell/zi] default zsh plugin manager
 - [PowerLevel10k] default zsh theme (customizable)
 - [SSH] default algorithm `ed25519` [(explanation)](https://docs.gitlab.com/ee/user/ssh.html#ed25519-ssh-keys)
 
@@ -88,9 +88,9 @@ Misc :
 
   ```shell
   # Load OhMyZSH ruby plugin
-  zinit snippet OMZP::ruby
+  zi snippet OMZP::ruby
   # Load OhMyZSH rails plugin
-  zinit snippet OMZP::rails
+  zi snippet OMZP::rails
 
   ```
 
@@ -107,7 +107,7 @@ Misc :
   <summary>🔄 Update all plugins</summary>
 
   ```console
-  > zinit update
+  > zi update
   ```
 
 </details>
@@ -115,7 +115,7 @@ Misc :
   <summary>🧹 Clean unused plugins</summary>
 
   ```console
-  > zinit delete --clean
+  > zi delete --clean
   ```
 
 </details>
@@ -128,5 +128,5 @@ Misc :
 [SSH]: https://en.wikipedia.org/wiki/Secure_Shell
 [Visual Studio Code]: https://code.visualstudio.com/
 [Watchman]: https://facebook.github.io/watchman/
-[Zinit]: https://github.com/zdharma-continuum/zinit
+[ZShell/zi]: https://wiki.zshell.dev/
 [ZSH]: http://www.zsh.org/

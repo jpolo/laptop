@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "zinit")
+__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "zi")
 
 __program_cleanup_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
@@ -38,9 +38,9 @@ __program_cleanup_run() {
         _laptop_step_start "- Clean pod cache"
         _laptop_step_eval "pod cache clean --all"
         ;;
-      zinit)
-        _laptop_step_start "- Cleanup zinit"
-        _laptop_step_eval "env zsh --login -i -c \"zinit delete --clean --quiet --yes\""
+      zi)
+        _laptop_step_start "- Cleanup zi"
+        _laptop_step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes\""
         ;;
       *)
         echo "Unknown tool: $tool"
