@@ -146,7 +146,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   ensure_vscode_setting '["editor.tabSize"]' ''
   ensure_vscode_setting '["window.commandCenter"]' 'true'
   # Fix ruby lsp with asdf
-  ensure_vscode_setting '["rubyLsp.rubyVersionManager"]["identifier"]' 'asdf'
+  ensure_vscode_setting '["rubyLsp.rubyVersionManager","identifier"]' '"asdf"'
 fi
 
 test_ssh_key "git@github.com" || \
