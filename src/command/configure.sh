@@ -3,8 +3,11 @@
 __program_configure_run() {
   # Bootstrap
   _laptop_bootstrap
+  ensure_file_template "profile" "$HOME/.profile"
   ensure_file_template "zprofile" "$HOME/.zprofile"
   ensure_file_template "zshrc" "$HOME/.zshrc"
+  # for backward compatibility
+  ensure_file_template "bash_profile" "$HOME/.bash_profile"
 
   # Installation
   _laptop_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
