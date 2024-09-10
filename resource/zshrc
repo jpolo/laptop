@@ -30,7 +30,7 @@
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
-if [ -z "$XDG_DATA_HOME" ]; then
+if [ -f "${HOME}/.zprofile" ]; then
   source "${HOME}/.zprofile"
 fi
 
