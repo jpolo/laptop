@@ -33,7 +33,7 @@ __program_upgrade_run() {
       softwareupdate)
         _laptop_step_start "- Upgrade macOS"
         echo ''
-        softwareupdate --install --all --background
+        softwareupdate --install --all
         ;;
       zi)
         ensure_zi_updated
