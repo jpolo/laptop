@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code" "softwareupdate")
 
 __program_upgrade_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -32,7 +32,8 @@ __program_upgrade_run() {
         ;;
       softwareupdate)
         _laptop_step_start "- Upgrade macOS"
-        softwareupdate --install --all
+        echo ''
+        softwareupdate --install --all --background
         ;;
       zi)
         ensure_zi_updated
