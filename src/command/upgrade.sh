@@ -27,8 +27,7 @@ __program_upgrade_run() {
         ensure_brew_updated
         ;;
       code)
-        _laptop_step_start "- Upgrade VSCode"
-        _laptop_step_eval "code --update-extensions"
+        ensure_asdf_updated
         ;;
       softwareupdate)
         _laptop_step_start "- Upgrade macOS"

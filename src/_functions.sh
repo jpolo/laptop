@@ -297,7 +297,7 @@ ensure_asdf_plugin() {
 
 ensure_asdf_updated() {
   _laptop_step_start "- Upgrade asdf"
-  _laptop_step_exec asdf plugin update --all
+  _laptop_step_eval "asdf plugin update --all"
 }
 
 ensure_asdf_tool() {
@@ -386,6 +386,11 @@ ensure_file_template() {
   mkdir -p $(quote $(dirname $target)) && \
   cp -f $(quote $LAPTOP_TEMPLATE_DIR/$template) $(quote $target) \
   "
+}
+
+ensure_vscode_updated() {
+  _laptop_step_start "- Upgrade VSCode"
+  _laptop_step_eval "code --update-extensions"
 }
 
 ensure_vscode_extension() {
