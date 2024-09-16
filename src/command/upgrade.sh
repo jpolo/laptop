@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf", "code")
 
 __program_upgrade_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -25,6 +25,10 @@ __program_upgrade_run() {
         ;;
       brew)
         ensure_brew_updated
+        ;;
+      code)
+        _laptop_step_start "- Upgrade VSCode"
+        _laptop_step_eval "code --update-extensions"
         ;;
       zi)
         ensure_zi_updated
