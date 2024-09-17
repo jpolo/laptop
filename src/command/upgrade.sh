@@ -27,7 +27,7 @@ __program_upgrade_run() {
         ensure_brew_updated
         ;;
       code)
-        ensure_asdf_updated
+        ensure_vscode_updated
         ;;
       sdkmanager)
         ensure_sdkmanager_updated
