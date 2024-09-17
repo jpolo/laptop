@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code" "softwareupdate")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code" "sdkmanager" "softwareupdate")
 
 __program_upgrade_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -28,6 +28,9 @@ __program_upgrade_run() {
         ;;
       code)
         ensure_asdf_updated
+        ;;
+      sdkmanager)
+        ensure_sdkmanager_updated
         ;;
       softwareupdate)
         _laptop_step_start "- Upgrade macOS"
