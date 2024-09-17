@@ -315,6 +315,12 @@ ensure_asdf_tool() {
   fi
 }
 
+ensure_sdkmanager_package() {
+  local package="$1"
+  _laptop_step_start "- Ensure sdkmanager '$package'"
+  _laptop_step_eval "sdkmanager --install '$package'"
+}
+
 ensure_sdkmanager_updated() {
   _laptop_step_start "- Upgrade sdkmanager"
   _laptop_step_eval "yes | sdkmanager --licenses && sdkmanager --update"

@@ -119,6 +119,11 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # ensure_package "virtualbox"
   ensure_package "visual-studio-code"
 
+  # Install Android tools
+  ensure_sdkmanager_package "platforms;android-34"
+  ensure_sdkmanager_package "build-tools;34.0.0"
+  ensure_sdkmanager_package "cmdline-tools;16.0"
+
   # Install VSCode extensions
   ensure_vscode_extension "EditorConfig.EditorConfig"
   ensure_vscode_extension "eamodio.gitlens"
