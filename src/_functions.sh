@@ -315,6 +315,11 @@ ensure_asdf_tool() {
   fi
 }
 
+ensure_sdkmanager_updated() {
+  _laptop_step_start "- Upgrade sdkmanager"
+  _laptop_step_eval "yes | sdkmanager --licenses && sdkmanager --update"
+}
+
 ensure_git_config() {
   local name="$1"
   local value="$2"
