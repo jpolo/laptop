@@ -162,6 +162,20 @@ ensure_shell() {
   fi
 }
 
+ensure_license_accepted() {
+  local xcode_message="- Ensure xcodebuild license accepted"
+  if command_exists "xcodebuild"; then
+    if ! [[ "$(/usr/bin/xcrun clang 2>&1 || true)" =~ 'license' ]]; then
+    # Already approved
+      _laptop_step_start "$xcode_message"
+      _laptop_step_ok
+    else
+      _laptop_step_start "$xcode_message\n"
+      sudo xcodebuild -license accept && _laptop_step_ok || _laptop_step_fail
+    fi
+  fi
+}
+
 ensure_zi_updated() {
   _laptop_step_start "- Upgrade zi"
   _laptop_step_eval "env zsh --login -i -c \"zi update --all\""

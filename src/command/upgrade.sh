@@ -14,6 +14,8 @@ __program_upgrade_detect() {
 }
 
 __program_upgrade_run() {
+  ensure_license_accepted
+
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
