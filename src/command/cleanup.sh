@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "zi")
+__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zi")
 
 __program_cleanup_detect() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
@@ -37,6 +37,10 @@ __program_cleanup_run() {
       pod)
         _laptop_step_start "- Clean pod cache"
         _laptop_step_eval "pod cache clean --all"
+        ;;
+      xcrun)
+        _laptop_step_start "- Clean XCode simulators"
+        _laptop_step_eval "xcrun simctl delete unavailable"
         ;;
       zi)
         _laptop_step_start "- Cleanup zi"
