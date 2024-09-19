@@ -210,6 +210,20 @@ ensure_package_default() {
   fi
 }
 
+ensure_brew() {
+  # Install Homebrew
+  local brew_present=$(env -i zsh --login -c 'command -v brew');
+  _laptop_step_start "- Ensure package manager 'brew'"
+
+  if [ -z "$brew_present" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+    # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
+    _laptop_step_ok
+  else
+    _laptop_step_ok
+  fi
+}
+
 ensure_brew_updated() {
   _laptop_step_start "- Upgrade brew"
   _laptop_step_eval "brew upgrade --quiet"
@@ -241,6 +255,23 @@ ensure_brew_tap() {
   local tap="$1"
   _laptop_step_start "- Ensure brew tap '$tap'"
   _laptop_step_eval "brew tap $tap"
+}
+
+ensure_brew_autodate() {
+  local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
+
+  _laptop_step_start "- Ensure package manager 'brew autoupdate'"
+  if [ "$brew_autodate_present" != "0" ]; then
+    brew tap homebrew/autoupdate
+  fi
+
+  if ! brew autoupdate status | grep --quiet running; then
+    brew autoupdate start &>/dev/null && \
+      _laptop_step_ok || \
+      _laptop_step_fail
+  else
+    _laptop_step_ok
+  fi
 }
 
 ensure_apt_key() {
@@ -460,37 +491,6 @@ ensure_vscode_setting() {
   "
 }
 
-_laptop_ensure_brew() {
-  # Install Homebrew
-  local brew_present=$(env -i zsh --login -c 'command -v brew');
-  _laptop_step_start "- Ensure package manager 'brew'"
-
-  if [ -z "$brew_present" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
-    # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
-    _laptop_step_ok
-  else
-    _laptop_step_ok
-  fi
-}
-
-_laptop_ensure_brew_autodate() {
-  local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
-
-  _laptop_step_start "- Ensure package manager 'brew autoupdate'"
-  if [ "$brew_autodate_present" != "0" ]; then
-    brew tap homebrew/autoupdate
-  fi
-
-  if ! brew autoupdate status | grep --quiet running; then
-    brew autoupdate start &>/dev/null && \
-      _laptop_step_ok || \
-      _laptop_step_fail
-  else
-    _laptop_step_ok
-  fi
-}
-
 _laptop_ensure_shell() {
   ensure_shell "$LAPTOP_SHELL"
 }
@@ -520,8 +520,8 @@ _laptop_bootstrap_macos() {
   ensure_package "rosetta2"
   _laptop_ensure_xcode
   _laptop_ensure_shell
-  _laptop_ensure_brew
-  _laptop_ensure_brew_autodate
+  ensure_brew
+  ensure_brew_autodate
 }
 
 _laptop_bootstrap() {
