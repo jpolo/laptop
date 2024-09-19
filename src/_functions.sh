@@ -183,11 +183,12 @@ ensure_zi_updated() {
 
 ensure_package() {
   local executable="$1"
-  local package=${2:-$executable}
+  local package="${2:-$executable}"
 
   # Attempt to launch a function named ensure_package__$package" if exists
   local recipe_function="ensure_package__$package"
-  if function_exists $recipe_function;then
+
+  if function_exists "$recipe_function";then
     $recipe_function
     return 0
   else
@@ -459,16 +460,6 @@ ensure_vscode_setting() {
   "
 }
 
-_laptop_ensure_rosetta2() {
-  # Install Rosetta
-  _laptop_step_start "- Ensure Rosetta 2"
-  if is_arm && ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
-    _laptop_step_exec sudo softwareupdate --install-rosetta  --agree-to-license
-  else
-    _laptop_step_ok
-  fi
-}
-
 _laptop_ensure_brew() {
   # Install Homebrew
   local brew_present=$(env -i zsh --login -c 'command -v brew');
@@ -526,7 +517,7 @@ _laptop_bootstrap_debian() {
 }
 
 _laptop_bootstrap_macos() {
-  _laptop_ensure_rosetta2
+  ensure_package "rosetta2"
   _laptop_ensure_xcode
   _laptop_ensure_shell
   _laptop_ensure_brew
