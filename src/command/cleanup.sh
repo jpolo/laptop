@@ -44,7 +44,7 @@ __program_cleanup_run() {
         ;;
       zi)
         _laptop_step_start "- Cleanup zi"
-        _laptop_step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes\""
+        _laptop_step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes; zi cclear\""
         ;;
       *)
         echo "Unknown tool: $tool"
