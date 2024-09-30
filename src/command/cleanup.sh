@@ -16,6 +16,7 @@ __program_cleanup_detect() {
 __program_cleanup_run() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
 
+  # Cleanup by command
   for tool in $filtered_commands; do
     case "$tool" in
       brew)
@@ -51,6 +52,15 @@ __program_cleanup_run() {
         ;;
     esac
   done
+
+  # Cleanup by directory
+  ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
+}
+
+ensure_directory_empty() {
+  local directory="$1"
+  _laptop_step_start "- Clean directory $directory"
+  _laptop_step_eval "rm -rfv '$directory/*'"
 }
 
 __program_cleanup() {
