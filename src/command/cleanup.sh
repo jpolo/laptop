@@ -64,7 +64,7 @@ __program_cleanup_run() {
 ensure_directory_empty() {
   local directory="$1"
   _laptop_step_start "- Clean directory $directory"
-  _laptop_step_eval "rm -rfv '$directory/*'"
+  _laptop_step_eval "if [ -d '$directory' ]; then rm -rfv '$directory/*'; fi"
 }
 
 __program_cleanup_result() {
