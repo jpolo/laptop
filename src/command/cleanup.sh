@@ -56,6 +56,7 @@ __program_cleanup_run() {
 
   # Cleanup by directory
   ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
+  ensure_directory_empty "$HOME/.gradle/caches"
 
   new_available_space=$(disk_available_space)
   __program_cleanup_result $((new_available_space - initial_available_space))
@@ -64,7 +65,7 @@ __program_cleanup_run() {
 ensure_directory_empty() {
   local directory="$1"
   _laptop_step_start "- Clean directory $directory"
-  _laptop_step_eval "if [ -d '$directory' ]; then rm -rfv '$directory/*'; fi"
+  _laptop_step_eval "if [ -d '$directory' ]; then rm -rfv '$directory'/*; fi"
 }
 
 __program_cleanup_result() {
