@@ -491,6 +491,10 @@ ensure_vscode_setting() {
   "
 }
 
+disk_available_space() {
+  df / | tail -1 | awk '{print $4}'
+}
+
 _laptop_ensure_shell() {
   ensure_shell "$LAPTOP_SHELL"
 }

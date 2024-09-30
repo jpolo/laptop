@@ -15,6 +15,7 @@ __program_cleanup_detect() {
 
 __program_cleanup_run() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
+  local initial_available_space=$(disk_available_space)
 
   # Cleanup by command
   for tool in $filtered_commands; do
@@ -55,12 +56,28 @@ __program_cleanup_run() {
 
   # Cleanup by directory
   ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
+
+  new_available_space=$(disk_available_space)
+  __program_cleanup_result $((new_available_space - initial_available_space))
 }
 
 ensure_directory_empty() {
   local directory="$1"
   _laptop_step_start "- Clean directory $directory"
   _laptop_step_eval "rm -rfv '$directory/*'"
+}
+
+__program_cleanup_result() {
+	b=${1:-0}
+	d=''
+	s=1
+	S=(Bytes {K,M,G,T,E,P,Y,Z}iB)
+	while ((b > 1024)); do
+		d="$(printf ".%02d" $((b % 1024 * 100 / 1024)))"
+		b=$((b / 1024))
+		((s++))
+	done
+	einfo "$b$d ${S[$s]} of space was cleaned up"
 }
 
 __program_cleanup() {
