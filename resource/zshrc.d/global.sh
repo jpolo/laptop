@@ -52,7 +52,7 @@ if command -v zi &> /dev/null; then
   zi snippet OMZL::completion.zsh
   zi snippet OMZL::grep.zsh
   zi snippet OMZL::history.zsh
-  # zi snippet OMZL::spectrum.zsh
+  zi snippet OMZL::spectrum.zsh
 
   # Zsh OMZ plugins
   zi snippet OMZP::asdf
