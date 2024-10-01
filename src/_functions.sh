@@ -424,6 +424,12 @@ ensure_directory() {
   fi
 }
 
+ensure_directory_empty() {
+  local directory="$1"
+  _laptop_step_start "- Clean directory $directory"
+  _laptop_step_eval "if [ -d '$directory' ]; then rm -rfv '$directory'/*; fi"
+}
+
 ensure_file() {
   local file_path="$1"
   _laptop_step_start "- Ensure file '$file_path'"
