@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-ensure_package__pack:utils() {
+laptop::ensure_package__pack:utils() {
   # A pack of useful tools
-  ensure_package "adr-tools"
-  ensure_package "gitmoji"
-  ensure_package "google-cloud-sdk"
-  ensure_package "heroku"
-  ensure_package "kubectl"
-  ensure_package "pv"
-  ensure_package "tmux"
-  ensure_package "tree"
-  ensure_package "fzf"
-  ensure_package "gh"
-  ensure_package "watchman"
-  # ensure_package "trash"
-  ensure_package "universal-ctags"
-  ensure_package "yq"
+  laptop::ensure_package "adr-tools"
+  laptop::ensure_package "gitmoji"
+  laptop::ensure_package "google-cloud-sdk"
+  laptop::ensure_package "heroku"
+  laptop::ensure_package "kubectl"
+  laptop::ensure_package "pv"
+  laptop::ensure_package "tmux"
+  laptop::ensure_package "tree"
+  laptop::ensure_package "fzf"
+  laptop::ensure_package "gh"
+  laptop::ensure_package "watchman"
+  # laptop::ensure_package "trash"
+  laptop::ensure_package "universal-ctags"
+  laptop::ensure_package "yq"
 }

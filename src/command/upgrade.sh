@@ -14,25 +14,25 @@ __program_upgrade_detect() {
 }
 
 __program_upgrade_run() {
-  ensure_license_accepted
+  laptop::ensure_license_accepted
 
   local filtered_commands=$(filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
       apt-get)
-        ensure_apt_updated
+        laptop::ensure_apt_updated
         ;;
       asdf)
-        ensure_asdf_updated
+        laptop::ensure_asdf_updated
         ;;
       brew)
-        ensure_brew_updated
+        laptop::ensure_brew_updated
         ;;
       code)
-        ensure_vscode_updated
+        laptop::ensure_vscode_updated
         ;;
       sdkmanager)
-        ensure_sdkmanager_updated
+        laptop::ensure_sdkmanager_updated
         ;;
       softwareupdate)
         laptop::step_start "- Upgrade macOS"
@@ -40,7 +40,7 @@ __program_upgrade_run() {
         softwareupdate --install --all
         ;;
       zi)
-        ensure_zi_updated
+        laptop::ensure_zi_updated
         ;;
       *)
         echo "Unknown tool: $tool"

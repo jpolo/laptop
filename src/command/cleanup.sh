@@ -15,7 +15,7 @@ __program_cleanup_detect() {
 
 __program_cleanup_run() {
   local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
-  local initial_available_space=$(disk_available_space)
+  local initial_available_space=$(laptop::disk_available_space)
 
   # Cleanup by command
   for tool in $filtered_commands; do
@@ -55,10 +55,10 @@ __program_cleanup_run() {
   done
 
   # Cleanup by directory
-  ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
-  ensure_directory_empty "$HOME/.gradle/caches"
+  laptop::ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
+  laptop::ensure_directory_empty "$HOME/.gradle/caches"
 
-  new_available_space=$(disk_available_space)
+  new_available_space=$(laptop::disk_available_space)
   __program_cleanup_result $((new_available_space - initial_available_space))
 }
 
