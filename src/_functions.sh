@@ -601,17 +601,4 @@ _laptop_step_eval() {
  _laptop_step_complete "$command" "$exit_code" "$output"
 }
 
-_laptop-logo() {
-  echo -e $BRACKET
-  cat <<-"EOF"
-    __            __
-   / /___ _____  / /_____  ____
-  / / __ `/ __ \/ __/ __ \/ __ \
- / / /_/ / /_/ / /_/ /_/ / /_/ /
-/_/\__,_/ .___/\__/\____/ .___/
-       /_/             /_/
-───────────────────────────────────
 
-EOF
-  echo -e $NORMAL
-}

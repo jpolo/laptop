@@ -16,6 +16,7 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 source "$ROOT_DIR/src/function/source_all.sh"
 source "$ROOT_DIR/src/_functions.sh"
 laptop::source_all "$ROOT_DIR/src/recipes"
+laptop::source_all "$ROOT_DIR/src/function"
 source "$ROOT_DIR/src/command/cleanup.sh"
 source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"

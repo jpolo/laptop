@@ -76,7 +76,7 @@ __program_cleanup_result() {
 }
 
 __program_cleanup() {
-  _laptop-logo
+  laptop::logo
   __program_cleanup_detect
   if confirm "Continue? (Y/n)"; then
     __program_cleanup_run

@@ -35,7 +35,7 @@ EOF
 }
 
 __program_configure() {
-  _laptop-logo
+  laptop::logo
   einfo "This will install and configure all tools"
   if confirm "Continue? (Y/n)"; then
     __program_configure_run

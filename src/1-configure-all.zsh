@@ -3,6 +3,7 @@
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 source "$SCRIPT_DIR/_functions.sh"
 source "$SCRIPT_DIR/function/source_all.sh"
+laptop::source_all "$SCRIPT_DIR/function"
 laptop::source_all "$SCRIPT_DIR/recipes"
 
 # Ensure Code

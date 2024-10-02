@@ -50,7 +50,7 @@ __program_upgrade_run() {
 }
 
 __program_upgrade() {
-  _laptop-logo
+  laptop::logo
   __program_upgrade_detect
   if confirm "Continue? (Y/n)"; then
     __program_upgrade_run
