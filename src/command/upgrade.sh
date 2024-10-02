@@ -35,7 +35,7 @@ __program_upgrade_run() {
         ensure_sdkmanager_updated
         ;;
       softwareupdate)
-        _laptop_step_start "- Upgrade macOS"
+        laptop::step_start "- Upgrade macOS"
         echo ''
         softwareupdate --install --all
         ;;

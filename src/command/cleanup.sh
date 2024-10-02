@@ -21,32 +21,32 @@ __program_cleanup_run() {
   for tool in $filtered_commands; do
     case "$tool" in
       brew)
-        _laptop_step_start "- Cleanup brew"
-        _laptop_step_eval "brew cleanup --prune=all"
+        laptop::step_start "- Cleanup brew"
+        laptop::step_eval "brew cleanup --prune=all"
         ;;
       docker)
-        _laptop_step_start "- Prune docker images"
-        _laptop_step_eval "docker image prune -a --force"
+        laptop::step_start "- Prune docker images"
+        laptop::step_eval "docker image prune -a --force"
         ;;
       gem)
-        _laptop_step_start "- Cleanup gem"
-        _laptop_step_eval "gem cleanup"
+        laptop::step_start "- Cleanup gem"
+        laptop::step_eval "gem cleanup"
         ;;
       npm)
-        _laptop_step_start "- Clean npm cache"
-        _laptop_step_eval "npm cache clean --force"
+        laptop::step_start "- Clean npm cache"
+        laptop::step_eval "npm cache clean --force"
         ;;
       pod)
-        _laptop_step_start "- Clean pod cache"
-        _laptop_step_eval "pod cache clean --all"
+        laptop::step_start "- Clean pod cache"
+        laptop::step_eval "pod cache clean --all"
         ;;
       xcrun)
-        _laptop_step_start "- Clean XCode simulators"
-        _laptop_step_eval "xcrun simctl delete unavailable"
+        laptop::step_start "- Clean XCode simulators"
+        laptop::step_eval "xcrun simctl delete unavailable"
         ;;
       zi)
-        _laptop_step_start "- Cleanup zi"
-        _laptop_step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes; zi cclear\""
+        laptop::step_start "- Cleanup zi"
+        laptop::step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes; zi cclear\""
         ;;
       *)
         echo "Unknown tool: $tool"

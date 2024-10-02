@@ -5,7 +5,7 @@ ensure_package__idb-companion() {
     ensure_brew_tap "facebook/fb"
     ensure_package_default "idb-companion"
   else
-    _laptop_step_start "- Ensure idb-companion installed (via git)"
-    _laptop_step_pass
+    laptop::step_start "- Ensure idb-companion installed (via git)"
+    laptop::step_pass
   fi
 }

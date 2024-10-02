@@ -152,13 +152,13 @@ ensure_shell() {
   local target_shell="$1";
   local current_shell="$(basename $SHELL)"
 
-  _laptop_step_start "- Ensure shell '$target_shell'"
+  laptop::step_start "- Ensure shell '$target_shell'"
   if [ -z "$target_shell" ]; then
-    _laptop_step_pass
+    laptop::step_pass
   elif [ "$current_shell" = "$target_shell" ];then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_exec sudo chsh -s "/bin/$target_shell"
+    laptop::step_exec sudo chsh -s "/bin/$target_shell"
   fi
 }
 
@@ -167,18 +167,18 @@ ensure_license_accepted() {
   if command_exists "xcodebuild"; then
     if ! [[ "$(/usr/bin/xcrun clang 2>&1 || true)" =~ 'license' ]]; then
     # Already approved
-      _laptop_step_start "$xcode_message"
-      _laptop_step_ok
+      laptop::step_start "$xcode_message"
+      laptop::step_ok
     else
-      _laptop_step_start "$xcode_message\n"
-      sudo xcodebuild -license accept && _laptop_step_ok || _laptop_step_fail
+      laptop::step_start "$xcode_message\n"
+      sudo xcodebuild -license accept && laptop::step_ok || laptop::step_fail
     fi
   fi
 }
 
 ensure_zi_updated() {
-  _laptop_step_start "- Upgrade zi"
-  _laptop_step_eval "env zsh --login -i -c \"zi update --all\""
+  laptop::step_start "- Upgrade zi"
+  laptop::step_eval "env zsh --login -i -c \"zi update --all\""
 }
 
 ensure_package() {
@@ -206,34 +206,34 @@ ensure_package_default() {
   elif [ $LAPTOP_PACKAGE_MANAGER = "apt-get" ];then
     ensure_apt_package "$executable" "$package"
   else
-    _laptop_step_fail
+    laptop::step_fail
   fi
 }
 
 ensure_brew() {
   # Install Homebrew
   local brew_present=$(env -i zsh --login -c 'command -v brew');
-  _laptop_step_start "- Ensure package manager 'brew'"
+  laptop::step_start "- Ensure package manager 'brew'"
 
   if [ -z "$brew_present" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
     # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 ensure_brew_updated() {
-  _laptop_step_start "- Upgrade brew"
-  _laptop_step_eval "brew upgrade --quiet"
+  laptop::step_start "- Upgrade brew"
+  laptop::step_eval "brew upgrade --quiet"
 }
 
 ensure_brew_package() {
   local executable="$1"
   local package=${2:-$executable}
 
-  _laptop_step_start "- Ensure brew package '$executable'"
+  laptop::step_start "- Ensure brew package '$executable'"
 
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -245,39 +245,39 @@ ensure_brew_package() {
   fi
 
   if brew list $package &>/dev/null; then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
+    laptop::step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
   fi
 }
 
 ensure_brew_tap() {
   local tap="$1"
-  _laptop_step_start "- Ensure brew tap '$tap'"
-  _laptop_step_eval "brew tap $tap"
+  laptop::step_start "- Ensure brew tap '$tap'"
+  laptop::step_eval "brew tap $tap"
 }
 
 ensure_brew_autodate() {
   local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
 
-  _laptop_step_start "- Ensure package manager 'brew autoupdate'"
+  laptop::step_start "- Ensure package manager 'brew autoupdate'"
   if [ "$brew_autodate_present" != "0" ]; then
     brew tap homebrew/autoupdate
   fi
 
   if ! brew autoupdate status | grep --quiet running; then
     brew autoupdate start &>/dev/null && \
-      _laptop_step_ok || \
-      _laptop_step_fail
+      laptop::step_ok || \
+      laptop::step_fail
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 ensure_apt_key() {
   local repo_key="$1"
-  _laptop_step_start "- Ensure apt key '$repo_url'"
-  _laptop_step_eval "! wget -qO - "$repo_key" | sudo apt-key add -"
+  laptop::step_start "- Ensure apt key '$repo_url'"
+  laptop::step_eval "! wget -qO - "$repo_key" | sudo apt-key add -"
 }
 
 ensure_apt_repository() {
@@ -286,21 +286,21 @@ ensure_apt_repository() {
 
   ensure_apt_key "$repo_key"
 
-  _laptop_step_start "- Ensure apt repository '$repo_url'"
+  laptop::step_start "- Ensure apt repository '$repo_url'"
   # Check if the repository is already added
   if grep -q "^deb .*$repo_url" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_eval "echo 'deb $repo_url' | sudo tee -a /etc/apt/sources.list.d/custom.list >/dev/null && sudo apt-get update"
+    laptop::step_eval "echo 'deb $repo_url' | sudo tee -a /etc/apt/sources.list.d/custom.list >/dev/null && sudo apt-get update"
   fi
 }
 
 ensure_apt_updated() {
-  _laptop_step_start "- Ensure APT updated"
+  laptop::step_start "- Ensure APT updated"
   if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
-    _laptop_step_exec sudo apt-get update;
+    laptop::step_exec sudo apt-get update;
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
@@ -308,84 +308,84 @@ ensure_apt_package() {
   local executable="$1"
   local package=${2:-$executable}
 
-  _laptop_step_start "- Ensure apt package '$executable'"
+  laptop::step_start "- Ensure apt package '$executable'"
   if dpkg -s "$package" &>/dev/null; then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_eval "sudo apt-get install $(quote $package) -yy"
+    laptop::step_eval "sudo apt-get install $(quote $package) -yy"
   fi
 }
 
 ensure_npm_package() {
   local package="$1"
 
-  _laptop_step_start "- Ensure NPM package '$package'"
+  laptop::step_start "- Ensure NPM package '$package'"
   local npm_args=("--quiet --global")
 
   if [ ! -z "$(npm list --global --parseable "$package")" ]; then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_eval "npm install ${npm_args[@]} $(quote $package)"
+    laptop::step_eval "npm install ${npm_args[@]} $(quote $package)"
   fi
 }
 
 ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
-  _laptop_step_start "- Ensure asdf plugin '$name'"
+  laptop::step_start "- Ensure asdf plugin '$name'"
 
   if ! asdf plugin-list | grep -Fq "$name"; then
-    _laptop_step_exec asdf plugin-add "$name" "$url"
+    laptop::step_exec asdf plugin-add "$name" "$url"
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 ensure_asdf_updated() {
-  _laptop_step_start "- Upgrade asdf"
-  _laptop_step_eval "asdf plugin update --all"
+  laptop::step_start "- Upgrade asdf"
+  laptop::step_eval "asdf plugin update --all"
 }
 
 ensure_asdf_tool() {
   local language="$1"
   local version=$2 || "latest"
 
-  _laptop_step_start "- Ensure asdf '$language' '$version'"
+  laptop::step_start "- Ensure asdf '$language' '$version'"
   if ! asdf list "$language" | grep -Fq "$version"; then
-    _laptop_step_exec \
+    laptop::step_exec \
       asdf install "$language" "$version" && \
       asdf global "$language" "$version"
   else
-    _laptop_step_exec \
+    laptop::step_exec \
       asdf global "$language" "$version"
   fi
 }
 
 ensure_sdkmanager_package() {
   local package="$1"
-  _laptop_step_start "- Ensure sdkmanager '$package'"
-  _laptop_step_eval "sdkmanager --install '$package'"
+  laptop::step_start "- Ensure sdkmanager '$package'"
+  laptop::step_eval "sdkmanager --install '$package'"
 }
 
 ensure_sdkmanager_updated() {
-  _laptop_step_start "- Upgrade sdkmanager"
-  _laptop_step_eval "yes | sdkmanager --licenses && sdkmanager --update"
+  laptop::step_start "- Upgrade sdkmanager"
+  laptop::step_eval "yes | sdkmanager --licenses && sdkmanager --update"
 }
 
 ensure_git_config() {
   local name="$1"
   local value="$2"
 
-  _laptop_step_start "- Ensure git config '$name'='${value:-"<custom>"}'"
+  laptop::step_start "- Ensure git config '$name'='${value:-"<custom>"}'"
   if [ -z "$(git config --global "$name")" ]; then
     if [ -z "${value}" ]; then
       echo "Git: Please enter value for '$name'"
       read value
     fi
 
-    _laptop_step_exec git config --global "$name" "$value"
+    laptop::step_exec git config --global "$name" "$value"
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
@@ -394,47 +394,47 @@ ensure_ssh_key() {
   local ssh_key="$HOME/.ssh/id_$algorithm"
   local email=$(git config --global user.email)
 
-  _laptop_step_start "- Ensure SSH key '$ssh_key'"
+  laptop::step_start "- Ensure SSH key '$ssh_key'"
   if [ -z "$email" ];then
-    _laptop_step_fail
+    laptop::step_fail
     eerror "git config user.email is empty";
   elif ! [ -f "$ssh_key" ]; then
-    _laptop_step_exec ssh-keygen -t $algorithm -C "$email" -N '' -o -f $ssh_key
+    laptop::step_exec ssh-keygen -t $algorithm -C "$email" -N '' -o -f $ssh_key
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 ensure_defaults() {
-  _laptop_step_start "- Ensure defaults ${@}"
+  laptop::step_start "- Ensure defaults ${@}"
   if command_exists "defaults"; then
-    _laptop_step_exec defaults write ${@}
+    laptop::step_exec defaults write ${@}
   else
-    _laptop_step_pass
+    laptop::step_pass
   fi
 }
 
 ensure_directory() {
   local directory="$1"
-  _laptop_step_start "- Ensure directory '$directory'"
+  laptop::step_start "- Ensure directory '$directory'"
   if [ ! -d $directory ]; then
-    _laptop_step_eval "mkdir -p $(quote $directory)"
+    laptop::step_eval "mkdir -p $(quote $directory)"
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 ensure_directory_empty() {
   local directory="$1"
-  _laptop_step_start "- Clean directory $directory"
-  _laptop_step_eval "if [ -d '$directory' ]; then rm -rfv '$directory'/*; fi"
+  laptop::step_start "- Clean directory $directory"
+  laptop::step_eval "if [ -d '$directory' ]; then rm -rfv '$directory'/*; fi"
 }
 
 ensure_file() {
   local file_path="$1"
-  _laptop_step_start "- Ensure file '$file_path'"
+  laptop::step_start "- Ensure file '$file_path'"
 
-  _laptop_step_eval "\
+  laptop::step_eval "\
     mkdir -p $(quote $(dirname $file_path)) && \
     touch $(quote $file_path)
     "
@@ -444,27 +444,27 @@ ensure_file_template() {
   local template="$1"
   local target="$2"
 
-  _laptop_step_start "- Ensure file '$target'"
-  _laptop_step_eval "\
+  laptop::step_start "- Ensure file '$target'"
+  laptop::step_eval "\
   mkdir -p $(quote $(dirname $target)) && \
   cp -f $(quote $LAPTOP_TEMPLATE_DIR/$template) $(quote $target) \
   "
 }
 
 ensure_vscode_updated() {
-  _laptop_step_start "- Upgrade VSCode"
-  _laptop_step_eval "code --update-extensions"
+  laptop::step_start "- Upgrade VSCode"
+  laptop::step_eval "code --update-extensions"
 }
 
 ensure_vscode_extension() {
   local extension_name="$1"
   local list_extensions=$(code --list-extensions);
-  _laptop_step_start "- Ensure VSCode '$extension_name'"
+  laptop::step_start "- Ensure VSCode '$extension_name'"
 
   if echo $list_extensions | grep -q $extension_name; then
-    _laptop_step_ok
+    laptop::step_ok
   else
-    _laptop_step_exec code --install-extension "$extension_name" --force
+    laptop::step_exec code --install-extension "$extension_name" --force
   fi
 }
 
@@ -490,8 +490,8 @@ ensure_vscode_setting() {
     return 1
   fi
 
-  _laptop_step_start "- Ensure VSCode Setting $json_path=$json_value"
-  _laptop_step_eval "\
+  laptop::step_start "- Ensure VSCode Setting $json_path=$json_value"
+  laptop::step_eval "\
   cat $(quote $vscode_settings_file) | \
   jsonc modify -n -m -p $(quote $json_path) $jsonc_args -f $(quote $vscode_settings_file) \
   "
@@ -507,17 +507,17 @@ _laptop_ensure_shell() {
 
 _laptop_ensure_xcode() {
   # Install XCode
-  _laptop_step_start "- Ensure Build tools"
+  laptop::step_start "- Ensure Build tools"
   if ! [ -x "$(command -v gcc)" ]; then
-    _laptop_step_exec xcode-select --install;
+    laptop::step_exec xcode-select --install;
   else
-    _laptop_step_ok
+    laptop::step_ok
   fi
 }
 
 _laptop_ensure_apt_core() {
-  _laptop_step_start "- Ensure APT core packages"
-  _laptop_step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
+  laptop::step_start "- Ensure APT core packages"
+  laptop::step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
 }
 
 _laptop_bootstrap_debian() {
@@ -549,56 +549,3 @@ _laptop_shell() {
   local script=$2
   env "$shell" --login -i "$script"
 }
-
-_laptop_step_start() {
-  echo -n -e "${@}"
-  return 0
-}
-
-_laptop_step_ok() {
-  # echo -n -e "${@}"
-  echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
-  return 0
-}
-
-_laptop_step_fail() {
-  # echo -n -e "${@}"
-  echo -e "${SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
-  return 0
-}
-
-_laptop_step_pass() {
-  #echo -n -e "${@}"
-  echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
-  return 0
-}
-
-_laptop_step_complete() {
-  local command=$1
-  local exit_code=$2
-  local output=$3
-
-  if [ "$exit_code" = "0" ]; then
-    _laptop_step_ok
-  else
-    _laptop_step_fail
-    eerror "Command failed \
-      \\n|  > $command \
-      \\n|  $output"
-  fi
-}
-
-_laptop_step_exec() {
-  _laptop_step_eval "$*"
-}
-
-_laptop_step_eval() {
-  local output;
-  local command="$1"
-  output=$(eval "$command" 2>&1)
-  local exit_code=$?
-
- _laptop_step_complete "$command" "$exit_code" "$output"
-}
-
-
