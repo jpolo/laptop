@@ -115,13 +115,3 @@ confirm() {
   # Any answer other than the list above is considerred a "no" answer
   return 1
 }
-
-test_ssh_key() {
-  local host="$1"
-  ssh -T $host >/dev/null 2>&1
-  if [ $? -ge 2 ]; then
-    return -1
-  else
-    return 0
-  fi
-}
