@@ -18,7 +18,6 @@ laptop::ensure_package__pack:core() {
   laptop::ensure_package "rclone"
   laptop::ensure_package "webp"
   laptop::ensure_package "wget"
-  laptop::ensure_package "yarn"
 
   # Install library
   laptop::ensure_package "graphviz"
