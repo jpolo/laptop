@@ -78,7 +78,7 @@ __program_cleanup_result() {
 __program_cleanup() {
   laptop::logo
   __program_cleanup_detect
-  if confirm "Continue? (Y/n)"; then
+  if laptop::confirm "Continue? (Y/n)"; then
     __program_cleanup_run
 
     einfo "🎉 Cleanup successful"

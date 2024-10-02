@@ -37,7 +37,7 @@ EOF
 __program_configure() {
   laptop::logo
   einfo "This will install and configure all tools"
-  if confirm "Continue? (Y/n)"; then
+  if laptop::confirm "Continue? (Y/n)"; then
     __program_configure_run
   else
     eerror "🛑 Upgrade aborted"
