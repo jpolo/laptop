@@ -138,9 +138,3 @@ test_ssh_key() {
     return 0
   fi
 }
-
-_laptop_shell() {
-  local shell=$1
-  local script=$2
-  env "$shell" --login -i "$script"
-}

@@ -10,8 +10,8 @@ __program_configure_run() {
   laptop::ensure_file_template "bash_profile" "$HOME/.bash_profile"
 
   # Installation
-  _laptop_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
-  _laptop_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
+  laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
+  laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
 
   einfo "🎉 Finished"
   einfo "$(cat << EOF
