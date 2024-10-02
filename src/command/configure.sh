@@ -2,7 +2,7 @@
 
 __program_configure_run() {
   # Bootstrap
-  _laptop_bootstrap
+  laptop::bootstrap
   ensure_file_template "profile" "$HOME/.profile"
   ensure_file_template "zprofile" "$HOME/.zprofile"
   ensure_file_template "zshrc" "$HOME/.zshrc"

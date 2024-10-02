@@ -41,15 +41,6 @@ COLOR_INFO='\033[32m'
 BREW_CASK_PACKAGES=(
   "docker"
 );
-APT_CORE_PACKAGES=(
-  "build-essential"
-  "procps"
-  "curl"
-  "file"
-  "git"
-  "software-properties-common"
-);
-
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 
@@ -499,49 +490,6 @@ ensure_vscode_setting() {
 
 disk_available_space() {
   df / | tail -1 | awk '{print $4}'
-}
-
-_laptop_ensure_shell() {
-  ensure_shell "$LAPTOP_SHELL"
-}
-
-_laptop_ensure_xcode() {
-  # Install XCode
-  laptop::step_start "- Ensure Build tools"
-  if ! [ -x "$(command -v gcc)" ]; then
-    laptop::step_exec xcode-select --install;
-  else
-    laptop::step_ok
-  fi
-}
-
-_laptop_ensure_apt_core() {
-  laptop::step_start "- Ensure APT core packages"
-  laptop::step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
-}
-
-_laptop_bootstrap_debian() {
-  _laptop_ensure_shell
-  ensure_apt_updated
-  _laptop_ensure_apt_core
-}
-
-_laptop_bootstrap_macos() {
-  ensure_package "rosetta2"
-  _laptop_ensure_xcode
-  _laptop_ensure_shell
-  ensure_brew
-  ensure_brew_autodate
-}
-
-_laptop_bootstrap() {
-  if command -v apt-get &> /dev/null; then
-    _laptop_bootstrap_debian
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-    _laptop_bootstrap_macos
-  else
-    return 1
-  fi
 }
 
 _laptop_shell() {
