@@ -5,7 +5,7 @@ laptop::ensure_package() {
   # Attempt to launch a function named laptop::ensure_package__$package" if exists
   local recipe_function="laptop::ensure_package__$package"
 
-  if function_exists "$recipe_function";then
+  if laptop::function_exists "$recipe_function";then
     $recipe_function
     return 0
   else

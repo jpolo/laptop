@@ -68,19 +68,6 @@ einfo() {
   echo -e "${COLOR_INFO}Info: ${NORMAL}${@}"
 }
 
-function_exists() {
-  declare -f -F "$1" > /dev/null
-  return $?
-}
-
-command_exists() {
-  if [ -x "$(command -v "$1")" ]; then
-    return 0
-  else
-    return 1
-  fi
-}
-
 # Filter array keeping only available commands
 #
 # Example 1 :
