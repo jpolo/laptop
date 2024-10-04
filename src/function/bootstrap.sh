@@ -1,11 +1,5 @@
-
-
-laptop::bootstrap_ensure_shell() {
-  laptop::ensure_shell "$LAPTOP_SHELL"
-}
-
 laptop::bootstrap_debian() {
-  laptop::bootstrap_ensure_shell
+  laptop::ensure_shell "$LAPTOP_SHELL"
   laptop::ensure_apt_updated
   laptop::ensure_package "pack:apt-core"
 }
@@ -13,7 +7,7 @@ laptop::bootstrap_debian() {
 laptop::bootstrap_macos() {
   laptop::ensure_package "rosetta2"
   laptop::bootstrap_ensure_xcode
-  laptop::bootstrap_ensure_shell
+  laptop::ensure_shell "$LAPTOP_SHELL"
   laptop::ensure_package "brew"
   laptop::ensure_brew_autodate
 }
