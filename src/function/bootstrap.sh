@@ -28,6 +28,6 @@ laptop::bootstrap() {
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     laptop::bootstrap_macos
   else
-    return 1
+    laptop::die "Unsupported OS. Only debian based and macos is supported."
   fi
 }
