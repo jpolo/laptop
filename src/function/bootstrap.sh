@@ -6,7 +6,7 @@ laptop::bootstrap_debian() {
 
 laptop::bootstrap_macos() {
   laptop::ensure_package "rosetta2"
-  laptop::bootstrap_ensure_xcode
+  laptop::ensure_package "xcode-command-line-tools"
   laptop::ensure_shell "$LAPTOP_SHELL"
   laptop::ensure_package "brew"
   laptop::ensure_brew_autodate
