@@ -2,6 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR/.."
+export LAPTOP_HOME=$(pwd)
 source "./src/env.sh"
 
 mkdir "test_data"

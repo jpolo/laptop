@@ -2,9 +2,8 @@
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
-source "$ROOT_DIR/src/env.sh"
-source "$ROOT_DIR/src/function/source_all.sh"
-laptop::source_all "$ROOT_DIR/src/function"
+LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
+source "$LAPTOP_HOME/src/env.sh"
 
 # Migrate
 rm -rf "$XDG_DATA_HOME/zsh/00_init.sh"

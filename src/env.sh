@@ -1,23 +1,25 @@
 #!/usr/bin/env bash
 
-if [ -z "${LAPTOP_ROOT_DIR}" ]; then
-  SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-  cd "$SCRIPT_DIR/.."
-  export LAPTOP_ROOT_DIR=$(pwd)
-  export LAPTOP_SOURCE_DIR="$LAPTOP_ROOT_DIR/src"
-  export LAPTOP_PROFILE_DIR="$LAPTOP_ROOT_DIR/profile"
-  export LAPTOP_PROFILE=${LAPTOP_PROFILE:-jpolo}
-  export LAPTOP_PROFILE_CURRENT_DIR="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE"
-
-  export LAPTOP_PACKAGE_MANAGER=unknown
-  if [ -x "$(command -v brew)" ]; then
-    export LAPTOP_PACKAGE_MANAGER=brew
-  elif [ -x "$(command -v apt-get)" ]; then
-    export LAPTOP_PACKAGE_MANAGER=apt-get
-  else
-    return 0
-  fi
+if [ -z "${LAPTOP_HOME}" ]; then
+  echo "LAPTOP_HOME variable is required"
+  exit 1;
 fi
+
+export LAPTOP_HOME="$LAPTOP_HOME"
+export LAPTOP_SOURCE_DIR="$LAPTOP_HOME/src"
+export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
+export LAPTOP_PROFILE=${LAPTOP_PROFILE:-jpolo}
+export LAPTOP_PROFILE_CURRENT_DIR="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE"
+
+export LAPTOP_PACKAGE_MANAGER=unknown
+if [ -x "$(command -v brew)" ]; then
+  export LAPTOP_PACKAGE_MANAGER=brew
+elif [ -x "$(command -v apt-get)" ]; then
+  export LAPTOP_PACKAGE_MANAGER=apt-get
+else
+  return 0
+fi
+
 
 ## Screen Dimensions
 # Find current screen size
@@ -57,3 +59,9 @@ is_arm() {
 quote() {
   echo "'$1'"
 }
+
+
+# Source scripts
+source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
+laptop::source_all "$LAPTOP_SOURCE_DIR/function"
+laptop::source_all "$LAPTOP_SOURCE_DIR/recipes"

@@ -2,10 +2,8 @@
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
-source "$ROOT_DIR/src/env.sh"
-source "$ROOT_DIR/src/function/source_all.sh"
-laptop::source_all "$ROOT_DIR/src/function"
-laptop::source_all "$ROOT_DIR/src/recipes"
+LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
+source "$LAPTOP_HOME/src/env.sh"
 
 # Ensure Code
 laptop::ensure_directory "$HOME/Code"
