@@ -4,8 +4,10 @@ if [ -z "${LAPTOP_ROOT_DIR}" ]; then
   SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
   cd "$SCRIPT_DIR/.."
   export LAPTOP_ROOT_DIR=$(pwd)
-  export LAPTOP_TEMPLATE_DIR="$LAPTOP_ROOT_DIR/resource"
   export LAPTOP_SOURCE_DIR="$LAPTOP_ROOT_DIR/src"
+  export LAPTOP_PROFILE_DIR="$LAPTOP_ROOT_DIR/profile"
+  export LAPTOP_PROFILE=${LAPTOP_PROFILE:-jpolo}
+  export LAPTOP_PROFILE_CURRENT_DIR="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE"
 
   export LAPTOP_PACKAGE_MANAGER=unknown
   if [ -x "$(command -v brew)" ]; then
