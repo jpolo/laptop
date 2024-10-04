@@ -1,11 +1,4 @@
-APT_CORE_PACKAGES=(
-  "build-essential"
-  "procps"
-  "curl"
-  "file"
-  "git"
-  "software-properties-common"
-);
+
 
 laptop::bootstrap_ensure_shell() {
   laptop::ensure_shell "$LAPTOP_SHELL"
@@ -14,7 +7,7 @@ laptop::bootstrap_ensure_shell() {
 laptop::bootstrap_debian() {
   laptop::bootstrap_ensure_shell
   laptop::ensure_apt_updated
-  laptop::bootstrap_ensure_apt_core
+  laptop::ensure_package "pack:apt-core"
 }
 
 laptop::bootstrap_macos() {
@@ -23,11 +16,6 @@ laptop::bootstrap_macos() {
   laptop::bootstrap_ensure_shell
   laptop::ensure_package "brew"
   laptop::ensure_brew_autodate
-}
-
-laptop::bootstrap_ensure_apt_core() {
-  laptop::step_start "- Ensure APT core packages"
-  laptop::step_exec sudo apt-get install "${APT_CORE_PACKAGES[@]}" -yy;
 }
 
 laptop::bootstrap_ensure_xcode() {
