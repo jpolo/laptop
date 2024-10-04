@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR/.."
-source "./src/_functions.sh"
+source "./src/env.sh"
 
 mkdir "test_data"
 cd "test_data"

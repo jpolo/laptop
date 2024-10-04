@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
-source "$ROOT_DIR/src/_functions.sh"
+source "$ROOT_DIR/src/env.sh"
 source "$ROOT_DIR/src/function/source_all.sh"
 laptop::source_all "$ROOT_DIR/src/function"
 laptop::source_all "$ROOT_DIR/src/recipes"
