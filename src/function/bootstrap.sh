@@ -12,16 +12,6 @@ laptop::bootstrap_macos() {
   laptop::ensure_brew_autodate
 }
 
-laptop::bootstrap_ensure_xcode() {
-  # Install XCode
-  laptop::step_start "- Ensure Build tools"
-  if ! [ -x "$(command -v gcc)" ]; then
-    laptop::step_exec xcode-select --install;
-  else
-    laptop::step_ok
-  fi
-}
-
 laptop::bootstrap() {
   if command -v apt-get &> /dev/null; then
     laptop::bootstrap_debian
