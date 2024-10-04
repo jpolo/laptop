@@ -1,4 +1,4 @@
-laptop::ensure_brew() {
+laptop::ensure_package__brew() {
   # Install Homebrew
   local brew_present=$(env -i zsh --login -c 'command -v brew');
   laptop::step_start "- Ensure package manager 'brew'"

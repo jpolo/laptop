@@ -21,7 +21,7 @@ laptop::bootstrap_macos() {
   laptop::ensure_package "rosetta2"
   laptop::bootstrap_ensure_xcode
   laptop::bootstrap_ensure_shell
-  laptop::ensure_brew
+  laptop::ensure_package "brew"
   laptop::ensure_brew_autodate
 }
 
