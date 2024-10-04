@@ -1,10 +1,10 @@
 # Bootstrap
 laptop::bootstrap
-laptop::ensure_file_template "resource/profile" "$HOME/.profile"
-laptop::ensure_file_template "resource/zprofile" "$HOME/.zprofile"
-laptop::ensure_file_template "resource/zshrc" "$HOME/.zshrc"
+laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/profile" "$HOME/.profile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zprofile" "$HOME/.zprofile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zshrc" "$HOME/.zshrc"
 # for backward compatibility
-laptop::ensure_file_template "resource/bash_profile" "$HOME/.bash_profile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/bash_profile" "$HOME/.bash_profile"
 
 # Installation
 laptop::exec_shell zsh "$LAPTOP_PROFILE_CURRENT_DIR/0-configure-shell.zsh"
