@@ -16,7 +16,7 @@ laptop::ensure_vscode_setting() {
 
   # Vérifier si la requête est vide
   if [ -z "$json_path" ]; then
-    eerror "La requête est vide."
+    laptop::error "La requête est vide."
     return 1
   fi
 

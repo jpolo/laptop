@@ -31,7 +31,7 @@ laptop::step_complete() {
     laptop::step_ok
   else
     laptop::step_fail
-    eerror "Command failed \
+    laptop::error "Command failed \
       \\n|  > $command \
       \\n|  $output"
   fi

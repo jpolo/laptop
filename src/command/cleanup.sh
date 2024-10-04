@@ -72,7 +72,7 @@ __program_cleanup_result() {
 		b=$((b / 1024))
 		((s++))
 	done
-	einfo "$b$d ${S[$s]} of space was cleaned up"
+	laptop::info "$b$d ${S[$s]} of space was cleaned up"
 }
 
 __program_cleanup() {
@@ -81,9 +81,9 @@ __program_cleanup() {
   if laptop::confirm "Continue? (Y/n)"; then
     __program_cleanup_run
 
-    einfo "🎉 Cleanup successful"
+    laptop::info "🎉 Cleanup successful"
   else
-    eerror "🛑 Cleanup aborted"
+    laptop::error "🛑 Cleanup aborted"
     exit 1
   fi
 }

@@ -13,8 +13,8 @@ __program_configure_run() {
   laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
   laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
 
-  einfo "🎉 Finished"
-  einfo "$(cat << EOF
+  laptop::info "🎉 Finished"
+  laptop::info "$(cat << EOF
   What next ?
 
   1️⃣ Finish your configuration manually :
@@ -31,16 +31,16 @@ __program_configure_run() {
     📸 Manage your Capture in ~/Captures
 EOF
 )"
-  ewarn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
+  laptop::warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
 }
 
 __program_configure() {
   laptop::logo
-  einfo "This will install and configure all tools"
+  laptop::info "This will install and configure all tools"
   if laptop::confirm "Continue? (Y/n)"; then
     __program_configure_run
   else
-    eerror "🛑 Upgrade aborted"
+    laptop::error "🛑 Upgrade aborted"
     exit 1
   fi
 }

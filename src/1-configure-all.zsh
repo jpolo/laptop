@@ -157,5 +157,5 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
 fi
 
 laptop::ssh_key_test "git@github.com" || \
-  ewarn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
+  laptop::warn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
 

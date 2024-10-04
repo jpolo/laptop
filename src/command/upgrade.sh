@@ -55,9 +55,9 @@ __program_upgrade() {
   if laptop::confirm "Continue? (Y/n)"; then
     __program_upgrade_run
 
-    einfo "🎉 Upgrade successful"
+    laptop::info "🎉 Upgrade successful"
   else
-    eerror "🛑 Upgrade aborted"
+    laptop::error "🛑 Upgrade aborted"
     exit 1
   fi
 }

@@ -56,18 +56,6 @@ quote() {
   echo "'$1'"
 }
 
-eerror() {
-  echo -e "${COLOR_ERROR}Error: ${NORMAL}${@}" >&2
-}
-
-ewarn() {
-  echo -e "${COLOR_WARNING}Warning: ${NORMAL}${@}"
-}
-
-einfo() {
-  echo -e "${COLOR_INFO}Info: ${NORMAL}${@}"
-}
-
 # Filter array keeping only available commands
 #
 # Example 1 :
