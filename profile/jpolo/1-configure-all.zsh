@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-source "$SCRIPT_DIR/_functions.sh"
-source "$SCRIPT_DIR/function/source_all.sh"
-laptop::source_all "$SCRIPT_DIR/function"
-laptop::source_all "$SCRIPT_DIR/recipes"
+ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
+source "$ROOT_DIR/src/_functions.sh"
+source "$ROOT_DIR/src/function/source_all.sh"
+laptop::source_all "$ROOT_DIR/src/function"
+laptop::source_all "$ROOT_DIR/src/recipes"
 
 # Ensure Code
 laptop::ensure_directory "$HOME/Code"

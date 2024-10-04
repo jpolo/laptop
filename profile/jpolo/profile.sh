@@ -7,8 +7,8 @@ laptop::ensure_file_template "resource/zshrc" "$HOME/.zshrc"
 laptop::ensure_file_template "resource/bash_profile" "$HOME/.bash_profile"
 
 # Installation
-laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/0-configure-shell.zsh"
-laptop::exec_shell zsh "$LAPTOP_SOURCE_DIR/1-configure-all.zsh"
+laptop::exec_shell zsh "$LAPTOP_PROFILE_CURRENT_DIR/0-configure-shell.zsh"
+laptop::exec_shell zsh "$LAPTOP_PROFILE_CURRENT_DIR/1-configure-all.zsh"
 
 laptop::info "🎉 Finished"
 laptop::info "$(cat << EOF
