@@ -3,7 +3,7 @@
 __LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zi")
 
 __program_cleanup_detect() {
-  local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
+  local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   echo "The following tools were found and will be cleaned :"
   echo ""
   # Iterate over the tools and check for their existence
@@ -14,7 +14,7 @@ __program_cleanup_detect() {
 }
 
 __program_cleanup_run() {
-  local filtered_commands=$(filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
+  local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   local initial_available_space=$(laptop::disk_available_space)
 
   # Cleanup by command
