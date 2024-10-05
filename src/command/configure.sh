@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 laptop::command__configure_run() {
-  local profile_file="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE/profile.sh"
-  if [ ! -f "$profile_file" ]; then
-    laptop:die "Profile \"$LAPTOP_PROFILE\" does not exist"
-  fi
-  source "$profile_file"
+  laptop::profile_load
 }
 
 laptop::command__configure() {
@@ -36,9 +32,4 @@ laptop::command__configure() {
     laptop::error "🛑 Upgrade aborted"
     exit 1
   fi
-}
-
-laptop::profile_available() {
-  echo "$LAPTOP_PROFILE_DEFAULT"
-  ls "$LAPTOP_PROFILE_DIR" | grep -v "$LAPTOP_PROFILE_DEFAULT" | sort
 }
