@@ -13,10 +13,10 @@ laptop::command__configure() {
 
   # Select profile
   if [ -z "$LAPTOP_PROFILE" ]; then
-    local list_profile=$(ls $LAPTOP_PROFILE_DIR)
+    local list_profile=$(laptop::profile_available)
 
-    if [[ "$list_profile" = "default"  ]]; then
-      LAPTOP_PROFILE="default"
+    if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT"  ]]; then
+      LAPTOP_PROFILE="$LAPTOP_PROFILE_DEFAULT"
     else
       laptop::info "Please select a configuration profile"
       select LAPTOP_PROFILE in $list_profile; do
@@ -39,7 +39,6 @@ laptop::command__configure() {
 }
 
 laptop::profile_available() {
-  ls $LAPTOP_PROFILE_DIR
+  echo "$LAPTOP_PROFILE_DEFAULT"
+  ls "$LAPTOP_PROFILE_DIR" | grep -v "$LAPTOP_PROFILE_DEFAULT" | sort
 }
-
-
