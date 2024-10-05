@@ -2,7 +2,7 @@
 
 __LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zi")
 
-__program_cleanup_detect() {
+laptop::command__cleanup_detect() {
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   echo "The following tools were found and will be cleaned :"
   echo ""
@@ -13,7 +13,7 @@ __program_cleanup_detect() {
   echo ""
 }
 
-__program_cleanup_run() {
+laptop::command__cleanup_run() {
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   local initial_available_space=$(laptop::disk_available_space)
 
@@ -59,10 +59,10 @@ __program_cleanup_run() {
   laptop::ensure_directory_empty "$HOME/.gradle/caches"
 
   new_available_space=$(laptop::disk_available_space)
-  __program_cleanup_result $((new_available_space - initial_available_space))
+  laptop::command__cleanup_result $((new_available_space - initial_available_space))
 }
 
-__program_cleanup_result() {
+laptop::command__cleanup_result() {
 	b=${1:-0}
 	d=''
 	s=1
@@ -75,11 +75,11 @@ __program_cleanup_result() {
 	laptop::info "$b$d ${S[$s]} of space was cleaned up"
 }
 
-__program_cleanup() {
+laptop::command__cleanup() {
   laptop::logo
-  __program_cleanup_detect
+  laptop::command__cleanup_detect
   if laptop::confirm "Continue? (Y/n)"; then
-    __program_cleanup_run
+    laptop::command__cleanup_run
 
     laptop::info "🎉 Cleanup successful"
   else

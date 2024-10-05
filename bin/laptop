@@ -24,7 +24,7 @@ source "$ROOT_DIR/src/command/upgrade.sh"
 ###   configure: setup every tool for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
-__program_help() {
+laptop::command__help() {
   sed -rn 's/^### ?//p' "$0"
 }
 
@@ -32,11 +32,11 @@ __program_help() {
 SUBCOMMAND=$1
 case $SUBCOMMAND in
   "" | "-h" | "--help")
-    __program_help
+    laptop::command__help
     ;;
   *)
     shift
-    __program_${SUBCOMMAND} $@
+    laptop::command__${SUBCOMMAND} $@
     if [ $? = 127 ]; then
       echo "Error: '$SUBCOMMAND' is not a known subcommand." >&2
       echo "       Run '$SCRIPT_NAME --help' for a list of known subcommands." >&2

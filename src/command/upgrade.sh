@@ -2,7 +2,7 @@
 
 __LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code" "sdkmanager" "softwareupdate")
 
-__program_upgrade_detect() {
+laptop::command__upgrade_detect() {
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   echo "The following tools were found and will be upgraded :"
   echo ""
@@ -13,7 +13,7 @@ __program_upgrade_detect() {
   echo ""
 }
 
-__program_upgrade_run() {
+laptop::command__upgrade_run() {
   laptop::ensure_license_accepted
 
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -49,11 +49,11 @@ __program_upgrade_run() {
   done
 }
 
-__program_upgrade() {
+laptop::command__upgrade() {
   laptop::logo
-  __program_upgrade_detect
+  laptop::command__upgrade_detect
   if laptop::confirm "Continue? (Y/n)"; then
-    __program_upgrade_run
+    laptop::command__upgrade_run
 
     laptop::info "🎉 Upgrade successful"
   else
