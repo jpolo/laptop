@@ -61,7 +61,7 @@ if command -v zinit &> /dev/null; then
   zinit light hlissner/zsh-autopair
 
   # Fast highlight
-  # @see https://wiki.zshell.dev/ecosystem/plugins/f-sy-h#performance
+  # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
         zdharma-continuum/fast-syntax-highlighting \
