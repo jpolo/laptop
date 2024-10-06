@@ -71,5 +71,9 @@ if command -v zinit &> /dev/null; then
         zsh-users/zsh-autosuggestions
 
   # Install also as a zsh plugin
-  zinit light jpolo/laptop
+  if [ ! -z "$LAPTOP_GIT_REMOTE" ]; then
+    zinit light "$LAPTOP_GIT_REMOTE"
+  else
+    echo "Warning: LAPTOP_GIT_REMOTE is empty"
+  fi
 fi
