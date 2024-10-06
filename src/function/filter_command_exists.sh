@@ -7,18 +7,9 @@
 laptop::filter_command_exists() {
   local filtered_array=()
   for tool in "$@"; do
-    case "$tool" in
-      zinit)
-        if env "$SHELL" --login -i -c "command -v $tool" &>/dev/null; then
-          filtered_array+=("$tool")
-        fi
-        ;;
-      *)
-        if command -v "$tool" &>/dev/null; then
-          filtered_array+=("$tool")
-        fi
-        ;;
-    esac
+    if laptop::command_exists "$tool"; then
+      filtered_array+=("$tool")
+    fi
   done
   echo "${filtered_array[@]}"
 }
