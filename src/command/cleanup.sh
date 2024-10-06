@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zi")
+__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zinit")
 
 laptop::command__cleanup_detect() {
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
@@ -44,8 +44,8 @@ laptop::command__cleanup_run() {
         laptop::step_start "- Clean XCode simulators"
         laptop::step_eval "xcrun simctl delete unavailable"
         ;;
-      zi)
-        laptop::step_start "- Cleanup zi"
+      zinit)
+        laptop::step_start "- Cleanup zinit"
         laptop::step_eval "env zsh --login -i -c \"zinit delete --clean --quiet --yes; zinit cclear\""
         ;;
       *)
