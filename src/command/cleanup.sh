@@ -46,7 +46,7 @@ laptop::command__cleanup_run() {
         ;;
       zi)
         laptop::step_start "- Cleanup zi"
-        laptop::step_eval "env zsh --login -i -c \"zi delete --clean --quiet --yes; zi cclear\""
+        laptop::step_eval "env zsh --login -i -c \"zinit delete --clean --quiet --yes; zinit cclear\""
         ;;
       *)
         echo "Unknown tool: $tool"

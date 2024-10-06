@@ -23,10 +23,10 @@
 # 2/ HOWTO ADD ZSH PLUGIN ?
 # ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 #
-# This file uses zi plugin manager (https://github.com/z-shell/zi)
+# This file uses zinit plugin manager (https://zdharma-continuum.github.io/)
 #
 # Example 1: Install and load OhMyZSH plugin named "ruby"
-# `zi snippet OMZP::ruby`
+# `zinit snippet OMZP::ruby`
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
@@ -44,26 +44,26 @@ fi
 ##
 # ZSH package manager : zi
 ##
-ZI_HOME="$XDG_CACHE_HOME/zi"
-typeset -Ag ZI
-typeset -gx ZI[HOME_DIR]="$ZI_HOME"
-typeset -gx ZI[BIN_DIR]="$ZI_HOME/bin"
-typeset -gx ZI[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME/zsh/zcompdump"
+ZINIT_HOME="$XDG_CACHE_HOME/zinit"
+typeset -Ag ZINIT
+typeset -gx ZINIT[HOME_DIR]="$ZINIT_HOME"
+typeset -gx ZINIT[BIN_DIR]="$ZINIT_HOME/bin"
+typeset -gx ZINIT[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME/zsh/zcompdump"
 
-if [[ ! -f "${ZI[BIN_DIR]}/zi.zsh" ]]; then
-  rm -rf "${ZI[BIN_DIR]}"
-  # compaudit | xargs chown -R "$(whoami)" "$ZI[HOME_DIR]"
-  # compaudit | xargs chmod -R go-w "$ZI[HOME_DIR]"
-  command git clone https://github.com/z-shell/zi.git "${ZI[BIN_DIR]}"
-  # zcompile "${ZI[BIN_DIR]}/bin/zi.zsh"
+if [[ ! -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
+  rm -rf "${ZINIT[BIN_DIR]}"
+  # compaudit | xargs chown -R "$(whoami)" "$ZINIT[HOME_DIR]"
+  # compaudit | xargs chmod -R go-w "$ZINIT[HOME_DIR]"
+  command git clone https://github.com/zdharma-continuum/zinit.git "${ZINIT[BIN_DIR]}"
+  # zcompile "${ZINIT[BIN_DIR]}/bin/zi.zsh"
 fi
 
-if [[ -f "${ZI[BIN_DIR]}/zi.zsh" ]]; then
-  source "${ZI[BIN_DIR]}/zi.zsh"
-  autoload -Uz _zi
-  (( ${+_comps} )) && _comps[zi]=_zi
+if [[ -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
+  source "${ZINIT[BIN_DIR]}/zinit.zsh"
+  autoload -Uz _zinit
+  (( ${+_comps} )) && _comps[zinit]=_zinit
 else
-  echo "zi cannot be installed"
+  echo "zinit cannot be installed"
 fi;
 
 # Find the first command available
@@ -87,7 +87,7 @@ _zsh-load-file() {
   fi
 }
 
-_zsh-load-plugins () {
+_zsh-load-plugins() {
   local directory=$1
   if [[ -d "$directory/" ]]; then
     for i in $(find "$directory/" -maxdepth 1 -type f -name "*.sh");

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zi" "asdf" "code" "sdkmanager" "softwareupdate")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zinit" "asdf" "code" "sdkmanager" "softwareupdate")
 
 laptop::command__upgrade_detect() {
   local filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
@@ -39,8 +39,8 @@ laptop::command__upgrade_run() {
         echo ''
         softwareupdate --install --all
         ;;
-      zi)
-        laptop::ensure_zi_updated
+      zinit)
+        laptop::ensure_zinit_updated
         ;;
       *)
         echo "Unknown tool: $tool"
