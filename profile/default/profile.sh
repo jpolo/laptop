@@ -3,8 +3,8 @@ LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 # Bootstrap
 laptop::bootstrap
 laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/profile" "$HOME/.profile"
-laptop::var_in_file "$HOME/.profile" "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
-laptop::var_in_file "$HOME/.profile" "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
+laptop::set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
+laptop::set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
 
 laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zprofile" "$HOME/.zprofile"
 laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zshrc" "$HOME/.zshrc"
