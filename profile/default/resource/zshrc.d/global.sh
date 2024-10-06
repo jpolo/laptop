@@ -73,7 +73,5 @@ if command -v zinit &> /dev/null; then
   # Install also as a zsh plugin
   if [ ! -z "$LAPTOP_GIT_REMOTE" ]; then
     zinit light "$LAPTOP_GIT_REMOTE"
-  else
-    echo "Warning: LAPTOP_GIT_REMOTE is empty"
   fi
 fi
