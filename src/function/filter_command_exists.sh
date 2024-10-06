@@ -8,7 +8,7 @@ laptop::filter_command_exists() {
   local filtered_array=()
   for tool in "$@"; do
     case "$tool" in
-      zi)
+      zinit)
         if env "$SHELL" --login -i -c "command -v $tool" &>/dev/null; then
           filtered_array+=("$tool")
         fi
