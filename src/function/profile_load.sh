@@ -1,3 +1,8 @@
+# Load profile using $LAPTOP_PROFILE
+#
+# Usage:
+#   laptop::profile_load
+#
 laptop::profile_load() {
   local profile_file="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE/profile.sh"
   if [ ! -f "$profile_file" ]; then

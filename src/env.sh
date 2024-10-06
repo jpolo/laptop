@@ -10,7 +10,6 @@ export LAPTOP_SOURCE_DIR="$LAPTOP_HOME/src"
 export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
-export LAPTOP_PROFILE_CURRENT_DIR="$LAPTOP_PROFILE_DIR/$LAPTOP_PROFILE"
 
 export LAPTOP_PACKAGE_MANAGER=unknown
 if [ -x "$(command -v brew)" ]; then

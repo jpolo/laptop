@@ -4,6 +4,7 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 source "$LAPTOP_HOME/src/env.sh"
+LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 
 # Migrate
 rm -rf "$XDG_DATA_HOME/zsh/00_init.sh"
