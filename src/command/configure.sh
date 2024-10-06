@@ -22,6 +22,16 @@ laptop::command__configure() {
     fi
   fi
 
+  if [ -z "$LAPTOP_GIT_REMOTE" ]; then
+    laptop::warn "LAPTOP_GIT_REMOTE is not set and is required for self updating"
+    laptop::info "LAPTOP_GIT_REMOTE can have the following value :"
+    laptop::info "  - A repository identifier (ex: jpolo/laptop)"
+    laptop::info "  - A full repository url (ex: https://github.com/jpolo/laptop.git)"
+    laptop::info "  - (empty value) to skip"
+    printf "LAPTOP_GIT_REMOTE? : "
+    read -e LAPTOP_GIT_REMOTE
+  fi
+
   laptop::info "Current profile is $(quote $LAPTOP_PROFILE)"
 
   # Ask confirmation
