@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-ROOT_DIR=$(dirname $(dirname "$SCRIPT_DIR"))
-LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 source "$LAPTOP_HOME/src/env.sh"
 
 # Ensure Code
