@@ -36,6 +36,6 @@ tar -zxf $PACKAGE_ARCHIVE --directory $DOWNLOAD_DIR$PACKAGE_NAME --strip-compone
 echo "[Info] Run $PACKAGE_NAME"
 cd $DOWNLOAD_DIR$PACKAGE_NAME
 # LAYOUT_PROFILE= will be asked during installation
-LAPTOP_GIT_REMOTE="https://github.com/$REPOSITORY_NAME"
+export LAPTOP_GIT_REMOTE="https://github.com/$REPOSITORY_NAME.git"
 $DOWNLOAD_DIR$PACKAGE_NAME/bin/laptop configure
 
