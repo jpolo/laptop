@@ -1,19 +1,20 @@
+LAPTOP_PROFILE_DEFAULT_DIR=$(laptop::profile_dir default)
 LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 
 # Bootstrap
 laptop::bootstrap
-laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/profile" "$HOME/.profile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/profile" "$HOME/.profile"
 laptop::set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
 laptop::set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
 
-laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zprofile" "$HOME/.zprofile"
-laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/zshrc" "$HOME/.zshrc"
+laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zprofile" "$HOME/.zprofile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc" "$HOME/.zshrc"
 # for backward compatibility
-laptop::ensure_file_template "$LAPTOP_PROFILE_CURRENT_DIR/resource/bash_profile" "$HOME/.bash_profile"
+laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/bash_profile" "$HOME/.bash_profile"
 
 # Installation
-laptop::exec_shell zsh "$LAPTOP_PROFILE_CURRENT_DIR/0-configure-shell.zsh"
-laptop::exec_shell zsh "$LAPTOP_PROFILE_CURRENT_DIR/1-configure-all.zsh"
+laptop::exec_shell zsh "$LAPTOP_PROFILE_DEFAULT_DIR/0-configure-shell.zsh"
+laptop::exec_shell zsh "$LAPTOP_PROFILE_DEFAULT_DIR/1-configure-all.zsh"
 
 laptop::info "🎉 Finished"
 laptop::info "$(cat << EOF

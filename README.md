@@ -108,6 +108,16 @@ Although there are some implementation tradeoffs, it should never limit develope
 
 </details>
 
+### Create your laptop tool for your company
+
+1. Fork this repository
+2. Copy `profile/default/profile.sh` to `profile/{{my-company-profile}}/profile.sh`
+3. Customize `profile/{{my-company-profile}}` (Avoid changing `profile/default`)
+    1. Modify `profile/{{my-company-profile}}/profile.sh` to fit your needs
+    2. Put any resources / template in this folder
+4. Customize the installer script `install.sh`
+5. Update the `README.md` installation instructions
+
 ## `laptop` CLI
 
 The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop.
@@ -136,13 +146,6 @@ Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" 
 - Prune unused data
 
 NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
-
-### Create your laptop tool for your company !
-
-1. Fork this repository
-2. Copy `profile/default` to `profile/{{my-company-profile}}`
-3. Customize the installer script `install.sh`
-4. Update the `README.md` installation instructions
 
 ## Contributing
 
