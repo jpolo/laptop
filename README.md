@@ -12,6 +12,10 @@ Its core values are :
 
 ## 🚀 Launch installation
 
+Available profiles :
+
+- [default](./profile/default/README.md)
+
 1. Open a terminal ( [How to](https://www.wikihow.com/Open-a-Terminal-Window-in-Mac) )
 
 2. Run the installation command :
@@ -22,56 +26,42 @@ Its core values are :
 
 ## ✨ Features
 
+### Multi-platform (`bash` is required)
+
 Platform supported :
 
 - ✅ macOS
 - ✅ Debian like distros (Ubuntu, Debian)
   - devcontainers (i.e. Docker) supported
 
-Package Manager :
+Package Manager supported :
 
 - [Homebrew] (macOS)
+- [apt-get] (Debian like distros)
 
-Shell :
-
-- [ZSH] default shell
-- [ZDharmaContinuum/zinit] default zsh plugin manager
-- [PowerLevel10k] default zsh theme (customizable)
-- [SSH] default algorithm `ed25519` [(explanation)](https://docs.gitlab.com/ee/user/ssh.html#ed25519-ssh-keys)
-
-Source Control Manager :
-
-- [Git] default version control
-- [GitHub CLI] for interacting with the GitHub API
-
-Programming language :
-
-- [asdf-vm] multi-language version manager (replaces nvm, rbenv, etc)
-  - ✅ Plugin Ruby
-  - ✅ Plugin NodeJS (+ `npm`, `yarn`)
-  - ✅ Plugin Java
-  - ✅ Plugin Python
-  - ✅ Plugin Terraform
-  - ✅ Plugin Cocoapods
-
-Code Editor :
-
-- [Visual Studio Code] default visual editor
-- `nano` default text based editor
-
-Misc :
-
-- [Watchman] for watching for filesystem events
-- `~/Code` folder to clone all repositories / organize projects
-- `~/Captures` folder to manage screen shots and screen captures
-
-## 🔧 Configuration
-
-### Customize your shell for your needs
+### Customize the shell for your needs
 
 `laptop` aims to give a common full feature basis for each laptop machine.
 
 Although there are some implementation tradeoffs, it should never limit developers to customize their workstation.
+
+### `laptop` command line tool to maintain your laptop
+
+The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop by providing a simple way to :
+
+- update all tools and dependencies, to avoid security issues and benefit from latest bug fixes
+- remove all unneeded files and free disk space
+- auto-update itself. laptop can be updated itself to benefit to the latest tools / configuration of the organization
+
+### Customize your laptop tool for your organization !
+
+- Built to be easily forked
+- Many bash functions for your needs in [`./src/functions`]()
+- Multiple configuration profile is possible
+
+## 🔧 Configuration
+
+### Shell customization
 
 <details>
   <summary>🔧 Override/Customize ZSH configuration</summary>
@@ -108,7 +98,7 @@ Although there are some implementation tradeoffs, it should never limit develope
 
 </details>
 
-### Create your laptop tool for your company
+### Fork this repository
 
 1. Fork this repository
 2. Copy `profile/default/profile.sh` to `profile/{{my-company-profile}}/profile.sh`
@@ -118,9 +108,7 @@ Although there are some implementation tradeoffs, it should never limit develope
 4. Customize the installer script `install.sh`
 5. Update the `README.md` installation instructions
 
-## 🛟 The `laptop` CLI
-
-The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop.
+## 💡 The `laptop` CLI
 
 Laptop CLI has 3 subcommands `configure`, `upgrade` and `cleanup`
 
