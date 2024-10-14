@@ -67,7 +67,11 @@ Misc :
 
 ## Configuration
 
-### ZSH Recipes
+### Customize your shell for your needs
+
+`laptop` aims to give a common full feature basis for each laptop machine.
+
+Although there are some implementation tradeoffs, it should never limit developers to customize their workstation.
 
 <details>
   <summary>🔧 Override/Customize ZSH configuration</summary>
@@ -104,7 +108,6 @@ Misc :
 
 </details>
 
-
 ## `laptop` CLI
 
 The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop.
@@ -133,6 +136,27 @@ Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" 
 - Prune unused data
 
 NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
+
+### Create your laptop tool for your company !
+
+1. Fork this repository
+2. Copy `profile/default` to `profile/{{my-company-profile}}`
+3. Customize the installer script `install.sh`
+4. Update the `README.md` installation instructions
+
+## Contributing
+
+Original repository is hosted at [https://github.com/jpolo]()
+
+Contributions are welcome especially when :
+
+- adding documentation to the laptop shell library `./src/functions`
+- adding new capabilities / support for the tool
+- reporting / fixing security issues
+
+## Funding
+
+If you like this repository and it made you win a lot of time / money (by not hiring a devops for example :) ), you may consider a small donation to help me maintaining this repository [Link to my profile](https://github.com/jpolo#-donate).
 
 [asdf-vm]: https://github.com/asdf-vm/asdf
 [Git]: https://git-scm.com/
