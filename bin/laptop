@@ -21,12 +21,21 @@ source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"
 
 ###   cleanup: empty cache and prune unused resources
-###   configure: setup every tool for this device
+###   configure: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
 laptop::command__help() {
   sed -rn 's/^### ?//p' "$0"
 }
+
+###
+### Environment variables:
+###   LAPTOP_HOME: Local folder of installation of the laptop executable and library
+###   LAPTOP_GIT_REMOTE: Git repository location used as zsh plugin. It can be :
+###     - A github repository name (ex: jpolo/laptop)
+###     - A full git url (ex: https://github.com/jpolo/laptop.git)
+###   LAPTOP_PROFILE: current profile to use for the configure sub command
+###     the profile source must be available at `$LAPTOP_HOME/profile/$LAPTOP_PROFILE/profile.sh`
 
 # Run the program
 SUBCOMMAND=$1
