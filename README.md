@@ -103,22 +103,36 @@ Misc :
   ```
 
 </details>
-<details>
-  <summary>🔄 Update all plugins</summary>
 
-  ```console
-  > zinit update
-  ```
 
-</details>
-<details>
-  <summary>🧹 Clean unused plugins</summary>
+## `laptop` CLI
 
-  ```console
-  > zinit delete --clean
-  ```
+The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop.
 
-</details>
+Laptop CLI has 3 subcommands `configure`, `upgrade` and `cleanup`
+
+More information is available with the command `laptop help`.
+
+### `laptop configure`
+
+Try to install all software from the current profile (that was configured at first installation).
+
+### `laptop upgrade`
+
+Detect many tools (`brew`, `asdf`, etc) and launch their respective update command.
+
+This will also update the laptop plugin and executable itself.
+
+Launch this command regularly to be up to date and avoir keeping old software with potential security vulnerabilities.
+
+### `laptop cleanup`
+
+Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" manner) :
+
+- Remove cache
+- Prune unused data
+
+NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
 
 [asdf-vm]: https://github.com/asdf-vm/asdf
 [Git]: https://git-scm.com/
