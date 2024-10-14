@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+#==============================================================================
+# 🔧 These variable can be changed to customize a forked laptop repository
+#
 RELEASE="main"
 REPOSITORY_NAME=${REPOSITORY_NAME:-"jpolo/laptop"}
+export LAPTOP_GIT_REMOTE="https://github.com/$REPOSITORY_NAME.git"
+
+#==============================================================================
+# 🔶 Do not change the content below
+#
 DOWNLOAD="https://github.com/$REPOSITORY_NAME/archive/$RELEASE.tar.gz"
 PACKAGE_NAME=laptop-installer
 PACKAGE_ARCHIVE="$PACKAGE_NAME.tar.gz"
@@ -36,6 +44,5 @@ tar -zxf $PACKAGE_ARCHIVE --directory $DOWNLOAD_DIR$PACKAGE_NAME --strip-compone
 echo "[Info] Run $PACKAGE_NAME"
 cd $DOWNLOAD_DIR$PACKAGE_NAME
 # LAYOUT_PROFILE= will be asked during installation
-export LAPTOP_GIT_REMOTE="https://github.com/$REPOSITORY_NAME.git"
 $DOWNLOAD_DIR$PACKAGE_NAME/bin/laptop configure
 
