@@ -10,7 +10,7 @@ Its core values are :
 - ✅ Safe : multiple runs should always work
 - 🧑‍🏫 Opiniated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
 
-## Launch installation
+## 🚀 Launch installation
 
 1. Open a terminal ( [How to](https://www.wikihow.com/Open-a-Terminal-Window-in-Mac) )
 
@@ -20,7 +20,7 @@ Its core values are :
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/main/install.sh)"
 ```
 
-## Features
+## ✨ Features
 
 Platform supported :
 
@@ -65,7 +65,7 @@ Misc :
 - `~/Code` folder to clone all repositories / organize projects
 - `~/Captures` folder to manage screen shots and screen captures
 
-## Configuration
+## 🔧 Configuration
 
 ### Customize your shell for your needs
 
@@ -118,7 +118,7 @@ Although there are some implementation tradeoffs, it should never limit develope
 4. Customize the installer script `install.sh`
 5. Update the `README.md` installation instructions
 
-## `laptop` CLI
+## 🛟 The `laptop` CLI
 
 The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop.
 
@@ -147,7 +147,7 @@ Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" 
 
 NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
 
-## Contributing
+## ⭐️ Contributing
 
 Original repository is hosted at [https://github.com/jpolo]()
 
@@ -157,7 +157,7 @@ Contributions are welcome especially when :
 - adding new capabilities / support for the tool
 - reporting / fixing security issues
 
-## Funding
+## 🩷 Funding
 
 If you like this repository and it made you win a lot of time / money (by not hiring a devops for example :) ), you may consider a small donation to help me maintaining this repository [Link to my profile](https://github.com/jpolo#-donate).
 
