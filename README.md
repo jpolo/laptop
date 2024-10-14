@@ -26,12 +26,12 @@ Available profiles :
 
 ## ✨ Features
 
-### Multi-platform (`bash` is required)
+### ✅ Portable (`bash` is required)
 
 Platform supported :
 
-- ✅ macOS
-- ✅ Debian like distros (Ubuntu, Debian)
+- ✓ macOS
+- ✓ Debian like distros (Ubuntu, Debian)
   - devcontainers (i.e. Docker) supported
 
 Package Manager supported :
@@ -39,13 +39,7 @@ Package Manager supported :
 - [Homebrew] (macOS)
 - [apt-get] (Debian like distros)
 
-### Customize the shell for your needs
-
-`laptop` aims to give a common full feature basis for each laptop machine.
-
-Although there are some implementation tradeoffs, it should never limit developers to customize their workstation.
-
-### `laptop` command line tool to maintain your laptop
+### ✅ `laptop` command line tool included to maintain your laptop
 
 The laptop ZSH plugin provides a `laptop` executable. This executable was created to make easier the maintenance of your laptop by providing a simple way to :
 
@@ -53,11 +47,17 @@ The laptop ZSH plugin provides a `laptop` executable. This executable was create
 - remove all unneeded files and free disk space
 - auto-update itself. laptop can be updated itself to benefit to the latest tools / configuration of the organization
 
-### Customize your laptop tool for your organization !
+### ✅ Customize your laptop tool for your organization !
 
-- Built to be easily forked
+- Built to be easily forked (better for security, so everyone can review the code)
 - Many bash functions for your needs in [`./src/functions`]()
 - Multiple configuration profile is possible
+
+### ✅ Customizable for your needs
+
+`laptop` aims to give a common full feature basis for each laptop machine.
+
+Although there are some implementation tradeoffs, it should never limit developers to customize their workstation.
 
 ## 🔧 Configuration
 
