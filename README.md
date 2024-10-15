@@ -1,8 +1,11 @@
-# Laptop initialization script
+# 💻 Laptop initialization script
 
 The main goal of this project is to help developers to focus on delivering value instead of struggling with the workstation configuration.
 
-The solution provided is a *one-liner* script that will fully configure a workstation for mobile and web development.
+The solution provided is a composed of :
+- *one-liner* installer script that will fully configure a workstation for mobile and web development.
+- a cli tool named "laptop" to help workstation maintenance event after the script was installed
+- an extended bash function collection to be able to create other configuration profile than the one on this repository
 
 Its core values are :
 
@@ -37,7 +40,7 @@ Platform supported :
 Package Manager supported :
 
 - [Homebrew] (macOS)
-- [apt-get] (Debian like distros)
+- [apt-get](https://help.ubuntu.com/community/AptGet/Howto) (Debian like distros)
 
 ### ✅ `laptop` command line tool included to maintain your laptop
 
