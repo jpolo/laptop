@@ -3,6 +3,7 @@
 laptop::ensure_package__pack:utils() {
   # A pack of useful tools
   laptop::ensure_package "adr-tools"
+  laptop::ensure_package "chatgpt"
   laptop::ensure_package "gitmoji"
   laptop::ensure_package "google-cloud-sdk"
   laptop::ensure_package "heroku"
