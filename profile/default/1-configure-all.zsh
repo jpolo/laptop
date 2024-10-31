@@ -90,11 +90,11 @@ laptop::ensure_asdf_tool "terraform" "latest"
 
 # Install programs (non devcontainers only)
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
+  laptop::ensure_package "pack:social"
   # Install programs
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
   laptop::ensure_package "chromedriver"
-  laptop::ensure_package "discord"
   laptop::ensure_package "docker"
   laptop::ensure_package "drawio"
   # laptop::ensure_package "idb-companion" # deprecated method
@@ -111,7 +111,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pgadmin4"
   laptop::ensure_package "postman"
   # laptop::ensure_package "rectangle"
-  laptop::ensure_package "slack"
   # FIXME: Does not work on Apple Silicon M1, M2, etc
   # Error: Cask virtualbox depends on hardware architecture being one of [{:type=>:intel, :bits=>64}], but you are running {:type=>:arm, :bits=>64}.
   # laptop::ensure_package "virtualbox"
