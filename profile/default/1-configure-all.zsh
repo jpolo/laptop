@@ -91,6 +91,8 @@ laptop::ensure_asdf_tool "terraform" "latest"
 # Install programs (non devcontainers only)
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:social"
+  laptop::ensure_package "pack:security"
+
   # Install programs
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
@@ -103,7 +105,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "google-chrome"
   laptop::ensure_package "google-drive"
   laptop::ensure_package "iterm2"
-  laptop::ensure_package "macpass"
+
   laptop::ensure_package "mongodb-community"
   laptop::ensure_package "mongodb-database-tools"
   laptop::ensure_package "mysql"
