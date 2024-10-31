@@ -92,13 +92,14 @@ laptop::ensure_asdf_tool "terraform" "latest"
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:social"
   laptop::ensure_package "pack:security"
+  laptop::ensure_package "pack:productivity"
 
   # Install programs
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
   laptop::ensure_package "chromedriver"
   laptop::ensure_package "docker"
-  laptop::ensure_package "drawio"
+
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
   laptop::ensure_package "font-monaspace"
@@ -109,7 +110,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "mongodb-community"
   laptop::ensure_package "mongodb-database-tools"
   laptop::ensure_package "mysql"
-  laptop::ensure_package "notion"
   laptop::ensure_package "pgadmin4"
   laptop::ensure_package "postman"
   # laptop::ensure_package "rectangle"
