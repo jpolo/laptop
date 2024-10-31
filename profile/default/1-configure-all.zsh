@@ -41,7 +41,7 @@ killall Finder
 
 # Install standard utils
 laptop::ensure_package "pack:core"
-laptop::ensure_package "pack:utils"
+laptop::ensure_package "pack:cli-tools"
 
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git

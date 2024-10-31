@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__pack:utils() {
+laptop::ensure_package__pack:cli-tools() {
   # A pack of useful tools
   laptop::ensure_package "adr-tools"
-  laptop::ensure_package "chatgpt"
+
   laptop::ensure_package "gitmoji"
   laptop::ensure_package "google-cloud-sdk"
   laptop::ensure_package "heroku"
