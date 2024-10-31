@@ -57,7 +57,8 @@ is_arm() {
 }
 
 quote() {
-  echo "'$1'"
+  local quoted=${1//\'/\'\\\'\'};
+  printf "'%s'" "$quoted"
 }
 
 
