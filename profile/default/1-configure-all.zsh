@@ -93,30 +93,17 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:social"
   laptop::ensure_package "pack:security"
   laptop::ensure_package "pack:productivity"
+  laptop::ensure_package "pack:development"
 
   # Install programs
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
-  laptop::ensure_package "chromedriver"
-  laptop::ensure_package "docker"
 
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
   laptop::ensure_package "font-monaspace"
   laptop::ensure_package "google-chrome"
   laptop::ensure_package "google-drive"
-  laptop::ensure_package "iterm2"
-
-  laptop::ensure_package "mongodb-community"
-  laptop::ensure_package "mongodb-database-tools"
-  laptop::ensure_package "mysql"
-  laptop::ensure_package "pgadmin4"
-  laptop::ensure_package "postman"
-  # laptop::ensure_package "rectangle"
-  # FIXME: Does not work on Apple Silicon M1, M2, etc
-  # Error: Cask virtualbox depends on hardware architecture being one of [{:type=>:intel, :bits=>64}], but you are running {:type=>:arm, :bits=>64}.
-  # laptop::ensure_package "virtualbox"
-  laptop::ensure_package "visual-studio-code"
 
   # Install Android tools
   laptop::ensure_sdkmanager_package "platforms;android-34"
