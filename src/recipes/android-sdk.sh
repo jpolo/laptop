@@ -9,4 +9,9 @@ laptop::ensure_package__android-sdk() {
     laptop::step_start "- Ensure android-sdk installed (via git)"
     laptop::step_eval "echo >&2 Not implemented;exit 1;"
   fi
+
+  # Install Android tools
+  laptop::ensure_sdkmanager_package "platforms;android-34"
+  laptop::ensure_sdkmanager_package "build-tools;34.0.0"
+  laptop::ensure_sdkmanager_package "cmdline-tools;16.0"
 }

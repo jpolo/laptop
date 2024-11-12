@@ -102,10 +102,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
 
-  # Install Android tools
-  laptop::ensure_sdkmanager_package "platforms;android-34"
-  laptop::ensure_sdkmanager_package "build-tools;34.0.0"
-  laptop::ensure_sdkmanager_package "cmdline-tools;16.0"
 
   # Install VSCode extensions
   laptop::ensure_vscode_extension "EditorConfig.EditorConfig"
