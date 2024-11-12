@@ -13,4 +13,7 @@ laptop::ensure_package__pack:development() {
   # Error: Cask virtualbox depends on hardware architecture being one of [{:type=>:intel, :bits=>64}], but you are running {:type=>:arm, :bits=>64}.
   # laptop::ensure_package "virtualbox"
   laptop::ensure_package "visual-studio-code"
+
+  # Fonts for development
+  laptop::ensure_package "font-monaspace"
 }

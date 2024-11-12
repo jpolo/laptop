@@ -101,8 +101,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
 
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
-  laptop::ensure_package "font-monaspace"
-
 
   # Install Android tools
   laptop::ensure_sdkmanager_package "platforms;android-34"
