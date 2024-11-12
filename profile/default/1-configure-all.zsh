@@ -102,8 +102,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
   laptop::ensure_package "font-monaspace"
-  laptop::ensure_package "google-chrome"
-  laptop::ensure_package "google-drive"
+
 
   # Install Android tools
   laptop::ensure_sdkmanager_package "platforms;android-34"
