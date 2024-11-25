@@ -68,6 +68,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:social"
   laptop::ensure_package "pack:security"
   laptop::ensure_package "pack:productivity"
+  laptop::ensure_package "pack:media"
   laptop::ensure_package "pack:development"
 
   # Install programs
