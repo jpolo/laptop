@@ -15,4 +15,4 @@ jobs:
 
     - name: Run tests
       run: |
-        ./test/suite.sh
+        make test
