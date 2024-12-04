@@ -6,7 +6,7 @@ LAPTOP_HOME=$(pwd)
 export LAPTOP_HOME
 source "./src/env.sh"
 
-mkdir "test_data"
+mkdir -p "test_data"
 cd "test_data" || exit 1
 
 # Try to run brew installation
