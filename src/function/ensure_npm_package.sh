@@ -9,6 +9,6 @@ laptop::ensure_npm_package() {
   if [ -n "$(npm list --global --parseable "$package")" ]; then
     laptop::step_ok
   else
-    laptop::step_eval "npm install ${npm_args[@]} $(quote $package)"
+    laptop::step_eval "npm install ${npm_args[@]} $(quote "$package")"
   fi
 }

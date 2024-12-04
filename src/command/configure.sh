@@ -30,7 +30,7 @@ laptop::command__configure() {
     laptop::info "  - A full repository url (ex: https://github.com/jpolo/laptop.git)"
     laptop::info "  - (empty value) to skip"
     printf "LAPTOP_GIT_REMOTE? : "
-    read -e LAPTOP_GIT_REMOTE
+    read -e -r LAPTOP_GIT_REMOTE
   fi
 
   laptop::info "Current profile is $(quote "$LAPTOP_PROFILE")"

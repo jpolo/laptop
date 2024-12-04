@@ -10,7 +10,7 @@
 #   if [ $? -eq 0 ]
 #
 laptop::confirm() {
-  echo -n "$@ "
+  echo -n "$* "
   read -e -r answer
   for response in y Y yes YES Yes Sure sure SURE OK ok Ok
   do

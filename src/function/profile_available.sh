@@ -7,5 +7,5 @@
 #
 laptop::profile_available() {
   echo "$LAPTOP_PROFILE_DEFAULT"
-  ls "$LAPTOP_PROFILE_DIR" | grep -v "$LAPTOP_PROFILE_DEFAULT" | sort
+  find "$LAPTOP_PROFILE_DIR" -maxdepth 1 -type f ! -name "$LAPTOP_PROFILE_DEFAULT" -exec basename {} \; | sort
 }
