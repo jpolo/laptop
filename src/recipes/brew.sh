@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_package__brew() {
   # Install Homebrew
   local brew_present=$(env -i zsh --login -c 'command -v brew');

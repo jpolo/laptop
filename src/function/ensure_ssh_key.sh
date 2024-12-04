@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_ssh_key() {
   local algorithm=${1:-"ed25519"}
   local ssh_key="$HOME/.ssh/id_$algorithm"

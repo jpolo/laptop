@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 laptop::ensure_apt_package() {
   local executable="$1"

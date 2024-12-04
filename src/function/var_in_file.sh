@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #
 # Usage:
 #   laptop::var_in_file "my_shell.sh" "MY_VARIABLE" "MY_VALUE"

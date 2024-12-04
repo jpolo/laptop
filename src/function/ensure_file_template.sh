@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_file_template() {
   local template="$1"
   local target="$2"

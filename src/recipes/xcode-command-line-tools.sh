@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_package__xcode-command-line-tools() {
   laptop::step_start "- Ensure XCode Command Line Tools"
 

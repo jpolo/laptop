@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_directory_empty() {
   local directory="$1"
   laptop::step_start "- Clean directory $directory"

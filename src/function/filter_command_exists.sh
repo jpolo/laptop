@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Filter array keeping only available commands
 #
 # Example 1 :

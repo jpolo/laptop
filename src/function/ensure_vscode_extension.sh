@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_vscode_extension() {
   local extension_name="$1"
   local list_extensions=$(code --list-extensions);

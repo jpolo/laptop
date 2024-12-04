@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 laptop::ensure_package__pack:apt-core() {
   laptop::ensure_apt_package "build-essential"

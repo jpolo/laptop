@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Load profile using $LAPTOP_PROFILE
 #
 # Usage:

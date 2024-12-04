@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_shell() {
   local target_shell="$1";
   local current_shell="$(basename $SHELL)"

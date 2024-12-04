@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Returns a list of available profile
 #
 # Usage:

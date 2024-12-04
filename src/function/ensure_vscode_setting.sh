@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_vscode_setting() {
   local json_path="$1"
   local json_value="$2"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::error() {
   echo -e "${COLOR_ERROR}Error: ${NORMAL}${@}" >&2
 }

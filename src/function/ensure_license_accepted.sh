@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_license_accepted() {
   local xcode_message="- Ensure xcodebuild license accepted"
   if laptop::command_exists "xcodebuild"; then

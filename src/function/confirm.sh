@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Confirm
 #
 # Example 1 :

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_apt_repository() {
   local repo_url="$1"
   local repo_key="$2"

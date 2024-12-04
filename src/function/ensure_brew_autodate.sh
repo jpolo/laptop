@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_brew_autodate() {
   local brew_autodate_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?');
 

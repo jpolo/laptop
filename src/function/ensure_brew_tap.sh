@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_brew_tap() {
   local tap="$1"
   laptop::step_start "- Ensure brew tap '$tap'"

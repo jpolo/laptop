@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #
 # Add or Update variable expression in ~/.profile
 #

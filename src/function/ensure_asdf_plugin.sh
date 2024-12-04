@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_asdf_plugin() {
   local name="$1"
   local url="$2"

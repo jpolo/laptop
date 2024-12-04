@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_asdf_tool() {
   local language="$1"
   local version=$2 || "latest"

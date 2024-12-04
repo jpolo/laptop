@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_git_config() {
   local name="$1"
   local value="$2"

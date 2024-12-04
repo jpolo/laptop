@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::bootstrap_debian() {
   laptop::ensure_shell "$LAPTOP_SHELL"
   laptop::ensure_apt_updated

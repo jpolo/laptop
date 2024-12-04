@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::logo() {
   echo -e $BRACKET
   cat <<-"EOF"

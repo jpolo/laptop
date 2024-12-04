@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Returns the location for the profile passed as parameter
 #
 # Usage:

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 laptop::ensure_brew_package() {
   local executable="$1"
   local package=${2:-$executable}

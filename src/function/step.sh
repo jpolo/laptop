@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 laptop::step_start() {
   echo -n -e "${@}"
