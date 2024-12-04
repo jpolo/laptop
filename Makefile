@@ -1,5 +1,5 @@
-Q=@
-SHELL_SRC_FILE=$(wildcard **/*.sh  **/*.zsh **/*.bash)
+Q?=@
+SHELL_SRC_FILE?=$(shell find . -iname 'bin/*' -o -iname '*.sh' -o -iname '*.bash')
 
 .PHONY: setup
 setup:
