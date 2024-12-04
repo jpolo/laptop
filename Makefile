@@ -1,5 +1,5 @@
-Q?=@
-SHELL_SRC_FILE?=$(shell find . -iname 'bin/*' -o -iname '*.sh' -o -iname '*.bash')
+Q ?= @
+SHELL_SRC_FILE ?= $(shell find . -iname 'bin/*' -o -iname '*.sh' -o -iname '*.bash')
 
 .PHONY: setup
 setup:
@@ -8,8 +8,12 @@ setup:
 
 .PHONY: lint
 lint:
-	shellcheck $(filter-out $(wildcard **/*.zsh), $(SHELL_SRC_FILE))
+	$(Q)shellcheck $(filter-out $(wildcard **/*.zsh), $(SHELL_SRC_FILE))
 
 .PHONY: format
 format:
 	$(Q)shfmt --write $(SHELL_SRC_FILE)
+
+.PHONY: test
+test:
+	$(Q) ./test/suite.sh
