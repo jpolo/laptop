@@ -15,9 +15,9 @@ laptop::ensure_brew_package() {
     brew_args+=("--cask")
   fi
 
-  if brew list $package &>/dev/null; then
+  if brew list "$package" &>/dev/null; then
     laptop::step_ok
   else
-    laptop::step_eval "brew install $(quote ${brew_args[@]}) $(quote $package)"
+    laptop::step_eval "brew install $(quote "${brew_args[@]}") $(quote "$package")"
   fi
 }

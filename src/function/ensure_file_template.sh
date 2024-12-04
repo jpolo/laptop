@@ -6,7 +6,7 @@ laptop::ensure_file_template() {
 
   laptop::step_start "- Ensure file '$target'"
   laptop::step_eval "\
-  mkdir -p $(quote $(dirname $target)) && \
-  cp -f $(quote $template) $(quote $target) \
+  mkdir -p $(quote "$(dirname "$target")") && \
+  cp -f $(quote "$template") $(quote "$target") \
   "
 }

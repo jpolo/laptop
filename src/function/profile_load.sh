@@ -10,5 +10,6 @@ laptop::profile_load() {
   if [ ! -f "$profile_file" ]; then
     laptop::die "Profile \"$LAPTOP_PROFILE\" does not exist"
   fi
+  # shellcheck disable=SC1090
   source "$profile_file"
 }

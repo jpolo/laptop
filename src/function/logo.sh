@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 laptop::logo() {
-  echo -e $BRACKET
+  echo -e "$BRACKET"
   cat <<-"EOF"
     __            __
    / /___ _____  / /_____  ____
@@ -12,5 +12,5 @@ laptop::logo() {
 ───────────────────────────────────
 
 EOF
-  echo -e $NORMAL
+  echo -e "$NORMAL"
 }

@@ -71,7 +71,7 @@ if command -v zinit &> /dev/null; then
         zsh-users/zsh-autosuggestions
 
   # Install also as a zsh plugin
-  if [ ! -z "$LAPTOP_GIT_REMOTE" ]; then
+  if [ -n "$LAPTOP_GIT_REMOTE" ]; then
     zinit light "$LAPTOP_GIT_REMOTE"
   fi
 fi

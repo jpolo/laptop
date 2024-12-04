@@ -8,7 +8,7 @@ laptop::ensure_git_config() {
   if [ -z "$(git config --global "$name")" ]; then
     if [ -z "${value}" ]; then
       echo "Git: Please enter value for '$name'"
-      read value
+      read -r value
     fi
 
     laptop::step_exec git config --global "$name" "$value"

@@ -9,7 +9,8 @@ laptop::command__configure() {
 
   # Select profile
   if [ -z "$LAPTOP_PROFILE" ]; then
-    local list_profile=$(laptop::profile_available)
+    local list_profile
+    list_profile=$(laptop::profile_available)
 
     if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT"  ]]; then
       LAPTOP_PROFILE="$LAPTOP_PROFILE_DEFAULT"
@@ -32,7 +33,7 @@ laptop::command__configure() {
     read -e LAPTOP_GIT_REMOTE
   fi
 
-  laptop::info "Current profile is $(quote $LAPTOP_PROFILE)"
+  laptop::info "Current profile is $(quote "$LAPTOP_PROFILE")"
 
   # Ask confirmation
   laptop::info "This will install and configure all tools"

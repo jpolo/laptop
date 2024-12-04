@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(dirname "$0")"
-cd "$SCRIPT_DIR/.."
-export LAPTOP_HOME=$(pwd)
+cd "$SCRIPT_DIR/.." || exit 1
+LAPTOP_HOME=$(pwd)
+export LAPTOP_HOME
 source "./src/env.sh"
 
 mkdir "test_data"
-cd "test_data"
+cd "test_data" || exit 1
 
 # Try to run brew installation
 laptop::ensure_brew

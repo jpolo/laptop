@@ -20,9 +20,9 @@ laptop::ensure_package_default() {
   local package=${2:-$executable}
 
   # Install using package manager
-  if [ $LAPTOP_PACKAGE_MANAGER = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
     laptop::ensure_brew_package "$executable" "$package"
-  elif [ $LAPTOP_PACKAGE_MANAGER = "apt-get" ];then
+  elif [ "$LAPTOP_PACKAGE_MANAGER" = "apt-get" ];then
     laptop::ensure_apt_package "$executable" "$package"
   else
     laptop::step_fail

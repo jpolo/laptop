@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+
 LAPTOP_PROFILE_DEFAULT_DIR=$(laptop::profile_dir default)
+# shellcheck disable=SC2034
 LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 
 # Bootstrap

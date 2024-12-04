@@ -2,7 +2,8 @@
 
 laptop::ensure_shell() {
   local target_shell="$1";
-  local current_shell="$(basename $SHELL)"
+  local current_shell
+  current_shell="$(basename "$SHELL")"
 
   laptop::step_start "- Ensure shell '$target_shell'"
   if [ -z "$target_shell" ]; then

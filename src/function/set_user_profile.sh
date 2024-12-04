@@ -12,7 +12,7 @@ laptop::set_user_profile() {
   local value="$2"
   laptop::step_start "- Set '$var_name=$value' in '$script_file'"
 
-  if [ ! -z "$value" ]; then
+  if [ -n "$value" ]; then
     laptop::var_in_file "$script_file" "$var_name" "$value"
     laptop::step_ok
   else
