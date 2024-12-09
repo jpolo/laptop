@@ -7,7 +7,7 @@ laptop::ensure_asdf_tool() {
   laptop::step_start "- Ensure asdf '$language' '$version'"
   if ! asdf list "$language" | grep -Fq "$version"; then
     laptop::step_exec \
-      asdf install "$language" "$version" && \
+      asdf install "$language" "$version" &&
       asdf global "$language" "$version"
   else
     laptop::step_exec \

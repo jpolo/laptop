@@ -21,32 +21,32 @@ laptop::command__upgrade_run() {
   filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
-      apt-get)
-        laptop::ensure_apt_updated
-        ;;
-      asdf)
-        laptop::ensure_asdf_updated
-        ;;
-      brew)
-        laptop::ensure_brew_updated
-        ;;
-      code)
-        laptop::ensure_vscode_updated
-        ;;
-      sdkmanager)
-        laptop::ensure_sdkmanager_updated
-        ;;
-      softwareupdate)
-        laptop::step_start "- Upgrade macOS"
-        echo ''
-        softwareupdate --install --all
-        ;;
-      zinit)
-        laptop::ensure_zinit_updated
-        ;;
-      *)
-        echo "Unknown tool: $tool"
-        ;;
+    apt-get)
+      laptop::ensure_apt_updated
+      ;;
+    asdf)
+      laptop::ensure_asdf_updated
+      ;;
+    brew)
+      laptop::ensure_brew_updated
+      ;;
+    code)
+      laptop::ensure_vscode_updated
+      ;;
+    sdkmanager)
+      laptop::ensure_sdkmanager_updated
+      ;;
+    softwareupdate)
+      laptop::step_start "- Upgrade macOS"
+      echo ''
+      softwareupdate --install --all
+      ;;
+    zinit)
+      laptop::ensure_zinit_updated
+      ;;
+    *)
+      echo "Unknown tool: $tool"
+      ;;
     esac
   done
 }

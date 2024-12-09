@@ -15,6 +15,6 @@ laptop::var_in_file() {
     sed -i "s/^export ${var_name}=.*/export ${var_name}=${new_value}/" "$script_file"
   else
     # Append the new assignment if not set
-    echo "export ${var_name}=${new_value}" >> "$script_file"
+    echo "export ${var_name}=${new_value}" >>"$script_file"
   fi
 }

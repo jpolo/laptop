@@ -2,7 +2,7 @@
 
 if [ -z "${LAPTOP_HOME}" ]; then
   echo "LAPTOP_HOME variable is required"
-  exit 1;
+  exit 1
 fi
 
 export LAPTOP_HOME="$LAPTOP_HOME"
@@ -20,18 +20,17 @@ else
   return 0
 fi
 
-
 ## Screen Dimensions
 # Find current screen size
 #if [ -z "${COLUMNS}" ]; then
-   #COLUMNS=$(stty size)
-   #COLUMNS=${COLUMNS##* }
+#COLUMNS=$(stty size)
+#COLUMNS=${COLUMNS##* }
 COLUMNS=100
 #fi
 
 # When using remote connections, such as a serial port, stty size returns 0
 if [ "$COLUMNS" = "0" ]; then
-   COLUMNS=80
+  COLUMNS=80
 fi
 COL=$(($COLUMNS - 8))
 # shellcheck disable=SC2034
@@ -51,7 +50,7 @@ COLOR_INFO='\033[32m'
 # shellcheck disable=SC2034
 BREW_CASK_PACKAGES=(
   "docker"
-);
+)
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 
@@ -64,10 +63,9 @@ is_arm() {
 }
 
 quote() {
-  local quoted=${1//\'/\'\\\'\'};
+  local quoted=${1//\'/\'\\\'\'}
   printf "'%s'" "$quoted"
 }
-
 
 # Source scripts
 # shellcheck disable=SC1091

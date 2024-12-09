@@ -23,37 +23,37 @@ laptop::command__cleanup_run() {
   # Cleanup by command
   for tool in $filtered_commands; do
     case "$tool" in
-      brew)
-        laptop::step_start "- Cleanup brew"
-        laptop::step_eval "brew cleanup --prune=all"
-        ;;
-      docker)
-        laptop::step_start "- Prune docker images"
-        laptop::step_eval "docker image prune -a --force"
-        ;;
-      gem)
-        laptop::step_start "- Cleanup gem"
-        laptop::step_eval "gem cleanup"
-        ;;
-      npm)
-        laptop::step_start "- Clean npm cache"
-        laptop::step_eval "npm cache clean --force"
-        ;;
-      pod)
-        laptop::step_start "- Clean pod cache"
-        laptop::step_eval "pod cache clean --all"
-        ;;
-      xcrun)
-        laptop::step_start "- Clean XCode simulators"
-        laptop::step_eval "xcrun simctl delete unavailable"
-        ;;
-      zinit)
-        laptop::step_start "- Cleanup zinit"
-        laptop::step_eval "env zsh --login -i -c \"zinit delete --clean --quiet --yes; zinit cclear\""
-        ;;
-      *)
-        echo "Unknown tool: $tool"
-        ;;
+    brew)
+      laptop::step_start "- Cleanup brew"
+      laptop::step_eval "brew cleanup --prune=all"
+      ;;
+    docker)
+      laptop::step_start "- Prune docker images"
+      laptop::step_eval "docker image prune -a --force"
+      ;;
+    gem)
+      laptop::step_start "- Cleanup gem"
+      laptop::step_eval "gem cleanup"
+      ;;
+    npm)
+      laptop::step_start "- Clean npm cache"
+      laptop::step_eval "npm cache clean --force"
+      ;;
+    pod)
+      laptop::step_start "- Clean pod cache"
+      laptop::step_eval "pod cache clean --all"
+      ;;
+    xcrun)
+      laptop::step_start "- Clean XCode simulators"
+      laptop::step_eval "xcrun simctl delete unavailable"
+      ;;
+    zinit)
+      laptop::step_start "- Cleanup zinit"
+      laptop::step_eval "env zsh --login -i -c \"zinit delete --clean --quiet --yes; zinit cclear\""
+      ;;
+    *)
+      echo "Unknown tool: $tool"
+      ;;
     esac
   done
 
@@ -66,16 +66,16 @@ laptop::command__cleanup_run() {
 }
 
 laptop::command__cleanup_result() {
-	b=${1:-0}
-	d=''
-	s=1
-	S=(Bytes {K,M,G,T,E,P,Y,Z}iB)
-	while ((b > 1024)); do
-		d="$(printf ".%02d" $((b % 1024 * 100 / 1024)))"
-		b=$((b / 1024))
-		((s++))
-	done
-	laptop::info "$b$d ${S[$s]} of space was cleaned up"
+  b=${1:-0}
+  d=''
+  s=1
+  S=(Bytes {K,M,G,T,E,P,Y,Z}iB)
+  while ((b > 1024)); do
+    d="$(printf ".%02d" $((b % 1024 * 100 / 1024)))"
+    b=$((b / 1024))
+    ((s++))
+  done
+  laptop::info "$b$d ${S[$s]} of space was cleaned up"
 }
 
 laptop::command__cleanup() {

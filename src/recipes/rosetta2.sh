@@ -8,7 +8,7 @@ laptop::ensure_package__rosetta2() {
   elif ! laptop::command_exists "softwareupdate"; then
     laptop::step_pass
   elif ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
-    laptop::step_exec sudo softwareupdate --install-rosetta  --agree-to-license
+    laptop::step_exec sudo softwareupdate --install-rosetta --agree-to-license
   else
     laptop::step_ok
   fi

@@ -24,10 +24,9 @@ echo
 
 # Remove old laptop playbook
 if [[ ! -x "$DOWNLOAD_DIR/$PACKAGE_ARCHIVE" ]]; then
-	echo "[Info] Clean previous $PACKAGE_NAME"
-	rm -rf "$DOWNLOAD_DIR$PACKAGE_NAME"*
+  echo "[Info] Clean previous $PACKAGE_NAME"
+  rm -rf "$DOWNLOAD_DIR$PACKAGE_NAME"*
 fi
-
 
 # Download and run laptop playbook
 echo "[Info] Download $PACKAGE_NAME"
@@ -40,9 +39,7 @@ tar -zxf "$PACKAGE_ARCHIVE" --directory "$DOWNLOAD_DIR$PACKAGE_NAME" --strip-com
 # This should be subsequently updated in shell settings
 # export PATH=/usr/local/bin:$PATH
 
-
 echo "[Info] Run $PACKAGE_NAME"
 cd "$DOWNLOAD_DIR$PACKAGE_NAME"
 # LAYOUT_PROFILE= will be asked during installation
 "$DOWNLOAD_DIR$PACKAGE_NAME/bin/laptop" configure
-

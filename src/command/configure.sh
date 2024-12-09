@@ -12,13 +12,13 @@ laptop::command__configure() {
     local list_profile
     list_profile=$(laptop::profile_available)
 
-    if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT"  ]]; then
+    if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT" ]]; then
       LAPTOP_PROFILE="$LAPTOP_PROFILE_DEFAULT"
     else
       laptop::info "Please select a configuration profile"
       select LAPTOP_PROFILE in $list_profile; do
-        test -n "$LAPTOP_PROFILE" && break;
-        laptop::error "Invalid Selection";
+        test -n "$LAPTOP_PROFILE" && break
+        laptop::error "Invalid Selection"
       done
     fi
   fi

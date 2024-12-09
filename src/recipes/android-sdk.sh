@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 laptop::ensure_package__android-sdk() {
-  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ];then
+  if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
     brew remove android-sdk &>/dev/null
     laptop::ensure_package_default "android-commandlinetools"
   else

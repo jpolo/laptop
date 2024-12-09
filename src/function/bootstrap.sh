@@ -15,7 +15,7 @@ laptop::bootstrap_macos() {
 }
 
 laptop::bootstrap() {
-  if command -v apt-get &> /dev/null; then
+  if command -v apt-get &>/dev/null; then
     laptop::bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     laptop::bootstrap_macos

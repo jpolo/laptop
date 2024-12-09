@@ -20,7 +20,8 @@ laptop::exec_shell zsh "$LAPTOP_PROFILE_DEFAULT_DIR/0-configure-shell.zsh"
 laptop::exec_shell zsh "$LAPTOP_PROFILE_DEFAULT_DIR/1-configure-all.zsh"
 
 laptop::info "🎉 Finished"
-laptop::info "$(cat << EOF
+laptop::info "$(
+  cat <<EOF
   What next ?
 
   1️⃣ Finish your configuration manually :

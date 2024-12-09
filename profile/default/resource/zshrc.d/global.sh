@@ -13,7 +13,7 @@ if [[ -f "$POWERLEVEL9K_CONFIG_FILE" ]]; then
   source "$POWERLEVEL9K_CONFIG_FILE"
 fi
 
-if command -v zinit &> /dev/null; then
+if command -v zinit &>/dev/null; then
   # When zinit is available
   zinit ice depth=1
   zinit light romkatv/powerlevel10k
@@ -64,11 +64,11 @@ if command -v zinit &> /dev/null; then
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-        zdharma-continuum/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
     blockf \
-        zsh-users/zsh-completions \
+    zsh-users/zsh-completions \
     atload"!_zsh_autosuggest_start" \
-        zsh-users/zsh-autosuggestions
+    zsh-users/zsh-autosuggestions
 
   # Install also as a zsh plugin
   if [ -n "$LAPTOP_GIT_REMOTE" ]; then

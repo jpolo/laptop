@@ -9,9 +9,9 @@ laptop::ensure_ssh_key() {
   email=$(git config --global user.email)
 
   laptop::step_start "- Ensure SSH key '$ssh_key'"
-  if [ -z "$email" ];then
+  if [ -z "$email" ]; then
     laptop::step_fail
-    laptop::error "git config user.email is empty";
+    laptop::error "git config user.email is empty"
   elif ! [ -f "$ssh_key" ]; then
     laptop::step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"
   else

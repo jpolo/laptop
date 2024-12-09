@@ -43,12 +43,10 @@ laptop::step_exec() {
 }
 
 laptop::step_eval() {
-  local output;
+  local output
   local command="$1"
   output=$(eval "$command" 2>&1)
   local exit_code=$?
 
- laptop::step_complete "$command" "$exit_code" "$output"
+  laptop::step_complete "$command" "$exit_code" "$output"
 }
-
-

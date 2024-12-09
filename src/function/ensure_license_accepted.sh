@@ -4,7 +4,7 @@ laptop::ensure_license_accepted() {
   local xcode_message="- Ensure xcodebuild license accepted"
   if laptop::command_exists "xcodebuild"; then
     if ! [[ "$(/usr/bin/xcrun clang 2>&1 || true)" =~ 'license' ]]; then
-    # Already approved
+      # Already approved
       laptop::step_start "$xcode_message"
       laptop::step_ok
     else

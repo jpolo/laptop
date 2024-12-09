@@ -5,6 +5,6 @@ laptop::source_all() {
   # shellcheck disable=SC2044
   for file in $(find "$script_dir" -type f -maxdepth 1 -name '*.sh' -print); do
     # shellcheck disable=SC1090
-    source "$file";
+    source "$file"
   done
 }
