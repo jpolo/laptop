@@ -6,6 +6,7 @@ laptop::command__configure_run() {
 
 laptop::command__configure() {
   laptop::logo
+  laptop::self_check_version
 
   # Select profile
   if [ -z "$LAPTOP_PROFILE" ]; then

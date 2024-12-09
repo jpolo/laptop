@@ -80,6 +80,8 @@ laptop::command__cleanup_result() {
 
 laptop::command__cleanup() {
   laptop::logo
+  laptop::self_check_version
+
   laptop::command__cleanup_detect
   if laptop::confirm "Continue? (Y/n)"; then
     laptop::command__cleanup_run
