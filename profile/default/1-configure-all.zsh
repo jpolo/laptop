@@ -47,6 +47,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git
   laptop::ensure_file "$XDG_CONFIG_HOME/git/config"
   laptop::ensure_git_config "core.ignorecase" "false"
+  laptop::ensure_git_config "init.defaultBranch" "main"
   # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
   laptop::ensure_git_config "push.default" "current"
   laptop::ensure_git_config "push.autoSetupRemote" "true"
