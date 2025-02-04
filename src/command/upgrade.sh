@@ -7,6 +7,7 @@ laptop::command__upgrade_detect() {
   filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   echo "The following tools were found and will be upgraded :"
   echo ""
+  echo "  ✓ laptop (itself)"
   # Iterate over the tools and check for their existence
   for tool in ${filtered_commands}; do
     echo "  ✓ $tool"
