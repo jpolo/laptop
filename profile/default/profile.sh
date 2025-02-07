@@ -3,6 +3,8 @@
 LAPTOP_PROFILE_DEFAULT_DIR=$(laptop::profile_dir default)
 # shellcheck disable=SC2034
 LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
+# Profile privacy settings
+LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 
 # Bootstrap
 laptop::bootstrap
