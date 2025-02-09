@@ -113,12 +113,14 @@ export VSCODE_EXTENSIONS="$XDG_DATA_HOME/code-oss/extensions"
 
 
 # Initialize brew
-for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew"
-do
-  if [ -f "$prefix/bin/brew" ] ; then
-    eval "$($prefix/bin/brew shellenv)"
-  fi
-done
+if ! command -v brew &> /dev/null; then
+  for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew"
+  do
+    if [ -f "$prefix/bin/brew" ] ; then
+      eval "$($prefix/bin/brew shellenv)"
+    fi
+  done
+fi
 
 if [ -z "$ANDROID_HOME" ]; then
   if [ -d "$HOME/Library/Android/sdk" ]; then
@@ -140,8 +142,8 @@ fi
 
 # Some homebrew paths
 if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
-  export PATH=$HOMEBREW_PREFIX/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
+  _path_prepend "$HOMEBREW_PREFIX/opt/ruby/bin"
+  _path_append "$(gem environment gemdir)/bin"
 fi
 _path_append "$HOMEBREW_PREFIX/opt/libpq/bin"
 
@@ -160,7 +162,9 @@ fi
 if [ ! -z "$GEM_HOME" ]; then
   _path_append "$GEM_HOME/bin"
 fi
+_path_prepend "$ASDF_DATA_DIR/shims"
 _path_append "$HOME/.yarn/bin"
+export PATH
 
 
 # Clean functions
