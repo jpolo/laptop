@@ -14,9 +14,8 @@ if [[ -f "$POWERLEVEL9K_CONFIG_FILE" ]]; then
 fi
 
 if command -v zinit &>/dev/null; then
-  # When zinit is available
-  zinit ice depth=1
-  zinit light romkatv/powerlevel10k
+  # Theme
+  zinit ice depth=1; zinit light romkatv/powerlevel10k
 
   # zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
   # zinit light trapd00r/LS_COLORS
@@ -45,14 +44,9 @@ if command -v zinit &>/dev/null; then
     as'completion' OMZ::plugins/docker-compose/_docker-compose
 
   # Brew completions
-  zinit ice wait"0b" lucid blockf
-
-  # Brew completions
   if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-    autoload -Uz compinit
-    compinit
+    autoload -Uz compinit && compinit
   fi
 
   # Zsh OMZ libraries
