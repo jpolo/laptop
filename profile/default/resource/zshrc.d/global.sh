@@ -74,7 +74,8 @@ if command -v zinit &>/dev/null; then
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting
+      zdharma-continuum/fast-syntax-highlighting \
+      OMZ::plugins/colored-man-pages
 
   # Install also as a zsh plugin
   if [ -n "$LAPTOP_GIT_REMOTE" ]; then
