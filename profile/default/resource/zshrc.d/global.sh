@@ -33,9 +33,9 @@ if command -v zinit &>/dev/null; then
   ##
 
   # Docker completion
-  zinit as"completion" wait lucid for \
-    OMZ::plugins/docker/completions/_docker \
-    OMZ::plugins/docker-compose/_docker-compose
+  zinit wait lucid light-mode has"docker" for \
+    as"completion" OMZ::plugins/docker/completions/_docker \
+    as'completion' OMZ::plugins/docker-compose/_docker-compose
 
   # Brew completions
   zinit ice wait"0b" lucid blockf
