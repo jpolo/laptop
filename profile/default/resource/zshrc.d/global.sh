@@ -22,8 +22,9 @@ if command -v zinit &>/dev/null; then
   # zinit light trapd00r/LS_COLORS
 
   # Fish like suggestions
-  zinit ice wait"0a" lucid atload"_zsh_autosuggest_start"
-  zinit light zsh-users/zsh-autosuggestions
+  zinit wait lucid for \
+    atload"!_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions
 
   zinit ice wait:0a lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
   zinit light zsh-users/zsh-history-substring-search
@@ -71,11 +72,9 @@ if command -v zinit &>/dev/null; then
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
+      zdharma-continuum/fast-syntax-highlighting \
     blockf \
-    zsh-users/zsh-completions \
-    atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
+      zsh-users/zsh-completions
 
   # Install also as a zsh plugin
   if [ -n "$LAPTOP_GIT_REMOTE" ]; then
