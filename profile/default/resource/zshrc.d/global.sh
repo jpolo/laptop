@@ -32,8 +32,15 @@ if command -v zinit &>/dev/null; then
   # Completions
   ##
 
+  # Docker completion
+  zinit as"completion" wait lucid for \
+    OMZ::plugins/docker/completions/_docker \
+    OMZ::plugins/docker-compose/_docker-compose
+
   # Brew completions
   zinit ice wait"0b" lucid blockf
+
+
   # Brew completions
   if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
