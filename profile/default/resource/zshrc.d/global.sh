@@ -26,10 +26,11 @@ if command -v zinit &>/dev/null; then
     atload"!_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions
 
-  zinit ice wait:0a lucid atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
-  zinit light zsh-users/zsh-history-substring-search
+  # History Substring Search
+  zinit wait lucid light-mode for \
+    atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down' \
+    zsh-users/zsh-history-substring-search
 
-  ##
   # Completions
   ##
 
@@ -45,7 +46,6 @@ if command -v zinit &>/dev/null; then
 
   # Brew completions
   zinit ice wait"0b" lucid blockf
-
 
   # Brew completions
   if type brew &>/dev/null; then
