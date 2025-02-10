@@ -33,6 +33,11 @@ if command -v zinit &>/dev/null; then
   # Completions
   ##
 
+  # ZSH community completions
+  zinit wait lucid for \
+    blockf \
+      zsh-users/zsh-completions
+
   # Docker completion
   zinit wait lucid light-mode has"docker" for \
     as"completion" OMZ::plugins/docker/completions/_docker \
@@ -49,9 +54,6 @@ if command -v zinit &>/dev/null; then
     autoload -Uz compinit
     compinit
   fi
-
-  # Zsh completions
-  zinit light zsh-users/zsh-completions
 
   # Zsh OMZ libraries
   zinit snippet OMZL::clipboard.zsh
@@ -72,9 +74,7 @@ if command -v zinit &>/dev/null; then
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-    blockf \
-      zsh-users/zsh-completions
+      zdharma-continuum/fast-syntax-highlighting
 
   # Install also as a zsh plugin
   if [ -n "$LAPTOP_GIT_REMOTE" ]; then
