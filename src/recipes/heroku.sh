@@ -2,7 +2,8 @@
 
 laptop::ensure_package__heroku() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
-    laptop::ensure_brew_tap "heroku/brew"
+    # INFO: heroku is now in the main the repo
+    # laptop::ensure_brew_tap "heroku/brew"
     laptop::ensure_package_default "heroku"
   else
     laptop::step_start "- Ensure apt package 'heroku'"
