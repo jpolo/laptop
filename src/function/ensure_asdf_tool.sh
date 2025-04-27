@@ -8,9 +8,9 @@ laptop::ensure_asdf_tool() {
   if ! asdf list "$language" | grep -Fq "$version"; then
     laptop::step_exec \
       asdf install "$language" "$version" &&
-      asdf set "$language" "$version" --home
+      asdf set --home "$language" "$version"
   else
     laptop::step_exec \
-      asdf set "$language" "$version" --home
+      asdf set --home "$language" "$version"
   fi
 }
