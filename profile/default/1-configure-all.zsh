@@ -87,11 +87,11 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_vscode_extension "GitHub.vscode-pull-request-github"
   laptop::ensure_vscode_extension "GitLab.gitlab-workflow"
   laptop::ensure_vscode_extension "ms-vsliveshare.vsliveshare"
-  laptop::ensure_vscode_extension "wayou.vscode-todo-highlight"
   laptop::ensure_vscode_extension "joshbolduc.commitlint"
   laptop::ensure_vscode_extension "streetsidesoftware.code-spell-checker"
   laptop::ensure_vscode_extension "seatonjiang.gitmoji-vscode"
   laptop::ensure_vscode_extension "redhat.vscode-yaml"
+  laptop::ensure_vscode_extension "aaron-bond.better-comments"
 
   # Configure VSCode
   laptop::ensure_npm_package "jsonc-cli"
