@@ -57,11 +57,12 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_ssh_key "ed25519"
 fi
 
-laptop::ensure_asdf_tool "ruby" "latest"
-laptop::ensure_asdf_tool "nodejs" "latest"
-laptop::ensure_asdf_tool "python" "latest"
-laptop::ensure_asdf_tool "java" "adoptopenjdk-17.0.6+10"
-laptop::ensure_asdf_tool "terraform" "latest"
+# Install globally tools using asdf to the version specified in profile/${profile_name}/.tool-versions
+laptop::ensure_asdf_tool "ruby" "$(laptop::profile_asdf_version ruby)"
+laptop::ensure_asdf_tool "nodejs" "$(laptop::profile_asdf_version nodejs)"
+laptop::ensure_asdf_tool "python" "$(laptop::profile_asdf_version python)"
+laptop::ensure_asdf_tool "java" "$(laptop::profile_asdf_version java)"
+laptop::ensure_asdf_tool "terraform" "$(laptop::profile_asdf_version terraform)"
 
 
 # Install programs (non devcontainers only)

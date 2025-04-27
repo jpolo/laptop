@@ -1,0 +1,5 @@
+java adoptopenjdk-17.0.6+10
+nodejs 23.5.0
+python 3.13.1
+ruby 3.4.1
+terraform 1.10.3
