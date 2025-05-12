@@ -109,7 +109,8 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME/solargraph"
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
-export VSCODE_EXTENSIONS="$XDG_DATA_HOME/code-oss/extensions"
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+export VSCODIUM_PORTABLE="$XDG_DATA_HOME/vscode"
 
 
 # Initialize brew
