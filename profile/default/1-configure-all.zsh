@@ -72,6 +72,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:productivity"
   laptop::ensure_package "pack:media"
   laptop::ensure_package "pack:development"
+  laptop::ensure_package "pack:proton"
 
   # Install programs
   laptop::ensure_package "android-studio"
