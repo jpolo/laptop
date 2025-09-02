@@ -121,6 +121,9 @@ if ! command -v brew &> /dev/null; then
     if [ -f "$prefix/bin/brew" ] ; then
       eval "$($prefix/bin/brew shellenv)"
     fi
+    if [ -d "$prefix/bin" ] ; then
+      _path_prepend "$prefix/bin"
+    fi
     if [ -d "$prefix/sbin" ] ; then
       _path_prepend "$prefix/sbin"
     fi
