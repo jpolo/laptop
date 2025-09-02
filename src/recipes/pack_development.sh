@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 laptop::ensure_package__pack:development() {
-  laptop::ensure_package "chromedriver"
+  # laptop::ensure_package "chromedriver" // DEPRECATED
   laptop::ensure_package "docker"
   laptop::ensure_package "iterm2"
   laptop::ensure_package "mongodb-community"
