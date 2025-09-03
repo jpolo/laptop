@@ -114,6 +114,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_vscode_setting '["rubyLsp.rubyVersionManager","identifier"]' '"asdf"'
 fi
 
-laptop::ssh_key_test "git@github.com" || \
-  laptop::warn "SSH invalid on github.com. Please register on https://github.com/settings/keys"
+laptop::ssh_key_test "git@github.com" \
+  && laptop::info "🔑✅ SSH valid on github.com." \
+  || laptop::warn "🔑❌ SSH invalid on github.com. Please register on https://github.com/settings/keys"
 
