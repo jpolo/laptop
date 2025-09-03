@@ -82,6 +82,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
 
   # Install devops / cloud provider
   laptop::ensure_package "heroku"
+  laptop::ensure_package "scalingo"
 
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
