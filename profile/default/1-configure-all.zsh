@@ -54,6 +54,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_git_config "fetch.prune" "true"
   laptop::ensure_git_config "user.email"
   laptop::ensure_git_config "user.name"
+  laptop::ensure_ssh_directory
   laptop::ensure_ssh_key "ed25519"
 fi
 
