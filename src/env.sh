@@ -47,10 +47,6 @@ COLOR_ERROR='\033[31m'
 COLOR_WARNING='\033[1;33m'
 # shellcheck disable=SC2034
 COLOR_INFO='\033[32m'
-# shellcheck disable=SC2034
-BREW_CASK_PACKAGES=(
-  "docker"
-)
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 

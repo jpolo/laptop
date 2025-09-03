@@ -12,13 +12,17 @@ laptop::ensure_brew_package() {
   local brew_args=("--quiet")
 
   # shellcheck disable=SC2076
-  if [[ " ${BREW_CASK_PACKAGES[*]} " =~ " ${package} " ]]; then
+  if [ ! -z "$BREW_CASK" ];then
     brew_args+=("--cask")
   fi
 
   if brew list "$package" &>/dev/null; then
     laptop::step_ok
   else
-    laptop::step_eval "brew install $(quote "${brew_args[@]}") $(quote "$package")"
+    laptop::step_eval "brew install ${brew_args[*]} $(quote "$package")"
   fi
+}
+
+laptop::ensure_brew_cask_package() {
+  BREW_CASK=1 laptop::ensure_brew_package "$1" "$2"
 }
