@@ -28,6 +28,7 @@ laptop::ensure_package__pack:core() {
   laptop::ensure_package "openssl"
 
   # Install ASDF plugins
+  laptop::ensure_asdf_plugin "azure-cli" "https://github.com/itspngu/asdf-azure-cli"
   laptop::ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
   laptop::ensure_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
   laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
