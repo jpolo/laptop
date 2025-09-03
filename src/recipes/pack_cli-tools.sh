@@ -6,8 +6,6 @@ laptop::ensure_package__pack:cli-tools() {
 
   laptop::ensure_package "gitmoji"
   # laptop::ensure_package "google-cloud-sdk" -> TODO: Change method to use asdf install
-  laptop::ensure_package "heroku"
-  # laptop::ensure_package "kubectl" -> TODO: Change method to use asdf install
   laptop::ensure_package "pv"
   laptop::ensure_package "tmux"
   laptop::ensure_package "tree"

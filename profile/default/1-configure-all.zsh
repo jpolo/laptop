@@ -80,6 +80,9 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
 
+  # Install devops / cloud provider
+  laptop::ensure_package "heroku"
+
   # laptop::ensure_package "idb-companion" # deprecated method
   # laptop::ensure_package "flipper" # deprecated method
 
