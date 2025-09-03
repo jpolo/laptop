@@ -15,6 +15,6 @@ laptop::ensure_package__pack:cli-tools() {
   laptop::ensure_package "watchman"
   # laptop::ensure_package "trash"
   laptop::ensure_package "universal-ctags"
-  laptop::ensure_package "xeol"
+  # laptop::ensure_package "xeol"
   laptop::ensure_package "yq"
 }
