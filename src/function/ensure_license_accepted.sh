@@ -9,7 +9,11 @@ laptop::ensure_license_accepted() {
       laptop::step_ok
     else
       laptop::step_start "$xcode_message\n"
-      sudo xcodebuild -license accept && laptop::step_ok || laptop::step_fail
+      if sudo xcodebuild -license accept; then
+        laptop::step_ok
+      else
+        laptop::step_fail
+      fi
     fi
   fi
 }
