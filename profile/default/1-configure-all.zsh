@@ -81,6 +81,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "android-sdk"
 
   # Install devops / cloud provider
+  laptop::ensure_package "az"
   laptop::ensure_package "heroku"
   laptop::ensure_package "scalingo"
 
