@@ -11,6 +11,7 @@ laptop::ensure_package__pack:cli-tools() {
   laptop::ensure_package "tree"
   laptop::ensure_package "fzf"
   laptop::ensure_package "gh"
+  laptop::ensure_package "sops"
   laptop::ensure_package "watchman"
   # laptop::ensure_package "trash"
   laptop::ensure_package "universal-ctags"
