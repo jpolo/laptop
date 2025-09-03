@@ -10,9 +10,7 @@ laptop::ensure_brew_autodate() {
   fi
 
   if ! brew autoupdate status | grep --quiet running; then
-    brew autoupdate start &>/dev/null &&
-      laptop::step_ok ||
-      laptop::step_fail
+    laptop::step_exec brew autoupdate start
   else
     laptop::step_ok
   fi
