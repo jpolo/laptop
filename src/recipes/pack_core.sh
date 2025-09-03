@@ -49,6 +49,7 @@ laptop::ensure_package__pack:core() {
 
   # Cloud, Kubernetes, ...
   laptop::ensure_asdf_plugin "azure-cli" "https://github.com/itspngu/asdf-azure-cli"
+  laptop::ensure_asdf_plugin "duckdb" "https://github.com/asdf-community/asdf-duckdb.git"
   laptop::ensure_asdf_plugin "helm" "https://github.com/Antiarchitect/asdf-helm.git"
   laptop::ensure_asdf_plugin "kubectl" "https://github.com/asdf-community/asdf-kubectl.git"
   laptop::ensure_asdf_plugin "kustomize" "https://github.com/Banno/asdf-kustomize.git"
