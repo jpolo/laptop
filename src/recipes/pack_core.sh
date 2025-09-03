@@ -28,8 +28,6 @@ laptop::ensure_package__pack:core() {
   laptop::ensure_package "openssl"
 
   # Install ASDF plugins
-  laptop::ensure_asdf_plugin "azure-cli" "https://github.com/itspngu/asdf-azure-cli"
-  laptop::ensure_asdf_plugin "helm" "https://github.com/Antiarchitect/asdf-helm.git"
   laptop::ensure_asdf_plugin "java" "https://github.com/halcyon/asdf-java.git"
   laptop::ensure_asdf_plugin "ruby" "https://github.com/asdf-vm/asdf-ruby.git"
   laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
@@ -49,6 +47,9 @@ laptop::ensure_package__pack:core() {
   laptop::ensure_asdf_plugin "vault" "https://github.com/asdf-community/asdf-hashicorp.git"
   laptop::ensure_asdf_plugin "waypoint" "https://github.com/asdf-community/asdf-hashicorp.git"
 
+  # Cloud, Kubernetes, ...
+  laptop::ensure_asdf_plugin "azure-cli" "https://github.com/itspngu/asdf-azure-cli"
+  laptop::ensure_asdf_plugin "helm" "https://github.com/Antiarchitect/asdf-helm.git"
   laptop::ensure_asdf_plugin "kubectl" "https://github.com/asdf-community/asdf-kubectl.git"
   laptop::ensure_asdf_plugin "kustomize" "https://github.com/Banno/asdf-kustomize.git"
   # laptop::ensure_asdf_plugin "cocoapods" "https://github.com/ronnnnn/asdf-cocoapods.git" Removed because not working so well, prefer a Gemfile/Gemfile.lock
