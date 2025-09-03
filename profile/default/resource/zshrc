@@ -108,7 +108,6 @@ fi
 
 # Load .zshrc.local
 _zsh-load-file "$XDG_DATA_HOME/zsh/global"
-_zsh-load-file "$XDG_DATA_HOME/zsh/organization"
 _zsh-load-file "$XDG_DATA_HOME/zsh/personal"
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
