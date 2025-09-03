@@ -27,11 +27,6 @@ laptop::info "$(
   What next ?
 
   1️⃣ Finish your configuration manually :
-    Git :
-      🔑 Authorize your SSH key in your git server
-        - Github : https://github.com/settings/keys
-        - Gitlab : https://gitlab.com/-/profile/keys
-        - Gitlab Self Hosted
     ZSH :
       🔧 Customize your configuration in \$XDG_DATA_HOME/zsh/personal.sh ($XDG_DATA_HOME/zsh/personal.sh)
       🎨 Customize the zsh prompt theme with "p10k configure"
