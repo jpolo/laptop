@@ -2,7 +2,7 @@
 
 laptop::ensure_asdf_tool() {
   local language="$1"
-  local version=$2 || "latest"
+  local version="${2:-latest}"
 
   laptop::step_start "- Ensure asdf '$language' '$version'"
   if ! asdf list "$language" | grep -Fq "$version"; then
