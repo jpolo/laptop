@@ -11,6 +11,7 @@ laptop::ensure_brew_package() {
   export HOMEBREW_NO_ENV_HINTS=1
   local brew_args=("--quiet")
 
+  # shellcheck disable=SC2076
   if [[ " ${BREW_CASK_PACKAGES[*]} " =~ " ${package} " ]]; then
     brew_args+=("--cask")
   fi
