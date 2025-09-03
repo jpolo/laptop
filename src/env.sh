@@ -32,7 +32,7 @@ COLUMNS=100
 if [ "$COLUMNS" = "0" ]; then
   COLUMNS=80
 fi
-COL=$(($COLUMNS - 8))
+COL=$((COLUMNS - 8))
 # shellcheck disable=SC2034
 SET_COL="\\033[${COL}G"
 # shellcheck disable=SC2034
