@@ -17,3 +17,6 @@ format:
 .PHONY: test
 test:
 	$(Q) ./test/suite.sh
+
+.PHONY: validate
+validate: lint test
