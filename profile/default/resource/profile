@@ -115,16 +115,13 @@ export VOLTA_HOME="$XDG_DATA_HOME/volta"
 
 
 # Initialize brew
-if ! command -v brew &> /dev/null; then
-  for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew"
-  do
-    if [ -f "$prefix/bin/brew" ] ; then
-      eval "$($prefix/bin/brew shellenv)"
-    fi
-    _path_prepend "$prefix/bin"
-    _path_prepend "$prefix/sbin"
-  done
-fi
+for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew"
+do
+  if [ -f "$prefix/bin/brew" ] ; then
+    eval "$("$prefix/bin/brew" shellenv)"
+    break
+  fi
+done
 
 if [ -z "$ANDROID_HOME" ]; then
   if [ -d "$HOME/Library/Android/sdk" ]; then
@@ -144,19 +141,10 @@ fi
 #   source "${ZDOTDIR:-$HOME}/.zprofile"
 # fi
 
-# Some homebrew paths
-if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
-  _path_prepend "$HOMEBREW_PREFIX/opt/ruby/bin"
-  _path_append "$(gem environment gemdir)/bin"
-fi
-_path_append "$HOMEBREW_PREFIX/opt/libpq/bin"
-
 # set PATH so it includes user's private bin if it exists
 _path_prepend "/usr/sbin"
 _path_prepend "/usr/local/bin"
 _path_prepend "/snap/bin"
-_path_prepend "$HOME/Application"
-_path_prepend "$HOME/Applications"
 _path_prepend "$HOME/bin"
 _path_prepend "$HOME/.bin"
 _path_prepend "$HOME/.local/bin"
@@ -166,6 +154,8 @@ fi
 if [ ! -z "$GEM_HOME" ]; then
   _path_append "$GEM_HOME/bin"
 fi
+_path_append "$HOME/Application"
+_path_append "$HOME/Applications"
 _path_prepend "$ASDF_DATA_DIR/shims"
 _path_append "$HOME/.yarn/bin"
 export PATH
