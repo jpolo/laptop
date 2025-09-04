@@ -26,6 +26,7 @@ if command -v zinit &>/dev/null; then
       zsh-users/zsh-autosuggestions
 
   # History Substring Search
+  # shellcheck disable=SC2016
   zinit wait lucid light-mode for \
     atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down' \
     zsh-users/zsh-history-substring-search
