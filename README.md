@@ -96,7 +96,7 @@ Although there are some implementation tradeoffs, it should never limit develope
   <summary>🎨 Customize ZSH Theme</summary>
 
   ```console
-  > p10k configure
+  > code $STARSHIP_CONFIG
   ```
 
 </details>

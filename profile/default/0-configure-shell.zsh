@@ -12,6 +12,6 @@ laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc.d/globa
 if [ ! -f "$XDG_DATA_HOME/zsh/personal.sh" ];then
   laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc.d/personal.sh" "$XDG_DATA_HOME/zsh/personal.sh"
 fi
-if [ ! -f "${POWERLEVEL9K_CONFIG_FILE:-$XDG_CONFIG_HOME/zsh/p10k.zsh}" ];then
-  laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/p10k.zsh" "${POWERLEVEL9K_CONFIG_FILE:-$XDG_CONFIG_HOME/zsh/p10k.zsh}"
+if [ ! -f "${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}" ];then
+  laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/starship.toml" "${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}"
 fi

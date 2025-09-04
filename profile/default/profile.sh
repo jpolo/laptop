@@ -29,7 +29,7 @@ laptop::info "$(
   1️⃣ Finish your configuration manually :
     ZSH :
       🔧 Customize your configuration in \$XDG_DATA_HOME/zsh/personal.sh ($XDG_DATA_HOME/zsh/personal.sh)
-      🎨 Customize the zsh prompt theme with "p10k configure"
+      🎨 Customize the zsh prompt theme with "$EDITOR $STARSHIP_CONFIG"
   2️⃣ Start developing !
     ⤵️ Clone your repositories in ~/Code
     📸 Manage your Capture in ~/Captures

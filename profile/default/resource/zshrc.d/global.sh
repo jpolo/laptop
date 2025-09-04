@@ -5,18 +5,17 @@
 # 🔒🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-##
-# Theme
-##
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-POWERLEVEL9K_CONFIG_FILE="${XDG_CONFIG_HOME}/zsh/p10k.zsh"
-if [[ -f "$POWERLEVEL9K_CONFIG_FILE" ]]; then
-  source "$POWERLEVEL9K_CONFIG_FILE"
-fi
+
 
 if command -v zinit &>/dev/null; then
-  # Theme
-  zinit ice depth=1; zinit light romkatv/powerlevel10k
+  ##
+  # Starship Theme
+  ##
+  zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+  zinit light starship/starship
+
 
   # zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
   # zinit light trapd00r/LS_COLORS

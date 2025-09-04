@@ -1,0 +1,5 @@
+# Starship.rs configuration
+#
+# See https://starship.rs/config/ for further information
+
+"$schema" = 'https://starship.rs/config-schema.json'
