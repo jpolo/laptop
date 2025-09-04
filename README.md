@@ -11,7 +11,7 @@ Its core values are :
 
 - 🤖 Automated : provide all *required* tools with almost no manual action
 - ✅ Safe : multiple runs should always work
-- 🧑‍🏫 Opiniated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
+- 🧑‍🏫 Opinionated yet Customizable : some configurations might not suit everybody, but for most people it will provide a great working experience. When possible, provide a simple way to customize/override setup
 
 ## 🚀 Launch installation
 
@@ -152,13 +152,4 @@ Contributions are welcome especially when :
 
 If you like this repository and it made you win a lot of time / money (by not hiring a devops for example :) ), you may consider a small donation to help me maintaining this repository [Link to my profile](https://github.com/jpolo#-donate).
 
-[asdf-vm]: https://github.com/asdf-vm/asdf
-[Git]: https://git-scm.com/
-[GitHub CLI]: https://cli.github.com/
 [Homebrew]: http://brew.sh/
-[PowerLevel10k]: https://github.com/romkatv/powerlevel10k
-[SSH]: https://en.wikipedia.org/wiki/Secure_Shell
-[Visual Studio Code]: https://code.visualstudio.com/
-[Watchman]: https://facebook.github.io/watchman/
-[ZDharmaContinuum/zinit]: https://zdharma-continuum.github.io/
-[ZSH]: http://www.zsh.org/

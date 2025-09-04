@@ -4,7 +4,7 @@ Shell :
 
 - [ZSH] default shell
 - [ZDharmaContinuum/zinit] default zsh plugin manager
-- [PowerLevel10k] default zsh theme (customizable)
+- [Starship] Cross-shell prompt
 - [SSH] default algorithm `ed25519` [(explanation)](https://docs.gitlab.com/ee/user/ssh.html#ed25519-ssh-keys)
 
 Source Control Manager :
@@ -36,7 +36,7 @@ Misc :
 [asdf-vm]: https://github.com/asdf-vm/asdf
 [Git]: https://git-scm.com/
 [GitHub CLI]: https://cli.github.com/
-[PowerLevel10k]: https://github.com/romkatv/powerlevel10k
+[Starship]: https://starship.rs
 [SSH]: https://en.wikipedia.org/wiki/Secure_Shell
 [Visual Studio Code]: https://code.visualstudio.com/
 [Watchman]: https://facebook.github.io/watchman/
