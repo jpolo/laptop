@@ -76,6 +76,8 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:development"
   laptop::ensure_package "pack:proton"
 
+  laptop::ensure_package "orbstack"
+
   # Install programs
   laptop::ensure_package "android-studio"
   laptop::ensure_package "android-sdk"
