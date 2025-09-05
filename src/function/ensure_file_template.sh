@@ -17,7 +17,7 @@ laptop::ensure_file_template() {
     case $1 in
       -f|--force)
         force=1
-        # shift
+        shift
         ;;
       -*)
         echo "Unknown option $1"
