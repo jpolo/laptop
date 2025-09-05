@@ -20,9 +20,9 @@ laptop::ensure_package "asdf"
 laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
-# Test laptop::ensure_asdf_tool
-laptop::ensure_asdf_tool "nodejs" "latest:20"
-laptop::ensure_asdf_tool "nodejs" "latest:20"
+# Test laptop::ensure_asdf_package
+laptop::ensure_asdf_package "nodejs" "latest:20"
+laptop::ensure_asdf_package "nodejs" "latest:20"
 
 # Test laptop::ensure_directory
 laptop::ensure_directory "./folder_create/"

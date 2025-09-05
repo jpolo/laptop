@@ -3,9 +3,9 @@
 # Install asdf `package` if not present
 #
 # Usage:
-#   laptop::ensure_asdf_tool <package> <version>
+#   laptop::ensure_asdf_package <package> <version>
 #
-laptop::ensure_asdf_tool() {
+laptop::ensure_asdf_package() {
   local package="$1"
   local version="${2:-latest}"
 
