@@ -7,15 +7,7 @@ LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 
 # Bootstrap
-laptop::bootstrap
-laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/profile" "$HOME/.profile"
-laptop::set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
-laptop::set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
-
-laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zprofile" "$HOME/.zprofile"
-laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc" "$HOME/.zshrc"
-# for backward compatibility
-laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/bash_profile" "$HOME/.bash_profile"
+laptop::configure_default_shell
 
 # Installation
 laptop::exec_shell zsh "$LAPTOP_PROFILE_DEFAULT_DIR/0-configure-shell.zsh"
