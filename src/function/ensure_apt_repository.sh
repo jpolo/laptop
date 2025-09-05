@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Add `repo_url` as an apt repository url using `repo_key`
+#
+# Usage:
+#   laptop::ensure_apt_package <repo_url> <repo_key>
+#
 laptop::ensure_apt_repository() {
   local repo_url="$1"
   local repo_key="$2"

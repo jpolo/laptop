@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+# Install apt `package` if not present
+#
+# Usage:
+#   laptop::ensure_apt_package <package>
+#
 laptop::ensure_apt_package() {
-  local executable="$1"
-  local package=${2:-$executable}
+  local package="$1"
 
-  laptop::step_start "- Ensure apt package '$executable'"
+  laptop::step_start "- Ensure apt package '$package'"
   if dpkg -s "$package" &>/dev/null; then
     laptop::step_ok
   else

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Ensure apt package are up to date
+#
+# Usage:
+#   laptop::ensure_apt_updated
+#
 laptop::ensure_apt_updated() {
   laptop::step_start "- Ensure APT updated"
   # shellcheck disable=SC2012
