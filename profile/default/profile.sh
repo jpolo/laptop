@@ -7,6 +7,7 @@ LAPTOP_PROFILE_CURRENT_DIR=$(laptop::profile_dir)
 LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 
 # Bootstrap
+laptop::bootstrap
 laptop::configure_default_shell
 
 # Installation

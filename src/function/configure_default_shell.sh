@@ -10,7 +10,6 @@ laptop::configure_default_shell() {
   profile_dir=$(laptop::profile_dir default)
 
   # Bootstrap
-  laptop::bootstrap
   laptop::ensure_file_template "$profile_dir/resource/.profile" "$HOME/.profile" --force
   laptop::set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
   laptop::set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
