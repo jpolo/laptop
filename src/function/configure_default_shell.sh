@@ -11,16 +11,14 @@ laptop::configure_default_shell() {
 
   # Bootstrap
   laptop::bootstrap
-  laptop::ensure_file_template "$profile_dir/resource/.profile" "$HOME/.profile"
+  laptop::ensure_file_template "$profile_dir/resource/.profile" "$HOME/.profile" --force
   laptop::set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
   laptop::set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
 
-  laptop::ensure_file_template "$profile_dir/resource/.zprofile" "$HOME/.zprofile"
-  laptop::ensure_file_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc"
+  laptop::ensure_file_template "$profile_dir/resource/.zprofile" "$HOME/.zprofile" --force
+  laptop::ensure_file_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
   # for backward compatibility with bash
-  laptop::ensure_file_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile"
+  laptop::ensure_file_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile" --force
 
-  if [ ! -f "$HOME/.zshrc.local" ];then
-    laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc.local" "$HOME/.zshrc.local"
-  fi
+  laptop::ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/.zshrc.local" "$HOME/.zshrc.local"
 }
