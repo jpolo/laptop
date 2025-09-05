@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Ensure apt package are up to date
+# Ensure apt packages are up to date
 #
 # Usage:
 #   laptop::ensure_apt_updated

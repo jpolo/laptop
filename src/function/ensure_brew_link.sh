@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Install brew link for `package` if not present
+#
+# Usage:
+#   laptop::ensure_brew_link <package>
+#
 laptop::ensure_brew_link() {
   local package=${1}
 

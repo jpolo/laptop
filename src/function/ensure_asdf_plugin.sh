@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Install asdf plugin `name` if not present
+#
+# Usage:
+#   laptop::ensure_asdf_plugin <name> <url>
+#
 laptop::ensure_asdf_plugin() {
   local name="$1"
   local url="$2"
