@@ -73,7 +73,6 @@ Although there are some implementation tradeoffs, it should never limit develope
 
   Here is the order of profile loading :
     - 🔒 `$XDG_DATA_HOME/zsh/global.{sh,zsh}` : default settings (always overwritten by `laptop`)
-    - 🔒 `$XDG_DATA_HOME/zsh/organization.{sh,zsh}` : organization settings (always overwritten by `laptop`)
     - ✍️ `$XDG_DATA_HOME/zsh/personal.{sh,zsh}` : custom personal settings
     - ✍️ `.zshrc.local` : For local override (that should not be synched between devices)
 
@@ -81,7 +80,7 @@ Although there are some implementation tradeoffs, it should never limit develope
     - `.zshrc.local` : For local override (that should not be synched between devices)
     - `$XDG_DATA_HOME/zsh/*.sh` : For generic overrides (zsh plugins, etc). Files are included in alphabetic order, so as a convention each file starts with two digits.
 
-  Example `$XDG_DATA_HOME/zsh/20_personal.sh` :
+  Example `$XDG_DATA_HOME/zsh/personal.sh` :
 
   ```shell
   # Load OhMyZSH ruby plugin
