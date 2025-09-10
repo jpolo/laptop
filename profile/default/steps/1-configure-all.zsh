@@ -76,7 +76,12 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop::ensure_package "pack:development"
   laptop::ensure_package "pack:proton"
 
+  laptop::ensure_ollama_model "qwen2.5-coder:1.5b"
+  laptop::ensure_ollama_model "nomic-embed-text"
   laptop::ensure_package "orbstack"
+
+  laptop::ensure_package "mongodb-community"
+  laptop::ensure_package "mongodb-database-tools"
 
   # Install programs
   laptop::ensure_package "android-studio"
