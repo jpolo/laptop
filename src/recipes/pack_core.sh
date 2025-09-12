@@ -23,6 +23,7 @@ laptop_ensure_package__pack:core() {
   laptop_ensure_package "graphviz"
   laptop_ensure_package "imagemagick"
   laptop_ensure_package "libpq"
+  laptop_ensure_package "mysql-client"
   laptop_ensure_package "libyaml"
   laptop_ensure_package "libvips"
   laptop_ensure_package "openssl"
