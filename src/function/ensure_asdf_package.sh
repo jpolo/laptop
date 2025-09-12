@@ -10,7 +10,7 @@ laptop_ensure_asdf_package() {
   local version="${2:-latest}"
 
   laptop_step_start "- Ensure asdf '$package' '$version'"
-  if ! asdf list "$package" | grep -Fq "$version"; then
+  if ! asdf list "$package" 2>/dev/null | grep -Fq "$version"; then
     laptop_step_exec \
       asdf install "$package" "$version" &&
       asdf set --home "$package" "$version"
