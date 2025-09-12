@@ -16,8 +16,6 @@ if [ -x "$(command -v brew)" ]; then
   export LAPTOP_PACKAGE_MANAGER=brew
 elif [ -x "$(command -v apt-get)" ]; then
   export LAPTOP_PACKAGE_MANAGER=apt-get
-else
-  return 0
 fi
 
 ## Screen Dimensions
