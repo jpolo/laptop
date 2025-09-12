@@ -11,7 +11,6 @@ laptop_bootstrap_macos() {
   laptop_ensure_package "xcode-command-line-tools"
   laptop_ensure_shell "$LAPTOP_SHELL"
   laptop_ensure_package "brew"
-  laptop_ensure_brew_autodate
   # set laptop package manager
   export LAPTOP_PACKAGE_MANAGER=brew
 }
