@@ -3,13 +3,13 @@
 # Confirm
 #
 # Example 1 :
-#   laptop::confirm Delete file1? && echo rm file1
+#   laptop_confirm Delete file1? && echo rm file1
 #
 # Example 2 :
-#   laptop::confirm Delete file2?
+#   laptop_confirm Delete file2?
 #   if [ $? -eq 0 ]
 #
-laptop::confirm() {
+laptop_confirm() {
   echo -n "$* "
   read -e -r answer
   for response in y Y yes YES Yes Sure sure SURE OK ok Ok; do

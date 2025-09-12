@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__pack:microsoft() {
-  laptop::ensure_package_default "microsoft-teams"
+laptop_ensure_package__pack:microsoft() {
+  laptop_ensure_package_default "microsoft-teams"
 }

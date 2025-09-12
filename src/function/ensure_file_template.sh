@@ -3,11 +3,11 @@
 # Ensure file is created using template
 #
 # Usage :
-#   laptop::ensure_file_template <template> <target>
+#   laptop_ensure_file_template <template> <target>
 # Options:
 #   --force  Force to overwrite file if present
 #
-laptop::ensure_file_template() {
+laptop_ensure_file_template() {
   local template="$1"
   local target="$2"
   local force=0
@@ -30,11 +30,11 @@ laptop::ensure_file_template() {
     esac
   done
 
-  laptop::step_start "- Ensure file '$target'$([ "$force" -eq 1 ] && echo ' (force)') "
+  laptop_step_start "- Ensure file '$target'$([ "$force" -eq 1 ] && echo ' (force)') "
   if [ "$force" -eq 0 ] && [ -f "$target" ]; then
-    laptop::step_pass
+    laptop_step_pass
   else
-    laptop::step_eval "\
+    laptop_step_eval "\
     mkdir -p $(quote "$(dirname "$target")") && \
     cp -f $(quote "$template") $(quote "$target") \
     "

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-laptop::ensure_defaults() {
-  laptop::step_start "- Ensure defaults $*"
-  if laptop::command_exists "defaults"; then
-    laptop::step_exec defaults write "$*"
+laptop_ensure_defaults() {
+  laptop_step_start "- Ensure defaults $*"
+  if laptop_command_exists "defaults"; then
+    laptop_step_exec defaults write "$*"
   else
-    laptop::step_pass
+    laptop_step_pass
   fi
 }

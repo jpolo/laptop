@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop::self_updated() {
+laptop_self_updated() {
   local current_branch
   local behind_count
 

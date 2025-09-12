@@ -2,9 +2,9 @@
 
 #
 # Usage:
-#   laptop::var_in_file "my_shell.sh" "MY_VARIABLE" "MY_VALUE"
+#   laptop_var_in_file "my_shell.sh" "MY_VARIABLE" "MY_VALUE"
 #
-laptop::var_in_file() {
+laptop_var_in_file() {
   local script_file="$1"
   local var_name="$2"
   local new_value="$3"

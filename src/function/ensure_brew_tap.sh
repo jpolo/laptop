@@ -3,10 +3,10 @@
 # Install brew tap `tap` if not present
 #
 # Usage:
-#   laptop::ensure_brew_tap <tap>
+#   laptop_ensure_brew_tap <tap>
 #
-laptop::ensure_brew_tap() {
+laptop_ensure_brew_tap() {
   local tap="$1"
-  laptop::step_start "- Ensure brew tap '$tap'"
-  laptop::step_eval "brew tap $tap"
+  laptop_step_start "- Ensure brew tap '$tap'"
+  laptop_step_eval "brew tap $tap"
 }

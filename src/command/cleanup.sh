@@ -2,9 +2,9 @@
 
 __LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zinit")
 
-laptop::command__cleanup_detect() {
+laptop_command__cleanup_detect() {
   local filtered_commands
-  filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
+  filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   echo "The following tools were found and will be cleaned :"
   echo ""
   # Iterate over the tools and check for their existence
@@ -14,42 +14,42 @@ laptop::command__cleanup_detect() {
   echo ""
 }
 
-laptop::command__cleanup_run() {
+laptop_command__cleanup_run() {
   local filtered_commands
-  filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
+  filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_CLEANUP_TOOLS[@]}")
   local initial_available_space
-  initial_available_space=$(laptop::disk_available_space)
+  initial_available_space=$(laptop_disk_available_space)
 
   # Cleanup by command
   for tool in $filtered_commands; do
     case "$tool" in
     brew)
-      laptop::step_start "- Cleanup brew"
-      laptop::step_eval "brew cleanup --prune=all"
+      laptop_step_start "- Cleanup brew"
+      laptop_step_eval "brew cleanup --prune=all"
       ;;
     docker)
-      laptop::step_start "- Prune docker images"
-      laptop::step_eval "docker image prune -a --force"
+      laptop_step_start "- Prune docker images"
+      laptop_step_eval "docker image prune -a --force"
       ;;
     gem)
-      laptop::step_start "- Cleanup gem"
-      laptop::step_eval "gem cleanup"
+      laptop_step_start "- Cleanup gem"
+      laptop_step_eval "gem cleanup"
       ;;
     npm)
-      laptop::step_start "- Clean npm cache"
-      laptop::step_eval "npm cache clean --force"
+      laptop_step_start "- Clean npm cache"
+      laptop_step_eval "npm cache clean --force"
       ;;
     pod)
-      laptop::step_start "- Clean pod cache"
-      laptop::step_eval "pod cache clean --all"
+      laptop_step_start "- Clean pod cache"
+      laptop_step_eval "pod cache clean --all"
       ;;
     xcrun)
-      laptop::step_start "- Clean XCode simulators"
-      laptop::step_eval "xcrun simctl delete unavailable"
+      laptop_step_start "- Clean XCode simulators"
+      laptop_step_eval "xcrun simctl delete unavailable"
       ;;
     zinit)
-      laptop::step_start "- Cleanup zinit"
-      laptop::step_eval "env zsh --login -i -c \"zinit cclear; zinit delete --clean --quiet --yes\""
+      laptop_step_start "- Cleanup zinit"
+      laptop_step_eval "env zsh --login -i -c \"zinit cclear; zinit delete --clean --quiet --yes\""
       ;;
     *)
       echo "Unknown tool: $tool"
@@ -58,14 +58,14 @@ laptop::command__cleanup_run() {
   done
 
   # Cleanup by directory
-  laptop::ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
-  laptop::ensure_directory_empty "$HOME/.gradle/caches"
+  laptop_ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
+  laptop_ensure_directory_empty "$HOME/.gradle/caches"
 
-  new_available_space=$(laptop::disk_available_space)
-  laptop::command__cleanup_result $((new_available_space - initial_available_space))
+  new_available_space=$(laptop_disk_available_space)
+  laptop_command__cleanup_result $((new_available_space - initial_available_space))
 }
 
-laptop::command__cleanup_result() {
+laptop_command__cleanup_result() {
   b=${1:-0}
   d=''
   s=1
@@ -75,20 +75,20 @@ laptop::command__cleanup_result() {
     b=$((b / 1024))
     ((s++))
   done
-  laptop::info "$b$d ${S[$s]} of space was cleaned up"
+  laptop_info "$b$d ${S[$s]} of space was cleaned up"
 }
 
-laptop::command__cleanup() {
-  laptop::logo
-  laptop::self_check_version
+laptop_command__cleanup() {
+  laptop_logo
+  laptop_self_check_version
 
-  laptop::command__cleanup_detect
-  if laptop::confirm "Continue? (Y/n)"; then
-    laptop::command__cleanup_run
+  laptop_command__cleanup_detect
+  if laptop_confirm "Continue? (Y/n)"; then
+    laptop_command__cleanup_run
 
-    laptop::info "🎉 Cleanup successful"
+    laptop_info "🎉 Cleanup successful"
   else
-    laptop::error "🛑 Cleanup aborted"
+    laptop_error "🛑 Cleanup aborted"
     exit 1
   fi
 }

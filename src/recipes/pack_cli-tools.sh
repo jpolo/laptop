@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__pack:cli-tools() {
+laptop_ensure_package__pack:cli-tools() {
   # A pack of useful tools
-  laptop::ensure_package "adr-tools"
+  laptop_ensure_package "adr-tools"
 
-  laptop::ensure_package "gitmoji"
-  # laptop::ensure_package "google-cloud-sdk" -> TODO: Change method to use asdf install
-  laptop::ensure_package "pv"
-  laptop::ensure_package "tmux"
-  laptop::ensure_package "tree"
-  laptop::ensure_package "fzf"
-  laptop::ensure_package "gh"
-  laptop::ensure_package "sops"
-  laptop::ensure_package "starship"
-  laptop::ensure_package "watchman"
-  # laptop::ensure_package "trash"
-  laptop::ensure_package "universal-ctags"
-  # laptop::ensure_package "xeol"
-  laptop::ensure_package "yq"
+  laptop_ensure_package "gitmoji"
+  # laptop_ensure_package "google-cloud-sdk" -> TODO: Change method to use asdf install
+  laptop_ensure_package "pv"
+  laptop_ensure_package "tmux"
+  laptop_ensure_package "tree"
+  laptop_ensure_package "fzf"
+  laptop_ensure_package "gh"
+  laptop_ensure_package "sops"
+  laptop_ensure_package "starship"
+  laptop_ensure_package "watchman"
+  # laptop_ensure_package "trash"
+  laptop_ensure_package "universal-ctags"
+  # laptop_ensure_package "xeol"
+  laptop_ensure_package "yq"
 }

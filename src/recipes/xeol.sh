@@ -5,12 +5,12 @@
 #
 # @see https://github.com/xeol-io/xeol
 #
-laptop::ensure_package__xeol() {
+laptop_ensure_package__xeol() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
     # xeol is now in the main repo
-    # laptop::ensure_brew_tap "xeol-io/xeol"
-    laptop::ensure_package_default "xeol"
+    # laptop_ensure_brew_tap "xeol-io/xeol"
+    laptop_ensure_package_default "xeol"
   else
-    laptop::ensure_package_default "xeol"
+    laptop_ensure_package_default "xeol"
   fi
 }

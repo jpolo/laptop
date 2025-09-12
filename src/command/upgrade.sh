@@ -2,9 +2,9 @@
 
 __LAPTOP_UPGRADE_TOOLS=("brew" "zinit" "asdf" "code" "sdkmanager" "softwareupdate")
 
-laptop::command__upgrade_detect() {
+laptop_command__upgrade_detect() {
   local filtered_commands
-  filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
+  filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   echo "The following tools were found and will be upgraded :"
   echo ""
   echo "  ✓ laptop (itself)"
@@ -15,35 +15,35 @@ laptop::command__upgrade_detect() {
   echo ""
 }
 
-laptop::command__upgrade_run() {
-  laptop::ensure_license_accepted
+laptop_command__upgrade_run() {
+  laptop_ensure_license_accepted
 
   local filtered_commands
-  filtered_commands=$(laptop::filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
+  filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
     apt-get)
-      laptop::ensure_apt_updated
+      laptop_ensure_apt_updated
       ;;
     asdf)
-      laptop::ensure_asdf_updated
+      laptop_ensure_asdf_updated
       ;;
     brew)
-      laptop::ensure_brew_updated
+      laptop_ensure_brew_updated
       ;;
     code)
-      laptop::ensure_vscode_updated
+      laptop_ensure_vscode_updated
       ;;
     sdkmanager)
-      laptop::ensure_sdkmanager_updated
+      laptop_ensure_sdkmanager_updated
       ;;
     softwareupdate)
-      laptop::step_start "- Upgrade macOS"
+      laptop_step_start "- Upgrade macOS"
       echo ''
       softwareupdate --install --all
       ;;
     zinit)
-      laptop::ensure_zinit_updated
+      laptop_ensure_zinit_updated
       ;;
     *)
       echo "Unknown tool: $tool"
@@ -52,15 +52,15 @@ laptop::command__upgrade_run() {
   done
 }
 
-laptop::command__upgrade() {
-  laptop::logo
-  laptop::command__upgrade_detect
-  if laptop::confirm "Continue? (Y/n)"; then
-    laptop::command__upgrade_run
+laptop_command__upgrade() {
+  laptop_logo
+  laptop_command__upgrade_detect
+  if laptop_confirm "Continue? (Y/n)"; then
+    laptop_command__upgrade_run
 
-    laptop::info "🎉 Upgrade successful"
+    laptop_info "🎉 Upgrade successful"
   else
-    laptop::error "🛑 Upgrade aborted"
+    laptop_error "🛑 Upgrade aborted"
     exit 1
   fi
 }

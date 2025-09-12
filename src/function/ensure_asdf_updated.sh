@@ -3,9 +3,9 @@
 # Ensure asdf packages are up to date
 #
 # Usage:
-#   laptop::ensure_asdf_updated
+#   laptop_ensure_asdf_updated
 #
-laptop::ensure_asdf_updated() {
-  laptop::step_start "- Upgrade asdf"
-  laptop::step_eval "asdf plugin update --all"
+laptop_ensure_asdf_updated() {
+  laptop_step_start "- Upgrade asdf"
+  laptop_step_eval "asdf plugin update --all"
 }

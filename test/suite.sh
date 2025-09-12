@@ -10,24 +10,24 @@ mkdir -p "test_data"
 cd "test_data" || exit 1
 
 # Try to run brew installation
-laptop::ensure_package "brew"
+laptop_ensure_package "brew"
 
-# Test laptop::ensure_package
-laptop::ensure_package "asdf"
-laptop::ensure_package "asdf"
+# Test laptop_ensure_package
+laptop_ensure_package "asdf"
+laptop_ensure_package "asdf"
 
-# Test laptop::ensure_asdf_plugin
-laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
-laptop::ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+# Test laptop_ensure_asdf_plugin
+laptop_ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
+laptop_ensure_asdf_plugin "nodejs" "https://github.com/asdf-vm/asdf-nodejs.git"
 
-# Test laptop::ensure_asdf_package
-laptop::ensure_asdf_package "nodejs" "latest:20"
-laptop::ensure_asdf_package "nodejs" "latest:20"
+# Test laptop_ensure_asdf_package
+laptop_ensure_asdf_package "nodejs" "latest:20"
+laptop_ensure_asdf_package "nodejs" "latest:20"
 
-# Test laptop::ensure_directory
-laptop::ensure_directory "./folder_create/"
-laptop::ensure_directory "./folder_create/"
+# Test laptop_ensure_directory
+laptop_ensure_directory "./folder_create/"
+laptop_ensure_directory "./folder_create/"
 
-# Test laptop::ensure_file
-laptop::ensure_file "./test_file_create"
-laptop::ensure_file "./test_file_create"
+# Test laptop_ensure_file
+laptop_ensure_file "./test_file_create"
+laptop_ensure_file "./test_file_create"

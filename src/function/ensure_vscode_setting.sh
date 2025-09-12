@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop::ensure_vscode_setting() {
+laptop_ensure_vscode_setting() {
   local json_path="$1"
   local json_value="$2"
   local vscode_settings_file=""
@@ -19,12 +19,12 @@ laptop::ensure_vscode_setting() {
 
   # Vérifier si la requête est vide
   if [ -z "$json_path" ]; then
-    laptop::error "La requête est vide."
+    laptop_error "La requête est vide."
     return 1
   fi
 
-  laptop::step_start "- Ensure VSCode Setting $json_path=$json_value"
-  laptop::step_eval "\
+  laptop_step_start "- Ensure VSCode Setting $json_path=$json_value"
+  laptop_step_eval "\
   cat $(quote "$vscode_settings_file") | \
   jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file") \
   "

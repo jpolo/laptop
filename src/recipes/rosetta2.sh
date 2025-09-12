@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__rosetta2() {
+laptop_ensure_package__rosetta2() {
   # Install Rosetta
-  laptop::step_start "- Ensure Rosetta 2"
+  laptop_step_start "- Ensure Rosetta 2"
   if ! is_arm; then
-    laptop::step_pass
-  elif ! laptop::command_exists "softwareupdate"; then
-    laptop::step_pass
+    laptop_step_pass
+  elif ! laptop_command_exists "softwareupdate"; then
+    laptop_step_pass
   elif ! test -f /Library/Apple/usr/share/rosetta/rosetta; then
-    laptop::step_exec sudo softwareupdate --install-rosetta --agree-to-license
+    laptop_step_exec sudo softwareupdate --install-rosetta --agree-to-license
   else
-    laptop::step_ok
+    laptop_step_ok
   fi
 }

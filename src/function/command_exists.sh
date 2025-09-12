@@ -2,9 +2,9 @@
 
 #
 # Usage:
-#   laptop::command_exists <command>
+#   laptop_command_exists <command>
 #
-laptop::command_exists() {
+laptop_command_exists() {
   local tool
   tool="$1"
   case "$tool" in

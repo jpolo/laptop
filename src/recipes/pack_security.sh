@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__pack:security() {
-  laptop::ensure_package "macpass"
+laptop_ensure_package__pack:security() {
+  laptop_ensure_package "macpass"
 }

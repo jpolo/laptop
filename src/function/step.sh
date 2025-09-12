@@ -1,52 +1,52 @@
 #!/usr/bin/env bash
 
-laptop::step_start() {
+laptop_step_start() {
   echo -n -e "${@}"
   return 0
 }
 
-laptop::step_ok() {
+laptop_step_ok() {
   # echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
   return 0
 }
 
-laptop::step_fail() {
+laptop_step_fail() {
   # echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
   return 0
 }
 
-laptop::step_pass() {
+laptop_step_pass() {
   #echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
   return 0
 }
 
-laptop::step_complete() {
+laptop_step_complete() {
   local command=$1
   local exit_code=$2
   local output=$3
 
   if [ "$exit_code" = "0" ]; then
-    laptop::step_ok
+    laptop_step_ok
   else
-    laptop::step_fail
-    laptop::error "Command failed \
+    laptop_step_fail
+    laptop_error "Command failed \
       \\n|  > $command \
       \\n|  $output"
   fi
 }
 
-laptop::step_exec() {
-  laptop::step_eval "$*"
+laptop_step_exec() {
+  laptop_step_eval "$*"
 }
 
-laptop::step_eval() {
+laptop_step_eval() {
   local output
   local command="$1"
   output=$(eval "$command" 2>&1)
   local exit_code=$?
 
-  laptop::step_complete "$command" "$exit_code" "$output"
+  laptop_step_complete "$command" "$exit_code" "$output"
 }

@@ -15,7 +15,7 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 source "$LAPTOP_HOME/src/env.sh"
-laptop::source_all "$ROOT_DIR/src/recipes"
+laptop_source_all "$ROOT_DIR/src/recipes"
 source "$ROOT_DIR/src/command/cleanup.sh"
 source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"
@@ -24,7 +24,7 @@ source "$ROOT_DIR/src/command/upgrade.sh"
 ###   configure: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
-laptop::command__help() {
+laptop_command__help() {
   sed -rn 's/^### ?//p' "$0"
 }
 
@@ -41,11 +41,11 @@ laptop::command__help() {
 SUBCOMMAND=$1
 case $SUBCOMMAND in
   "" | "-h" | "--help")
-    laptop::command__help
+    laptop_command__help
     ;;
   *)
     shift
-    laptop::command__${SUBCOMMAND} $@
+    laptop_command__${SUBCOMMAND} $@
     if [ $? = 127 ]; then
       echo "Error: '$SUBCOMMAND' is not a known subcommand." >&2
       echo "       Run '$SCRIPT_NAME --help' for a list of known subcommands." >&2

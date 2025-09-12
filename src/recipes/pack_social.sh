@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__pack:social() {
-  laptop::ensure_package "discord"
-  laptop::ensure_package "slack"
-  laptop::ensure_package "whatsapp"
-  laptop::ensure_package "zoom"
+laptop_ensure_package__pack:social() {
+  laptop_ensure_package "discord"
+  laptop_ensure_package "slack"
+  laptop_ensure_package "whatsapp"
+  laptop_ensure_package "zoom"
 }

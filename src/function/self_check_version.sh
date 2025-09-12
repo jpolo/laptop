@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-laptop::self_check_version() {
-  if laptop::self_updated; then
-    laptop::info "Laptop is up to date"
+laptop_self_check_version() {
+  if laptop_self_updated; then
+    laptop_info "Laptop is up to date"
   else
-    laptop::warn "A new laptop version is available. Run 'laptop upgrade' to download it."
+    laptop_warn "A new laptop version is available. Run 'laptop upgrade' to download it."
   fi
 }

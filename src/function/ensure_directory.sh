@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-laptop::ensure_directory() {
+laptop_ensure_directory() {
   local directory="$1"
-  laptop::step_start "- Ensure directory '$directory'"
+  laptop_step_start "- Ensure directory '$directory'"
   if [ ! -d "$directory" ]; then
-    laptop::step_eval "mkdir -p $(quote "$directory")"
+    laptop_step_eval "mkdir -p $(quote "$directory")"
   else
-    laptop::step_ok
+    laptop_step_ok
   fi
 }

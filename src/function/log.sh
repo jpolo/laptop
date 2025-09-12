@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-laptop::error() {
+laptop_error() {
   echo -e "${COLOR_ERROR}Error: ${NORMAL}$*" >&2
 }
 
-laptop::warn() {
+laptop_warn() {
   echo -e "${COLOR_WARNING}Warning: ${NORMAL}$*"
 }
 
-laptop::info() {
+laptop_info() {
   echo -e "${COLOR_INFO}Info: ${NORMAL}$*"
 }

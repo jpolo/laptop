@@ -4,16 +4,16 @@
 # in the current profile directory.
 #
 # Usage:
-#   laptop::profile_asdf_version <language>
+#   laptop_profile_asdf_version <language>
 #
 # Example:
-#   version=$(laptop::profile_asdf_version "nodejs")
-laptop::profile_asdf_version() {
+#   version=$(laptop_profile_asdf_version "nodejs")
+laptop_profile_asdf_version() {
   local language="$1"
 
   # Path to the .tool-versions file
   local tool_versions_file
-  tool_versions_file="$(laptop::profile_dir)/.tool-versions"
+  tool_versions_file="$(laptop_profile_dir)/.tool-versions"
 
   local target_language
   local target_version

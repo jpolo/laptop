@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__gcloud() {
+laptop_ensure_package__gcloud() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
-    laptop::ensure_brew_cask_package "gcloud-cli"
+    laptop_ensure_brew_cask_package "gcloud-cli"
   else
-    laptop::ensure_package_default "gcloud"
+    laptop_ensure_package_default "gcloud"
   fi
 }

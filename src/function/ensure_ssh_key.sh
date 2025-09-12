@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop::ensure_ssh_key() {
+laptop_ensure_ssh_key() {
   local algorithm
   algorithm=${1:-"ed25519"}
   local ssh_key
@@ -8,13 +8,13 @@ laptop::ensure_ssh_key() {
   local email
   email=$(git config --global user.email)
 
-  laptop::step_start "- Ensure SSH key '$ssh_key'"
+  laptop_step_start "- Ensure SSH key '$ssh_key'"
   if [ -z "$email" ]; then
-    laptop::step_fail
-    laptop::error "git config user.email is empty"
+    laptop_step_fail
+    laptop_error "git config user.email is empty"
   elif ! [ -f "$ssh_key" ]; then
-    laptop::step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"
+    laptop_step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"
   else
-    laptop::step_ok
+    laptop_step_ok
   fi
 }

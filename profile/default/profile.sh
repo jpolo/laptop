@@ -4,14 +4,14 @@
 LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 
 # Bootstrap
-laptop::bootstrap
-laptop::configure_default_shell
+laptop_bootstrap
+laptop_configure_default_shell
 
 # Installation
-laptop::configure_steps
+laptop_configure_steps
 
-laptop::info "🎉 Finished"
-laptop::info "$(
+laptop_info "🎉 Finished"
+laptop_info "$(
   cat <<EOF
   What next ?
 
@@ -28,4 +28,4 @@ laptop::info "$(
     📸 Manage your Capture in ~/Captures
 EOF
 )"
-laptop::warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
+laptop_warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."

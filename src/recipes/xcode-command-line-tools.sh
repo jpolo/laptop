@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-laptop::ensure_package__xcode-command-line-tools() {
-  laptop::step_start "- Ensure XCode Command Line Tools"
+laptop_ensure_package__xcode-command-line-tools() {
+  laptop_step_start "- Ensure XCode Command Line Tools"
 
-  if laptop::command_exists "xcode-select"; then
+  if laptop_command_exists "xcode-select"; then
     if ! [ -x "$(command -v gcc)" ]; then
-      laptop::step_exec xcode-select --install
+      laptop_step_exec xcode-select --install
     else
-      laptop::step_ok
+      laptop_step_ok
     fi
   else
-    laptop::step_pass
+    laptop_step_pass
   fi
 }

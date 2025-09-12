@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop::logo() {
+laptop_logo() {
   echo -e "$BRACKET"
   cat <<-"EOF"
     __            __
