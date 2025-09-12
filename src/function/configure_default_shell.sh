@@ -19,5 +19,5 @@ laptop_configure_default_shell() {
   # for backward compatibility with bash
   laptop_ensure_file_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile" --force
 
-  laptop_ensure_file_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/.zshrc.local" "$HOME/.zshrc.local"
+  laptop_ensure_file_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
 }
