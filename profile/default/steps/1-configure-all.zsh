@@ -60,12 +60,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
 fi
 
 # Install globally tools using asdf to the version specified in profile/${profile_name}/.tool-versions
-laptop_ensure_asdf_package "ruby" "$(laptop_profile_asdf_version ruby)"
-laptop_ensure_asdf_package "nodejs" "$(laptop_profile_asdf_version nodejs)"
-laptop_ensure_asdf_package "python" "$(laptop_profile_asdf_version python)"
-laptop_ensure_asdf_package "java" "$(laptop_profile_asdf_version java)"
-laptop_ensure_asdf_package "terraform" "$(laptop_profile_asdf_version terraform)"
-
+laptop_ensure_asdf_package_list "$(laptop_profile_dir)/.tool-versions"
 
 # Install programs (non devcontainers only)
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
