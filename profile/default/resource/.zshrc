@@ -61,7 +61,7 @@ else
 fi;
 
 # Find the first command available
-_command-alternative() {
+.zshrc-command-alternative() {
   for command_to_test in "$@"; do
     if type "$command_to_test" &>/dev/null; then
       printf "%s" "${command_to_test}"
@@ -71,38 +71,21 @@ _command-alternative() {
 }
 
 # Load plugins
-_zsh-load-file() {
+.zshrc-load-file() {
   local file_basename="$1"
+  local file_path="${file_basename}.sh"
 
-  if [ -f "${file_basename}.zsh" ]; then
-    source "${file_basename}.zsh"
-  elif [ -f "${file_basename}.sh" ]; then
-    source "${file_basename}.sh"
-  fi
+  source "$file_path"
 }
 
-_zsh-load-plugins() {
-  local directory=$1
-  if [[ -d "$directory/" ]]; then
-    for i in $(find "$directory/" -maxdepth 1 -type f -name "*.sh");
-    do
-      . $i;
-    done
-  fi
-}
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
 # Custom scripts
 ##
 
-# Load all files *.sh in $XDG_DATA_HOME/zsh
-if [ ! -z "$XDG_DATA_HOME" ]; then
-  _zsh-load-plugins "$XDG_DATA_HOME/zsh"
-fi
-
 # Load .zshrc.local
-_zsh-load-file "$XDG_DATA_HOME/zsh/global"
-_zsh-load-file "$XDG_DATA_HOME/zsh/personal"
+.zshrc-load-file "$XDG_DATA_HOME/zsh/global"
+.zshrc-load-file "$XDG_DATA_HOME/zsh/personal"
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
@@ -123,13 +106,13 @@ fi
 # Editor and Pager
 ##
 if [ -z "$PAGER" ]; then
-  export PAGER=$(_command-alternative most less more)
+  export PAGER=$(.zshrc-command-alternative most less more)
 fi
 if [ -z "$EDITOR" ]; then
   if [[ -n $SSH_CONNECTION ]]; then # SSH mode
-    export EDITOR=$(_command-alternative nano vim vi)
+    export EDITOR=$(.zshrc-command-alternative nano vim vi)
   else
-    export EDITOR=$(_command-alternative code subl nano vim vi)
+    export EDITOR=$(.zshrc-command-alternative code subl nano vim vi)
   fi
 fi
 if [[ $EDITOR == "code" ]]; then
@@ -144,4 +127,4 @@ fi
 ##
 # Cleanup
 ##
-unset -f _command-alternative
+unset -f .zshrc-command-alternative
