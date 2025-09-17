@@ -106,6 +106,7 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop_ensure_vscode_extension "seatonjiang.gitmoji-vscode"
   laptop_ensure_vscode_extension "redhat.vscode-yaml"
   laptop_ensure_vscode_extension "aaron-bond.better-comments"
+  laptop_ensure_vscode_extension "tamasfe.even-better-toml"
 
   # Configure VSCode
   laptop_ensure_npm_package "jsonc-cli"
