@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__LAPTOP_UPGRADE_TOOLS=("brew" "zinit" "asdf" "code" "sdkmanager" "softwareupdate")
+__LAPTOP_UPGRADE_TOOLS=("brew" "zinit" "asdf" "code" "cursor" "sdkmanager" "softwareupdate")
 
 laptop_command__upgrade_detect() {
   local filtered_commands
@@ -33,6 +33,9 @@ laptop_command__upgrade_run() {
       ;;
     code)
       laptop_ensure_vscode_updated
+      ;;
+    cursor)
+      laptop_ensure_cursor_updated
       ;;
     sdkmanager)
       laptop_ensure_sdkmanager_updated
