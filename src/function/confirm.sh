@@ -10,6 +10,11 @@
 #   if [ $? -eq 0 ]
 #
 laptop_confirm() {
+  # If LAPTOP_YES is true, skip confirmation and return success
+  if [ "$LAPTOP_YES" = "true" ]; then
+    return 0
+  fi
+
   echo -n "$* "
   read -e -r answer
   for response in y Y yes YES Yes Sure sure SURE OK ok Ok; do

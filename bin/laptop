@@ -7,6 +7,7 @@
 ###
 ### Options:
 ###   -h,--help: Show this message.
+###   -y,--yes:  Skip confirmation prompts and assume yes
 ###
 ### Subcommands:
 
@@ -37,17 +38,42 @@ laptop_command__help() {
 ###   LAPTOP_PROFILE: current profile to use for the configure sub command
 ###     the profile source must be available at `$LAPTOP_HOME/profile/$LAPTOP_PROFILE/profile.sh`
 
+# Parse global options and subcommand
+LAPTOP_YES=false
+LAPTOP_SUBCOMMAND=""
+LAPTOP_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -y|--yes)
+      # shellcheck disable=SC2034
+      LAPTOP_YES=true
+      shift
+      ;;
+    -h|--help)
+      laptop_command__help
+      exit 0
+      ;;
+    *)
+      if [ -z "$LAPTOP_SUBCOMMAND" ]; then
+        LAPTOP_SUBCOMMAND=$1
+      else
+        LAPTOP_ARGS+=("$1")
+      fi
+      shift
+      ;;
+  esac
+done
+
 # Run the program
-SUBCOMMAND=$1
-case $SUBCOMMAND in
-  "" | "-h" | "--help")
+case $LAPTOP_SUBCOMMAND in
+  "" | "help")
     laptop_command__help
     ;;
   *)
-    shift
-    laptop_command__${SUBCOMMAND} $@
+    laptop_command__${LAPTOP_SUBCOMMAND} "${LAPTOP_ARGS[@]}"
     if [ $? = 127 ]; then
-      echo "Error: '$SUBCOMMAND' is not a known subcommand." >&2
+      echo "Error: '$LAPTOP_SUBCOMMAND' is not a known subcommand." >&2
       echo "       Run '$SCRIPT_NAME --help' for a list of known subcommands." >&2
       exit 1
     fi
