@@ -32,10 +32,10 @@ laptop_command__upgrade_run() {
       laptop_ensure_brew_updated
       ;;
     code)
-      laptop_ensure_vscode_updated
+      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_ensure_vscode_updated
       ;;
     cursor)
-      laptop_ensure_cursor_updated
+      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_ensure_vscode_updated
       ;;
     sdkmanager)
       laptop_ensure_sdkmanager_updated
