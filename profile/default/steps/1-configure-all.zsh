@@ -99,7 +99,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop_ensure_vscode_extension "EditorConfig.EditorConfig"
   laptop_ensure_vscode_extension "eamodio.gitlens"
   laptop_ensure_vscode_extension "GitHub.vscode-pull-request-github"
-  laptop_ensure_vscode_extension "GitLab.gitlab-workflow"
   laptop_ensure_vscode_extension "ms-vsliveshare.vsliveshare"
   laptop_ensure_vscode_extension "joshbolduc.commitlint"
   laptop_ensure_vscode_extension "streetsidesoftware.code-spell-checker"
