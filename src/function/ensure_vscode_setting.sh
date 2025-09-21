@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
+# Ensure VSCode setting
+#
+# Usage:
+#   laptop_ensure_vscode_setting <json_path> <json_value>
+#
 laptop_ensure_vscode_setting() {
+  local executable="${1:-$LAPTOP_VSCODE_EXECUTABLE}"
+  # set local variable for app name
+  local app_name
+  app_name=$(laptop_vscode_app_name "$executable")
+
   local json_path="$1"
   local json_value="$2"
   local vscode_settings_file=""
@@ -23,7 +33,7 @@ laptop_ensure_vscode_setting() {
     return 1
   fi
 
-  laptop_step_start "- Ensure VSCode Setting $json_path=$json_value"
+  laptop_step_start "- Ensure $app_name Setting $json_path=$json_value"
   laptop_step_eval "\
   cat $(quote "$vscode_settings_file") | \
   jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file") \

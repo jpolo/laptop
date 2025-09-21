@@ -5,15 +5,14 @@
 # Usage:
 #   laptop_ensure_vscode_updated <executable>
 #
+# Example:
+#   LAPTOP_VSCODE_EXECUTABLE=cursor laptop_ensure_vscode_updated
+#
 laptop_ensure_vscode_updated() {
   local executable="${1:-$LAPTOP_VSCODE_EXECUTABLE}"
   # set local variable for app name
-  local app_name="VSCode"
-  if [ "$executable" = "code-insiders" ]; then
-    app_name="VSCode Insiders"
-  elif [ "$executable" = "cursor" ]; then
-    app_name="Cursor"
-  fi
+  local app_name
+  app_name=$(laptop_vscode_app_name "$executable")
 
   laptop_step_start "- Upgrade $app_name"
   laptop_step_eval "$executable --update-extensions"
