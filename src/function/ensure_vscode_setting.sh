@@ -20,11 +20,19 @@ laptop_ensure_vscode_setting() {
     jsonc_args="--delete"
   fi
 
+  local app_dir="Code"
+  if [ "$executable" = "code-insiders" ]; then
+    app_dir="Code - Insiders"
+  elif [ "$executable" = "cursor" ]; then
+    app_dir="Cursor"
+  fi
+  local vscode_relative_path="$app_dir/User/settings.json"
+
   # Vérifier si le système d'exploitation est macOS
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    vscode_settings_file="$HOME/Library/Application Support/Code/User/settings.json"
+    vscode_settings_file="$HOME/Library/Application Support/$vscode_relative_path"
   else
-    vscode_settings_file="$HOME/.config/Code/User/settings.json"
+    vscode_settings_file="$(laptop_xdg_dir config)/$vscode_relative_path"
   fi
 
   # Vérifier si la requête est vide
