@@ -3,13 +3,14 @@
 # Ensure VSCode is up to date
 #
 # Usage:
-#   laptop_ensure_vscode_updated <executable>
+#   laptop_ensure_vscode_updated
 #
 # Example:
-#   LAPTOP_VSCODE_EXECUTABLE=cursor laptop_ensure_vscode_updated
+#   laptop_ensure_vscode_updated // -> uses default "code" executable
+#   LAPTOP_VSCODE_EXECUTABLE=cursor laptop_ensure_vscode_updated // -> uses "cursor" executable
 #
 laptop_ensure_vscode_updated() {
-  local executable="${1:-$LAPTOP_VSCODE_EXECUTABLE}"
+  local executable="${LAPTOP_VSCODE_EXECUTABLE:-code}"
   # set local variable for app name
   local app_name
   app_name=$(laptop_vscode_app_name "$executable")

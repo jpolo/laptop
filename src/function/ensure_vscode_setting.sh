@@ -6,7 +6,7 @@
 #   laptop_ensure_vscode_setting <json_path> <json_value>
 #
 laptop_ensure_vscode_setting() {
-  local executable="${1:-$LAPTOP_VSCODE_EXECUTABLE}"
+  local executable="${LAPTOP_VSCODE_EXECUTABLE:-code}"
   # set local variable for app name
   local app_name
   app_name=$(laptop_vscode_app_name "$executable")
