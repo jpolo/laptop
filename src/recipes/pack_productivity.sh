@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__pack:productivity() {
-  laptop_ensure_package "chatgpt"
-  laptop_ensure_package "ollama"
-  laptop_ensure_package "drawio"
-  laptop_ensure_package "notion"
-  # laptop_ensure_package "rectangle"
+laptop_package_ensure__pack:productivity() {
+  laptop_package_ensure "chatgpt"
+  laptop_package_ensure "ollama"
+  laptop_package_ensure "drawio"
+  laptop_package_ensure "notion"
+  # laptop_package_ensure "rectangle"
   if [[ ${LAPTOP_PROFILE_PRIVACY:-strict} = strict ]];then
-    laptop_ensure_package "vivaldi"
+    laptop_package_ensure "vivaldi"
   else
-    laptop_ensure_package "google-chrome"
-    laptop_ensure_package "google-drive"
+    laptop_package_ensure "google-chrome"
+    laptop_package_ensure "google-drive"
   fi
 }

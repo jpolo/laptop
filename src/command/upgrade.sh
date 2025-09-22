@@ -16,29 +16,29 @@ laptop_command__upgrade_detect() {
 }
 
 laptop_command__upgrade_run() {
-  laptop_ensure_license_accepted
+  laptop_xcode_ensure_license_accepted
 
   local filtered_commands
   filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
     apt-get)
-      laptop_ensure_apt_updated
+      laptop_apt_ensure_updated
       ;;
     asdf)
-      laptop_ensure_asdf_updated
+      laptop_asdf_ensure_updated
       ;;
     brew)
-      laptop_ensure_brew_updated
+      laptop_brew_ensure_updated
       ;;
     code)
-      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_ensure_vscode_updated
+      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_vscode_ensure_updated
       ;;
     cursor)
-      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_ensure_vscode_updated
+      LAPTOP_VSCODE_EXECUTABLE="$tool" laptop_vscode_ensure_updated
       ;;
     sdkmanager)
-      laptop_ensure_sdkmanager_updated
+      laptop_sdkmanager_ensure_updated
       ;;
     softwareupdate)
       laptop_step_start "- Upgrade macOS"
@@ -46,7 +46,7 @@ laptop_command__upgrade_run() {
       softwareupdate --install --all
       ;;
     zinit)
-      laptop_ensure_zinit_updated
+      laptop_zinit_ensure_updated
       ;;
     *)
       echo "Unknown tool: $tool"

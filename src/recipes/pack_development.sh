@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__pack:development() {
-  # laptop_ensure_package "chromedriver" // DEPRECATED
-  laptop_ensure_package "docker"
-  laptop_ensure_package "iterm2"
-  laptop_ensure_package "pgadmin4"
-  laptop_ensure_package "postman"
-  laptop_ensure_package "virtualbox"
-  laptop_ensure_package "visual-studio-code"
+laptop_package_ensure__pack:development() {
+  # laptop_package_ensure "chromedriver" // DEPRECATED
+  laptop_package_ensure "docker"
+  laptop_package_ensure "iterm2"
+  laptop_package_ensure "pgadmin4"
+  laptop_package_ensure "postman"
+  laptop_package_ensure "virtualbox"
+  laptop_package_ensure "visual-studio-code"
 
   # Fonts for development
-  laptop_ensure_package "font-monaspace"
+  laptop_package_ensure "font-monaspace"
 }

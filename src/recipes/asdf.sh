@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__asdf() {
+laptop_package_ensure__asdf() {
   local asdf_dir
   asdf_dir="${ASDF_DIR:-$HOME/.asdf}"
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
-    laptop_ensure_package_default "asdf"
+    laptop_package_ensure_default "asdf"
   else
     if [ ! -d "$asdf_dir" ]; then
       laptop_step_start "- Ensure asdf installed (via git)"

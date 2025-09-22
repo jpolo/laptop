@@ -58,8 +58,8 @@ laptop_command__cleanup_run() {
   done
 
   # Cleanup by directory
-  laptop_ensure_directory_empty "$HOME/Library/Developer/Xcode/DerivedData"
-  laptop_ensure_directory_empty "$HOME/.gradle/caches"
+  laptop_directory_ensure_empty "$HOME/Library/Developer/Xcode/DerivedData"
+  laptop_directory_ensure_empty "$HOME/.gradle/caches"
 
   new_available_space=$(laptop_disk_available_space)
   laptop_command__cleanup_result $((new_available_space - initial_available_space))

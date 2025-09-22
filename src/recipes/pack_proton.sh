@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__pack:proton() {
-  laptop_ensure_package_default "proton-mail"
-  laptop_ensure_package_default "proton-drive"
-  laptop_ensure_package_default "proton-pass"
-  laptop_ensure_package_default "protonvpn"
+laptop_package_ensure__pack:proton() {
+  laptop_package_ensure_default "proton-mail"
+  laptop_package_ensure_default "proton-drive"
+  laptop_package_ensure_default "proton-pass"
+  laptop_package_ensure_default "protonvpn"
 }

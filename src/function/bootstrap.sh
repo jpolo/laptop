@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 laptop_bootstrap_debian() {
-  laptop_ensure_shell "$LAPTOP_SHELL"
-  laptop_ensure_apt_updated
-  laptop_ensure_package "pack:apt-core"
+  laptop_shell_ensure "$LAPTOP_SHELL"
+  laptop_apt_ensure_updated
+  laptop_package_ensure "pack:apt-core"
 }
 
 laptop_bootstrap_macos() {
-  laptop_ensure_package "rosetta2"
-  laptop_ensure_package "xcode-command-line-tools"
-  laptop_ensure_shell "$LAPTOP_SHELL"
-  laptop_ensure_package "brew"
+  laptop_package_ensure "rosetta2"
+  laptop_package_ensure "xcode-command-line-tools"
+  laptop_shell_ensure "$LAPTOP_SHELL"
+  laptop_package_ensure "brew"
   # set laptop package manager
   export LAPTOP_PACKAGE_MANAGER=brew
 }

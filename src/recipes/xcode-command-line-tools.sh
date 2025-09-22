@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__xcode-command-line-tools() {
+laptop_package_ensure__xcode-command-line-tools() {
   laptop_step_start "- Ensure XCode Command Line Tools"
 
   if laptop_command_exists "xcode-select"; then

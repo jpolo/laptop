@@ -10,14 +10,14 @@ laptop_configure_default_shell() {
   profile_dir=$(laptop_profile_dir default)
 
   # Bootstrap
-  laptop_ensure_file_template "$profile_dir/resource/.profile" "$HOME/.profile" --force
-  laptop_set_user_profile "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
-  laptop_set_user_profile "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
+  laptop_file_ensure_template "$profile_dir/resource/.profile" "$HOME/.profile" --force
+  laptop_shell_profile_var "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
+  laptop_shell_profile_var "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
 
-  laptop_ensure_file_template "$profile_dir/resource/.zprofile" "$HOME/.zprofile" --force
-  laptop_ensure_file_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
+  laptop_file_ensure_template "$profile_dir/resource/.zprofile" "$HOME/.zprofile" --force
+  laptop_file_ensure_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
   # for backward compatibility with bash
-  laptop_ensure_file_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile" --force
+  laptop_file_ensure_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile" --force
 
-  laptop_ensure_file_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
+  laptop_file_ensure_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
 }

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__pack:apt-core() {
-  laptop_ensure_apt_package "build-essential"
-  laptop_ensure_apt_package "procps"
-  laptop_ensure_apt_package "curl"
-  laptop_ensure_apt_package "file"
-  laptop_ensure_apt_package "git"
-  laptop_ensure_apt_package "software-properties-common"
+laptop_package_ensure__pack:apt-core() {
+  laptop_apt_ensure_package "build-essential"
+  laptop_apt_ensure_package "procps"
+  laptop_apt_ensure_package "curl"
+  laptop_apt_ensure_package "file"
+  laptop_apt_ensure_package "git"
+  laptop_apt_ensure_package "software-properties-common"
 }

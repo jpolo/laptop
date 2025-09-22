@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop_ensure_package__rosetta2() {
+laptop_package_ensure__rosetta2() {
   # Install Rosetta
   laptop_step_start "- Ensure Rosetta 2"
   if ! is_arm; then
