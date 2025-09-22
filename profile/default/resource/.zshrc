@@ -115,9 +115,6 @@ if [ -z "$EDITOR" ]; then
     export EDITOR=$(.zshrc-command-alternative code subl nano vim vi)
   fi
 fi
-if [[ $EDITOR == "code" ]]; then
-  export EDITOR="$EDITOR --wait"
-fi
 
 if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
