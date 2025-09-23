@@ -4,6 +4,7 @@ laptop_package_ensure__pack:core() {
   # A pack of required packages
 
   # Install core tools
+  laptop_package_ensure "augeas"
   laptop_package_ensure "coreutils"
   laptop_package_ensure "moreutils"
   laptop_package_ensure "findutils"
