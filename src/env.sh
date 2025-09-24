@@ -65,4 +65,4 @@ quote() {
 # shellcheck disable=SC1091
 source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
 laptop_source_all "$LAPTOP_SOURCE_DIR/function"
-laptop_source_all "$LAPTOP_SOURCE_DIR/recipes"
+laptop_source_all "$LAPTOP_SOURCE_DIR/recipe"
