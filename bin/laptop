@@ -16,7 +16,6 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 source "$LAPTOP_HOME/src/env.sh"
-laptop_source_all "$ROOT_DIR/src/recipes"
 source "$ROOT_DIR/src/command/cleanup.sh"
 source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"
