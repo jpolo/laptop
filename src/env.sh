@@ -11,26 +11,12 @@ export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
 
-# Source scripts
-# shellcheck disable=SC1091
-source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
-# Source global functions
-laptop_source_all "$LAPTOP_SOURCE_DIR/function"
-# Source profile functions
-if [ -d "$(laptop_profile_dir)/function" ]; then
-  laptop_source_all "$(laptop_profile_dir)/function"
+export LAPTOP_PACKAGE_MANAGER=unknown
+if [ -x "$(command -v brew)" ]; then
+  export LAPTOP_PACKAGE_MANAGER=brew
+elif [ -x "$(command -v apt-get)" ]; then
+  export LAPTOP_PACKAGE_MANAGER=apt-get
 fi
-
-# Source recipes
-laptop_source_all "$LAPTOP_SOURCE_DIR/recipe"
-# Source profile recipes
-if [ -d "$(laptop_profile_dir)/recipe" ]; then
-  laptop_source_all "$(laptop_profile_dir)/recipe"
-fi
-
-# Determine package manager
-LAPTOP_PACKAGE_MANAGER=$(laptop_filter_command_exists brew apt-get)
-export LAPTOP_PACKAGE_MANAGER
 
 ## Screen Dimensions
 # Find current screen size
@@ -71,4 +57,19 @@ quote() {
   printf "'%s'" "$quoted"
 }
 
+# Source scripts
+# shellcheck disable=SC1091
+source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
+# Source global functions
+laptop_source_all "$LAPTOP_SOURCE_DIR/function"
+# Source profile functions
+if [ -d "$(laptop_profile_dir)/function" ]; then
+  laptop_source_all "$(laptop_profile_dir)/function"
+fi
 
+# Source recipes
+laptop_source_all "$LAPTOP_SOURCE_DIR/recipe"
+# Source profile recipes
+if [ -d "$(laptop_profile_dir)/recipe" ]; then
+  laptop_source_all "$(laptop_profile_dir)/recipe"
+fi
