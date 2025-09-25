@@ -52,10 +52,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ]; then
   [[ "$(whoami)" = "vscode" ]] && LAPTOP_DEVCONTAINER="true"
 fi
 
-is_arm() {
-  test arm64 = "$(uname -m)"
-}
-
 quote() {
   local quoted=${1//\'/\'\\\'\'}
   printf "'%s'" "$quoted"

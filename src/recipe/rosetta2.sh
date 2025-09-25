@@ -3,7 +3,7 @@
 laptop_package_ensure__rosetta2() {
   # Install Rosetta
   laptop_step_start "- Ensure Rosetta 2"
-  if ! is_arm; then
+  if ! test arm64 = "$(uname -m)"; then
     laptop_step_pass
   elif ! laptop_command_exists "softwareupdate"; then
     laptop_step_pass
