@@ -30,7 +30,7 @@ laptop_file_ensure_template() {
     esac
   done
 
-  laptop_step_start "- Ensure file '$target'$([ "$force" -eq 1 ] && echo ' (force)') "
+  laptop_step_start "- Ensure file '$(laptop_path_print "$target")'$([ "$force" -eq 1 ] && echo ' (force)') "
   if [ "$force" -eq 0 ] && [ -f "$target" ]; then
     laptop_step_pass
   else

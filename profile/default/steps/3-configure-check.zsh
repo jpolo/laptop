@@ -13,10 +13,10 @@ laptop_info "$(
   1️⃣ Finish your configuration manually :
     ZSH :
       🔧 Customize your configuration
-         > $EDITOR $XDG_DATA_HOME/zsh/personal.sh
+         > $EDITOR $(laptop_path_print $XDG_DATA_HOME/zsh/personal.sh)
 
       🎨 Customize the zsh prompt theme
-         > $EDITOR $STARSHIP_CONFIG
+         > $EDITOR $(laptop_path_print $STARSHIP_CONFIG)
 
   2️⃣ Start developing !
     ⤵️ Clone your repositories in ~/Code

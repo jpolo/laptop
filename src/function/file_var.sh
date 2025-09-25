@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Set or update a variable in a shell script file.
 #
 # Usage:
 #   laptop_file_var "my_shell.sh" "MY_VARIABLE" "MY_VALUE"
