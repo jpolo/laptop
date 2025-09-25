@@ -1,24 +1,27 @@
 #!/usr/bin/env bash
 
 laptop_step_start() {
-  echo -n -e "${@}"
+  local message="$1"
+  # display the message and truncate the line to $COLUMNS characters
+  # and adds a ... at the end if truncated
+  if [ "${#message}" -ge "$LAPTOP_STEP_STATUS_COLUMN" ]; then
+    message="${message:0:$LAPTOP_STEP_STATUS_COLUMN-5}..."
+  fi
+  echo -n -e "$message"
   return 0
 }
 
 laptop_step_ok() {
-  # echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
   return 0
 }
 
 laptop_step_fail() {
-  # echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
   return 0
 }
 
 laptop_step_pass() {
-  #echo -n -e "${@}"
   echo -e "${SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
   return 0
 }

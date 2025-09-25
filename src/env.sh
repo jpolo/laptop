@@ -30,9 +30,9 @@ COLUMNS=100
 if [ "$COLUMNS" = "0" ]; then
   COLUMNS=80
 fi
-COL=$((COLUMNS - 8))
+LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 # shellcheck disable=SC2034
-SET_COL="\\033[${COL}G"
+SET_COL="\\033[${LAPTOP_STEP_STATUS_COLUMN}G"
 # shellcheck disable=SC2034
 NORMAL="\\033[0;39m"
 # shellcheck disable=SC2034
