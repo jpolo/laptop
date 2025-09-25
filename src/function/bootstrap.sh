@@ -9,6 +9,7 @@ laptop_bootstrap_debian() {
 laptop_bootstrap_macos() {
   laptop_package_ensure "rosetta2"
   laptop_package_ensure "xcode-command-line-tools"
+  laptop_xcode_ensure_license_accepted
   laptop_shell_ensure "$LAPTOP_SHELL"
   laptop_package_ensure "brew"
   # set laptop package manager
