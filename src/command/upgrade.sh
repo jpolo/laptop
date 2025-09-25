@@ -63,7 +63,6 @@ laptop_command__upgrade() {
 
     laptop_info "🎉 Upgrade successful"
   else
-    laptop_error "🛑 Upgrade aborted"
-    exit 1
+    laptop_die "🛑 Upgrade aborted"
   fi
 }

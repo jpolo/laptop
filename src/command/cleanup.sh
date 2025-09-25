@@ -88,7 +88,6 @@ laptop_command__cleanup() {
 
     laptop_info "🎉 Cleanup successful"
   else
-    laptop_error "🛑 Cleanup aborted"
-    exit 1
+    laptop_die "🛑 Cleanup aborted"
   fi
 }

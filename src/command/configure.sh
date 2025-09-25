@@ -49,7 +49,6 @@ laptop_command__configure() {
   if laptop_confirm "Continue? (Y/n)"; then
     laptop_command__configure_run
   else
-    laptop_error "🛑 Upgrade aborted"
-    exit 1
+    laptop_die "🛑 Upgrade aborted"
   fi
 }
