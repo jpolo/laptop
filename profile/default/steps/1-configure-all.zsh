@@ -132,7 +132,4 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop_vscode_ensure_setting '["gitlens.plusFeatures.enabled"]' 'false'
 fi
 
-laptop_ssh_test_key "git@github.com" \
-  && laptop_info "🔑✅ SSH valid on github.com." \
-  || laptop_warn "🔑❌ SSH invalid on github.com. Please register on https://github.com/settings/keys"
 
