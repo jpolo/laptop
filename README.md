@@ -21,11 +21,18 @@ Available profiles :
 
 1. Open a terminal ( [How to](https://www.wikihow.com/Open-a-Terminal-Window-in-Mac) )
 
-2. Run the installation command :
+2. Install `laptop` executable and custom `.zshrc` :
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/main/install.sh)"
 ```
+
+3. Install all programs :
+
+```shell
+laptop configure
+```
+
 
 ## ✨ Features
 
