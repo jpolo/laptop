@@ -8,7 +8,7 @@ laptop_ssh_ensure_key() {
   local email
   email=$(git config --global user.email)
 
-  laptop_step_start "- Ensure SSH key '$ssh_key'"
+  laptop_step_start "- Ensure SSH key '$(laptop_path_print $ssh_key)'"
   if [ -z "$email" ]; then
     laptop_step_fail
     laptop_error "git config user.email is empty"
