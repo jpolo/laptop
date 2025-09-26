@@ -108,13 +108,20 @@ fi
 if [ -z "$PAGER" ]; then
   export PAGER=$(.zshrc-command-alternative most less more)
 fi
+
 if [ -z "$EDITOR" ]; then
   if [[ -n $SSH_CONNECTION ]]; then # SSH mode
-    export EDITOR=$(.zshrc-command-alternative nano vim vi)
+    EDITOR=$(.zshrc-command-alternative nano vim vi)
   else
-    export EDITOR=$(.zshrc-command-alternative code subl nano vim vi)
+    EDITOR=$(.zshrc-command-alternative cursor code subl nano vim vi)
   fi
+  # Add --wait flag for code, cursor for diff editing etc
+  if [[ "$EDITOR" == "code" || "$EDITOR" == "cursor" ]]; then
+    EDITOR="$EDITOR --wait"
+  fi
+  export EDITOR
 fi
+
 
 if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
