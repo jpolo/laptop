@@ -23,7 +23,7 @@ laptop_ssh_ensure_setting() {
   section=$(echo "$section_raw" | cut -d' ' -f1)
   section_value=$(echo "$section_raw" | cut -d' ' -f2)
 
-  laptop_step_start "- Ensure SSH setting [\"$section $section_value\"][\"$setting\"]='$(laptop_path_print "$value")'"
+  laptop_step_start "- Ensure SSH setting [\"$section $section_value\"][\"$setting\"]='$value'"
   laptop_step_exec augtool -A <<EOF
 set /augeas/load/SSH/lens SSH.lns
 set /augeas/load/SSH/incl '$config_file'
