@@ -41,6 +41,7 @@ laptop_command__help() {
 LAPTOP_YES=false
 LAPTOP_SUBCOMMAND=""
 LAPTOP_ARGS=()
+LAPTOP_BOOTSTRAP=${LAPTOP_BOOTSTRAP:-false}
 
 while [[ $# -gt 0 ]]; do
   case $1 in

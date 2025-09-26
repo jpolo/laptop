@@ -8,8 +8,10 @@ laptop_command__configure_run() {
   laptop_bootstrap
   laptop_configure_default_shell
 
-  # Installation
-  laptop_configure_steps
+  # Complete installation if LAPTOP_BOOTSTRAP omitted or false
+  if [ "${LAPTOP_BOOTSTRAP:-false}" = false ]; then
+    laptop_configure_steps
+  fi
 }
 
 laptop_command__configure() {
@@ -42,10 +44,14 @@ laptop_command__configure() {
     read -e -r LAPTOP_GIT_REMOTE
   fi
 
-  laptop_info "Current profile is $(quote "$LAPTOP_PROFILE")"
+  laptop_info "  Profile: ${BRACKET}${LAPTOP_PROFILE}${NORMAL}"
 
   # Ask confirmation
-  laptop_info "This will install and configure all tools"
+  if [ "${LAPTOP_BOOTSTRAP:-false}" = true ]; then
+    laptop_info "  Install Mode: ${BRACKET}bootstrap${NORMAL} ${DIM}(only laptop and zshrc)${NORMAL}"
+  else
+    laptop_info "  InstallMode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
+  fi
   if laptop_confirm "Continue? (Y/n)"; then
     laptop_command__configure_run
   else
