@@ -79,7 +79,7 @@ laptop_command__cleanup_result() {
 }
 
 laptop_command__cleanup() {
-  laptop_logo
+  laptop_handler_call "logo"
   laptop_self_check_version
 
   laptop_command__cleanup_detect
