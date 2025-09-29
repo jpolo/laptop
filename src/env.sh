@@ -75,3 +75,6 @@ laptop_source_all "$LAPTOP_SOURCE_DIR/recipe"
 if [ -d "$(laptop_profile_dir)/recipe" ]; then
   laptop_source_all "$(laptop_profile_dir)/recipe"
 fi
+# IMPORTANT: Load profile at the end
+# Load profile (with overrides)# Load profile (with overrides)
+laptop_profile_load

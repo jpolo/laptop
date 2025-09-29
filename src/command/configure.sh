@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 laptop_command__configure_run() {
-  # Load profile (with overrides)
-  laptop_profile_load
 
   # Bootstrap
   laptop_bootstrap
