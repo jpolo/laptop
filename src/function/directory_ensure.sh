@@ -11,15 +11,15 @@
 laptop_directory_ensure() {
   local directory="$1"
   # parse options
-  local package_status="present"
+  local resource_status="present"
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -s|--status) package_status="$2"; shift 2;;
+      -s|--status) resource_status="$2"; shift 2;;
       *) shift;;
     esac
   done
-  laptop_step_start "- Ensure directory '$(laptop_path_print "$directory")' is $package_status"
-  if [ "$package_status" = "present" ]; then
+  laptop_step_start_status "$resource_status" "Directory '$(laptop_path_print "$directory")'"
+  if [ "$resource_status" = "present" ]; then
     if [ ! -d "$directory" ]; then
       laptop_step_eval "mkdir -p $(quote "$directory")"
     else

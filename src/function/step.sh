@@ -11,6 +11,24 @@ laptop_step_start() {
   return 0
 }
 
+# Display a step with a target status
+#
+# Usage:
+#   laptop_step_start_status <target_status> <message>
+#
+# Options:
+#   <target_status> present|absent
+laptop_step_start_status() {
+  local target_status="$1"
+  local message="$2"
+  # display A if present, F if failed
+  local status_message="${COLOR_SUCCESS}+${NORMAL}"
+  if [ "$target_status" = "absent" ]; then
+    status_message="${COLOR_ERROR}-${NORMAL}"
+  fi
+  laptop_step_start "${status_message} $message"
+}
+
 laptop_step_ok() {
   echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
   return 0

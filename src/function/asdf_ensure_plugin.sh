@@ -19,7 +19,7 @@ laptop_asdf_ensure_plugin() {
       *) shift;;
     esac
   done
-  laptop_step_start "- Ensure asdf plugin '$name' is $package_status"
+  laptop_step_start_status "$package_status" "asdf plugin '$name'"
 
   if [ "$package_status" = "present" ]; then
     if ! asdf plugin list | grep -Fq "$name"; then

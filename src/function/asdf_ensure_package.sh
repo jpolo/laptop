@@ -20,7 +20,7 @@ laptop_asdf_ensure_package() {
     esac
   done
 
-  laptop_step_start "- Ensure asdf '$package' '$version' is $package_status"
+  laptop_step_start_status "$package_status" "asdf '$package' '$version'"
   if [ "$package_status" = "present" ]; then
     if ! asdf list "$package" 2>/dev/null | grep -Fq "$version"; then
       laptop_step_exec \

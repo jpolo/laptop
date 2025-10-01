@@ -18,7 +18,7 @@ laptop_brew_ensure_package() {
       *) shift;;
     esac
   done
-  laptop_step_start "- Ensure brew package '$package' is $package_status"
+  laptop_step_start_status "$package_status" "brew package '$package'"
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
   export HOMEBREW_NO_ENV_HINTS=1
