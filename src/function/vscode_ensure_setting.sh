@@ -41,7 +41,7 @@ laptop_vscode_ensure_setting() {
     return 1
   fi
 
-  laptop_step_start_status "present" "$app_name setting $json_path=$json_value"
+  laptop_step_start_status "present" "unknown" "$app_name setting $json_path=$json_value"
   laptop_step_eval "\
   cat $(quote "$vscode_settings_file") | \
   jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file") \

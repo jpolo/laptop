@@ -19,7 +19,7 @@ laptop_brew_ensure_link() {
     esac
   done
 
-  laptop_step_start_status "$resource_status" "brew link '$package'"
+  laptop_step_start_status "$resource_status" "unknown" "brew link '$package'"
   if [ "$resource_status" = "present" ]; then
     laptop_step_exec brew link --force "$package"
   else

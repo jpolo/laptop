@@ -21,7 +21,11 @@ laptop_directory_ensure() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "Directory '$(laptop_path_print "$directory")'"
+  local current_resource_status
+  current_resource_status=$(test -d "$directory" && echo "present" || echo "absent")
+  local message="Directory '$(laptop_path_print "$directory")'"
+
+  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
   if [ "$resource_status" = "present" ]; then
     if [ ! -d "$directory" ]; then
       # if mode is set, run chmod

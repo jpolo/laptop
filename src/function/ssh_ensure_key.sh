@@ -23,7 +23,7 @@ laptop_ssh_ensure_key() {
   local email
   email=$(git config --global user.email)
 
-  laptop_step_start_status "$resource_status" "SSH key '$(laptop_path_print $ssh_key)'"
+  laptop_step_start_status "$resource_status" "unknown" "SSH key '$(laptop_path_print $ssh_key)'"
 
   if [  "$resource_status" = "present" ]; then
     if [ -z "$email" ]; then

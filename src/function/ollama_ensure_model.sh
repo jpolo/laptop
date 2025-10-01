@@ -20,7 +20,7 @@ laptop_ollama_ensure_model() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "Ollama model '$model'"
+  laptop_step_start_status "$resource_status" "unknown" "Ollama model '$model'"
 
   if [ "$resource_status" = "present" ]; then
     if ollama show "$model" &>/dev/null; then

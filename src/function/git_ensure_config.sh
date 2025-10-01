@@ -18,7 +18,7 @@ laptop_git_ensure_config() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "Git config '$name'='${value:-"<custom>"}'"
+  laptop_step_start_status "$resource_status" "unknown" "Git config '$name'='${value:-"<custom>"}'"
   if [ "$resource_status" = "present" ]; then
     if [ -z "$(git config --global "$name")" ]; then
       if [ -z "${value}" ]; then

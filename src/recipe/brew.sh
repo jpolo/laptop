@@ -4,7 +4,7 @@ laptop_package_ensure__brew() {
   # Install Homebrew
   local brew_present
   brew_present=$(env -i zsh --login -c 'command -v brew')
-  laptop_step_start_status "present" "Package manager 'brew'"
+  laptop_step_start_status "present" "unknown" "Package manager 'brew'"
 
   if [ -z "$brew_present" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&

@@ -17,7 +17,7 @@ laptop_sdkmanager_ensure_package() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "sdkmanager '$package'"
+  laptop_step_start_status "$resource_status" "unknown" "sdkmanager '$package'"
   if [ "$resource_status" = "present" ]; then
     laptop_step_eval "sdkmanager --install '$package'"
   else

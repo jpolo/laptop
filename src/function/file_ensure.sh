@@ -21,16 +21,15 @@ laptop_file_ensure() {
     esac
   done
 
-  local current_file_status
-  current_file_status=$(test -f "$file_path" && echo "present" || echo "absent")
+  local current_resource_status
+  current_resource_status=$(test -f "$file_path" && echo "present" || echo "absent")
   local message
   message="File '$(laptop_path_print "$file_path")'"
 
-  if [ "$current_file_status" = "$resource_status" ]; then
-    laptop_step_start_status "unchanged" "$message"
+  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
+  if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_ok
   else
-    laptop_step_start_status "$resource_status" "$message"
     if [ "$resource_status" = "present" ]; then
       local command_script
       command_script="mkdir -p $(quote "$(dirname "$file_path")") && touch $(quote "$file_path")"

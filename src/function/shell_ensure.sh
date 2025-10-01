@@ -5,7 +5,7 @@ laptop_shell_ensure() {
   local current_shell
   current_shell="$(basename "$SHELL")"
 
-  laptop_step_start_status "present" "User shell '$target_shell'"
+  laptop_step_start_status "present" "unknown" "User shell '$target_shell'"
   if [ -z "$target_shell" ]; then
     laptop_step_pass
   elif [ "$current_shell" = "$target_shell" ]; then

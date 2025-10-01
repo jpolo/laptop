@@ -8,7 +8,7 @@ laptop_package_ensure__xcode-command-line-tools() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "XCode Command Line Tools"
+  laptop_step_start_status "$resource_status" "unknown" "XCode Command Line Tools"
 
   if laptop_command_exists "xcode-select"; then
     if [ "$resource_status" = "present" ]; then
