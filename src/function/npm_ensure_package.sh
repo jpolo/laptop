@@ -1,13 +1,34 @@
 #!/usr/bin/env bash
 
+# Install npm package `package` if not present
+#
+# Usage:
+#   laptop_npm_ensure_package <package> [--status present|absent]
+#
+# Options:
+#   --status present|absent
+#
 laptop_npm_ensure_package() {
   local package="$1"
+  local resource_status="present"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -s|--status) resource_status="$2"; shift 2;;
+      *) shift;;
+    esac
+  done
+  local resource_current_status
+  resource_current_status=$(npm list --global --parseable "$package" &>/dev/null && echo "present" || echo "absent")
 
-  laptop_step_start_status "present" "unknown" "NPM package '$package'"
+  laptop_step_start_status "$resource_status" "$resource_current_status" "NPM package '$package'"
 
-  if [ -n "$(npm list --global --parseable "$package")" ]; then
+  if [ "$resource_current_status" = "$resource_status" ]; then
     laptop_step_ok
   else
-    laptop_step_eval "npm install --quiet --global $(quote "$package")"
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_eval "npm install --quiet --global $(quote "$package")"
+    else
+      laptop_step_eval "npm uninstall --quiet --global $(quote "$package")"
+    fi
   fi
 }
