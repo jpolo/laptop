@@ -19,10 +19,16 @@ laptop_asdf_ensure_package() {
       *) shift;;
     esac
   done
+  local current_package_status
+  current_package_status=$(asdf list "$package" 2>/dev/null | grep -Fq "$version" && echo "present" || echo "absent")
+  local message="asdf '$package' '$version'"
 
-  laptop_step_start_status "$package_status" "asdf '$package' '$version'"
-  if [ "$package_status" = "present" ]; then
-    if ! asdf list "$package" 2>/dev/null | grep -Fq "$version"; then
+  if [ "$current_package_status" = "$package_status" ]; then
+    laptop_step_start_status "unchanged" "$message"
+    laptop_step_ok
+  else
+    laptop_step_start_status "$package_status" "$message"
+    if [ "$package_status" = "present" ]; then
       laptop_step_exec \
         asdf install "$package" "$version" &&
         asdf set --home "$package" "$version"
@@ -30,8 +36,5 @@ laptop_asdf_ensure_package() {
       laptop_step_exec \
         asdf set --home "$package" "$version"
     fi
-  else
-    laptop_step_exec \
-      asdf uninstall "$package" "$version"
   fi
 }
