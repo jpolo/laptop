@@ -10,7 +10,7 @@ laptop_shell_profile_var() {
   local script_file="$HOME/.profile"
   local var_name="$1"
   local value="$2"
-  laptop_step_start "- Set '$var_name=$value' in '$(laptop_path_print "$script_file")'"
+  laptop_step_start_status "present" "Variable '$var_name=$value' in '$(laptop_path_print "$script_file")'"
 
   if [ -n "$value" ]; then
     laptop_file_var "$script_file" "$var_name" "$value"
