@@ -74,8 +74,9 @@ fi;
 .zshrc-load-file() {
   local file_basename="$1"
   local file_path="${file_basename}.sh"
-
-  source "$file_path"
+  if [ -f "$file_path" ]; then
+    source "$file_path"
+  fi
 }
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
