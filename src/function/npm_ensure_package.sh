@@ -3,7 +3,7 @@
 laptop_npm_ensure_package() {
   local package="$1"
 
-  laptop_step_start "- Ensure NPM package '$package'"
+  laptop_step_start_status "present" "NPM package '$package'"
 
   if [ -n "$(npm list --global --parseable "$package")" ]; then
     laptop_step_ok
