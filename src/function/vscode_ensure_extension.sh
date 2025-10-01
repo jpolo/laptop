@@ -22,15 +22,18 @@ laptop_vscode_ensure_extension() {
   done
   local list_extensions
   list_extensions=$(code --list-extensions)
-  laptop_step_start_status "$resource_status" "unknown" "$app_name extension '$extension_name'"
 
-  if [ "$resource_status" = "present" ]; then
-    if echo "$list_extensions" | grep -q "$extension_name"; then
-      laptop_step_ok
-    else
-      laptop_step_exec "$executable" --install-extension "$extension_name" --force
-    fi
+  local resource_current_status
+  resource_current_status=$(echo "$list_extensions" | grep -q "$extension_name" && echo "present" || echo "absent")
+  laptop_step_start_status "$resource_status" "$resource_current_status" "$app_name extension '$extension_name'"
+
+  if [ "$resource_current_status" = "$resource_status" ]; then
+    laptop_step_ok
   else
-    laptop_step_exec "$executable" --uninstall-extension "$extension_name"  --force
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_exec "$executable" --install-extension "$extension_name" --force
+    else
+      laptop_step_exec "$executable" --uninstall-extension "$extension_name"  --force
+    fi
   fi
 }
