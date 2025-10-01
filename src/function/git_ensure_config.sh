@@ -19,10 +19,6 @@ laptop_git_ensure_config() {
     esac
   done
 
-  if [ -z "${value}" ] && [ "$resource_status" = "present" ]; then
-    echo "Git: Please enter value for '$name'"
-    read -r value
-  fi
   local current_value
   current_value=$(git config --global "$name")
   local resource_current_status
@@ -33,6 +29,10 @@ laptop_git_ensure_config() {
   if [ "$resource_current_status" = "$resource_status" ]; then
     laptop_step_ok
   else
+    if [ -z "${value}" ] && [ "$resource_status" = "present" ]; then
+      echo "Git: Please enter value for '$name'"
+      read -r value
+    fi
     if [ "$resource_status" = "present" ]; then
       laptop_step_exec git config --global "$name" "$value"
     else
