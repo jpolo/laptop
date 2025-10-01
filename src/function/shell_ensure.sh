@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
+# Ensure user shell is set
+#
+# Usage:
+#   laptop_shell_ensure <target_shell>
+#
+#
 laptop_shell_ensure() {
   local target_shell="$1"
   local current_shell
   current_shell="$(basename "$SHELL")"
+  local resource_status="present"
+  local resource_current_status
+  resource_current_status=$([[ "$current_shell" = "$target_shell" ]] && echo "present" || echo "absent")
 
-  laptop_step_start_status "present" "unknown" "User shell '$target_shell'"
-  if [ -z "$target_shell" ]; then
-    laptop_step_pass
-  elif [ "$current_shell" = "$target_shell" ]; then
+  laptop_step_start_status "$resource_status" "$resource_current_status" "User shell '$target_shell'"
+  if [ "$resource_current_status" = "$resource_status" ]; then
     laptop_step_ok
   else
     laptop_step_exec sudo chsh -s "/bin/$target_shell"

@@ -18,19 +18,25 @@ laptop_git_ensure_config() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "unknown" "Git config '$name'='${value:-"<custom>"}'"
-  if [ "$resource_status" = "present" ]; then
-    if [ -z "$(git config --global "$name")" ]; then
-      if [ -z "${value}" ]; then
-        echo "Git: Please enter value for '$name'"
-        read -r value
-      fi
 
+  if [ -z "${value}" ] && [ "$resource_status" = "present" ]; then
+    echo "Git: Please enter value for '$name'"
+    read -r value
+  fi
+  local current_value
+  current_value=$(git config --global "$name")
+  local resource_current_status
+  resource_current_status=$([[ "$current_value" = "$value" ]] && echo "present" || echo "absent")
+
+  laptop_step_start_status "$resource_status" "$resource_current_status" "Git config '$name'='${value:-"<custom>"}'"
+
+  if [ "$resource_current_status" = "$resource_status" ]; then
+    laptop_step_ok
+  else
+    if [ "$resource_status" = "present" ]; then
       laptop_step_exec git config --global "$name" "$value"
     else
-      laptop_step_ok
+      laptop_step_exec git config --global --unset "$name"
     fi
-  else
-    laptop_step_eval "git config --global --unset $name"
   fi
 }
