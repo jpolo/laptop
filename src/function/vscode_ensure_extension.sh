@@ -9,6 +9,7 @@
 #
 laptop_vscode_ensure_extension() {
   local executable="${LAPTOP_VSCODE_EXECUTABLE:-code}"
+  local extension_name="$1"
   # set local variable for app name
   local app_name
   app_name=$(laptop_vscode_app_name "$executable")
@@ -19,7 +20,6 @@ laptop_vscode_ensure_extension() {
       *) shift;;
     esac
   done
-  local extension_name="$1"
   local list_extensions
   list_extensions=$(code --list-extensions)
   laptop_step_start_status "$resource_status" "$app_name extension '$extension_name'"
