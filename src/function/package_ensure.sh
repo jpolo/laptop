@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Install `package` if not present
+#
+# Usage:
+#   laptop_package_ensure <package> [--status present|absent]
+#
+# Options:
+#   --status present|absent
+#
 laptop_package_ensure() {
   local package="${1}"
 

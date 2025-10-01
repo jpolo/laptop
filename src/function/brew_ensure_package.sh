@@ -3,7 +3,7 @@
 # Install brew `package` if not present
 #
 # Usage:
-#   laptop_brew_ensure_package <package>
+#   laptop_brew_ensure_package <package> [--status present|absent]
 #
 # Options:
 #   --status present|absent
