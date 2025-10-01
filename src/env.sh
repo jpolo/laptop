@@ -82,6 +82,14 @@ laptop_handler__logo() {
   laptop_logo
 }
 
+laptop_handler__configure_bootstrap() {
+  laptop_bootstrap
+}
+
+laptop_handler__configure_shell() {
+  laptop_configure_default_shell
+}
+
 # IMPORTANT: Load profile at the end
 # Load profile (with overrides)# Load profile (with overrides)
 laptop_profile_load

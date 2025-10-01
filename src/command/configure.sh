@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 laptop_command__configure_run() {
-
   # Bootstrap
-  laptop_bootstrap
-  laptop_configure_default_shell
+  laptop_handler_call "configure_bootstrap"
+  laptop_handler_call "configure_shell"
 
   # Complete installation if LAPTOP_BOOTSTRAP omitted or false
   if [ "${LAPTOP_BOOTSTRAP:-false}" = false ]; then
