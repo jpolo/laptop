@@ -20,4 +20,7 @@ laptop_configure_default_shell() {
   laptop_file_ensure_template "$profile_dir/resource/.bash_profile" "$HOME/.bash_profile" --force
 
   laptop_file_ensure_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
+
+  # Configure ZSH
+  laptop_shell_exec "zsh" "$profile_dir/bootstrap-shell.zsh"
 }

@@ -2,7 +2,6 @@
 
 source "$LAPTOP_HOME/src/env.sh"
 LAPTOP_PROFILE_DEFAULT_DIR=$(laptop_profile_dir default)
-LAPTOP_PROFILE_CURRENT_DIR=$(laptop_profile_dir)
 
 # Ensure ZSH Configuration
 laptop_file_ensure_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/zshrc.d/global.sh" "$XDG_DATA_HOME/zsh/global.sh" --force
