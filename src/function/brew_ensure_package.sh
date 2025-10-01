@@ -5,11 +5,20 @@
 # Usage:
 #   laptop_brew_ensure_package <package>
 #
+# Options:
+#   --status present|absent
+#
 laptop_brew_ensure_package() {
   local package="$1"
-
-  laptop_step_start "- Ensure brew package '$package'"
-
+  # parse options
+  local package_status="present"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -s|--status) package_status="$2"; shift 2;;
+      *) shift;;
+    esac
+  done
+  laptop_step_start "- Ensure brew package '$package' is $package_status"
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
   export HOMEBREW_NO_ENV_HINTS=1
@@ -20,10 +29,14 @@ laptop_brew_ensure_package() {
     brew_args+=("--cask")
   fi
 
-  if brew list "$package" &>/dev/null; then
-    laptop_step_ok
+  if [ "$package_status" = "present" ]; then
+    if brew list "$package" &>/dev/null; then
+      laptop_step_ok
+    else
+      laptop_step_eval "brew install ${brew_args[*]} $(quote "$package")"
+    fi
   else
-    laptop_step_eval "brew install ${brew_args[*]} $(quote "$package")"
+    laptop_step_eval "brew uninstall ${brew_args[*]} $(quote "$package") --force"
   fi
 }
 
