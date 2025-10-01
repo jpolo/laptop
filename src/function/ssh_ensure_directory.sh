@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Ensure SSH directory exists
+#
+# Usage:
+#   laptop_ssh_ensure_directory [--status present|absent]
+#
+# Options:
+#   --status present|absent
+#
 laptop_ssh_ensure_directory() {
   local ssh_dir
   ssh_dir="$HOME/.ssh"
