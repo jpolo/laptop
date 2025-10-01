@@ -19,15 +19,19 @@ laptop_asdf_ensure_plugin() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$package_status" "asdf plugin '$name'"
+  local current_package_status
+  current_package_status=$(asdf plugin list | grep -Fq "$name" && echo "present" || echo "absent")
+  local message="asdf plugin '$name'"
 
-  if [ "$package_status" = "present" ]; then
-    if ! asdf plugin list | grep -Fq "$name"; then
+  if [ "$current_package_status" = "$package_status" ]; then
+    laptop_step_start_status "unchanged" "$message"
+    laptop_step_ok
+  else
+    laptop_step_start_status "$package_status" "$message"
+    if [ "$package_status" = "present" ]; then
       laptop_step_exec asdf plugin add "$name" "$url"
     else
-      laptop_step_ok
+      laptop_step_exec asdf plugin remove "$name"
     fi
-  else
-    laptop_step_exec asdf plugin remove "$name"
   fi
 }
