@@ -22,9 +22,11 @@ laptop_step_start_status() {
   local target_status="$1"
   local message="$2"
   # display A if present, F if failed
-  local status_message="${COLOR_SUCCESS}+${NORMAL}"
+  local status_message="${DIM}=${NORMAL}"
   if [ "$target_status" = "absent" ]; then
     status_message="${COLOR_ERROR}-${NORMAL}"
+  elif [ "$target_status" = "present" ]; then
+    status_message="${COLOR_SUCCESS}+${NORMAL}"
   fi
   laptop_step_start "${status_message} $message"
 }
