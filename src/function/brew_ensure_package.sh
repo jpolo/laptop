@@ -18,25 +18,31 @@ laptop_brew_ensure_package() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$package_status" "brew package '$package'"
+
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
   export HOMEBREW_NO_ENV_HINTS=1
   local brew_args=("--quiet")
+
+  local current_package_status
+  current_package_status=$(brew list "$package" &>/dev/null && echo "present" || echo "absent")
+  local message="brew package '$package'"
 
   # shellcheck disable=SC2076
   if [ ! -z "$BREW_CASK" ];then
     brew_args+=("--cask")
   fi
 
-  if [ "$package_status" = "present" ]; then
-    if brew list "$package" &>/dev/null; then
-      laptop_step_ok
-    else
-      laptop_step_eval "brew install ${brew_args[*]} $(quote "$package")"
-    fi
+  if [ "$current_package_status" = "$package_status" ]; then
+    laptop_step_start_status "unchanged" "$message"
+    laptop_step_ok
   else
-    laptop_step_eval "brew uninstall ${brew_args[*]} $(quote "$package") --force"
+    laptop_step_start_status "$package_status" "$message"
+    if [ "$package_status" = "present" ]; then
+      laptop_step_eval "brew install ${brew_args[*]} $(quote "$package")"
+    else
+      laptop_step_eval "brew uninstall ${brew_args[*]} $(quote "$package") --force"
+    fi
   fi
 }
 
