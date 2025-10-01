@@ -12,10 +12,14 @@ laptop_ssh_ensure_directory() {
   local ssh_dir
   ssh_dir="$HOME/.ssh"
   local ssh_config_file="$ssh_dir/config"
+  local resource_status="present"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -s|--status) resource_status="$2"; shift 2;;
+      *) shift;;
+    esac
+  done
 
-  laptop_step_start "- Ensure SSH directory '$(laptop_path_print $ssh_dir)'"
-  laptop_step_eval "mkdir -p \"$ssh_dir\" && chmod 0700 \"$ssh_dir\""
-
-  laptop_step_start "- Ensure SSH config '$(laptop_path_print $ssh_config_file)'"
-  laptop_step_eval "touch \"$ssh_config_file\" && chmod 0600 \"$ssh_config_file\""
+  laptop_directory_ensure "$ssh_dir" --mode 0700 --status "$resource_status"
+  laptop_file_ensure "$ssh_config_file" --mode 0600 --status "$resource_status"
 }
