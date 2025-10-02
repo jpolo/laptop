@@ -11,6 +11,12 @@ export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
 
+# Use default by default
+export LAPTOP_SUDO=true
+if [ "$(whoami)" = "root" ]; then
+  export LAPTOP_SUDO=false
+fi
+
 export LAPTOP_PACKAGE_MANAGER=unknown
 if [ -x "$(command -v brew)" ]; then
   export LAPTOP_PACKAGE_MANAGER=brew

@@ -11,12 +11,20 @@
 laptop_apt_ensure_package() {
   local package="$1"
   local resource_status="present"
+  local with_sudo="$LAPTOP_SUDO"
+
   while [[ $# -gt 0 ]]; do
     case "$1" in
       -s|--status) resource_status="$2"; shift 2;;
+      --sudo) with_sudo="$2"; shift 2;;
       *) shift;;
     esac
   done
+
+  local sudo_command
+  if [ "$with_sudo" = true ]; then
+    sudo_command="sudo"
+  fi
 
   local current_resource_status
   current_resource_status=$(dpkg -s "$package" &>/dev/null && echo "present" || echo "absent")
@@ -27,9 +35,9 @@ laptop_apt_ensure_package() {
     laptop_step_ok
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_exec sudo apt-get install "$package" -yy
+      laptop_step_exec "$sudo_command" apt-get install "$package" -yy
     else
-      laptop_step_exec sudo apt-get remove "$package" -yy
+      laptop_step_exec "$sudo_command" apt-get remove "$package" -yy
     fi
   fi
 }
