@@ -3,15 +3,33 @@
 # Install apt `package` if not present
 #
 # Usage:
-#   laptop_apt_ensure_package <package>
+#   laptop_apt_ensure_package <package> [--status present|absent]
+#
+# Options:
+#   --status present|absent
 #
 laptop_apt_ensure_package() {
   local package="$1"
+  local resource_status="present"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -s|--status) resource_status="$2"; shift 2;;
+      *) shift;;
+    esac
+  done
 
-  laptop_step_start "- Ensure apt package '$package'"
-  if dpkg -s "$package" &>/dev/null; then
+  local current_resource_status
+  current_resource_status=$(dpkg -s "$package" &>/dev/null && echo "present" || echo "absent")
+
+  laptop_package_ensure_start "$package" --status "$resource_status" --current-status "$current_resource_status"
+
+  if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_ok
   else
-    laptop_step_eval "sudo apt-get install $(quote "$package") -yy"
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_exec sudo apt-get install "$package" -yy
+    else
+      laptop_step_exec sudo apt-get remove "$package" -yy
+    fi
   fi
 }
