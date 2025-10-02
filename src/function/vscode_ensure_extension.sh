@@ -24,7 +24,7 @@ laptop_vscode_ensure_extension() {
   list_extensions=$(code --list-extensions)
 
   local resource_current_status
-  resource_current_status=$(echo "$list_extensions" | grep -q "$extension_name" && echo "present" || echo "absent")
+  resource_current_status=$(echo "$list_extensions" | grep -iq "$extension_name" && echo "present" || echo "absent")
   laptop_step_start_status "$resource_status" "$resource_current_status" "$app_name extension '$extension_name'"
 
   if [ "$resource_current_status" = "$resource_status" ]; then
