@@ -6,9 +6,10 @@
 #   laptop_apt_ensure_updated
 #
 laptop_apt_ensure_updated() {
-  laptop_step_start "- Ensure APT updated"
-  # shellcheck disable=SC2012
-  if [ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ]; then
+  local current_status
+  current_status=$([ ! -d "/var/lib/apt/lists" ] || [ "$(ls /var/lib/apt/lists/ | wc -l)" = "0" ] && echo "absent" || echo "present")
+  laptop_step_start_status "present" "$current_status" "apt updated"
+  if [ "$current_status" = "absent" ]; then
     laptop_step_exec sudo apt-get update
   else
     laptop_step_ok
