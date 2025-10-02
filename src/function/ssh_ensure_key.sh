@@ -23,18 +23,25 @@ laptop_ssh_ensure_key() {
   local email
   email=$(git config --global user.email)
 
-  laptop_step_start_status "$resource_status" "unknown" "SSH key '$(laptop_path_print $ssh_key)'"
+  local current_resource_status
+  current_resource_status=$(test -f "$ssh_key" && echo "present" || echo "absent")
+  local message
+  message="SSH key '$(laptop_path_print $ssh_key)'"
 
-  if [  "$resource_status" = "present" ]; then
-    if [ -z "$email" ]; then
-      laptop_step_fail
-      laptop_error "git config user.email is empty"
-    elif ! [ -f "$ssh_key" ]; then
-      laptop_step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"
-    else
-      laptop_step_ok
-    fi
+  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
+
+  if [ "$current_resource_status" = "$resource_status" ]; then
+    laptop_step_ok
   else
-    laptop_ensure_file "$ssh_key" --status absent
+    if [ "$resource_status" = "present" ]; then
+      if [ -z "$email" ]; then
+        laptop_step_fail
+        laptop_error "git config user.email is empty"
+      else
+        laptop_step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"
+      fi
+    else
+      laptop_step_exec rm -f "$ssh_key"
+    fi
   fi
 }
