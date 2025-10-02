@@ -35,7 +35,7 @@ laptop_defaults_ensure com.apple.SoftwareUpdate ConfigDataInstall -int 1
 # Turn on app auto-update
 laptop_defaults_ensure com.apple.commerce AutoUpdate -bool true
 
-killall Finder
+# killall Finder
 
 # laptop_defaults_ensure_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
 
