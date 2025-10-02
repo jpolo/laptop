@@ -8,19 +8,21 @@ laptop_package_ensure__xcode-command-line-tools() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "unknown" "XCode Command Line Tools"
 
-  if laptop_command_exists "xcode-select"; then
-    if [ "$resource_status" = "present" ]; then
-      if ! [ -x "$(command -v gcc)" ]; then
-        laptop_step_exec xcode-select --install
-      else
-        laptop_step_ok
-      fi
-    else
-      laptop_step_eval "xcode-select --uninstall"
-    fi
-  else
+  local current_resource_status
+  current_resource_status=$(test -x "$(command -v gcc)" && echo "present" || echo "absent")
+  local message="XCode Command Line Tools"
+
+  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
+  if ! laptop_command_exists "xcode-select"; then
     laptop_step_pass
+  elif [ "$current_resource_status" = "$resource_status" ]; then
+    laptop_step_ok
+  else
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_exec xcode-select --install
+    else
+      laptop_step_exec sudo xcode-select --reset
+    fi
   fi
 }
