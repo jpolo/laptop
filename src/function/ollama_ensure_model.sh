@@ -20,19 +20,18 @@ laptop_ollama_ensure_model() {
       *) shift;;
     esac
   done
-  laptop_step_start_status "$resource_status" "unknown" "Ollama model '$model'"
 
-  if [ "$resource_status" = "present" ]; then
-    if ollama show "$model" &>/dev/null; then
-      laptop_step_ok
-    else
-      laptop_step_eval "ollama pull $(quote "$model")"
-    fi
+  local current_resource_status
+  current_resource_status=$(ollama show "$model" &>/dev/null && echo "present" || echo "absent")
+  laptop_step_start_status "$resource_status" "$current_resource_status" "Ollama model '$model'"
+
+  if [ "$current_resource_status" = "$resource_status" ]; then
+    laptop_step_ok
   else
-    if ollama show "$model" &>/dev/null; then
-      laptop_step_eval "ollama rm $(quote "$model")"
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_exec ollama pull "$model"
     else
-      laptop_step_ok
+      laptop_step_exec ollama rm "$model"
     fi
   fi
 }
