@@ -120,12 +120,13 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop_vscode_ensure_setting '["git.confirmSync"]' 'false'
   laptop_vscode_ensure_setting '["git.autofetch"]' 'true'
   # Important settings to disable
-  laptop_vscode_ensure_setting '["files.insertFinalNewline"]' ''
-  laptop_vscode_ensure_setting '["files.trimFinalNewlines"]' ''
-  laptop_vscode_ensure_setting '["files.trimTrailingWhitespace"]' ''
-  laptop_vscode_ensure_setting '["editor.trimAutoWhitespace"]' ''
-  laptop_vscode_ensure_setting '["editor.tabSize"]' ''
-  laptop_vscode_ensure_setting '["window.commandCenter"]' 'true'
+  laptop_vscode_ensure_setting '["files.insertFinalNewline"]' --status absent
+  laptop_vscode_ensure_setting '["files.trimFinalNewlines"]' --status absent
+  laptop_vscode_ensure_setting '["files.trimTrailingWhitespace"]' --status absent
+  laptop_vscode_ensure_setting '["editor.trimAutoWhitespace"]' --status absent
+  laptop_vscode_ensure_setting '["editor.tabSize"]' --status absent
+  laptop_vscode_ensure_setting '["window.commandCenter"]' --status absent
+
   # Fix ruby lsp with asdf
   laptop_vscode_ensure_setting '["rubyLsp.rubyVersionManager","identifier"]' '"asdf"'
   # Disable gitlens pro features annoying messages
