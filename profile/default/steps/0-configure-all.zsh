@@ -79,7 +79,6 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   laptop_ollama_ensure_model "nomic-embed-text"
   laptop_package_ensure "orbstack"
 
-  laptop_package_ensure "mongodb-community"
   laptop_package_ensure "mongodb-database-tools"
 
   # Install programs
