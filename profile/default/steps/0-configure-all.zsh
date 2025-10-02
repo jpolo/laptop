@@ -6,38 +6,36 @@ source "$LAPTOP_HOME/src/env.sh"
 laptop_directory_ensure "$HOME/Code"
 laptop_directory_ensure "$HOME/Captures"
 
-# Default settings
-laptop_defaults_ensure NSGlobalDomain AppleShowAllExtensions -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-laptop_defaults_ensure NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
-# Set sidebar icon size
-laptop_defaults_ensure NSGlobalDomain NSTableViewDefaultSizeMode -int 3
+if laptop_command_exists "defaults"; then
+  # Default settings
+  laptop_defaults_ensure NSGlobalDomain AppleShowAllExtensions -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+  laptop_defaults_ensure NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+  # Set sidebar icon size
+  laptop_defaults_ensure NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 
-## Screen Capture application
-laptop_defaults_ensure com.apple.screencapture location -string "$HOME/Captures"
-# Save PNG format
-laptop_defaults_ensure com.apple.screencapture type -string "png"
+  ## Screen Capture application
+  laptop_defaults_ensure com.apple.screencapture location -string "$HOME/Captures"
+  # Save PNG format
+  laptop_defaults_ensure com.apple.screencapture type -string "png"
 
-# Software updates
+  # Software updates
 
-# Enable the automatic update check
-laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-# Download newly available updates in background
-laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticDownload -int 1
-# Install System data files & security updates
-laptop_defaults_ensure com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
-# Automatically download apps purchased on other Macs
-laptop_defaults_ensure com.apple.SoftwareUpdate ConfigDataInstall -int 1
-# Turn on app auto-update
-laptop_defaults_ensure com.apple.commerce AutoUpdate -bool true
-
-# killall Finder
-
-# laptop_defaults_ensure_bool "/Library/Preferences/com.apple.commerce.plist" AutoUpdate -bool false
+  # Enable the automatic update check
+  laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+  # Download newly available updates in background
+  laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticDownload -int 1
+  # Install System data files & security updates
+  laptop_defaults_ensure com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+  # Automatically download apps purchased on other Macs
+  laptop_defaults_ensure com.apple.SoftwareUpdate ConfigDataInstall -int 1
+  # Turn on app auto-update
+  laptop_defaults_ensure com.apple.commerce AutoUpdate -bool true
+fi
 
 # Install standard utils
 laptop_package_ensure "pack:core"
