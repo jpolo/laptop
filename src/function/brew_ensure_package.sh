@@ -26,14 +26,13 @@ laptop_brew_ensure_package() {
 
   local current_resource_status
   current_resource_status=$(brew list "$package" &>/dev/null && echo "present" || echo "absent")
-  local message="brew package '$package'"
 
   # shellcheck disable=SC2076
   if [ ! -z "$BREW_CASK" ];then
     brew_args+=("--cask")
   fi
 
-  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
+  laptop_package_ensure_start "$package" --status "$resource_status" --current-status "$current_resource_status"
   if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_ok
   else
