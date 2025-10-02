@@ -23,8 +23,21 @@ laptop_ssh_ensure_setting() {
   section=$(echo "$section_raw" | cut -d' ' -f1)
   section_value=$(echo "$section_raw" | cut -d' ' -f2)
 
-  laptop_step_start_status "present" "unknown" "SSH setting [\"$section $section_value\"][\"$setting\"]='$value'"
-  laptop_step_exec augtool -A <<EOF
+  local current_value
+  current_value=$(augtool get "/files/$config_file/${section}[.=$(quote "${section_value}")]/${setting}")
+
+  local resource_status="present"
+  local current_resource_status
+  current_resource_status=$(echo "$current_value" | grep -q "$value" && echo "present" || echo "absent")
+  local message
+  message="SSH setting [\"$section $section_value\"][\"$setting\"]='$value'"
+
+  laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
+  if [ "$current_resource_status" = "$resource_status" ]; then
+    laptop_step_ok
+  else
+    if [ "$resource_status" = "present" ]; then
+      laptop_step_exec augtool -A <<EOF
 set /augeas/load/SSH/lens SSH.lns
 set /augeas/load/SSH/incl '$config_file'
 load
@@ -34,6 +47,13 @@ set "/files/$config_file/${section}[.=$(quote "${section_value}")]/${setting}" $
 
 save
 EOF
+    else
+      laptop_step_fail
+      laptop_error "Not implemented"
+    fi
+  fi
+
+
 
 
 }
