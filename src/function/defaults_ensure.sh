@@ -23,12 +23,15 @@ laptop_defaults_ensure() {
   local current_resource_status
   current_resource_status=$(defaults read "$domain" "$key" &>/dev/null && echo "present" || echo "absent")
   local message="Defaults ${domain}[${key}] $value_type $value"
+
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
   if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_ok
   else
-    if [ "$resource_status" = "present" ]; then
+    if ! laptop_command_exists "defaults"; then
+      laptop_step_pass
+    elif [ "$resource_status" = "present" ]; then
       laptop_step_exec defaults write "$domain" "$key" "$value_type" "$value"
     else
       laptop_step_exec defaults delete "$domain" "$key"
