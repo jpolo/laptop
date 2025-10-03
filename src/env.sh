@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Change current directory to home
+cd "$HOME" || exit 1
+
 if [ -z "${LAPTOP_HOME}" ]; then
   echo "LAPTOP_HOME variable is required"
   exit 1
