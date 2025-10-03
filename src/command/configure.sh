@@ -42,6 +42,7 @@ laptop_command__configure() {
   fi
 
   laptop_info "  Profile: ${BRACKET}${LAPTOP_PROFILE}${NORMAL}"
+  laptop_info "  Dev Container: ${BRACKET}${LAPTOP_DEVCONTAINER}${NORMAL}"
 
   # Ask confirmation
   if [ "${LAPTOP_BOOTSTRAP:-false}" = true ]; then

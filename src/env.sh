@@ -17,6 +17,16 @@ if [ "$(whoami)" = "root" ]; then
   export LAPTOP_SUDO=false
 fi
 
+if [ -z "$LAPTOP_DEVCONTAINER" ]; then
+  if [ -f "/.dockerenv" ]; then
+    export LAPTOP_DEVCONTAINER="true"
+  elif [ -f "/proc/self/cgroup" ]; then
+    export LAPTOP_DEVCONTAINER="true"
+  else
+    export LAPTOP_DEVCONTAINER="false"
+  fi
+fi
+
 export LAPTOP_PACKAGE_MANAGER=unknown
 if [ -x "$(command -v brew)" ]; then
   export LAPTOP_PACKAGE_MANAGER=brew
