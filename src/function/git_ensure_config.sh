@@ -39,7 +39,7 @@ laptop_git_ensure_config() {
   else
     if [ "$resource_status" = "present" ]; then
       if [ -z "${value}" ]; then
-        echo "\nGit: Please enter value for '$name'"
+        echo " Git: Please enter value for '$name'"
         read -r value
       fi
       laptop_step_exec git config --global "$name" "$value"

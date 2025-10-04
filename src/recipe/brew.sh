@@ -13,6 +13,7 @@ laptop_package_ensure__brew() {
     laptop_step_ok
   else
     if [ "$resource_status" = "present" ]; then
+      # shellcheck disable=SC2015
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&
         # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
         laptop_step_ok || laptop_step_fail
