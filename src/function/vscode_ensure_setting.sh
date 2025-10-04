@@ -76,9 +76,9 @@ laptop_vscode_ensure_setting() {
     laptop_step_ok
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_eval "cat $(quote $vscode_settings_file) | jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file")"
+      laptop_step_eval "cat $(quote "$vscode_settings_file") | jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file")"
     else
-      laptop_step_eval "cat $(quote $vscode_settings_file) | jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file")"
+      laptop_step_eval "cat $(quote "$vscode_settings_file") | jsonc modify -n -m -p $(quote "$json_path") $jsonc_args -f $(quote "$vscode_settings_file")"
     fi
   fi
 }

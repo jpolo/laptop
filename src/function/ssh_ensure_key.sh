@@ -26,7 +26,7 @@ laptop_ssh_ensure_key() {
   local current_resource_status
   current_resource_status=$(test -f "$ssh_key" && echo "present" || echo "absent")
   local message
-  message="SSH key '$(laptop_path_print $ssh_key)'"
+  message="SSH key '$(laptop_path_print "$ssh_key")'"
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
