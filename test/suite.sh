@@ -4,6 +4,7 @@ SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR/.." || exit 1
 LAPTOP_HOME=$(pwd)
 export LAPTOP_HOME
+export LAPTOP_PROFILE=default
 source "./src/env.sh"
 
 mkdir -p "test_data"
