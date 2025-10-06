@@ -23,18 +23,7 @@ if laptop_command_exists "defaults"; then
   # Save PNG format
   laptop_defaults_ensure com.apple.screencapture type -string "png"
 
-  # Software updates
-
-  # Enable the automatic update check
-  laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-  # Download newly available updates in background
-  laptop_defaults_ensure com.apple.SoftwareUpdate AutomaticDownload -int 1
-  # Install System data files & security updates
-  laptop_defaults_ensure com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
-  # Automatically download apps purchased on other Macs
-  laptop_defaults_ensure com.apple.SoftwareUpdate ConfigDataInstall -int 1
-  # Turn on app auto-update
-  laptop_defaults_ensure com.apple.commerce AutoUpdate -bool true
+  laptop_package_ensure "config:macos-update-recommended"
 fi
 
 # Install standard utils
