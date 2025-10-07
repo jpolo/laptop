@@ -11,4 +11,8 @@ laptop_package_ensure__config:macos-global-recommended() {
   laptop_defaults_ensure NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
   laptop_defaults_ensure NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
   laptop_defaults_ensure NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
+  # Fast key repeat
+  laptop_defaults_ensure NSGlobalDomain InitialKeyRepeat -int 10
+  laptop_defaults_ensure NSGlobalDomain KeyRepeat -int 1
 }
