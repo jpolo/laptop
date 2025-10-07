@@ -7,12 +7,8 @@ laptop_directory_ensure "$HOME/Code"
 laptop_directory_ensure "$HOME/Captures"
 
 if laptop_command_exists "defaults"; then
-  ## Screen Capture application
-  laptop_defaults_ensure com.apple.screencapture location -string "$HOME/Captures"
-  # Save PNG format
-  laptop_defaults_ensure com.apple.screencapture type -string "png"
-
   laptop_package_ensure "config:macos-global-recommended"
+  laptop_package_ensure "config:macos-screencapture-recommended"
   laptop_package_ensure "config:macos-update-recommended"
 fi
 
