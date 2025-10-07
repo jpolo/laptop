@@ -7,14 +7,7 @@ laptop_directory_ensure "$HOME/Code"
 laptop_directory_ensure "$HOME/Captures"
 
 if laptop_command_exists "defaults"; then
-  # Default settings
-  laptop_defaults_ensure NSGlobalDomain AppleShowAllExtensions -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-  laptop_defaults_ensure NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
   # Set sidebar icon size
   laptop_defaults_ensure NSGlobalDomain NSTableViewDefaultSizeMode -int 3
 
@@ -23,6 +16,7 @@ if laptop_command_exists "defaults"; then
   # Save PNG format
   laptop_defaults_ensure com.apple.screencapture type -string "png"
 
+  laptop_package_ensure "config:macos-dev-recommended"
   laptop_package_ensure "config:macos-update-recommended"
 fi
 
