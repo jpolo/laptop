@@ -78,24 +78,12 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
 
   # Configure VSCode
   laptop_npm_ensure_package "jsonc-cli"
-  laptop_vscode_ensure_setting '["workbench.fontAliasing"]' '"auto"'
-  laptop_vscode_ensure_setting '["editor.bracketPairColorization.enabled"]' 'true'
+  laptop_package_ensure "config:vscode-recommended"
   laptop_vscode_ensure_setting '["editor.fontFamily"]' "\"'Monaspace Neon', Menlo, Monaco, Courier New, monospace\""
   laptop_vscode_ensure_setting '["editor.fontLigatures"]' "\"'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'\""
-  laptop_vscode_ensure_setting '["git.confirmSync"]' 'false'
-  laptop_vscode_ensure_setting '["git.autofetch"]' 'true'
-  # Important settings to disable
-  laptop_vscode_ensure_setting '["files.insertFinalNewline"]' --status absent
-  laptop_vscode_ensure_setting '["files.trimFinalNewlines"]' --status absent
-  laptop_vscode_ensure_setting '["files.trimTrailingWhitespace"]' --status absent
-  laptop_vscode_ensure_setting '["editor.trimAutoWhitespace"]' --status absent
-  laptop_vscode_ensure_setting '["editor.tabSize"]' --status absent
-  laptop_vscode_ensure_setting '["window.commandCenter"]' --status absent
 
   # Fix ruby lsp with asdf
   laptop_vscode_ensure_setting '["rubyLsp.rubyVersionManager","identifier"]' '"asdf"'
-  # Disable gitlens pro features annoying messages
-  laptop_vscode_ensure_setting '["gitlens.plusFeatures.enabled"]' 'false'
 fi
 
 
