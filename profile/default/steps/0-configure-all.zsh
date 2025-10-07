@@ -65,16 +65,8 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # laptop_package_ensure "flipper" # deprecated method
 
   # Install VSCode extensions
-  laptop_vscode_ensure_extension "EditorConfig.EditorConfig"
-  laptop_vscode_ensure_extension "eamodio.gitlens"
-  laptop_vscode_ensure_extension "GitHub.vscode-pull-request-github"
-  laptop_vscode_ensure_extension "ms-vsliveshare.vsliveshare"
-  laptop_vscode_ensure_extension "joshbolduc.commitlint"
-  laptop_vscode_ensure_extension "streetsidesoftware.code-spell-checker"
+  laptop_package_ensure "pack:vscode-extension-recommended"
   laptop_vscode_ensure_extension "seatonjiang.gitmoji-vscode"
-  laptop_vscode_ensure_extension "redhat.vscode-yaml"
-  laptop_vscode_ensure_extension "aaron-bond.better-comments"
-  laptop_vscode_ensure_extension "tamasfe.even-better-toml"
 
   # Configure VSCode
   laptop_npm_ensure_package "jsonc-cli"
