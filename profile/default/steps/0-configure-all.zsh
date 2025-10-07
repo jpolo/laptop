@@ -7,10 +7,6 @@ laptop_directory_ensure "$HOME/Code"
 laptop_directory_ensure "$HOME/Captures"
 
 if laptop_command_exists "defaults"; then
-
-  # Set sidebar icon size
-  laptop_defaults_ensure NSGlobalDomain NSTableViewDefaultSizeMode -int 3
-
   ## Screen Capture application
   laptop_defaults_ensure com.apple.screencapture location -string "$HOME/Captures"
   # Save PNG format
