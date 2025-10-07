@@ -22,14 +22,12 @@ if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git
   laptop_file_ensure "$XDG_CONFIG_HOME/git/config"
   laptop_package_ensure "config:git-recommended"
-
+  # Configure github
   laptop_github_ensure_login
-  laptop_ssh_ensure_directory
+  # Configure ssh
+  laptop_package_ensure "config:ssh-recommended"
   laptop_ssh_ensure_key "ed25519"
   laptop_ssh_ensure_setting "Host *" "IdentityFile" "~/.ssh/id_ed25519"
-
-  laptop_ssh_ensure_setting "Host *" "AddKeysToAgent" "yes"
-  laptop_ssh_ensure_setting "Host *" "UseKeychain" "yes"
 fi
 
 # Install globally tools using asdf to the version specified in profile/${profile_name}/.tool-versions
