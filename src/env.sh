@@ -21,7 +21,9 @@ if [ "$(whoami)" = "root" ]; then
 fi
 
 if [ -z "$LAPTOP_DEVCONTAINER" ]; then
-  if [ -f "/.dockerenv" ]; then
+  if [[ "$(whoami)" = "vscode" ]]; then
+    export LAPTOP_DEVCONTAINER="true"
+  elif [ -f "/.dockerenv" ]; then
     export LAPTOP_DEVCONTAINER="true"
   elif [ -f "/proc/self/cgroup" ]; then
     export LAPTOP_DEVCONTAINER="true"
@@ -70,10 +72,6 @@ COLOR_SUCCESS='\033[32m'
 DIM="\\033[2m"
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
-
-if [ -z "$LAPTOP_DEVCONTAINER" ]; then
-  [[ "$(whoami)" = "vscode" ]] && LAPTOP_DEVCONTAINER="true"
-fi
 
 quote() {
   local quoted=${1//\'/\'\\\'\'}
