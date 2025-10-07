@@ -21,14 +21,8 @@ laptop_package_ensure "pack:cloud-utils"
 if [ -z "$LAPTOP_DEVCONTAINER" ];then
   # Configure git
   laptop_file_ensure "$XDG_CONFIG_HOME/git/config"
-  laptop_git_ensure_config "core.ignorecase" "false"
-  laptop_git_ensure_config "init.defaultBranch" "main"
-  # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/
-  laptop_git_ensure_config "push.default" "current"
-  laptop_git_ensure_config "push.autoSetupRemote" "true"
-  laptop_git_ensure_config "fetch.prune" "true"
-  laptop_git_ensure_config "user.email"
-  laptop_git_ensure_config "user.name"
+  laptop_package_ensure "config:git-recommended"
+
   laptop_github_ensure_login
   laptop_ssh_ensure_directory
   laptop_ssh_ensure_key "ed25519"
