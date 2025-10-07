@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # macOS defaults settings for developers
-laptop_package_ensure__config:macos-dev-recommended() {
+laptop_package_ensure__config:macos-global-recommended() {
 
   # We remove many default completions that adds unwanted characters
   laptop_defaults_ensure NSGlobalDomain AppleShowAllExtensions -bool true

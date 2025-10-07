@@ -12,7 +12,7 @@ if laptop_command_exists "defaults"; then
   # Save PNG format
   laptop_defaults_ensure com.apple.screencapture type -string "png"
 
-  laptop_package_ensure "config:macos-dev-recommended"
+  laptop_package_ensure "config:macos-global-recommended"
   laptop_package_ensure "config:macos-update-recommended"
 fi
 
