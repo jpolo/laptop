@@ -13,6 +13,6 @@ laptop_package_ensure__config:macos-global-recommended() {
   laptop_defaults_ensure NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
 
   # Fast key repeat
-  laptop_defaults_ensure NSGlobalDomain InitialKeyRepeat -int 10
+  laptop_defaults_ensure NSGlobalDomain InitialKeyRepeat -int 15 # 150ms seems to be the most common value that offers the best tradeoff (source = github)
   laptop_defaults_ensure NSGlobalDomain KeyRepeat -int 1
 }
