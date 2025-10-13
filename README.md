@@ -3,6 +3,7 @@
 The main goal of this project is to help developers to focus on delivering value instead of struggling with the workstation configuration.
 
 The solution provided is a composed of :
+
 - *one-liner* installer script that will fully configure a workstation for mobile and web development.
 - a cli tool named "laptop" to help workstation maintenance event after the script was installed
 - an extended bash function collection to be able to create other configuration profile than the one on this repository
@@ -23,16 +24,15 @@ Available profiles :
 
 2. Install `laptop` executable and custom `.zshrc` :
 
-```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/main/install.sh)"
-```
+    ```shell
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/jpolo/laptop/main/install.sh)"
+    ```
 
 3. Install all programs :
 
-```shell
-laptop configure
-```
-
+    ```shell
+    laptop configure
+    ```
 
 ## ✨ Features
 
@@ -57,10 +57,10 @@ The laptop ZSH plugin provides a `laptop` executable. This executable was create
 - remove all unneeded files and free disk space
 - auto-update itself. laptop can be updated itself to benefit to the latest tools / configuration of the organization
 
-### ✅ Customize your laptop tool for your organization !
+### ✅ Customize your laptop tool for your organization
 
 - Built to be easily forked (better for security, so everyone can review the code)
-- Many bash functions for your needs in [`./src/functions`]()
+- Many bash functions for your needs in [`./src/functions`](./src/functions)
 - Multiple configuration profile is possible
 
 ### ✅ Customizable for your needs
@@ -146,7 +146,7 @@ NPM, docker, mobile development can be quite greedy on disk space. Launch this c
 
 ## ⭐️ Contributing
 
-Original repository is hosted at [https://github.com/jpolo]()
+Original repository is hosted at [https://github.com/jpolo](https://github.com/jpolo)
 
 Contributions are welcome especially when :
 
