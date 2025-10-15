@@ -144,6 +144,4 @@ unset -f .zshrc-command-alternative
 unset -f .zshrc-load-file
 
 # Print ZPROF results
-if [[ -n $ZSH_PROF ]]; then
-  zprof
-fi
+[[ -n "$ZPROF" ]] && zprof
