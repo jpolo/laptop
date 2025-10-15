@@ -28,6 +28,9 @@
 # Example 1: Install and load OhMyZSH plugin named "ruby"
 # `zinit snippet OMZP::ruby`
 
+# Enable ZPROF for profiling when ZPROF environment variable is set
+[[ -n "$ZPROF" ]] && zmodload zsh/zprof
+
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
 if [ -f "${HOME}/.zprofile" ]; then
@@ -77,6 +80,11 @@ fi;
   if [ -f "$file_path" ]; then
     source "$file_path"
   fi
+}
+
+# Profile a command and print the results
+zsh_profile_result() {
+  ZPROF=1 zsh "$@"
 }
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
@@ -134,3 +142,8 @@ fi
 ##
 unset -f .zshrc-command-alternative
 unset -f .zshrc-load-file
+
+# Print ZPROF results
+if [[ -n $ZSH_PROF ]]; then
+  zprof
+fi
