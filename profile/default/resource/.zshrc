@@ -133,3 +133,4 @@ fi
 # Cleanup
 ##
 unset -f .zshrc-command-alternative
+unset -f .zshrc-load-file
