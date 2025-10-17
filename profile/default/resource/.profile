@@ -4,7 +4,7 @@
 # 🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-_path_prepend() {
+.profile-path-prepend() {
   for ARG in "$@"
   do
     if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
@@ -13,7 +13,7 @@ _path_prepend() {
   done
 }
 
-_path_append() {
+.profile-path-append() {
   for ARG in "$@"
   do
     if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
@@ -22,7 +22,7 @@ _path_append() {
   done
 }
 
-_xdg_init() {
+.profile-xdg-init() {
   # Make sure XDG dirs are set
 
   # Init default platform directories
@@ -62,7 +62,7 @@ _xdg_init() {
   }
 }
 
-_xdg_init
+.profile-xdg-init
 
 # jenv, rbenv, etc
 export ANSIBLE_HOME="$XDG_CONFIG_HOME/ansible"
@@ -135,8 +135,8 @@ if [ -z "$ANDROID_HOME" ]; then
     export ANDROID_HOME="/usr/local/opt/android-sdk"
   fi
   if [ ! -z "$ANDROID_HOME" ]; then
-    _path_append "$ANDROID_HOME/platform-tools"
-    _path_append "$ANDROID_HOME/cmdline-tools/latest/bin"
+    .profile-path-append "$ANDROID_HOME/platform-tools"
+    .profile-path-append "$ANDROID_HOME/cmdline-tools/latest/bin"
   fi
 fi
 
@@ -147,24 +147,24 @@ fi
 # fi
 
 # set PATH so it includes user's private bin if it exists
-_path_prepend "/usr/sbin"
-_path_prepend "/usr/local/bin"
-_path_prepend "/snap/bin"
-_path_prepend "$HOME/bin"
-_path_prepend "$HOME/.bin"
-_path_prepend "$HOME/.local/bin"
+.profile-path-prepend "/usr/sbin"
+.profile-path-prepend "/usr/local/bin"
+.profile-path-prepend "/snap/bin"
+.profile-path-prepend "$HOME/bin"
+.profile-path-prepend "$HOME/.bin"
+.profile-path-prepend "$HOME/.local/bin"
 if [ ! -z "$CARGO_HOME" ]; then
-  _path_append "$CARGO_HOME/bin"
+  .profile-path-append "$CARGO_HOME/bin"
 fi
 if [ ! -z "$GEM_HOME" ]; then
-  _path_append "$GEM_HOME/bin"
+  .profile-path-append "$GEM_HOME/bin"
 fi
-_path_append "$HOME/Application"
-_path_append "$HOME/Applications"
-_path_prepend "$ASDF_DATA_DIR/shims"
-_path_append "$HOME/.yarn/bin"
+.profile-path-append "$HOME/Application"
+.profile-path-append "$HOME/Applications"
+.profile-path-prepend "$ASDF_DATA_DIR/shims"
+.profile-path-append "$HOME/.yarn/bin"
 export PATH
 
 
 # Clean functions
-unset -f _path_append _path_prepend _xdg_init
+unset -f .profile-path-append .profile-path-prepend .profile-xdg-init
