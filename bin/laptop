@@ -15,12 +15,16 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
+LAPTOP_CONFIG_FILE=${LAPTOP_CONFIG_FILE:-}
 source "$LAPTOP_HOME/src/env.sh"
 source "$ROOT_DIR/src/command/cleanup.sh"
+source "$ROOT_DIR/src/command/config.sh"
 source "$ROOT_DIR/src/command/configure.sh"
 source "$ROOT_DIR/src/command/upgrade.sh"
 
 ###   cleanup: empty cache and prune unused resources
+###   config view: view the current shell personal configuration file
+###   config edit: edit the current shell personal configuration file
 ###   configure: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
@@ -31,6 +35,7 @@ laptop_command__help() {
 ###
 ### Environment variables:
 ###   LAPTOP_HOME: Local folder of installation of the laptop executable and library
+###   LAPTOP_CONFIG_FILE: Path to the shell personal configuration file (default: $XDG_CONFIG_HOME/zsh/personal.sh)
 ###   LAPTOP_GIT_REMOTE: Git repository location used as zsh plugin. It can be :
 ###     - A github repository name (ex: jpolo/laptop)
 ###     - A full git url (ex: https://github.com/jpolo/laptop.git)
