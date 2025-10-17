@@ -39,6 +39,7 @@ laptop_command__help() {
 
 # Parse global options and subcommand
 LAPTOP_YES=false
+LAPTOP_HELP=false
 LAPTOP_SUBCOMMAND=""
 LAPTOP_ARGS=()
 LAPTOP_BOOTSTRAP=${LAPTOP_BOOTSTRAP:-false}
@@ -51,8 +52,9 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     -h|--help)
-      laptop_command__help
-      exit 0
+      # shellcheck disable=SC2034
+      LAPTOP_HELP=true
+      shift
       ;;
     *)
       if [ -z "$LAPTOP_SUBCOMMAND" ]; then
