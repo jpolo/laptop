@@ -5,21 +5,17 @@
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
 .profile-path-prepend() {
-  for ARG in "$@"
-  do
-    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
-        PATH="$ARG${PATH:+":$PATH"}"
-    fi
-  done
+  local new_path="$1"
+  if [ -d "$new_path" ] && [[ ":$PATH:" != *":$new_path:"* ]]; then
+    PATH="$new_path${PATH:+":$PATH"}"
+  fi
 }
 
 .profile-path-append() {
-  for ARG in "$@"
-  do
-    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$ARG"
-    fi
-  done
+  local new_path="$1"
+  if [ -d "$new_path" ] && [[ ":$PATH:" != *":$new_path:"* ]]; then
+    PATH="${PATH:+"$PATH:"}$new_path"
+  fi
 }
 
 .profile-xdg-init() {
