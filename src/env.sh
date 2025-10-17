@@ -83,6 +83,10 @@ quote() {
 source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
 # Source global functions
 laptop_source_all "$LAPTOP_SOURCE_DIR/function"
+
+# Select profile
+laptop_profile_select
+
 # Source profile functions
 if [ -d "$(laptop_profile_dir)/function" ]; then
   laptop_source_all "$(laptop_profile_dir)/function"

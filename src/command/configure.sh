@@ -15,21 +15,6 @@ laptop_command__configure() {
   laptop_handler_call "logo"
   laptop_self_check_version
 
-  # Select profile
-  if [ -z "$LAPTOP_PROFILE" ]; then
-    local list_profile
-    list_profile=$(laptop_profile_available)
-
-    if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT" ]]; then
-      LAPTOP_PROFILE="$LAPTOP_PROFILE_DEFAULT"
-    else
-      laptop_info "Please select a configuration profile"
-      select LAPTOP_PROFILE in $list_profile; do
-        test -n "$LAPTOP_PROFILE" && break
-        laptop_error "Invalid Selection"
-      done
-    fi
-  fi
 
   if [ -z "$LAPTOP_GIT_REMOTE" ]; then
     laptop_warn "LAPTOP_GIT_REMOTE is not set and is required for self updating"
