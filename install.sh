@@ -45,3 +45,5 @@ echo "[Info] Run $PACKAGE_NAME"
 cd "$DOWNLOAD_DIR$PACKAGE_NAME"
 # LAYOUT_PROFILE= will be asked during installation
 LAPTOP_BOOTSTRAP=true "$DOWNLOAD_DIR$PACKAGE_NAME/bin/laptop" configure
+
+echo "[Info] Please close your terminal to apply the changes"
