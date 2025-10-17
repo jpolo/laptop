@@ -8,6 +8,8 @@
 # Examples of common plugins
 # ⬇ Uncomment one of these line will install the plugin
 #
+# zinit snippet OMZP::common-aliases
+# zinit snippet OMZP::git
 # zinit snippet OMZP::bundler
 # zinit snippet OMZP::git
 # zinit snippet OMZP::ruby
