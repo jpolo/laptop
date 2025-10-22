@@ -30,11 +30,7 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_ssh_ensure_setting "Host *" "IdentityFile" "~/.ssh/id_ed25519"
 fi
 
-# Install globally tools using asdf to the version specified in profile/${profile_name}/.tool-versions
-laptop_asdf_ensure_package_list "$(laptop_profile_dir)/.tool-versions"
-
-# Install npm packages
-laptop_npm_ensure_package_list "$(laptop_profile_dir)/npmfile"
+laptop_package_ensure "profile:all"
 
 # Install programs (non devcontainers only)
 if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
