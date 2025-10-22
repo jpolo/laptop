@@ -57,7 +57,7 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
 
   # Install VSCode extensions
   laptop_package_ensure "pack:vscode-extension-recommended"
-  laptop_vscode_ensure_extension "seatonjiang.gitmoji-vscode"
+  laptop_vscode_ensure_extension_list "$(laptop_profile_dir)/codefile"
 
   # Configure VSCode
   laptop_package_ensure "config:vscode-recommended"
