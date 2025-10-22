@@ -6,6 +6,6 @@
 #   laptop_asdf_ensure_updated
 #
 laptop_asdf_ensure_updated() {
-  laptop_step_start "- Upgrade asdf"
+  laptop_step_upgrade_start "asdf updated"
   laptop_step_eval "asdf plugin update --all"
 }

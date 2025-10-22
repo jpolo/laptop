@@ -40,6 +40,15 @@ laptop_step_start_status() {
   laptop_step_start "${status_message} $message"
 }
 
+# Display a step with a upgrade status
+#
+# Usage:
+#   laptop_step_upgrade_start <message>
+#
+laptop_step_upgrade_start() {
+  laptop_step_start "${COLOR_SUCCESS}↻${NORMAL} $1"
+}
+
 laptop_step_ok() {
   echo -e "${SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
   return 0

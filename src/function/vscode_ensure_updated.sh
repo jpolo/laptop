@@ -15,6 +15,6 @@ laptop_vscode_ensure_updated() {
   local app_name
   app_name=$(laptop_vscode_app_name "$executable")
 
-  laptop_step_start "- Upgrade $app_name"
+  laptop_step_upgrade_start "$app_name updated"
   laptop_step_eval "$executable --update-extensions"
 }

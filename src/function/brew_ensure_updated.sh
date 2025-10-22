@@ -6,6 +6,6 @@
 #   laptop_brew_ensure_updated
 #
 laptop_brew_ensure_updated() {
-  laptop_step_start "- Upgrade brew"
+  laptop_step_upgrade_start "brew updated"
   laptop_step_eval "brew upgrade --quiet"
 }
