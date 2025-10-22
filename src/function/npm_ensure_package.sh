@@ -18,7 +18,7 @@ laptop_npm_ensure_package() {
     esac
   done
   local resource_current_status
-  resource_current_status=$(npm list --global --parseable "$package" &>/dev/null && echo "present" || echo "absent")
+  resource_current_status=$(npm list --global --parseable "$package" | grep "$package" && echo "present" || echo "absent")
 
   laptop_step_start_status "$resource_status" "$resource_current_status" "NPM package '$package'"
 
@@ -26,9 +26,9 @@ laptop_npm_ensure_package() {
     laptop_step_ok
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_eval "npm install --quiet --global $(quote "$package")"
+      laptop_step_exec npm install --quiet --global "$package"
     else
-      laptop_step_eval "npm uninstall --quiet --global $(quote "$package")"
+      laptop_step_exec npm uninstall --quiet --global "$package"
     fi
   fi
 }
