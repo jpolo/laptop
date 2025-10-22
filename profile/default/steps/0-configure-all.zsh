@@ -33,6 +33,9 @@ fi
 # Install globally tools using asdf to the version specified in profile/${profile_name}/.tool-versions
 laptop_asdf_ensure_package_list "$(laptop_profile_dir)/.tool-versions"
 
+# Install npm packages
+laptop_npm_ensure_package_list "$(laptop_profile_dir)/npmfile"
+
 # Install programs (non devcontainers only)
 if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_package_ensure "pack:social"
