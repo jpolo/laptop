@@ -70,6 +70,13 @@ laptop_vscode_ensure_setting() {
   local message
   message="$app_name setting $json_path=$json_value"
 
+  # Try to install once jsonc-cli
+  _LAPTOP_ENSURE_JSONC_CLI="${_LAPTOP_ENSURE_JSONC_CLI:-false}"
+  if [ "$_LAPTOP_ENSURE_JSONC_CLI" = "false" ]; then
+    _LAPTOP_ENSURE_JSONC_CLI="true"
+    laptop_npm_ensure_package "jsonc-cli"
+  fi
+
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
   if [ "$current_resource_status" = "$resource_status" ]; then

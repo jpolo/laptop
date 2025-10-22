@@ -60,7 +60,6 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_vscode_ensure_extension "seatonjiang.gitmoji-vscode"
 
   # Configure VSCode
-  laptop_npm_ensure_package "jsonc-cli"
   laptop_package_ensure "config:vscode-recommended"
   laptop_vscode_ensure_setting '["editor.fontFamily"]' "\"'Monaspace Neon', Menlo, Monaco, Courier New, monospace\""
   laptop_vscode_ensure_setting '["editor.fontLigatures"]' "\"'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'\""
