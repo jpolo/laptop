@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop_package_ensure__profile:all() {
+laptop_package_ensure__profile:core() {
   local profile_dir
   profile_dir="$(laptop_profile_dir)"
 

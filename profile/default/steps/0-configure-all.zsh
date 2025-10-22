@@ -30,7 +30,7 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_ssh_ensure_setting "Host *" "IdentityFile" "~/.ssh/id_ed25519"
 fi
 
-laptop_package_ensure "profile:all"
+laptop_package_ensure "profile:core"
 
 # Install programs (non devcontainers only)
 if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
@@ -57,7 +57,7 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
 
   # Install VSCode extensions
   laptop_package_ensure "pack:vscode-extension-recommended"
-  laptop_vscode_ensure_extension_list "$(laptop_profile_dir)/codefile"
+  laptop_package_ensure "profile:vscode-extensions"
 
   # Configure VSCode
   laptop_package_ensure "config:vscode-recommended"
