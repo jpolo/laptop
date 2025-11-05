@@ -13,7 +13,7 @@ laptop_info "$(
   1️⃣ Finish your configuration manually :
     ZSH :
       🔧 Customize your configuration
-         > $EDITOR $(laptop_path_print $XDG_DATA_HOME/zsh/personal.sh)
+         > laptop config edit
 
       🎨 Customize the zsh prompt theme
          > $EDITOR $(laptop_path_print $STARSHIP_CONFIG)
