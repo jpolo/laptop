@@ -27,9 +27,11 @@ if command -v zinit &>/dev/null; then
 
   # History Substring Search
   # shellcheck disable=SC2016
-  zinit wait lucid light-mode for \
-    atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down' \
-    zsh-users/zsh-history-substring-search
+  zinit load 'zsh-users/zsh-history-substring-search'
+  zinit ice wait atload'_history_substring_search_config'
+  # Bind keys
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
 
   # Completions
   ##
