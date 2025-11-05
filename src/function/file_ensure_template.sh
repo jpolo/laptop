@@ -29,8 +29,17 @@ laptop_file_ensure_template() {
         ;;
     esac
   done
+  local current_resource_status="absent"
+  if [ -f "$target" ]; then
+    # test if $template file is identical to $target file
+    if cmp -s "$template" "$target"; then
+      current_resource_status="present"
+    fi
+  else
+    current_resource_status="absent"
+  fi
 
-  laptop_step_start_status "present" "unknown" "Template '$(laptop_path_print "$target")'$([ "$force" -eq 1 ] && echo ' (force)') "
+  laptop_step_start_status "present" "$current_resource_status" "Template '$(laptop_path_print "$target")'$([ "$force" -eq 1 ] && echo ' (force)') "
   if [ "$force" -eq 0 ] && [ -f "$target" ]; then
     laptop_step_pass
   else
