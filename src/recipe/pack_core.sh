@@ -17,6 +17,7 @@ laptop_package_ensure__pack:core() {
   laptop_package_ensure "gpg"
   laptop_package_ensure "jq"
   laptop_package_ensure "rclone"
+  laptop_package_ensure "uv"
   laptop_package_ensure "webp"
   laptop_package_ensure "wget"
 
