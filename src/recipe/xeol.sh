@@ -9,7 +9,7 @@ laptop_package_ensure__xeol() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
     # xeol is now in the main repo
     # laptop_brew_ensure_tap "xeol-io/xeol"
-    laptop_package_ensure_default "xeol"
+    laptop_brew_ensure_package "xeol"
   else
     laptop_package_ensure_default "xeol"
   fi
