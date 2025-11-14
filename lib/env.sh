@@ -9,7 +9,7 @@ if [ -z "${LAPTOP_HOME}" ]; then
 fi
 
 export LAPTOP_HOME="$LAPTOP_HOME"
-export LAPTOP_SOURCE_DIR="$LAPTOP_HOME/src"
+export LAPTOP_LIB_DIR="$LAPTOP_HOME/lib"
 export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
@@ -80,9 +80,9 @@ quote() {
 
 # Source scripts
 # shellcheck disable=SC1091
-source "$LAPTOP_SOURCE_DIR/function/source_all.sh"
+source "$LAPTOP_LIB_DIR/function/source_all.sh"
 # Source global functions
-laptop_source_all "$LAPTOP_SOURCE_DIR/function"
+laptop_source_all "$LAPTOP_LIB_DIR/function"
 
 # Select profile
 laptop_profile_select
@@ -93,7 +93,7 @@ if [ -d "$(laptop_profile_dir)/function" ]; then
 fi
 
 # Source recipes
-laptop_source_all "$LAPTOP_SOURCE_DIR/recipe"
+laptop_source_all "$LAPTOP_LIB_DIR/recipe"
 # Source profile recipes
 if [ -d "$(laptop_profile_dir)/recipe" ]; then
   laptop_source_all "$(laptop_profile_dir)/recipe"

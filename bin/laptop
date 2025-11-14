@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck source=/dev/null
 
 ###
 ### laptop — A tool for maintaining your laptop (cleaning, upgrading, etc)
@@ -16,11 +17,12 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 LAPTOP_CONFIG_FILE=${LAPTOP_CONFIG_FILE:-}
-source "$LAPTOP_HOME/src/env.sh"
-source "$ROOT_DIR/src/command/cleanup.sh"
-source "$ROOT_DIR/src/command/config.sh"
-source "$ROOT_DIR/src/command/configure.sh"
-source "$ROOT_DIR/src/command/upgrade.sh"
+LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
+source "$LAPTOP_LIB_DIR/env.sh"
+source "$LAPTOP_LIB_DIR/command/cleanup.sh"
+source "$LAPTOP_LIB_DIR/command/config.sh"
+source "$LAPTOP_LIB_DIR/command/configure.sh"
+source "$LAPTOP_LIB_DIR/command/upgrade.sh"
 
 ###   cleanup: empty cache and prune unused resources
 ###   config view: view the current shell personal configuration file

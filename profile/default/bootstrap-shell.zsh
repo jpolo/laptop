@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source "$LAPTOP_HOME/src/env.sh"
+source "$LAPTOP_HOME/lib/env.sh"
 LAPTOP_PROFILE_DEFAULT_DIR=$(laptop_profile_dir default)
 
 # Ensure ZSH Configuration

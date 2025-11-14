@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source "$LAPTOP_HOME/src/env.sh"
+source "$LAPTOP_HOME/lib/env.sh"
 
 # Ensure Code
 laptop_directory_ensure "$HOME/Code"
