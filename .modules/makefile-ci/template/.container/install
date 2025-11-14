@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_stdlib.sh"
+
+BUNDLE_ARGS=
+YARN_ARGS=
+
+# Configure Bundler
+BUNDLE_ARGS+=" --jobs $(nproc)"
+
+if [[ "$BUILD_TYPE" = "release" ]];then
+  BUNDLE_FROZEN="true"
+  BUNDLE_WITHOUT="development test"
+fi
+
+# Configure yarn
+if [[ "$BUILD_TYPE" = "release" ]];then
+  YARN_ARGS+=" --immutable"
+fi
+
+# Install
+puts_step 'Installing dependencies'
+
+if [[ -f ./Gemfile ]];then
+  bundle install $BUNDLE_ARGS
+fi
+
+if [[ -f ./yarn.lock ]];then
+  if ! command -v yarn &> /dev/null;then
+    npm install yarn -g
+  fi
+  yarn install $YARN_ARGS
+fi
+
+if [[ -f ./Bowerfile ]];then
+  if ! command -v bower &> /dev/null;then
+    npm install bower -g
+  fi
+  bundle exec rake bower:install['--allow-root']
+fi

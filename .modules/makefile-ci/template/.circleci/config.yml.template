@@ -1,0 +1,278 @@
+#==================================================================================================
+#                                         ┓ ┏┏━┏┓
+#                                         ┃┃┃┗┓┗┓
+#                                         ┗┻┛┗┛┗┛
+#
+#                                 W5S default CircleCI configuration
+#
+#                 ⚠️ THIS IS A GENERATED FILE, SEE THE END OF FILE FOR EDITION
+#
+#==================================================================================================
+version: 2.1
+orbs:
+  asdf: rynkowsg/asdf@0.1.2
+commands:
+  detect_lockfile:
+    steps:
+      - run:
+          name: Detect ASDF .tool-versions
+          command: |
+            if [ -f ".tool-versions" ]; then
+              echo "Found .tool-versions"
+              cp -f .tool-versions /tmp/asdf-project-tool-versions
+            else
+              echo '' > /tmp/asdf-project-tool-versions
+            fi
+      - run:
+          name: Detect NodeJS Lockfile
+          command: |
+            # Link corresponding lock file to a temporary file used by cache commands
+            if [ -f "package-lock.json" ]; then
+                echo "Found package-lock.json file, assuming lockfile"
+                cp package-lock.json /tmp/node-project-lockfile
+            elif [ -f "npm-shrinkwrap.json" ]; then
+                echo "Found npm-shrinkwrap.json file, assuming lockfile"
+                cp npm-shrinkwrap.json /tmp/node-project-lockfile
+            elif [ -f "yarn.lock" ]; then
+                echo "Found yarn.lock file, assuming lockfile"
+                cp yarn.lock /tmp/node-project-lockfile
+            else
+                echo "Found no lockfile, adding empty one"
+                touch /tmp/node-project-lockfile
+            fi
+
+            if [ -f "package.json" ]; then
+              cp -f package.json /tmp/node-project-package.json
+            else
+              echo '' > /tmp/node-project-package.json
+            fi
+      - run:
+          name: Detect Ruby Lockfile
+          command: |
+            if [ -f "Gemfile.lock" ]; then
+              echo "Found Gemfile.lock"
+              cp -f Gemfile.lock /tmp/ruby-project-lockfile
+            else
+              echo '' > /tmp/ruby-project-lockfile
+            fi
+  asdf_install:
+    steps:
+      - asdf/install:
+          install_dir: .cache/asdf
+      - run:
+          name: Configure ASDF
+          command: |
+            echo "export ASDF_DIR=$(pwd)/.cache/asdf" >> "$BASH_ENV"
+            echo "export ASDF_DATA_DIR=$(pwd)/.cache/asdf" >> "$BASH_ENV"
+            echo 'source "$ASDF_DIR/asdf.sh"' >> "$BASH_ENV"
+            source "$BASH_ENV"
+  restore_asdf:
+    steps:
+      - asdf_install
+      - restore_cache:
+          name: Restore ASDF Cache
+          keys:
+            - v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-asdf-{{ checksum "/tmp/asdf-project-tool-versions" }}
+      - run:
+          name: ASDF install plugins
+          command: |
+            asdf plugin add ruby
+            asdf plugin add nodejs
+      - run:
+          name: Install NodeJS package manager
+          command: |
+            if command -v node &> /dev/null; then
+              corepack enable
+              asdf reshim
+            fi
+
+  save_asdf:
+    steps:
+      - save_cache:
+          name: Save ASDF Cache
+          key: v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-asdf-{{ checksum "/tmp/asdf-project-tool-versions" }}
+          paths:
+            - .cache/asdf
+
+  restore_deps:
+    description: Restore dependencies cache
+    steps:
+      - restore_cache:
+          name: Restore NodeJS Download Cache
+          keys:
+            - v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-node-dl-{{ checksum "/tmp/node-project-lockfile" }}
+      - restore_cache:
+          name: Restore NodeJS Cache
+          keys:
+            - v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-node-{{ checksum "/tmp/node-project-lockfile" }}
+      - restore_cache:
+          name: Restore Bundle Cache
+          keys:
+            - v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-bundle-{{ checksum "/tmp/ruby-project-lockfile" }}
+      - run:
+          command: make self-install
+  save_deps:
+    description: Save dependencies cache
+    steps:
+      - save_cache:
+          name: Save NodeJS Download Cache
+          key: v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-node-dl-{{ checksum "/tmp/node-project-lockfile" }}
+          paths:
+            - .cache/yarn
+            #            - .cache/cypress
+            - .yarn/unplugged
+      - save_cache:
+          name: Save NodeJS Cache
+          key: v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-node-{{ checksum "/tmp/node-project-lockfile" }}
+          paths:
+            - node_modules
+      - save_cache:
+          name: Save Bundle Cache
+          key: v1-{{checksum ".circleci/config.yml"}}-{{ arch }}-bundle-{{ checksum "/tmp/ruby-project-lockfile" }}
+          paths:
+            - vendor/bundle
+  before_job:
+    steps:
+      - checkout
+      - detect_lockfile
+      - restore_asdf
+      - restore_deps
+
+jobs:
+  build-base: &build-base
+    docker:
+      - image: cimg/base:2023.08-22.04
+        environment: &env-base
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          CYPRESS_CACHE_FOLDER: .cache/cypress
+          YARN_ENABLE_GLOBAL_CACHE: false
+          YARN_CACHE_FOLDER: .cache/yarn
+    steps:
+      - command: echo 'Passed'
+
+  install:
+    <<: *build-base
+    steps:
+      - checkout
+      - detect_lockfile
+      - restore_asdf
+      - run:
+          name: ASDF install tools
+          command: |
+            asdf install
+      - run:
+          name: Install NodeJS package manager
+          command: |
+            if command -v node &> /dev/null; then
+              corepack enable
+              asdf reshim
+            fi
+      - save_asdf
+      - run:
+          command: |
+            node -v
+            yarn -v
+      - restore_deps
+      - run:
+          command: make dependencies
+      - save_deps
+  lint:
+    <<: *build-base
+    steps:
+      - before_job
+      - run:
+          command: node -v
+      - run:
+          command: make lint
+  build:
+    <<: *build-base
+    steps:
+      - before_job
+      - run:
+          command: make build
+
+  test-base: &test-base
+    <<: *build-base
+    parallelism: 1
+    # docker:
+    #   - image: cimg/ruby:3.2.3-browsers@sha256:0742dede9858c452aa14ad7c34e7b03ffefd6914dfbad477a071713d595d9858
+    #     environment:
+    #       <<: *env-base
+    #       # PGHOST: 127.0.0.1
+    #       # PGUSER: circleci-demo-ruby
+    #       # RAILS_ENV: test
+
+  test:
+    <<: *test-base
+    steps:
+      - before_job
+      - run:
+          command: make test
+
+  test-e2e:
+    <<: *test-base
+    steps:
+      - before_job
+      - run:
+          command: make test-e2e
+
+  deploy-base: &deploy-base
+    resource_class: small
+    docker:
+      - image: cimg/deploy:2024.03
+    steps:
+      - before_job
+      - run:
+          command: make deploy
+
+  deploy-staging:
+    environment:
+      CI_ENVIRONMENT_NAME: staging
+    <<: *deploy-base
+
+  deploy-production:
+    environment:
+      CI_ENVIRONMENT_NAME: production
+    <<: *deploy-base
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - install
+      - lint:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+      - test:
+          requires:
+            - build
+      - test-e2e:
+          requires:
+            - build
+      - deploy-staging:
+          requires:
+            - build
+            - lint
+            - test
+            - test-e2e
+          filters:
+            branches:
+              only: main
+      - approve-production:
+          type: approval
+          requires:
+            - deploy-staging
+          filters:
+            branches:
+              only: main
+      - deploy-production:
+          requires:
+            - approve-production
+          filters:
+            branches:
+              only: main

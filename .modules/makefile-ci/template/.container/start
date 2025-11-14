@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_stdlib.sh"
+
+##
+# Help
+#
+print_help() {
+   echo "Usage: $(basename "$0") <container_type> [-h] -- Start the program using foreman with Procfile or Procfile.dev"
+   echo
+   echo "Explanation"
+   echo "  1. Run ./postdeploy, if present"
+   echo "  2. Run 'foreman \$COMMAND --proc-file \$PROCFILE \$CONTAINER_TYPE'" with the options :
+   echo "       COMMAND : 'run' if CONTAINER_TYPE is defined, else 'start'"
+   echo "       PROCFILE : ./Procfile (./Procfile.dev if BUILD_TYPE=debug)"
+   echo "       CONTAINER_TYPE : (optional, default: \$FOREMAN_PROCESS)"
+   echo
+   echo "Options:"
+   echo "  -h     Print this Help."
+   echo
+}
+
+main() {
+  source "$SCRIPT_DIR/_env.sh"
+
+  puts_step 'Start application'
+  echo "PORT=$PORT"
+  echo "BUILD_TYPE=$BUILD_TYPE"
+  echo "ENVIRONMENT=$ENVIRONMENT"
+  echo "FOREMAN_PROCESS=$FOREMAN_PROCESS"
+  echo "NODE_ENV=$NODE_ENV"
+  echo "RAILS_ENV=$RAILS_ENV"
+
+  # Configure
+  # A list of services used by Scalingo/Heroku as post deployment/release hooks
+  PROCFILE_HOOKS="release postdeploy"
+
+  # FIXME: à supprimer/corriger
+  # - ce code est dépendant du déploiement terraform avec des valeurs "en dur"
+  # - il faudrait soit passer par des variables d'environnements, soit passer par un protocole plus standard de passage de credentials (ex: celui de rails d'une manière transparente)
+  if [[ -d /credentials ]]; then
+    puts_step 'Copy credentials'
+    for file in $(ls /credentials);do
+      ln -s /credentials/$file config/credentials/$file
+    done
+  fi
+
+  # Start foreman
+  puts_step 'Start services'
+
+  # To ignore Scalingo/Heroku hooks, we set 0 in the formation, so they are never launched
+  # They have to be launched manually in another deployment task
+  FOREMAN_COMMAND=start
+  FOREMAN_ARGS=
+
+  # the Procfile that will be used by foreman
+  FOREMAN_PROCFILE=Procfile.dev
+  if [[ "$BUILD_TYPE" = "release" ]]; then
+    FOREMAN_PROCFILE=Procfile
+  fi
+
+  # If FOREMAN_PROCESS is not defined use in run mode, else start mode
+  if [[ -z "${FOREMAN_PROCESS:-}" ]]; then
+    FOREMAN_IGNORED=
+
+    for PROCFILE_HOOK in $PROCFILE_HOOKS
+    do
+      FOREMAN_IGNORED+=",$PROCFILE_HOOK=0"
+    done
+    FOREMAN_ARGS+=" --formation=all=1$FOREMAN_IGNORED"
+  else
+    FOREMAN_COMMAND=run
+    FOREMAN_ARGS+=" $FOREMAN_PROCESS"
+  fi
+
+  # 1. Starts foreman in background
+  exec foreman $FOREMAN_COMMAND --procfile $FOREMAN_PROCFILE $FOREMAN_ARGS &
+  # 2. Run post_deploy
+  post_deploy
+  # 3. Wait for background jobs (= never because foreman is a server)
+  wait
+}
+
+post_deploy() {
+  # if [[ "$RAILS_ENV" = "development" ]];then
+  if [[ -f "$SCRIPT_DIR/post-deploy" ]];then
+    "$SCRIPT_DIR/post-deploy" \
+    || puts_warn "Warning: post-deploy failed"
+  fi
+  # fi
+}
+
+##
+# Main program
+#
+# Get the options
+while getopts ":h" option; do
+   case $option in
+      h) # display Help
+        print_help
+        exit;;
+      \?)
+   esac
+done
+
+# Initialize FOREMAN_PROCESS with first parameter (if present)
+ARG1=${@:$OPTIND:1}
+if [[ ! -z "$ARG1" ]]; then
+  FOREMAN_PROCESS="$ARG1"
+fi
+
+# Run main
+
+main
