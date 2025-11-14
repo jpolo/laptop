@@ -1,0 +1,77 @@
+# BEGIN MANAGED BLOCK
+#==================================================================================================
+#                                         ┓ ┏┏━┏┓
+#                                         ┃┃┃┗┓┗┓
+#                                         ┗┻┛┗┛┗┛
+#
+#                                 W5S default editorconfig
+#
+#                 ⚠️ THIS IS A GENERATED FILE, SEE THE END OF FILE FOR EDITION
+#
+# Generated from https://github.com/w5s/project-config/blob/main/packages/mrm-preset/editorconfig/_editorconfig
+#==================================================================================================
+
+# http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+continuation_indent_size = 4
+curly_bracket_next_line = false
+end_of_line = lf
+indent_brace_style = Stroustrup
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+spaces_around_brackets = outside
+spaces_around_operators = true
+trim_trailing_whitespace = true
+
+[*.{json,json5,webmanifest}]
+indent_size = 2
+indent_style = space
+insert_final_newline = ignore
+
+[*.{yml,yaml}]
+indent_size = 2
+indent_style = space
+
+[*.{bat,reg,ps1,vbs,cs,cmd,fs,ahk}]
+end_of_line = crlf
+
+[*.{sh,zsh}]
+end_of_line = lf
+
+[*.{css,sass,scss,less,pcss}]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+quote_type = single
+
+[*.{js,jsx,jsm,ts,tsx,cjs,cjs,cjsx,cts,ctsx,mjs,mts,mtsx,js.hbs}]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+quote_type = single
+
+[*.{htm,html,svg,vue}]
+indent_size = 2
+indent_style = space
+
+[*.{md,mdwn,mdown,markdown,mdx,apib}]
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = false
+
+[*.{py,robot}]
+indent_size = 4
+indent_style = space
+
+[{Makefile,**.mk,**.make}]
+indent_style = tab
+
+#==================================================================================================
+#                             ⬇ Add Project specific rules below ⬇
+#==================================================================================================
+# END MANAGED BLOCK

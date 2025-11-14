@@ -1,0 +1,99 @@
+# Common services only used with "extends"
+
+version: '3.8'
+
+services:
+  # Service PostgreSQL
+  postgres:
+    image: postgres:13@sha256:b195083330eba49a963db6c8c8671078119853692c72301c7c6ad914457cecae
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
+    environment:
+      POSTGRES_USER: ${APP_DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${APP_DATABASE_PASSWORD:-postgres_pass}
+      POSTGRES_DB: ${APP_DATABASE_NAME:-app}
+
+  # Service MySQL
+  mysql:
+    image: mysql:8.3@sha256:0f2e15fb8b47db2518b1428239ed3e3fe6a6693401b2cf19552063562cfc2fc4
+    environment:
+      MYSQL_DATABASE: ${APP_DATABASE_NAME:-app}
+      MYSQL_USER: ${APP_DATABASE_USER:-mysql}
+      MYSQL_PASSWORD: ${APP_DATABASE_PASSWORD:-mysql_pass}
+      MYSQL_ROOT_PASSWORD: ${APP_DATABASE_ROOT_PASSWORD:-mysql_root_pass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  mongo:
+    image: mongo:7.0.8-jammy@sha256:7a917ef07ebe13ded880dd5f77fe49da273cff5296b0f76a0545675ff350648d
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${APP_DATABASE_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${APP_DATABASE_PASSWORD:-mongo_pass}
+    volumes:
+      - mongo_data:/data/db
+
+  # Service Redis
+  redis:
+    image: redis:6.2@sha256:d55b1d49d6d3918cab030af98bb6d8d63519ac6bc36aca33d320921c7dd62721
+    volumes:
+      - redis_data:/data
+
+  # Service Minio (S3)
+  minio:
+    image: minio/minio:2023.12.23
+    volumes:
+      - minio_data:/data
+    expose:
+      - '9000'
+      - '9001'
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio-root-user}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio-root-password}
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: [CMD, curl, -f, 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # Service Web (Rails application)
+  web:
+    image: ${APP_IMAGE:-${COMPOSE_PROJECT_NAME}-release:local}
+    # build:
+    #   context: .
+    #   args:
+    #     RUBY_VERSION: 2.7.8
+    #     NODEJS_VERSION: 18
+    #     BUNDLER_VERSION: 1.17.1
+    ports:
+      - '${PORT:-3000}:3000'
+    # depends_on:
+    # - postgres
+    # - minio
+    # - mongo
+    # - mysql
+    # - redis
+    environment:
+      # DATABASE_URL: ${MYSQL_URL}
+      MONGO_URL: mongodb://${APP_DATABASE_USER:-root}:${APP_DATABASE_PASSWORD:-mongo_pass}@mongo:27017/${APP_DATABASE_NAME:-app}
+      MYSQL_URL: mysql://${APP_DATABASE_USER:-mysql}:${APP_DATABASE_PASSWORD:-mysql_pass}@mysql:3306/${APP_DATABASE_NAME:-app}
+      POSTGRESQL_URL: postgres://${APP_DATABASE_USER:-postgres}:${APP_DATABASE_PASSWORD:-postgres_pass}@postgres:5432/${APP_DATABASE_NAME:-app}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      # Use tmpfs for puma server
+      PIDFILE: /tmp/pids/server.pid
+
+      # Default to development key
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_SERVE_STATIC_FILES: true
+      REDIS_URL: redis://redis:6379/0
+      SKIP_FORCE_SSL: true
+    tmpfs:
+      - /tmp/pids/
+
+volumes:
+  minio_data:
+  mongo_data:
+  mysql_data:
+  postgres_data:
+  redis_data:

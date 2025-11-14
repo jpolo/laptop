@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_stdlib.sh"
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+if [[ "$BUILD_TYPE" = "release" ]];then
+  puts_step 'Build'
+  bundle exec bootsnap precompile --gemfile
+  # Precompile bootsnap code for faster boot times
+  bundle exec bootsnap precompile app/ lib/
+
+  SKIP_YARN_INSTALL=true \
+  RAILS_ENV=production \
+  SECRET_KEY_BASE_DUMMY=1 \
+  ./bin/rails assets:precompile
+fi
+
+# Cleanup
+if [[ "$BUILD_TYPE" = "release" ]];then
+  yarn workspaces focus --production
+fi
