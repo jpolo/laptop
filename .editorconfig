@@ -1,3 +1,16 @@
+# BEGIN MANAGED BLOCK
+#==================================================================================================
+#                                         ┓ ┏┏━┏┓
+#                                         ┃┃┃┗┓┗┓
+#                                         ┗┻┛┗┛┗┛
+#
+#                                 W5S default editorconfig
+#
+#                 ⚠️ THIS IS A GENERATED FILE, SEE THE END OF FILE FOR EDITION
+#
+# Generated from https://github.com/w5s/project-config/blob/main/packages/mrm-preset/editorconfig/_editorconfig
+#==================================================================================================
+
 # http://editorconfig.org
 root = true
 
@@ -46,7 +59,7 @@ indent_size = 2
 indent_style = space
 
 [*.{md,mdwn,mdown,markdown,mdx,apib}]
-indent_size = 4
+indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = false
@@ -55,9 +68,10 @@ trim_trailing_whitespace = false
 indent_size = 4
 indent_style = space
 
-[Makefile,*.{mk,make}]
+[{Makefile,**.mk,**.make}]
 indent_style = tab
 
-[*.txt]
-trim_trailing_whitespace = false
-insert_final_newline = false
+#==================================================================================================
+#                             ⬇ Add Project specific rules below ⬇
+#==================================================================================================
+# END MANAGED BLOCK
