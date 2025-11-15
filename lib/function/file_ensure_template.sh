@@ -15,18 +15,18 @@ laptop_file_ensure_template() {
 
   while [[ $# -gt 0 ]]; do
     case $1 in
-      -f|--force)
-        force=1
-        shift
-        ;;
-      -*)
-        echo "Unknown option $1"
-        exit 1
-        ;;
-      *)
-        positional_args+=("$1") # save positional arg
-        shift # past argument
-        ;;
+    -f | --force)
+      force=1
+      shift
+      ;;
+    -*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      positional_args+=("$1") # save positional arg
+      shift                   # past argument
+      ;;
     esac
   done
   local current_resource_status="absent"

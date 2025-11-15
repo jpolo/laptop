@@ -12,7 +12,7 @@ laptop_handler_call() {
   local command="$1"
   shift
   local function_name="laptop_handler__${command}"
-  if declare -f "$function_name" > /dev/null; then
+  if declare -f "$function_name" >/dev/null; then
     "$function_name" "$@"
   else
     laptop_error "No handler function '$function_name'"

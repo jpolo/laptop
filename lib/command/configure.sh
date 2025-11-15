@@ -15,7 +15,6 @@ laptop_command__configure() {
   laptop_handler_call "logo"
   laptop_self_check_version
 
-
   if [ -z "$LAPTOP_GIT_REMOTE" ]; then
     laptop_warn "LAPTOP_GIT_REMOTE is not set and is required for self updating"
     laptop_info "LAPTOP_GIT_REMOTE can have the following value :"

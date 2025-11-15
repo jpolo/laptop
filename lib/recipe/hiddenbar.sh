@@ -11,4 +11,3 @@ laptop_package_ensure__hiddenbar() {
     laptop_step_pass
   fi
 }
-

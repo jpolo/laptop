@@ -17,7 +17,7 @@ laptop_npm_ensure_package_list() {
 
       # If the language matches, return the version
       laptop_npm_ensure_package "$target_package"
-    done < "$npm_file"
+    done <"$npm_file"
   else
     laptop_warn "$npm_file does not exist"
   fi

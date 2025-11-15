@@ -13,8 +13,11 @@ laptop_brew_ensure_tap() {
   local resource_status="present"
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -s|--status) resource_status="$2"; shift 2;;
-      *) shift;;
+    -s | --status)
+      resource_status="$2"
+      shift 2
+      ;;
+    *) shift ;;
     esac
   done
   local current_resource_status

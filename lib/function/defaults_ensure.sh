@@ -14,9 +14,16 @@ laptop_defaults_ensure() {
   local resource_status="present"
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -s|--status) resource_status="$2"; shift 2;;
-      -*) value_type="$1"; value="$2"; shift 2;;
-      *) shift;;
+    -s | --status)
+      resource_status="$2"
+      shift 2
+      ;;
+    -*)
+      value_type="$1"
+      value="$2"
+      shift 2
+      ;;
+    *) shift ;;
     esac
   done
 

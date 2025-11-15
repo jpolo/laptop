@@ -31,6 +31,6 @@ laptop_profile_asdf_version() {
         echo "$target_version"
         return 0
       fi
-    done < "$tool_versions_file"
+    done <"$tool_versions_file"
   fi
 }

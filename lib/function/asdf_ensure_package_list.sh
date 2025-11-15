@@ -20,7 +20,7 @@ laptop_asdf_ensure_package_list() {
 
       # If the language matches, return the version
       laptop_asdf_ensure_package "$target_package" "$target_version"
-    done < "$tool_version_file"
+    done <"$tool_version_file"
   else
     laptop_warn "$tool_version_file does not exist"
   fi

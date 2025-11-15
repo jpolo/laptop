@@ -14,8 +14,11 @@ laptop_brew_ensure_package() {
   local resource_status="present"
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -s|--status) resource_status="$2"; shift 2;;
-      *) shift;;
+    -s | --status)
+      resource_status="$2"
+      shift 2
+      ;;
+    *) shift ;;
     esac
   done
 
@@ -28,7 +31,7 @@ laptop_brew_ensure_package() {
   current_resource_status=$(brew list "$package" &>/dev/null && echo "present" || echo "absent")
 
   # shellcheck disable=SC2076
-  if [ ! -z "$BREW_CASK" ];then
+  if [ ! -z "$BREW_CASK" ]; then
     brew_args+=("--cask")
   fi
 

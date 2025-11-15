@@ -17,7 +17,7 @@ laptop_vscode_ensure_extension_list() {
 
       # If the language matches, return the version
       laptop_vscode_ensure_extension "$target_extension"
-    done < "$vscode_file"
+    done <"$vscode_file"
   else
     laptop_warn "$vscode_file does not exist"
   fi

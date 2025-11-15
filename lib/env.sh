@@ -99,7 +99,6 @@ if [ -d "$(laptop_profile_dir)/recipe" ]; then
   laptop_source_all "$(laptop_profile_dir)/recipe"
 fi
 
-
 # Default handlers
 laptop_handler__logo() {
   laptop_logo

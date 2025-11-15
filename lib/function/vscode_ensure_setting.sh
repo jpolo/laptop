@@ -14,7 +14,7 @@ laptop_vscode_ensure_setting() {
   local app_name
   app_name=$(laptop_vscode_app_name "$executable")
 
-  local json_path="$1";
+  local json_path="$1"
   local json_value="$2"
   # parse options
   local resource_status="present"
@@ -23,8 +23,11 @@ laptop_vscode_ensure_setting() {
   fi
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -s|--status) resource_status="$2"; shift 2;;
-      *) shift;;
+    -s | --status)
+      resource_status="$2"
+      shift 2
+      ;;
+    *) shift ;;
     esac
   done
   local vscode_settings_file=""
