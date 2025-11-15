@@ -71,6 +71,8 @@ endif
 
 include $(MAKEFILE_CI_SRC)/githooks.mk
 
+include $(MAKEFILE_CI_SRC)/shell.mk
+
 ifneq ($(call filter-false,$(NODEJS_ENABLED)),)
 include $(MAKEFILE_CI_SRC)/node.mk
 endif
