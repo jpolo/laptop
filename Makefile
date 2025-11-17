@@ -12,3 +12,8 @@ test: ## Run all tests
 
 .PHONY: validate
 validate: lint test
+
+.PHONY: install
+install: ## Install laptop configuration
+	$(Q) mkdir -p $(INSTALL_PREFIX)
+	$(Q) cp -r bin lib profile $(INSTALL_PREFIX)
