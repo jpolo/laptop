@@ -6,11 +6,6 @@
 # 4. .modules/*/module.mk
 include .modules/core.mk
 
-.PHONY: setup
-setup: ## Setup development environment
-	brew install $(SHELLCHECK)
-	brew install $(SHFMT)
-
 .PHONY: test
 test: ## Run all tests
 	$(Q) ./test/suite.sh
