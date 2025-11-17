@@ -15,5 +15,7 @@ validate: lint test
 
 .PHONY: install
 install: ## Install laptop configuration
-	$(Q) mkdir -p $(INSTALL_PREFIX)
-	$(Q) cp -r bin lib profile $(INSTALL_PREFIX)
+	$(Q)mkdir -p $(INSTALL_PREFIX)
+	$(Q)cp -r bin lib profile $(INSTALL_PREFIX)
+# add LAPTOP_HOME to bin/laptop
+	$(Q)sed -i '' "s|^LAPTOP_HOME=.*|LAPTOP_HOME=\$${LAPTOP_HOME:-\"$(realpath $(INSTALL_PREFIX))\"}|" $(INSTALL_PREFIX)/bin/laptop
