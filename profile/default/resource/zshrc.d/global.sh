@@ -5,17 +5,14 @@
 # 🔒🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-
-
 if command -v zinit &>/dev/null; then
   ##
   # Starship Theme
   ##
   zinit ice as"command" from"gh-r" \
-          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-          atpull"%atclone" src"init.zsh"
+    atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+    atpull"%atclone" src"init.zsh"
   zinit light starship/starship
-
 
   # zinit ice nocompile:! pick:c.zsh atpull:%atclone atclone:'dircolors -b LS_COLORS > c.zsh'
   # zinit light trapd00r/LS_COLORS
@@ -23,7 +20,7 @@ if command -v zinit &>/dev/null; then
   # Fish like suggestions
   zinit wait lucid for \
     atload"!_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions
+    zsh-users/zsh-autosuggestions
 
   # History Substring Search
   # shellcheck disable=SC2016
@@ -39,7 +36,7 @@ if command -v zinit &>/dev/null; then
   # ZSH community completions
   zinit wait lucid for \
     blockf \
-      zsh-users/zsh-completions
+    zsh-users/zsh-completions
 
   # Docker completion
   zinit wait lucid light-mode has"docker" for \
@@ -71,8 +68,8 @@ if command -v zinit &>/dev/null; then
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
   zinit wait lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-      OMZ::plugins/colored-man-pages
+    zdharma-continuum/fast-syntax-highlighting \
+    OMZ::plugins/colored-man-pages
 
   # Install also as a zsh plugin
   if [ -n "$LAPTOP_GIT_REMOTE" ]; then
