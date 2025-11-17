@@ -14,7 +14,8 @@ SHELL_FILES ?= $(filter-out ./$(MODULES_PATH)/%, $(shell find . -iname '*.sh' -o
 #
 .PHONY: shell-setup
 shell-setup:
-	$(Q):
+	$(Q)[ -x "$$(command -v $(SHELLCHECK))" ] || brew install $(SHELLCHECK)
+	$(Q)[ -x "$$(command -v $(SHFMT))" ] || brew install $(SHFMT)
 .setup:: shell-setup # Add `shell-setup` to `make setup`
 
 .PHONY: shell-dependencies
