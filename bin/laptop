@@ -23,6 +23,7 @@ source "$LAPTOP_LIB_DIR/command/cleanup.sh"
 source "$LAPTOP_LIB_DIR/command/config.sh"
 source "$LAPTOP_LIB_DIR/command/configure.sh"
 source "$LAPTOP_LIB_DIR/command/upgrade.sh"
+source "$LAPTOP_LIB_DIR/command/version.sh"
 
 ###   cleanup: empty cache and prune unused resources
 ###   config view: view the current shell personal configuration file
@@ -63,6 +64,11 @@ while [[ $# -gt 0 ]]; do
       LAPTOP_HELP=true
       shift
       ;;
+    -v|--version)
+      # shellcheck disable=SC2034
+      laptop_command__version
+      exit 0
+      ;;
     *)
       if [ -z "$LAPTOP_SUBCOMMAND" ]; then
         LAPTOP_SUBCOMMAND=$1
@@ -78,6 +84,9 @@ done
 case $LAPTOP_SUBCOMMAND in
   "" | "help")
     laptop_command__help
+    ;;
+  "version")
+    laptop_command__version
     ;;
   *)
     laptop_command__${LAPTOP_SUBCOMMAND} "${LAPTOP_ARGS[@]}"
