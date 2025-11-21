@@ -7,8 +7,10 @@ export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 source "./lib/env.sh"
 
-mkdir -p "test_data"
-cd "test_data" || exit 1
+TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
+cd "$TMPDIR" || exit 1
+
+echo "Running tests in temporary directory: $TMPDIR"
 
 # Try to run brew installation
 laptop_package_ensure "brew"
