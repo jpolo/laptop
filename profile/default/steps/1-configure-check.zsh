@@ -16,7 +16,7 @@ laptop_info "$(
          > laptop config zsh --edit
 
       🎨 Customize the zsh prompt theme
-         > $EDITOR $(laptop_path_print $STARSHIP_CONFIG)
+         > laptop config starship --edit
 
   2️⃣ Start developing !
     ⤵️ Clone your repositories in ~/Code

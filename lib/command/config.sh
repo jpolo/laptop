@@ -24,6 +24,9 @@ laptop_command__config() {
   # Determine the configuration file based on the type
   local config_file=""
   case "$config_type" in
+    "starship")
+      config_file="${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}"
+      ;;
     "zsh")
       if [ -z "$LAPTOP_CONFIG_ZSH_FILE" ]; then
         laptop_die "LAPTOP_CONFIG_ZSH_FILE is not set"
