@@ -12,8 +12,8 @@ laptop_info "$(
 
   1️⃣ Finish your configuration manually :
     ZSH :
-      🔧 Customize your configuration
-         > laptop config edit
+      🔧 Customize your zsh configuration
+         > laptop config zsh --edit
 
       🎨 Customize the zsh prompt theme
          > $EDITOR $(laptop_path_print $STARSHIP_CONFIG)

@@ -1,22 +1,50 @@
 #!/usr/bin/env bash
 
 laptop_command__config() {
-  local subcommand="$1"
+  local config_type="$1"
   shift
-  local args=("$@")
-  laptop_handler_call "config_$subcommand" "${args[@]}"
-}
+  local action="view"
 
-laptop_handler__config_view() {
-  if [ -z "$LAPTOP_CONFIG_FILE" ]; then
-    laptop_die "LAPTOP_CONFIG_FILE is not set"
-  fi
-  cat "$LAPTOP_CONFIG_FILE"
-}
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --view)
+        action="view"
+        shift
+        ;;
+      --edit)
+        action="edit"
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
 
-laptop_handler__config_edit() {
-  if [ -z "$LAPTOP_CONFIG_FILE" ]; then
-    laptop_die "LAPTOP_CONFIG_FILE is not set"
-  fi
-  ${EDITOR} "$LAPTOP_CONFIG_FILE"
+  # Determine the configuration file based on the type
+  local config_file=""
+  case "$config_type" in
+    "zsh")
+      if [ -z "$LAPTOP_CONFIG_ZSH_FILE" ]; then
+        laptop_die "LAPTOP_CONFIG_ZSH_FILE is not set"
+      fi
+      config_file="$LAPTOP_CONFIG_ZSH_FILE"
+      ;;
+    *)
+      laptop_die "Unknown config type: $config_type"
+      ;;
+  esac
+
+  # Perform the action
+  case "$action" in
+    "view")
+      cat "$config_file"
+      ;;
+    "edit")
+      ${EDITOR} "$config_file"
+      ;;
+    *)
+      laptop_die "Unknown action: $action"
+      ;;
+  esac
 }
