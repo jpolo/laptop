@@ -83,7 +83,7 @@ laptop_command__cleanup() {
   laptop_self_check_version
 
   laptop_command__cleanup_detect
-  if laptop_confirm "Continue? (Y/n)"; then
+  if laptop_confirm "Continue? (y/N)"; then
     laptop_command__cleanup_run
 
     laptop_info "🎉 Cleanup successful"

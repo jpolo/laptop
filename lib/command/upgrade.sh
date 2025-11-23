@@ -58,7 +58,7 @@ laptop_command__upgrade_run() {
 laptop_command__upgrade() {
   laptop_handler_call "logo"
   laptop_command__upgrade_detect
-  if laptop_confirm "Continue? (Y/n)"; then
+  if laptop_confirm "Continue? (y/N)"; then
     laptop_command__upgrade_run
 
     laptop_info "🎉 Upgrade successful"

@@ -34,7 +34,7 @@ laptop_command__configure() {
   else
     laptop_info "  Install Mode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
   fi
-  if laptop_confirm "Continue? (Y/n)"; then
+  if laptop_confirm "Continue? (y/N)"; then
     laptop_command__configure_run
   else
     laptop_die "🛑 Upgrade aborted"
