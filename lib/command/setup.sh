@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-laptop_command__configure_run() {
+laptop_command__setup_run() {
   # Bootstrap
-  laptop_handler_call "configure_bootstrap"
-  laptop_handler_call "configure_shell"
+  laptop_handler_call "setup_bootstrap"
+  laptop_handler_call "setup_shell"
 
   # Complete installation if LAPTOP_BOOTSTRAP omitted or false
   if [ "${LAPTOP_BOOTSTRAP:-false}" = false ]; then
-    laptop_configure_steps
+    laptop_setup_steps
   fi
 }
 
-laptop_command__configure() {
+laptop_command__setup() {
   laptop_handler_call "logo"
   laptop_self_check_version
 
@@ -35,8 +35,14 @@ laptop_command__configure() {
     laptop_info "  Install Mode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
   fi
   if laptop_confirm "Continue? (y/N)"; then
-    laptop_command__configure_run
+    laptop_command__setup_run
   else
     laptop_die "🛑 Upgrade aborted"
   fi
+}
+
+## Legacy command handler
+laptop_command__configure() {
+  laptop_handler_call "logo"
+  laptop_die "🛑 'laptop configure' was removed. Use 'laptop setup' instead."
 }

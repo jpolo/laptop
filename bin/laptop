@@ -21,13 +21,13 @@ LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
 source "$LAPTOP_LIB_DIR/env.sh"
 source "$LAPTOP_LIB_DIR/command/cleanup.sh"
 source "$LAPTOP_LIB_DIR/command/config.sh"
-source "$LAPTOP_LIB_DIR/command/configure.sh"
+source "$LAPTOP_LIB_DIR/command/setup.sh"
 source "$LAPTOP_LIB_DIR/command/upgrade.sh"
 source "$LAPTOP_LIB_DIR/command/version.sh"
 
 ###   cleanup: empty cache and prune unused resources
 ###   config zsh [--view] [--edit] view or edit the configuration file
-###   configure: install and setup every tool for the current profile for this device
+###   setup: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
 laptop_command__help() {

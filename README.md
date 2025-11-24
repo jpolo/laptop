@@ -31,7 +31,7 @@ Available profiles :
 3. Install all programs :
 
     ```shell
-    laptop configure
+    laptop setup
     ```
 
 ## ✨ Features
@@ -119,11 +119,11 @@ Although there are some implementation tradeoffs, it should never limit develope
 
 ## 💡 The `laptop` CLI
 
-Laptop CLI has 3 subcommands `configure`, `upgrade` and `cleanup`
+Laptop CLI has 3 subcommands `setup`, `upgrade` and `cleanup`
 
 More information is available with the command `laptop help`.
 
-### `laptop configure`
+### `laptop setup`
 
 Try to install all software from the current profile (that was configured at first installation).
 

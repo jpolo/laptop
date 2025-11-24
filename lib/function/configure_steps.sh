@@ -3,9 +3,9 @@
 # Run every steps in alphabetic order (in a separate shell instance)
 #
 # Usage:
-#   laptop_configure_steps <steps_dir>
+#   laptop_setup_steps <steps_dir>
 #
-laptop_configure_steps() {
+laptop_setup_steps() {
   local steps_dir
   steps_dir=${1:-"$(laptop_profile_dir)/steps"}
   local shell=zsh

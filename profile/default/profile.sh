@@ -10,10 +10,10 @@ LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 #   echo "👋 Hello, world!"
 # }
 
-# laptop_handler__configure_bootstrap() {
+# laptop_handler__setup_bootstrap() {
 #   laptop_bootstrap
 # }
 
-# laptop_handler__configure_shell() {
-#   laptop_configure_default_shell
+# laptop_handler__setup_shell() {
+#   laptop_setup_default_shell
 # }

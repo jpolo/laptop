@@ -3,9 +3,9 @@
 # Configure default profile (.profile, .zprofile, .zshrc, etc) using default profile templates
 #
 # Usage:
-#   laptop_configure_default_shell
+#   laptop_setup_default_shell
 #
-laptop_configure_default_shell() {
+laptop_setup_default_shell() {
   local profile_dir
   profile_dir=$(laptop_profile_dir default)
 
