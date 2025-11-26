@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2155
+
 # Change current directory to home
 cd "$HOME" || exit 1
 
@@ -8,11 +10,17 @@ if [ -z "${LAPTOP_HOME}" ]; then
   exit 1
 fi
 
+LAPTOP_APP_NAME="laptop"
+
 export LAPTOP_HOME="$LAPTOP_HOME"
 export LAPTOP_LIB_DIR="$LAPTOP_HOME/lib"
 export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
+export LAPTOP_USER_CONFIG_DIR="$(laptop_xdg_dir config)/$LAPTOP_APP_NAME"
+export LAPTOP_USER_DATA_DIR="$(laptop_xdg_dir data)/$LAPTOP_APP_NAME"
+export LAPTOP_USER_CACHE_DIR="$(laptop_xdg_dir cache)/$LAPTOP_APP_NAME"
+export LAPTOP_USER_STATE_DIR="$(laptop_xdg_dir state)/$LAPTOP_APP_NAME"
 
 # Use default by default
 export LAPTOP_SUDO=true
