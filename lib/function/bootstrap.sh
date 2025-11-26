@@ -8,6 +8,7 @@ laptop_bootstrap_debian() {
   laptop_package_ensure "brew"
   # set laptop package manager
   export LAPTOP_PACKAGE_MANAGER=brew
+  laptop_apt_ensure_package "augeas-tools"
 }
 
 laptop_bootstrap_macos() {
@@ -18,6 +19,7 @@ laptop_bootstrap_macos() {
   laptop_package_ensure "brew"
   # set laptop package manager
   export LAPTOP_PACKAGE_MANAGER=brew
+  laptop_brew_ensure_package "augeas"
 }
 
 laptop_bootstrap() {
