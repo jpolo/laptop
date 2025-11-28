@@ -28,11 +28,11 @@ laptop_xdg_dir() {
   cache)
     echo "${XDG_CACHE_HOME:-$_XDG_CACHE_HOME_DEFAULT}"
     ;;
-  runtime)
-    echo "${XDG_RUNTIME_DIR:-$_XDG_RUNTIME_DIR_DEFAULT}"
+  state)
+    echo "${XDG_STATE_HOME:-$_XDG_STATE_HOME_DEFAULT}"
     ;;
   *)
-    echo "Usage: laptop_xdg_dir {data|config|cache|runtime}" >&2
+    echo "Usage: laptop_xdg_dir {data|config|cache|state}" >&2
     return 1
     ;;
   esac
