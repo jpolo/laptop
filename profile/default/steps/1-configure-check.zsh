@@ -12,10 +12,10 @@ laptop_info "$(
   1️⃣ Finish your configuration manually :
     ZSH :
       🔧 Customize your zsh configuration
-         > laptop config zsh --edit
+         > laptop config edit zsh
 
       🎨 Customize the zsh prompt theme
-         > laptop config starship --edit
+         > laptop config edit starship
 
   2️⃣ Start developing !
     ⤵️ Clone your repositories in ~/Code

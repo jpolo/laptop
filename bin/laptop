@@ -26,7 +26,8 @@ source "$LAPTOP_LIB_DIR/command/upgrade.sh"
 source "$LAPTOP_LIB_DIR/command/version.sh"
 
 ###   cleanup: empty cache and prune unused resources
-###   config zsh [--view] [--edit] view or edit the configuration file
+###   config edit <config_type> : edit the configuration file (default: self)
+###   config view <config_type> : view the configuration file (default: self)
 ###   setup: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message
@@ -34,6 +35,10 @@ laptop_command__help() {
   sed -rn 's/^### ?//p' "$0"
 }
 
+### Configuration type
+###   self: user configuration file (default: $LAPTOP_USER_CONFIG_FILE)
+###   starship: starship configuration file (default: $STARSHIP_CONFIG)
+###   zsh: zsh configuration file (default: $LAPTOP_CONFIG_ZSH_FILE)
 ###
 ### Environment variables:
 ###   LAPTOP_HOME: Local folder of installation of the laptop executable and library

@@ -30,6 +30,8 @@ export LAPTOP_USER_DATA_DIR="$(laptop_xdg_dir data)/$LAPTOP_APP_NAME"
 export LAPTOP_USER_CACHE_DIR="$(laptop_xdg_dir cache)/$LAPTOP_APP_NAME"
 export LAPTOP_USER_STATE_DIR="$(laptop_xdg_dir state)/$LAPTOP_APP_NAME"
 
+export LAPTOP_USER_CONFIG_FILE="$LAPTOP_USER_CONFIG_DIR/config.ini"
+
 # Use default by default
 export LAPTOP_SUDO=true
 if [ "$(whoami)" = "root" ]; then
