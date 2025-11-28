@@ -9,35 +9,35 @@ laptop_command__config() {
   # Determine the configuration file based on the type
   local config_file=""
   case "$config_type" in
-    "self")
-      config_file="$LAPTOP_USER_CONFIG_FILE"
-      ;;
-    "starship")
-      config_file="${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}"
-      shift
-      ;;
-    "zsh")
-      if [ -z "$LAPTOP_CONFIG_ZSH_FILE" ]; then
-        laptop_die "LAPTOP_CONFIG_ZSH_FILE is not set"
-      fi
-      config_file="$LAPTOP_CONFIG_ZSH_FILE"
-      shift
-      ;;
-    *)
-      laptop_die "Unknown config type: $config_type"
-      ;;
+  "self")
+    config_file="$LAPTOP_USER_CONFIG_FILE"
+    ;;
+  "starship")
+    config_file="${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}"
+    shift
+    ;;
+  "zsh")
+    if [ -z "$LAPTOP_CONFIG_ZSH_FILE" ]; then
+      laptop_die "LAPTOP_CONFIG_ZSH_FILE is not set"
+    fi
+    config_file="$LAPTOP_CONFIG_ZSH_FILE"
+    shift
+    ;;
+  *)
+    laptop_die "Unknown config type: $config_type"
+    ;;
   esac
 
   # Perform the action
   case "$action" in
-    "view")
-      cat "$config_file"
-      ;;
-    "edit")
-      ${EDITOR} "$config_file"
-      ;;
-    *)
-      laptop_die "Unknown action: $action"
-      ;;
+  "view")
+    cat "$config_file"
+    ;;
+  "edit")
+    ${EDITOR} "$config_file"
+    ;;
+  *)
+    laptop_die "Unknown action: $action"
+    ;;
   esac
 }
