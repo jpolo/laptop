@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-source "$LAPTOP_HOME/lib/env.sh"
 
 laptop_ssh_test_key "git@github.com" \
   && laptop_info "🔑✅ SSH valid on github.com." \
