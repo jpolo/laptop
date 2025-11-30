@@ -16,7 +16,6 @@ export LAPTOP_HOME="$LAPTOP_HOME"
 export LAPTOP_LIB_DIR="$LAPTOP_HOME/lib"
 export LAPTOP_PROFILE_DIR="$LAPTOP_HOME/profile"
 export LAPTOP_PROFILE_DEFAULT="default"
-# export LAPTOP_PROFILE=${LAPTOP_PROFILE:-default}
 
 # Source scripts
 # shellcheck disable=SC1091
@@ -31,6 +30,9 @@ export LAPTOP_USER_CACHE_DIR="$(laptop_xdg_dir cache)/$LAPTOP_APP_NAME"
 export LAPTOP_USER_STATE_DIR="$(laptop_xdg_dir state)/$LAPTOP_APP_NAME"
 
 export LAPTOP_USER_CONFIG_FILE="$LAPTOP_USER_CONFIG_DIR/config.ini"
+
+# Default environment variables
+export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FILE" "profile")}
 
 # Use default by default
 export LAPTOP_SUDO=true
