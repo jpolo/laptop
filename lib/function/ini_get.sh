@@ -15,13 +15,14 @@ laptop_ini_get() {
   fi
 
   local result
-  result=$(augtool -A <<EOF
+  result=$(
+    augtool -A <<EOF
 set /augeas/load/IniFile/lens IniFile.lns_loose
 set /augeas/load/IniFile/incl "$config_file"
 load
 print /files$config_file/section/$key
 EOF
-)
-  echo "$result"| sed -n 's/.* = "\(.*\)"/\1/p'
+  )
+  echo "$result" | sed -n 's/.* = "\(.*\)"/\1/p'
 
 }
