@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(dirname "$0")"
-cd "$SCRIPT_DIR/.." || exit 1
-LAPTOP_HOME=$(pwd)
-export LAPTOP_HOME
-export LAPTOP_PROFILE=default
-source "./lib/env.sh"
 
-TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
-cd "$TMPDIR" || exit 1
+# Source assert.sh
+source "$SCRIPT_DIR/env.sh"
 
 echo "Running tests in temporary directory: $TMPDIR"
 
@@ -28,9 +23,12 @@ laptop_asdf_ensure_package "nodejs" "latest:20"
 laptop_asdf_ensure_package "nodejs" "latest:20"
 
 # Test laptop_directory_ensure
-laptop_directory_ensure "./folder_create/"
-laptop_directory_ensure "./folder_create/"
+laptop_directory_ensure "$TMPDIR/folder_create/"
+laptop_directory_ensure "$TMPDIR/folder_create/"
 
 # Test laptop_file_ensure
-laptop_file_ensure "./test_file_create"
-laptop_file_ensure "./test_file_create"
+laptop_file_ensure "$TMPDIR/test_file_create"
+laptop_file_ensure "$TMPDIR/test_file_create"
+
+
+assert_end

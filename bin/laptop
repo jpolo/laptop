@@ -25,6 +25,9 @@ source "$LAPTOP_LIB_DIR/command/setup.sh"
 source "$LAPTOP_LIB_DIR/command/upgrade.sh"
 source "$LAPTOP_LIB_DIR/command/version.sh"
 
+# Change current directory to home (to avoid issues with asdf)
+cd "$HOME" || exit 1
+
 ###   cleanup: empty cache and prune unused resources
 ###   config edit <config_type> : edit the configuration file (default: self)
 ###   config view <config_type> : view the configuration file (default: self)
