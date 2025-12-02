@@ -3,7 +3,9 @@
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR/.." || exit 1
 
+# Disable colors
 unset TERM;
+export NO_COLOR=1
 
 ROOT_DIR=$(pwd)
 export ROOT_DIR
