@@ -9,6 +9,10 @@
 ### Options:
 ###   -h,--help: Show this message.
 ###   -y,--yes:  Skip confirmation prompts and assume yes
+###   --color:  Enable or disable ANSI colors (default: auto)
+###     - auto: use ANSI colors if available
+###     - true: use ANSI colors
+###     - false: do not use ANSI colors
 ###
 ### Subcommands:
 
@@ -72,6 +76,15 @@ while [[ $# -gt 0 ]]; do
       LAPTOP_HELP=true
       shift
       ;;
+    --color|--color=*)
+      # shellcheck disable=SC2034
+      LAPTOP_COLOR_MODE="${1#*=}"
+      shift
+      if [ "$LAPTOP_COLOR_MODE" = "--color" ]; then
+        LAPTOP_COLOR_MODE="$1"
+        shift
+      fi
+      ;;
     -v|--version)
       # shellcheck disable=SC2034
       laptop_command__version
@@ -87,6 +100,9 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+# Set the color mode
+laptop_color_mode "$LAPTOP_COLOR_MODE"
 
 # Run the program
 case $LAPTOP_SUBCOMMAND in

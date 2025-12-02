@@ -37,6 +37,10 @@ if [ "$(whoami)" = "root" ]; then
   export LAPTOP_SUDO=false
 fi
 
+# Use ANSI colors default value
+export LAPTOP_COLOR_MODE=${LAPTOP_COLOR_MODE:-"auto"}
+export LAPTOP_COLOR=false
+
 if [ -z "$LAPTOP_DEVCONTAINER" ]; then
   if [[ "$(whoami)" = "vscode" ]]; then
     export LAPTOP_DEVCONTAINER="true"
@@ -72,21 +76,21 @@ LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 # shellcheck disable=SC2034
 SET_COL="\\033[${LAPTOP_STEP_STATUS_COLUMN}G"
 # shellcheck disable=SC2034
-NORMAL="\\033[0;39m"
+NORMAL="$(laptop_ansi reset)"
 # shellcheck disable=SC2034
-SUCCESS="\\033[1;32m"
+SUCCESS="$(laptop_ansi bold green)"
 # shellcheck disable=SC2034
-BRACKET="\\033[1;34m"
+BRACKET="$(laptop_ansi bold blue)"
 # shellcheck disable=SC2034
-COLOR_ERROR='\033[31m'
+COLOR_ERROR="$(laptop_ansi red)"
 # shellcheck disable=SC2034
-COLOR_WARNING='\033[1;33m'
+COLOR_WARNING="$(laptop_ansi yellow)"
 # shellcheck disable=SC2034
-COLOR_INFO="\\033[32m"
+COLOR_INFO="$(laptop_ansi green)"
 # shellcheck disable=SC2034
-COLOR_SUCCESS='\033[32m'
+COLOR_SUCCESS="$(laptop_ansi green)"
 # shellcheck disable=SC2034
-DIM="\\033[2m"
+DIM="$(laptop_ansi dim)"
 
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 
