@@ -9,6 +9,8 @@ ROOT_DIR=$(pwd)
 export ROOT_DIR
 export TEST_DIR=${TEST_DIR:-"$ROOT_DIR/test"}
 
+export OK_STATUS="OK"
+
 # Source assert.sh
 source "$TEST_DIR/assert.sh"
 source "$TEST_DIR/assert_snapshot.sh"
