@@ -11,8 +11,8 @@
 ###   -y,--yes:  Skip confirmation prompts and assume yes
 ###   --color:  Enable or disable ANSI colors (default: auto)
 ###     - auto: use ANSI colors if available
-###     - true: use ANSI colors
-###     - false: do not use ANSI colors
+###     - always: use ANSI colors
+###     - never: do not use ANSI colors
 ###
 ### Subcommands:
 
