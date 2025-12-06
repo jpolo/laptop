@@ -75,23 +75,6 @@ fi
 LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 # shellcheck disable=SC2034
 SET_COL="\\033[${LAPTOP_STEP_STATUS_COLUMN}G"
-# shellcheck disable=SC2034
-NORMAL="$(laptop_ansi reset)"
-# shellcheck disable=SC2034
-SUCCESS="$(laptop_ansi bold green)"
-# shellcheck disable=SC2034
-BRACKET="$(laptop_ansi bold blue)"
-# shellcheck disable=SC2034
-COLOR_ERROR="$(laptop_ansi red)"
-# shellcheck disable=SC2034
-COLOR_WARNING="$(laptop_ansi yellow)"
-# shellcheck disable=SC2034
-COLOR_INFO="$(laptop_ansi green)"
-# shellcheck disable=SC2034
-COLOR_SUCCESS="$(laptop_ansi green)"
-# shellcheck disable=SC2034
-DIM="$(laptop_ansi dim)"
-
 LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 
 quote() {
