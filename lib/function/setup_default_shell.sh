@@ -11,7 +11,7 @@ laptop_setup_default_shell() {
 
   # Bootstrap
   laptop_file_ensure_template "$profile_dir/resource/.profile" "$HOME/.profile" --force
-  laptop_shell_profile_var "LAPTOP_PROFILE" "${LAPTOP_PROFILE}"
+  laptop_ini_ensure "$LAPTOP_USER_CONFIG_FILE/" "profile" "${LAPTOP_PROFILE}"
   laptop_shell_profile_var "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
 
   laptop_file_ensure_template "$profile_dir/resource/.zprofile" "$HOME/.zprofile" --force
