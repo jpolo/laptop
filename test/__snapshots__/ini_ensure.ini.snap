@@ -1,0 +1,5 @@
+
+root=root_value
+root_overwrite=root_overwrite_next
+[section]
+new_key=value_next
