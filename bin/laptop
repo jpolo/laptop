@@ -45,6 +45,7 @@ laptop_command__help() {
 ###
 ### Configuration type:
 ###   self: laptop configuration file
+###   git: git configuration file
 ###   starship: starship configuration file
 ###   zsh: zsh configuration file
 ###
