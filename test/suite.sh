@@ -3,6 +3,7 @@
 SCRIPT_DIR="$(dirname "$0")"
 
 # Source assert.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR/env.sh"
 
 echo "Running tests in temporary directory: $TMPDIR"

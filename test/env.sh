@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR/.." || exit 1
