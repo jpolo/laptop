@@ -12,8 +12,11 @@ laptop_command__config() {
   "self")
     config_file="$LAPTOP_USER_CONFIG_FILE"
     ;;
+  "git")
+    config_file="$(laptop_xdg_dir "config")/git/config"
+    ;;
   "starship")
-    config_file="${STARSHIP_CONFIG:-$XDG_CONFIG_HOME/starship/config.toml}"
+    config_file="${STARSHIP_CONFIG:-$(laptop_xdg_dir "config")/starship/config.toml}"
     shift
     ;;
   "zsh")
