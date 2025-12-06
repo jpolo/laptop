@@ -62,11 +62,10 @@ fi
 
 ## Screen Dimensions
 # Find current screen size
-#if [ -z "${COLUMNS}" ]; then
-#COLUMNS=$(stty size)
-#COLUMNS=${COLUMNS##* }
-COLUMNS=100
-#fi
+if [ -z "${COLUMNS}" ]; then
+  COLUMNS=$(stty size)
+  COLUMNS=${COLUMNS##* }
+fi
 
 # When using remote connections, such as a serial port, stty size returns 0
 if [ "$COLUMNS" = "0" ]; then
