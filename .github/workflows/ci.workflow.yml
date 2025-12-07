@@ -22,4 +22,4 @@ jobs:
 
     - name: Run tests
       run: |
-        make test
+        TEST_TMP_DIR="${{ runner.temp }}" make test
