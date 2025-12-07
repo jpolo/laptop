@@ -8,21 +8,19 @@ cd "$SCRIPT_DIR/.." || exit 1
 unset TERM;
 export NO_COLOR=1
 
-ROOT_DIR=$(pwd)
-export ROOT_DIR
-export TEST_DIR=${TEST_DIR:-"$ROOT_DIR/test"}
-
-# Source assert.sh
-source "$TEST_DIR/assert.sh"
-source "$TEST_DIR/assert_snapshot.sh"
-
 # Variables
-LAPTOP_HOME="$ROOT_DIR"
+LAPTOP_HOME="$(pwd)"
 export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 
+export LAPTOP_TEST_DIR=${LAPTOP_TEST_DIR:-"$LAPTOP_HOME/test"}
+
 # Source laptop environment
-source "$ROOT_DIR/lib/env.sh"
+source "$LAPTOP_HOME/lib/env.sh"
+
+# Source assert.sh
+source "$LAPTOP_HOME/test/assert.sh"
+source "$LAPTOP_HOME/test/assert_snapshot.sh"
 
 # Temporary directory
 if [ -z "$TEST_TMP_DIR" ];then

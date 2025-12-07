@@ -7,7 +7,7 @@ assert_snapshot() {
   local test_command="$1"
   local snapshot_file;
   local snapshot_content;
-  snapshot_file="$TEST_DIR/__snapshots__/$2"
+  snapshot_file="$LAPTOP_TEST_DIR/__snapshots__/$2"
 
   if [[ "$UPDATE_SNAPSHOT" != "" || ! -f $snapshot_file ]];then
     mkdir -p "$(dirname "$snapshot_file")"

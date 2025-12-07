@@ -10,7 +10,7 @@ echo "LAPTOP_HOME: $LAPTOP_HOME"
 echo "Running tests in temporary directory: $TEST_TMP_DIR"
 
 # source *.test.sh files
-for file in "$TEST_DIR"/*.test.sh; do
+for file in "$LAPTOP_TEST_DIR"/*.test.sh; do
   # shellcheck disable=SC1090
   source "$file"
 done

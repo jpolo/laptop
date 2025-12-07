@@ -2,10 +2,10 @@
 
 # Test laptop_ini_get
 
-assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'root'" "root_value"
-assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'section.section_key'" "section_value"
-assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'section2.section2_key'" "section2_value"
-assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'unknown_key'" ""
+assert "laptop_ini_get '$LAPTOP_TEST_DIR/ini_test.ini' 'root'" "root_value"
+assert "laptop_ini_get '$LAPTOP_TEST_DIR/ini_test.ini' 'section.section_key'" "section_value"
+assert "laptop_ini_get '$LAPTOP_TEST_DIR/ini_test.ini' 'section2.section2_key'" "section2_value"
+assert "laptop_ini_get '$LAPTOP_TEST_DIR/ini_test.ini' 'unknown_key'" ""
 
 # Test laptop_ini_ensure
 ensure_ini_file="$TEST_TMP_DIR/ini_ensure.ini"
