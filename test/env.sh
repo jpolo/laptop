@@ -22,7 +22,7 @@ export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 
 # Source laptop environment
-source "$TEST_DIR/../lib/env.sh"
+source "$ROOT_DIR/lib/env.sh"
 
 # Temporary directory
 if [ -z "$TEST_TMP_DIR" ];then
