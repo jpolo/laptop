@@ -12,8 +12,6 @@ ROOT_DIR=$(pwd)
 export ROOT_DIR
 export TEST_DIR=${TEST_DIR:-"$ROOT_DIR/test"}
 
-export OK_STATUS="OK"
-
 # Source assert.sh
 source "$TEST_DIR/assert.sh"
 source "$TEST_DIR/assert_snapshot.sh"
@@ -27,5 +25,8 @@ export LAPTOP_PROFILE=default
 source "$TEST_DIR/../lib/env.sh"
 
 # Temporary directory
-TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
-export TMPDIR
+if [ -z "$TEST_TMP_DIR" ];then
+  TEST_TMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
+  export TEST_TMP_DIR
+fi
+

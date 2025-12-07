@@ -8,7 +8,7 @@ assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'section2.section2_key'" "sectio
 assert "laptop_ini_get '$TEST_DIR/ini_test.ini' 'unknown_key'" ""
 
 # Test laptop_ini_ensure
-ensure_ini_file="$TMPDIR/ini_ensure.ini"
+ensure_ini_file="$TEST_TMP_DIR/ini_ensure.ini"
 assert_raises "laptop_file_ensure '$ensure_ini_file'" 0
 assert_raises "laptop_ini_ensure '$ensure_ini_file' 'root' 'root_value'" 0
 assert_raises "laptop_ini_ensure '$ensure_ini_file' 'root_overwrite' 'root_overwrite_initial'" 0

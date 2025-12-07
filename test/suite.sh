@@ -6,7 +6,7 @@ SCRIPT_DIR="$(dirname "$0")"
 # shellcheck disable=SC1091
 source "$SCRIPT_DIR/env.sh"
 
-echo "Running tests in temporary directory: $TMPDIR"
+echo "Running tests in temporary directory: $TEST_TMP_DIR"
 
 # source *.test.sh files
 for file in "$TEST_DIR"/*.test.sh; do
