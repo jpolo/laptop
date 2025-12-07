@@ -63,11 +63,10 @@ fi
 ## Screen Dimensions
 # Find current screen size
 if [ -z "${COLUMNS}" ]; then
-  COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2 || echo "80")
+  COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)
 fi
-
 # When using remote connections, such as a serial port, stty size returns 0
-if [ "$COLUMNS" = "0" ]; then
+if [ -z "$COLUMNS" ]; then
   COLUMNS=80
 fi
 LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
