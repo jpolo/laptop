@@ -17,6 +17,6 @@ validate: lint test
 install: ## Install laptop configuration
 # Install folders
 	$(Q)mkdir -p $(INSTALL_PREFIX)
-	$(Q)cp -r bin lib profile man $(INSTALL_PREFIX)
+	$(Q)cp -r bin lib profile share $(INSTALL_PREFIX)
 # add LAPTOP_HOME to bin/laptop
 	$(Q)sed -i '' "s|^LAPTOP_HOME=.*|LAPTOP_HOME=\$${LAPTOP_HOME:-\"$(realpath $(INSTALL_PREFIX))\"}|" $(INSTALL_PREFIX)/bin/laptop
