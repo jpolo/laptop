@@ -1,0 +1,68 @@
+." Manpage for laptop-setup
+.TH LAPTOP-SETUP 1 "December 2025" "1.0" "Laptop Setup Subcommand Manual"
+.SH NAME
+laptop-setup \- Install and setup every tool for the current profile
+.SH DESCRIPTION
+The setup subcommand performs a complete installation and configuration of your laptop based on the selected profile. It handles bootstrapping, shell configuration, and installation of all required tools and dependencies.
+.PP
+The setup process includes:
+.RS
+.TP
+\- Bootstrapping the laptop environment
+.TP
+\- Configuring the default shell
+.TP
+\- Installing all tools defined in the profile
+.TP
+\- Setting up development environments
+.RE
+.PP
+Before running setup, the command will ask for confirmation and display the profile and installation mode being used.
+.SH SYNOPSIS
+.B laptop setup
+.SH OPTIONS
+Use parent command options:
+.TP
+.B -y, --yes
+Skip confirmation prompts and proceed with setup.
+.TP
+.B --color \fImode\fR
+Enable or disable ANSI colors.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B LAPTOP_PROFILE
+The profile to use for installation (default: "default"). The profile must exist at $LAPTOP_HOME/profile/$LAPTOP_PROFILE/profile.sh
+.TP
+.B LAPTOP_GIT_REMOTE
+Git repository used for zsh plugin and auto-updates. Required for setup. Can be:
+.RS
+.TP
+\- A GitHub repository identifier (e.g., jpolo/laptop)
+.TP
+\- A full git URL (e.g., https://github.com/jpolo/laptop.git)
+.RE
+.TP
+.B LAPTOP_HOME
+Local folder of installation of the laptop executable and library.
+.TP
+.B LAPTOP_BOOTSTRAP
+Set to "true" to run in bootstrap mode (minimal setup). Default: false (complete setup).
+.TP
+.B LAPTOP_DEVCONTAINER
+Indicates if running inside a devcontainer (Docker).
+.SH EXAMPLES
+.TP
+.B laptop setup
+Run setup with confirmation prompts.
+.TP
+.B laptop setup -y
+Run setup automatically without prompts.
+.TP
+.B LAPTOP_PROFILE=default laptop setup
+Setup with a specific profile.
+.SH NOTES
+If LAPTOP_GIT_REMOTE is not set, the setup command will prompt you to provide a value. This is required for the zsh plugin functionality and self-updating capability.
+.SH SEE ALSO
+.BR laptop (1)
+.SH AUTHOR
+Written by jpolo.

@@ -1,0 +1,101 @@
+." Manpage for laptop
+." Contact jpolo for help.
+.TH LAPTOP 1 "December 2025" "1.0" "Laptop Command Manual"
+.SH NAME
+laptop \- A tool for maintaining your laptop (cleaning, upgrading, etc)
+.SH SYNOPSIS
+.B laptop
+[\fIoptions\fR] [\fIsubcommand\fR]
+.SH DESCRIPTION
+The laptop command provides various utilities to manage and configure your laptop environment, including package management, configuration, setup, system updates, and cleanup operations.
+.SH OPTIONS
+.TP
+.B -h, --help
+Show help information.
+.TP
+.B -y, --yes
+Skip confirmation prompts and assume yes to all questions.
+.TP
+.B -v, --version
+Show version information.
+.TP
+.B --color \fImode\fR
+Enable or disable ANSI colors (default: auto)
+.RS
+.TP
+.B auto
+Use ANSI colors if available
+.TP
+.B always
+Always use ANSI colors
+.TP
+.B never
+Do not use ANSI colors
+.RE
+.SH SUBCOMMANDS
+.TP
+.B cleanup
+Empty cache and prune unused resources across multiple tools.
+.TP
+.B config
+View or edit configuration files (self, git, zsh, starship).
+.TP
+.B setup
+Install and setup every tool for the current profile for this device.
+.TP
+.B upgrade
+Upgrade all tools and packages to their latest versions.
+.TP
+.B help
+Show help information.
+.TP
+.B version
+Show version information.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B LAPTOP_HOME
+Local folder of installation of the laptop executable and library
+.TP
+.B LAPTOP_CONFIG_ZSH_FILE
+Path to the shell personal configuration file (default: $XDG_CONFIG_HOME/zsh/personal.sh)
+.TP
+.B LAPTOP_GIT_REMOTE
+Git repository location used as zsh plugin. Can be:
+.RS
+.TP
+\- A github repository name (ex: jpolo/laptop)
+.TP
+\- A full git url (ex: https://github.com/jpolo/laptop.git)
+.RE
+.TP
+.B LAPTOP_PROFILE
+Current profile to use for the setup/configure sub command. The profile source must be available at $LAPTOP_HOME/profile/$LAPTOP_PROFILE/profile.sh
+.SH EXAMPLES
+.TP
+.B laptop --help
+Show help information.
+.TP
+.B laptop --version
+Show version information.
+.TP
+.B laptop setup
+Install and setup all tools for the current profile.
+.TP
+.B laptop upgrade
+Upgrade all tools and packages.
+.TP
+.B laptop cleanup
+Clean and prune unused resources.
+.TP
+.B laptop config view git
+View the git configuration file.
+.TP
+.B laptop config edit zsh
+Edit the zsh configuration file.
+.SH SEE ALSO
+.BR laptop-cleanup (1),
+.BR laptop-config (1),
+.BR laptop-setup (1),
+.BR laptop-upgrade (1)
+.SH AUTHOR
+Written by jpolo.

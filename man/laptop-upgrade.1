@@ -1,0 +1,55 @@
+." Manpage for laptop-upgrade
+.TH LAPTOP-UPGRADE 1 "December 2025" "1.0" "Laptop Upgrade Subcommand Manual"
+.SH NAME
+laptop-upgrade \- Upgrade all tools and packages
+.SH SYNOPSIS
+.B laptop upgrade
+.SH DESCRIPTION
+The upgrade subcommand updates all installed tools and packages to their latest versions. It detects which tools are installed on your system and upgrades only those tools.
+.PP
+Supported tools for upgrade include:
+.RS
+.TP
+\- laptop (self-update)
+.TP
+\- brew (Homebrew)
+.TP
+\- apt-get (Debian-based systems)
+.TP
+\- asdf (Version manager)
+.TP
+\- zinit (Zsh plugin manager)
+.TP
+\- code (Visual Studio Code)
+.TP
+\- cursor (Cursor editor)
+.TP
+\- sdkmanager (Android SDK Manager)
+.TP
+\- softwareupdate (macOS system updates)
+.RE
+.SH OPTIONS
+Use parent command options:
+.TP
+.B -y, --yes
+Skip confirmation prompts and proceed with upgrades.
+.TP
+.B --color \fImode\fR
+Enable or disable ANSI colors.
+.SH EXAMPLES
+.TP
+.B laptop upgrade
+Run upgrade with confirmation prompts.
+.TP
+.B laptop upgrade -y
+Run upgrade automatically without prompts.
+.TP
+.B laptop --yes upgrade
+Same as above (options before subcommand).
+.SH NOTES
+The upgrade command will first detect which tools are available on your system and display them before proceeding. On macOS, you may be prompted to accept the Xcode license.
+.SH SEE ALSO
+.BR laptop (1),
+.BR laptop-cleanup (1)
+.SH AUTHOR
+Written by jpolo.

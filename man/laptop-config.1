@@ -1,0 +1,71 @@
+." Manpage for laptop-config
+.TH LAPTOP-CONFIG 1 "December 2025" "1.0" "Laptop Config Subcommand Manual"
+.SH NAME
+laptop-config \- View or edit configuration files
+.SH SYNOPSIS
+.B laptop config
+\fIaction\fR [\fIconfig_type\fR]
+.SH DESCRIPTION
+The config subcommand allows you to view or edit various configuration files used by the laptop tool and related applications. The default config type is "self" if not specified.
+.SH ACTIONS
+.TP
+.B view \fIconfig_type\fR
+Display the contents of the specified configuration file.
+.TP
+.B edit \fIconfig_type\fR
+Open the specified configuration file in your default editor (defined by $EDITOR).
+.SH CONFIGURATION TYPES
+.TP
+.B self
+The laptop tool's own configuration file ($LAPTOP_USER_CONFIG_FILE).
+.TP
+.B git
+Git configuration file ($XDG_CONFIG_HOME/git/config).
+.TP
+.B zsh
+Zsh shell configuration file ($LAPTOP_CONFIG_ZSH_FILE).
+.TP
+.B starship
+Starship prompt configuration file ($STARSHIP_CONFIG or $XDG_CONFIG_HOME/starship/config.toml).
+.SH EXAMPLES
+.TP
+.B laptop config view
+View the laptop configuration file (default).
+.TP
+.B laptop config view git
+View the git configuration file.
+.TP
+.B laptop config view zsh
+View the zsh configuration file.
+.TP
+.B laptop config view starship
+View the starship prompt configuration file.
+.TP
+.B laptop config edit self
+Edit the laptop configuration file in your default editor.
+.TP
+.B laptop config edit git
+Edit the git configuration file in your default editor.
+.TP
+.B laptop config edit zsh
+Edit the zsh configuration file in your default editor.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B EDITOR
+The editor to use when editing configuration files (default: vi).
+.TP
+.B LAPTOP_USER_CONFIG_FILE
+Path to the laptop configuration file.
+.TP
+.B LAPTOP_CONFIG_ZSH_FILE
+Path to the zsh configuration file.
+.TP
+.B STARSHIP_CONFIG
+Path to the starship configuration file.
+.TP
+.B XDG_CONFIG_HOME
+Base directory for configuration files (default: $HOME/.config).
+.SH SEE ALSO
+.BR laptop (1)
+.SH AUTHOR
+Written by jpolo.

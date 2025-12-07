@@ -1,0 +1,48 @@
+." Manpage for laptop-cleanup
+.TH LAPTOP-CLEANUP 1 "December 2025" "1.0" "Laptop Cleanup Subcommand Manual"
+.SH NAME
+laptop-cleanup \- Empty cache and prune unused resources
+.SH SYNOPSIS
+.B laptop cleanup
+.SH DESCRIPTION
+The cleanup subcommand removes cache files and prunes unused resources from installed tools and packages. It helps free up disk space and keep your system clean.
+.PP
+The cleanup command detects which tools are installed on your system and cleans up resources for those tools only. Supported tools include:
+.RS
+.TP
+\- brew (Homebrew package manager cache)
+.TP
+\- docker (Docker images and containers)
+.TP
+\- gem (Ruby gems cache)
+.TP
+\- npm (Node.js npm cache)
+.TP
+\- pod (CocoaPods cache)
+.TP
+\- xcrun (Xcode simulators and caches)
+.TP
+\- zinit (Zsh plugin manager cache)
+.RE
+.SH OPTIONS
+None. Use parent command options:
+.TP
+.B -y, --yes
+Skip confirmation prompts.
+.TP
+.B --color \fImode\fR
+Enable or disable ANSI colors.
+.SH EXAMPLES
+.TP
+.B laptop cleanup
+Run cleanup with confirmation prompts.
+.TP
+.B laptop cleanup -y
+Run cleanup automatically without prompts.
+.TP
+.B laptop --yes cleanup
+Same as above (options before subcommand).
+.SH SEE ALSO
+.BR laptop (1)
+.SH AUTHOR
+Written by jpolo.
