@@ -13,8 +13,6 @@ LAPTOP_HOME="$(pwd)"
 export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 
-export LAPTOP_TEST_DIR=${LAPTOP_TEST_DIR:-"$LAPTOP_HOME/test"}
-
 # Source laptop environment
 source "$LAPTOP_HOME/lib/env.sh"
 

@@ -22,7 +22,6 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 LAPTOP_CONFIG_ZSH_FILE=${LAPTOP_CONFIG_ZSH_FILE:-}
 LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
-LAPTOP_MAN_DIR=${LAPTOP_MAN_DIR:-"$LAPTOP_HOME/share/man/man1"}
 source "$LAPTOP_LIB_DIR/env.sh"
 source "$LAPTOP_LIB_DIR/command/cleanup.sh"
 source "$LAPTOP_LIB_DIR/command/config.sh"
