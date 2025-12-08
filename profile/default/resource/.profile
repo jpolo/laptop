@@ -29,11 +29,13 @@
     XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
     XDG_DATA_HOME_DEFAULT="$HOME/Library"
     XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
+    XDG_RUNTIME_DIR_DEFAULT=$(getconf DARWIN_USER_TEMP_DIR)
   else
     XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
     XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
     XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
     XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
+    XDG_RUNTIME_DIR_DEFAULT="/run/user/$(id -u)"
   fi
   # export variables
   [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
@@ -50,6 +52,7 @@
   [[ -n "$XDG_PUBLICSHARE_DIR" ]] || export XDG_PUBLICSHARE_DIR="$HOME/Public"
   [[ -n "$XDG_TEMPLATES_DIR"   ]] || export XDG_TEMPLATES_DIR="$HOME/Templates"
   [[ -n "$XDG_VIDEOS_DIR"      ]] || export XDG_VIDEOS_DIR="$HOME/Videos"
+  [[ -n "$XDG_RUNTIME_DIR"    ]] || export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR_DEFAULT
 
   # Source file
   [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
