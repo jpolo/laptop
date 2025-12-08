@@ -21,15 +21,40 @@ laptop_ini_get() {
     key=$(echo "$key" | cut -d'.' -f2)
   fi
 
-  local result
-  result=$(
-    augtool -A <<EOF
-set /augeas/load/IniFile/lens IniFile.lns_loose
-set /augeas/load/IniFile/incl "$config_file"
-load
-get /files$config_file/section[.="$section"]/$key
-EOF
-  )
-  # extract the part after = and remove starting space
-  echo "$result" | sed -n 's/.* = \(.*\)/\1/p'
+  local in_section=0
+  local result=""
+
+  # Handle anonymous section (.anon) - keys before any [section]
+  if [ "$section" = ".anon" ]; then
+    in_section=1
+  fi
+
+  while IFS= read -r line; do
+    # Skip empty lines and comments
+    [[ "$line" =~ ^[[:space:]]*$ ]] && continue
+    [[ "$line" =~ ^[[:space:]]*[\#\;] ]] && continue
+
+    # Check for section headers [section_name]
+    if [[ "$line" =~ ^[[:space:]]*\[([^\]]+)\][[:space:]]*$ ]]; then
+      local found_section="${BASH_REMATCH[1]}"
+      if [ "$found_section" = "$section" ]; then
+        in_section=1
+      else
+        in_section=0
+      fi
+      continue
+    fi
+
+    # If we're in the right section, look for the key
+    if [ "$in_section" = 1 ]; then
+      if [[ "$line" =~ ^[[:space:]]*${key}[[:space:]]*=[[:space:]]*(.*) ]]; then
+        result="${BASH_REMATCH[1]}"
+        # Remove trailing whitespace and quotes
+        result=$(echo "$result" | sed 's/[[:space:]]*$//' | sed 's/^"\(.*\)"$/\1/' | sed "s/^'\(.*\)'$/\1/")
+        break
+      fi
+    fi
+  done < "$config_file"
+
+  echo "$result"
 }
