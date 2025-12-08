@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Try to run brew installation
-laptop_package_ensure 'brew'
 assert_raises "laptop_package_ensure 'brew'" 0
 assert_raises "command -v brew" 0
 
