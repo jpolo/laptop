@@ -29,7 +29,7 @@ laptop_ini_get() {
     in_section=1
   fi
 
-  while IFS= read -r line; do
+  while IFS= read -r line || [ -n "$line" ]; do
     # Skip empty lines and comments
     [[ "$line" =~ ^[[:space:]]*$ ]] && continue
     [[ "$line" =~ ^[[:space:]]*[\#\;] ]] && continue
