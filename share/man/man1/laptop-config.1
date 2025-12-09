@@ -22,11 +22,14 @@ The laptop tool's own configuration file ($LAPTOP_USER_CONFIG_FILE).
 .B git
 Git configuration file ($XDG_CONFIG_HOME/git/config).
 .TP
-.B zsh
-Zsh shell configuration file ($LAPTOP_CONFIG_ZSH_FILE).
+.B npm
+NPM user configuration file (resolved via npm config get userconfig).
 .TP
 .B starship
 Starship prompt configuration file ($STARSHIP_CONFIG or $XDG_CONFIG_HOME/starship/config.toml).
+.TP
+.B zsh
+Zsh shell configuration file ($LAPTOP_CONFIG_ZSH_FILE).
 .SH EXAMPLES
 .TP
 .B laptop config view
@@ -38,6 +41,9 @@ View the git configuration file.
 .B laptop config view zsh
 View the zsh configuration file.
 .TP
+.B laptop config view npm
+View the npm user configuration file.
+.TP
 .B laptop config view starship
 View the starship prompt configuration file.
 .TP
@@ -46,6 +52,9 @@ Edit the laptop configuration file in your default editor.
 .TP
 .B laptop config edit git
 Edit the git configuration file in your default editor.
+.TP
+.B laptop config edit npm
+Edit the npm user configuration file in your default editor.
 .TP
 .B laptop config edit zsh
 Edit the zsh configuration file in your default editor.

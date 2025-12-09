@@ -26,6 +26,9 @@ laptop_command__config() {
     config_file="$LAPTOP_CONFIG_ZSH_FILE"
     shift
     ;;
+  "npm")
+    config_file="$(npm config get userconfig)"
+    ;;
   *)
     laptop_die "Unknown config type: $config_type"
     ;;
