@@ -19,18 +19,15 @@ laptop_ini_ensure() {
 
   local current_value
   current_value=$(laptop_ini_get "$file" "$2")
-echo laptop_ini_get "$file" "$2"
-echo "section: $section.$key"
-echo "current_value: $current_value"
   local resource_status="present"
   local current_resource_status
   current_resource_status=$([ "$current_value" = "$value" ] && echo "present" || echo "absent")
-echo "current_resource_status: $current_resource_status"
+
   local resource_status="present"
   local current_resource_status
 
   local message
-  message="INI setting [\"$section\"][\"$key\"]='$value'"
+  message="INI setting $2=$value"
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
