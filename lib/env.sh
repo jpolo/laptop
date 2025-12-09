@@ -103,6 +103,7 @@ laptop_handler__logo() {
 
 laptop_handler__setup_bootstrap() {
   laptop_bootstrap
+  laptop_setup_xdg_desktop
 }
 
 laptop_handler__setup_shell() {
