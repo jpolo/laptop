@@ -18,12 +18,14 @@ laptop_ini_ensure() {
   fi
 
   local current_value
-  current_value=$(laptop_ini_get "$file" "$section.${key}")
-
+  current_value=$(laptop_ini_get "$file" "$2")
+echo laptop_ini_get "$file" "$2"
+echo "section: $section.$key"
+echo "current_value: $current_value"
   local resource_status="present"
   local current_resource_status
-  current_resource_status=$(echo "$current_value" | grep -q "$value" && echo "present" || echo "absent")
-
+  current_resource_status=$([ "$current_value" = "$value" ] && echo "present" || echo "absent")
+echo "current_resource_status: $current_resource_status"
   local resource_status="present"
   local current_resource_status
 
