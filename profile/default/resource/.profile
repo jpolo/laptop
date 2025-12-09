@@ -25,12 +25,14 @@
   # https://github.com/adrg/xdg/blob/master/README.md#xdg-base-directory
   local XDG_CONFIG_HOME_DEFAULT XDG_CACHE_HOME_DEFAULT XDG_DATA_HOME_DEFAULT XDG_STATE_HOME_DEFAULT
   if [[ "$OSTYPE" == "darwin"* ]]; then
+    XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
     XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
     XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
     XDG_DATA_HOME_DEFAULT="$HOME/Library"
     XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
     XDG_RUNTIME_DIR_DEFAULT=$(getconf DARWIN_USER_TEMP_DIR)
   else
+    XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
     XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
     XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
     XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
@@ -38,6 +40,7 @@
     XDG_RUNTIME_DIR_DEFAULT="/run/user/$(id -u)"
   fi
   # export variables
+  [[ -n "$XDG_BIN_HOME" ]] || export XDG_BIN_HOME=$XDG_BIN_HOME_DEFAULT
   [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
   [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
   [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
