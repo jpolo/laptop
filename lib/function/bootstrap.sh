@@ -7,9 +7,6 @@ laptop_bootstrap_debian() {
   laptop_require "laptop_apt_ensure_package"
   laptop_require "laptop_shell_ensure"
   laptop_require "laptop_package_ensure"
-  laptop_require "laptop_brew_ensure_package"
-  laptop_require "laptop_apt_ensure_package"
-  laptop_require "laptop_apt_ensure_package"
 
   laptop_apt_ensure_updated
   laptop_apt_ensure_package "zsh"
@@ -23,12 +20,9 @@ laptop_bootstrap_debian() {
 
 laptop_bootstrap_macos() {
   laptop_require "laptop_package_ensure"
-  laptop_require "laptop_brew_ensure_package"
+  laptop_require "laptop_xcode_ensure_license_accepted"
   laptop_require "laptop_shell_ensure"
-  laptop_require "laptop_package_ensure"
   laptop_require "laptop_brew_ensure_package"
-  laptop_require "laptop_apt_ensure_package"
-  laptop_require "laptop_apt_ensure_package"
 
   laptop_package_ensure "rosetta2"
   laptop_package_ensure "xcode-command-line-tools"
