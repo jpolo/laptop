@@ -11,12 +11,13 @@ fi
 source "$LAPTOP_HOME/lib/function/require.sh"
 
 laptop_require "laptop_env_reload"
+laptop_require "laptop_profile_select"
+laptop_require "laptop_profile_dir"
+laptop_require "laptop_source_all"
 
 # Reload environment
 laptop_env_reload
 
-# Source scripts
-laptop_require "laptop_source_all"
 # Source global functions
 laptop_source_all "$LAPTOP_LIB_DIR/function"
 
@@ -25,11 +26,6 @@ export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FI
 
 
 ## Screen Dimensions
-
-_LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
-# shellcheck disable=SC2034
-_LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"
-
 
 quote() {
   local quoted=${1//\'/\'\\\'\'}

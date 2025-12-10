@@ -73,3 +73,8 @@ if [ -z "${COLUMNS}" ]; then
     COLUMNS=80
   fi
 fi
+
+_LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
+# shellcheck disable=SC2034
+_LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"
+
