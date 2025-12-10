@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_exec"
+laptop_require "laptop_step_ok"
+# laptop_require "laptop_package_ensure_start"
+
 # Install apt `package` if not present
 #
 # Usage:

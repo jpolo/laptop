@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_apt_ensure_key"
+laptop_require "laptop_step_start"
+laptop_require "laptop_step_eval"
+laptop_require "laptop_step_ok"
+
 # Add `repo_url` as an apt repository url using `repo_key`
 #
 # Usage:

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_start"
+laptop_require "laptop_step_eval"
+
 # Add repo_key to apt key registry
 #
 # Usage:

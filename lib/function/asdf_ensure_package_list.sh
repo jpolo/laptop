@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_asdf_ensure_package"
+laptop_require "laptop_warn"
+
 # Install all asdf packages from ".tool-versions" like file
 #
 # Usage:

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_upgrade_start"
+laptop_require "laptop_step_exec"
+laptop_require "laptop_step_ok"
+
 # Ensure apt packages are up to date
 #
 # Usage:
