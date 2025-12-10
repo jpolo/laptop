@@ -3,6 +3,7 @@
 # shellcheck disable=SC2155
 
 laptop_require "laptop_xdg_dir"
+laptop_require "laptop_ini_get"
 
 if [ -z "${LAPTOP_HOME}" ]; then
   echo "LAPTOP_HOME variable is required"
@@ -64,7 +65,6 @@ export LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 export LAPTOP_COLOR_MODE=${LAPTOP_COLOR_MODE:-"auto"}
 export LAPTOP_COLOR=${LAPTOP_COLOR:-false}
 
-
 # Detect screen size
 if [ -z "${COLUMNS}" ]; then
   COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)
@@ -78,3 +78,5 @@ _LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 # shellcheck disable=SC2034
 _LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"
 
+# Default environment variables
+export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FILE" "profile")}

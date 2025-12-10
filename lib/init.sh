@@ -13,6 +13,7 @@ source "$LAPTOP_HOME/lib/function/require.sh"
 laptop_require "laptop_env_reload"
 laptop_require "laptop_profile_select"
 laptop_require "laptop_profile_dir"
+laptop_require "laptop_profile_load"
 laptop_require "laptop_source_all"
 
 # Reload environment
@@ -20,10 +21,6 @@ laptop_env_reload
 
 # Source global functions
 laptop_source_all "$LAPTOP_LIB_DIR/function"
-
-# Default environment variables
-export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FILE" "profile")}
-
 
 ## Screen Dimensions
 
@@ -49,17 +46,24 @@ fi
 
 # Default handlers
 laptop_handler__logo() {
+  laptop_require "laptop_logo"
+
   laptop_logo
 }
 
 laptop_handler__setup_bootstrap() {
+  laptop_require "laptop_bootstrap"
+  laptop_require "laptop_setup_xdg_desktop"
+  laptop_require "laptop_setup_default_profile"
+
   laptop_bootstrap
   laptop_setup_xdg_desktop
-  laptop_setup_default_profile # FIXME: use this internal shell instead
-  # laptop_shell_exec "zsh" "$(laptop_profile_dir default)/bootstrap-profile.zsh"
+  laptop_setup_default_profile
 }
 
 laptop_handler__setup_shell() {
+  laptop_require "laptop_setup_default_shell"
+
   laptop_setup_default_shell
 }
 
