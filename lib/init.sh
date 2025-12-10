@@ -8,35 +8,24 @@ fi
 
 # Source env
 # shellcheck disable=SC1091
-source "$LAPTOP_HOME/lib/function/env_reload.sh"
-# shellcheck disable=SC1091
-source "$LAPTOP_HOME/lib/function/xdg_dir.sh"
+source "$LAPTOP_HOME/lib/function/require.sh"
+
+laptop_require "laptop_env_reload"
 
 # Reload environment
 laptop_env_reload
 
 # Source scripts
-# shellcheck disable=SC1091
-source "$LAPTOP_LIB_DIR/function/source_all.sh"
+laptop_require "laptop_source_all"
 # Source global functions
 laptop_source_all "$LAPTOP_LIB_DIR/function"
 
 # Default environment variables
 export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FILE" "profile")}
 
-# Use ANSI colors default value
-export LAPTOP_COLOR_MODE=${LAPTOP_COLOR_MODE:-"auto"}
-export LAPTOP_COLOR=false
 
 ## Screen Dimensions
-# Find current screen size
-if [ -z "${COLUMNS}" ]; then
-  COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)
-fi
-# When using remote connections, such as a serial port, stty size returns 0
-if [ -z "$COLUMNS" ]; then
-  COLUMNS=80
-fi
+
 _LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 # shellcheck disable=SC2034
 _LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"

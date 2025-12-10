@@ -2,6 +2,8 @@
 
 # shellcheck disable=SC2155
 
+laptop_require "laptop_xdg_dir"
+
 if [ -z "${LAPTOP_HOME}" ]; then
   echo "LAPTOP_HOME variable is required"
   exit 1
@@ -57,3 +59,17 @@ fi
 
 # Laptop shell used for running scripts
 export LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
+
+# Use ANSI colors default value
+export LAPTOP_COLOR_MODE=${LAPTOP_COLOR_MODE:-"auto"}
+export LAPTOP_COLOR=${LAPTOP_COLOR:-false}
+
+
+# Detect screen size
+if [ -z "${COLUMNS}" ]; then
+  COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)
+  # When using remote connections, such as a serial port, stty size returns 0
+  if [ -z "$COLUMNS" ]; then
+    COLUMNS=80
+  fi
+fi
