@@ -37,13 +37,6 @@ if [ -d "$(laptop_profile_dir)/function" ]; then
   laptop_source_all "$(laptop_profile_dir)/function"
 fi
 
-# Source recipes
-laptop_source_all "$LAPTOP_LIB_DIR/recipe"
-# Source profile recipes
-if [ -d "$(laptop_profile_dir)/recipe" ]; then
-  laptop_source_all "$(laptop_profile_dir)/recipe"
-fi
-
 # Default handlers
 laptop_handler__logo() {
   laptop_require "laptop_logo"
