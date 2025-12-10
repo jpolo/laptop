@@ -14,7 +14,7 @@ export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 
 # Source laptop environment
-source "$LAPTOP_HOME/lib/env.sh"
+source "$LAPTOP_HOME/lib/init.sh"
 
 # Source assert.sh
 source "$LAPTOP_HOME/test/assert.sh"
