@@ -63,7 +63,7 @@ laptop_command__upgrade() {
   if laptop_confirm "Continue? (y/N)"; then
     laptop_command__upgrade_run
 
-    laptop_info "🎉 Upgrade successful"
+    laptop_log info "🎉 Upgrade successful"
   else
     laptop_die "🛑 Upgrade aborted"
   fi

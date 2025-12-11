@@ -45,7 +45,7 @@ save
 EOF
     else
       laptop_step_status "fail"
-      laptop_error "Not implemented"
+      laptop_log error "Not implemented"
     fi
   fi
 }

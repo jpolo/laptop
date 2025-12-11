@@ -15,7 +15,7 @@ laptop_handler_call() {
   if declare -f "$function_name" >/dev/null; then
     "$function_name" "$@"
   else
-    laptop_error "No handler function '$function_name'"
+    laptop_log error "No handler function '$function_name'"
     return 1
   fi
 }

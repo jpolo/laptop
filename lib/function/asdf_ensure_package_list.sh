@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_asdf_ensure_package"
-laptop_require "laptop_warn"
+laptop_require "laptop_log warn"
 
 # Install all asdf packages from ".tool-versions" like file
 #
@@ -25,6 +25,6 @@ laptop_asdf_ensure_package_list() {
       laptop_asdf_ensure_package "$target_package" "$target_version"
     done <"$tool_version_file"
   else
-    laptop_warn "$tool_version_file does not exist"
+    laptop_log warn "$tool_version_file does not exist"
   fi
 }

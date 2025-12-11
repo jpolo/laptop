@@ -6,8 +6,8 @@
 #   laptop_step_finished <message>
 #
 laptop_step_finished() {
-  laptop_info "🎉 Finished"
-  laptop_info "$(
+  laptop_log info "🎉 Finished"
+  laptop_log info "$(
   cat <<EOF
   What next ?
 
@@ -23,5 +23,5 @@ laptop_step_finished() {
     📸 Manage your Capture in ~/Captures
 EOF
 )"
-  laptop_warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
+  laptop_log warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
 }

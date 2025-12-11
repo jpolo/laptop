@@ -26,7 +26,7 @@ _laptop_step_complete() {
     laptop_step_status "ok"
   else
     laptop_step_status "fail"
-    laptop_error "Command failed \
+    laptop_log error "Command failed \
       \\n|  > $command \
       \\n|  $output"
   fi

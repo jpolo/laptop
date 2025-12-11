@@ -17,6 +17,6 @@ laptop_shell_profile_var() {
     laptop_step_status "ok"
   else
     laptop_step_status "pass"
-    laptop_warn "$var_name is empty"
+    laptop_log warn "$var_name is empty"
   fi
 }

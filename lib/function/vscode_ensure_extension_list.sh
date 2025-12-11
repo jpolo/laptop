@@ -19,6 +19,6 @@ laptop_vscode_ensure_extension_list() {
       laptop_vscode_ensure_extension "$target_extension"
     done <"$vscode_file"
   else
-    laptop_warn "$vscode_file does not exist"
+    laptop_log warn "$vscode_file does not exist"
   fi
 }

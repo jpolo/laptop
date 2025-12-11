@@ -75,7 +75,7 @@ laptop_command__cleanup_result() {
     b=$((b / 1024))
     ((s++))
   done
-  laptop_info "$b$d ${S[$s]} of space was cleaned up"
+  laptop_log info "$b$d ${S[$s]} of space was cleaned up"
 }
 
 laptop_command__cleanup() {
@@ -86,7 +86,7 @@ laptop_command__cleanup() {
   if laptop_confirm "Continue? (y/N)"; then
     laptop_command__cleanup_run
 
-    laptop_info "🎉 Cleanup successful"
+    laptop_log info "🎉 Cleanup successful"
   else
     laptop_die "🛑 Cleanup aborted"
   fi

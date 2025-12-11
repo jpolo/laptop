@@ -57,7 +57,7 @@ laptop_vscode_ensure_setting() {
 
   # Vérifier si la requête est vide
   if [ -z "$json_path" ]; then
-    laptop_error "Empty json_path"
+    laptop_log error "Empty json_path"
     return 1
   fi
 

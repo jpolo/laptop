@@ -19,6 +19,6 @@ laptop_npm_ensure_package_list() {
       laptop_npm_ensure_package "$target_package"
     done <"$npm_file"
   else
-    laptop_warn "$npm_file does not exist"
+    laptop_log warn "$npm_file does not exist"
   fi
 }

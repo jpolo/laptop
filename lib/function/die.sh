@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 laptop_die() {
-  laptop_error "$1"
+  laptop_log error "$1"
   exit 1
 }

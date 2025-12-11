@@ -14,10 +14,10 @@ laptop_profile_select() {
     if [[ "$list_profile" = "$LAPTOP_PROFILE_DEFAULT" ]]; then
       LAPTOP_PROFILE="$LAPTOP_PROFILE_DEFAULT"
     else
-      laptop_info "Please select a configuration profile"
+      laptop_log info "Please select a configuration profile"
       select LAPTOP_PROFILE in $list_profile; do
         test -n "$LAPTOP_PROFILE" && break
-        laptop_error "Invalid Selection"
+        laptop_log error "Invalid Selection"
       done
     fi
 

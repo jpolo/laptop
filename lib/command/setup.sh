@@ -16,23 +16,23 @@ laptop_command__setup() {
   laptop_self_check_version
 
   if [ -z "$LAPTOP_GIT_REMOTE" ]; then
-    laptop_warn "LAPTOP_GIT_REMOTE is not set and is required for self updating"
-    laptop_info "LAPTOP_GIT_REMOTE can have the following value :"
-    laptop_info "  - A repository identifier (ex: jpolo/laptop)"
-    laptop_info "  - A full repository url (ex: https://github.com/jpolo/laptop.git)"
-    laptop_info "  - (empty value) to skip"
+    laptop_log warn "LAPTOP_GIT_REMOTE is not set and is required for self updating"
+    laptop_log info "LAPTOP_GIT_REMOTE can have the following value :"
+    laptop_log info "  - A repository identifier (ex: jpolo/laptop)"
+    laptop_log info "  - A full repository url (ex: https://github.com/jpolo/laptop.git)"
+    laptop_log info "  - (empty value) to skip"
     printf "LAPTOP_GIT_REMOTE? : "
     read -e -r LAPTOP_GIT_REMOTE
   fi
 
-  laptop_info "  Profile: ${BRACKET}${LAPTOP_PROFILE}${NORMAL}"
-  laptop_info "  Dev Container: ${BRACKET}${LAPTOP_DEVCONTAINER}${NORMAL}"
+  laptop_log info "  Profile: ${BRACKET}${LAPTOP_PROFILE}${NORMAL}"
+  laptop_log info "  Dev Container: ${BRACKET}${LAPTOP_DEVCONTAINER}${NORMAL}"
 
   # Ask confirmation
   if [ "${LAPTOP_BOOTSTRAP:-false}" = true ]; then
-    laptop_info "  Install Mode: ${BRACKET}bootstrap${NORMAL} ${DIM}(only laptop and zshrc)${NORMAL}"
+    laptop_log info "  Install Mode: ${BRACKET}bootstrap${NORMAL} ${DIM}(only laptop and zshrc)${NORMAL}"
   else
-    laptop_info "  Install Mode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
+    laptop_log info "  Install Mode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
   fi
   if laptop_confirm "Continue? (y/N)"; then
     laptop_command__setup_run
