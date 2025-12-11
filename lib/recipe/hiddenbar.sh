@@ -7,7 +7,7 @@ laptop_package_ensure__hiddenbar() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     laptop_brew_ensure_package "$package"
   else
-    laptop_package_ensure_start "$package" --status "unknown"
+    laptop_step_resource_start_status "$package" --status "unknown"
     laptop_step_status "pass"
   fi
 }

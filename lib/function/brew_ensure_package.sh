@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-laptop_require "laptop_package_ensure_start"
+laptop_require "laptop_step_resource_start_status"
 laptop_require "laptop_step_eval"
 laptop_require "laptop_step_status"
 
@@ -39,7 +39,7 @@ laptop_brew_ensure_package() {
     brew_args+=("--cask")
   fi
 
-  laptop_package_ensure_start "$package" --status "$resource_status" --current-status "$current_resource_status"
+  laptop_step_resource_start_status "$package" --status "$resource_status" --current-status "$current_resource_status"
   if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_status "ok"
   else

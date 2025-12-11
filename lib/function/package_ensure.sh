@@ -72,12 +72,12 @@ laptop_package_load_recipe() {
 # Display a step with a target status
 #
 # Usage:
-#   laptop_package_ensure_start <package> [--status present|absent] [--current-status present|absent]
+#   laptop_step_resource_start_status <package> [--status present|absent] [--current-status present|absent]
 #
 # Options:
 #   <current_status> present|absent
 #   <target_status> present|absent
-laptop_package_ensure_start() {
+laptop_step_resource_start_status() {
   local package="${1}"
   local resource_status="present"
   local current_resource_status="unknown"

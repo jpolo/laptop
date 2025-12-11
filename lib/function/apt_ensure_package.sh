@@ -2,7 +2,7 @@
 
 laptop_require "laptop_step_exec"
 laptop_require "laptop_step_status"
-# laptop_require "laptop_package_ensure_start"
+laptop_require "laptop_step_resource_start_status"
 
 # Install apt `package` if not present
 #
@@ -39,7 +39,7 @@ laptop_apt_ensure_package() {
   local current_resource_status
   current_resource_status=$(dpkg -s "$package" &>/dev/null && echo "present" || echo "absent")
 
-  laptop_package_ensure_start "$package" --status "$resource_status" --current-status "$current_resource_status"
+  laptop_step_resource_start_status "$package" --status "$resource_status" --current-status "$current_resource_status"
 
   if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_status "ok"
