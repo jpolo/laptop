@@ -30,18 +30,3 @@ laptop_step_start_status() {
 
   laptop_step_start "${status_message} $message"
 }
-
-laptop_step_ok() {
-  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${SUCCESS}  OK  ${BRACKET}]${NORMAL}"
-  return 0
-}
-
-laptop_step_fail() {
-  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${FAILURE} FAIL ${BRACKET}]${NORMAL}"
-  return 0
-}
-
-laptop_step_pass() {
-  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${NORMAL} PASS ${BRACKET}]${NORMAL}"
-  return 0
-}
