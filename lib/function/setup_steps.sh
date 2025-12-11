@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_profile_dir"
+laptop_require "laptop_shell_exec"
+
 # Run every steps in alphabetic order (in a separate shell instance)
 #
 # Usage:

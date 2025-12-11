@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_log"
+
 # Display a finished step
 #
 # Usage:

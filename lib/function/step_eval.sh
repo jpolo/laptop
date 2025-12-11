@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_status"
+laptop_require "laptop_log"
 
 # Execute a command and display the output
 #
@@ -12,15 +14,6 @@ laptop_step_eval() {
   local command="$1"
   output=$(eval "$command" 2>&1)
   local exit_code=$?
-
-  _laptop_step_complete "$command" "$exit_code" "$output"
-}
-
-
-_laptop_step_complete() {
-  local command=$1
-  local exit_code=$2
-  local output=$3
 
   if [ "$exit_code" = "0" ]; then
     laptop_step_status "ok"

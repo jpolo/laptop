@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_directory_ensure"
+laptop_require "laptop_file_ensure"
+
 # Ensure SSH directory exists
 #
 # Usage:

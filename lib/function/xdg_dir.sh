@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   _XDG_DATA_HOME_DEFAULT="$HOME/Library"

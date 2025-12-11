@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_profile_dir"
+
 # Retrieves the version of a specified language from the .tool-versions file
 # in the current profile directory.
 #

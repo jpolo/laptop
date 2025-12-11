@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_profile_dir"
+laptop_require "laptop_file_ensure_template"
+laptop_require "laptop_shell_profile_var"
+laptop_require "laptop_shell_exec"
+
 # Configure default profile (.profile, .zprofile, .zshrc, etc) using default profile templates
 #
 # Usage:

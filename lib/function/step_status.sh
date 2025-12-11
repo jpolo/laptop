@@ -12,12 +12,12 @@ laptop_require "laptop_die"
 #   - fail: FAIL
 #   - pass: PASS
 laptop_step_status() {
-  local status="$1"
+  local step_status="$1"
   local color
   # uppercase the status
   local message
-  message=$(echo "$status" | tr '[:lower:]' '[:upper:]')
-  case "$status" in
+  message=$(echo "$step_status" | tr '[:lower:]' '[:upper:]')
+  case "$step_status" in
     "ok")
       color="${SUCCESS}"
       ;;

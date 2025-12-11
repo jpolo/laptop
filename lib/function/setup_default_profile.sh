@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_die"
+laptop_require "laptop_file_ensure"
+laptop_require "laptop_ini_ensure"
+laptop_require "laptop_ini_get"
+
 # Configure default profile from LAPTOP_PROFILE if not set
 #
 # Usage:

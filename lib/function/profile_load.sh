@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_die"
+
 # Load profile using $LAPTOP_PROFILE
 #
 # Usage:

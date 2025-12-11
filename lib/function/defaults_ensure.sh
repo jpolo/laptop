@@ -3,6 +3,7 @@
 laptop_require "laptop_step_start_status"
 laptop_require "laptop_step_exec"
 laptop_require "laptop_step_status"
+laptop_require "laptop_step_start_status"
 laptop_require "laptop_command_exists"
 
 # Ensure defaults are set

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_profile_dir"
+laptop_require "laptop_file_ensure_template"
+
 # Configure XDG desktop directories compatibility
 #
 # Usage:

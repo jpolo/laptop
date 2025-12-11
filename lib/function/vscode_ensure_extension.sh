@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_exec"
+laptop_require "laptop_step_status"
+laptop_require "laptop_vscode_app_name"
+
 # Ensure VSCode extension
 #
 # Usage:

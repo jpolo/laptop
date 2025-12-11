@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_log"
+
 # Call a handler function
 #
 # The handler function must be named like this:

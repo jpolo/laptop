@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_upgrade_start"
+laptop_require "laptop_step_eval"
+laptop_require "laptop_step_status"
+
 # Ensure brew packages are up to date
 #
 # Usage:

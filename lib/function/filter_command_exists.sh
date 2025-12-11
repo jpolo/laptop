@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_command_exists"
+
 # Filter array keeping only available commands
 #
 # Example 1 :

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_npm_ensure_package"
+laptop_require "laptop_log"
+
 # Install all npm packages from "npmfile" like file
 #
 # Usage:

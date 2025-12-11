@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_status"
+laptop_require "laptop_command_exists"
+
+# Ensure Xcode license is accepted
+#
+# Usage:
+#   laptop_xcode_ensure_license_accepted
+#
 laptop_xcode_ensure_license_accepted() {
   local xcode_message="xcodebuild license accepted"
   if laptop_command_exists "xcodebuild"; then

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_log"
+laptop_require "laptop_profile_available"
+
 # Select profile
 #
 # Usage:

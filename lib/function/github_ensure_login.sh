@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_status"
+laptop_require "laptop_step_exec"
+
 # Ensure Github account is logged in
 # See gh auth --help for more information
 #
