@@ -5,6 +5,6 @@ laptop_package_ensure__idb-companion() {
     laptop_brew_ensure_package "facebook/fb/idb-companion"
   else
     laptop_step_start "- Ensure idb-companion installed (via git)"
-    laptop_step_pass
+    laptop_step_status "pass"
   fi
 }

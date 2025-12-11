@@ -23,9 +23,9 @@ _laptop_step_complete() {
   local output=$3
 
   if [ "$exit_code" = "0" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
-    laptop_step_fail
+    laptop_step_status "fail"
     laptop_error "Command failed \
       \\n|  > $command \
       \\n|  $output"

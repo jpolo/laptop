@@ -14,9 +14,9 @@ laptop_shell_profile_var() {
 
   if [ -n "$value" ]; then
     laptop_file_var "$script_file" "$var_name" "$value"
-    laptop_step_ok
+    laptop_step_status "ok"
   else
-    laptop_step_pass
+    laptop_step_status "pass"
     laptop_warn "$var_name is empty"
   fi
 }

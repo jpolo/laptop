@@ -34,11 +34,11 @@ laptop_ssh_ensure_key() {
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       if [ -z "$email" ]; then
-        laptop_step_fail
+        laptop_step_status "fail"
         laptop_error "git config user.email is empty"
       else
         laptop_step_exec ssh-keygen -t "$algorithm" -C "$email" -N '' -o -f "$ssh_key"

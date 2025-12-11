@@ -2,7 +2,7 @@
 
 laptop_require "laptop_step_start_status"
 laptop_require "laptop_step_exec"
-laptop_require "laptop_step_ok"
+laptop_require "laptop_step_status"
 
 # Install asdf plugin `name` if not present
 #
@@ -32,7 +32,7 @@ laptop_asdf_ensure_plugin() {
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       laptop_step_exec asdf plugin add "$name" "$url"

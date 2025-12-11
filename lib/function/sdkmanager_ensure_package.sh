@@ -28,7 +28,7 @@ laptop_sdkmanager_ensure_package() {
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       laptop_step_eval "sdkmanager --install '$package'"

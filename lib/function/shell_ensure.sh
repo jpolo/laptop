@@ -16,7 +16,7 @@ laptop_shell_ensure() {
 
   laptop_step_start_status "$resource_status" "$resource_current_status" "User shell '$target_shell'"
   if [ "$resource_current_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     laptop_step_exec sudo chsh -s "/bin/$target_shell"
   fi

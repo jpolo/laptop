@@ -43,7 +43,7 @@ laptop_directory_ensure() {
       fi
       laptop_step_eval "$command_script"
     else
-      laptop_step_ok
+      laptop_step_status "ok"
     fi
   else
     laptop_step_eval "rm -rf $(quote "$directory")"

@@ -2,7 +2,7 @@
 
 laptop_require "laptop_package_ensure_start"
 laptop_require "laptop_step_eval"
-laptop_require "laptop_step_ok"
+laptop_require "laptop_step_status"
 
 # Install brew `package` if not present
 #
@@ -41,7 +41,7 @@ laptop_brew_ensure_package() {
 
   laptop_package_ensure_start "$package" --status "$resource_status" --current-status "$current_resource_status"
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       laptop_step_eval "brew install ${brew_args[*]} $(quote "$package")"

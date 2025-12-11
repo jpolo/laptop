@@ -6,10 +6,10 @@ laptop_package_ensure__container() {
       laptop_brew_ensure_cask_package "container" "${@:2}"
     else
       laptop_package_ensure_start "$@"
-      laptop_step_pass
+      laptop_step_status "pass"
     fi
   else
     laptop_package_ensure_start "$@"
-    laptop_step_pass
+    laptop_step_status "pass"
   fi
 }

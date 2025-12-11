@@ -31,7 +31,7 @@ laptop_vscode_ensure_extension() {
   laptop_step_start_status "$resource_status" "$resource_current_status" "$app_name extension '$extension_name'"
 
   if [ "$resource_current_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       laptop_step_exec "$executable" --install-extension "$extension_name" --force

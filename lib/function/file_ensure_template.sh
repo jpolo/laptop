@@ -41,7 +41,7 @@ laptop_file_ensure_template() {
 
   laptop_step_start_status "present" "$current_resource_status" "Template '$(laptop_path_print "$target")'$([ "$force" -eq 1 ] && echo ' (force)') "
   if [ "$force" -eq 0 ] && [ -f "$target" ]; then
-    laptop_step_pass
+    laptop_step_status "pass"
   else
     laptop_step_eval "\
     mkdir -p $(quote "$(dirname "$target")") && \

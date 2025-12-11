@@ -38,7 +38,7 @@ laptop_git_ensure_config() {
   laptop_step_start_status "$resource_status" "$resource_current_status" "Git config '$name'='${value:-"<custom>"}'"
 
   if [ "$resource_current_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       if [ -z "${value}" ]; then

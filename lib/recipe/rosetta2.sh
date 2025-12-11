@@ -11,10 +11,10 @@ laptop_package_ensure__rosetta2() {
 
   # Install Rosetta
   if ! test arm64 = "$(uname -m)" || ! laptop_command_exists "softwareupdate"; then
-    laptop_step_pass
+    laptop_step_status "pass"
   else
     if [ "$current_resource_status" = "$resource_status" ]; then
-      laptop_step_ok
+      laptop_step_status "ok"
     else
       laptop_step_exec sudo softwareupdate --install-rosetta --agree-to-license
     fi

@@ -2,8 +2,7 @@
 
 laptop_require "laptop_step_start_status"
 laptop_require "laptop_step_exec"
-laptop_require "laptop_step_ok"
-laptop_require "laptop_step_pass"
+laptop_require "laptop_step_status"
 laptop_require "laptop_command_exists"
 
 # Ensure defaults are set
@@ -40,10 +39,10 @@ laptop_defaults_ensure() {
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if ! laptop_command_exists "defaults"; then
-      laptop_step_pass
+      laptop_step_status "pass"
     elif [ "$resource_status" = "present" ]; then
       laptop_step_exec defaults write "$domain" "$key" "$value_type" "$value"
     else

@@ -8,7 +8,7 @@ laptop_package_ensure__heroku() {
   else
     laptop_step_start "- Ensure apt package 'heroku'"
     if dpkg -s "heroku" &>/dev/null; then
-      laptop_step_ok
+      laptop_step_status "ok"
     else
       laptop_step_eval "curl https://cli-assets.heroku.com/install-ubuntu.sh | sh"
     fi

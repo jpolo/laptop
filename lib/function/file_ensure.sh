@@ -34,7 +34,7 @@ laptop_file_ensure() {
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
   if [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       local command_script

@@ -8,6 +8,6 @@ laptop_package_ensure__hiddenbar() {
     laptop_brew_ensure_package "$package"
   else
     laptop_package_ensure_start "$package" --status "unknown"
-    laptop_step_pass
+    laptop_step_status "pass"
   fi
 }

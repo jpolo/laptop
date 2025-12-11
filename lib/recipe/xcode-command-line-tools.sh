@@ -18,9 +18,9 @@ laptop_package_ensure__xcode-command-line-tools() {
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
   if ! laptop_command_exists "xcode-select"; then
-    laptop_step_pass
+    laptop_step_status "pass"
   elif [ "$current_resource_status" = "$resource_status" ]; then
-    laptop_step_ok
+    laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
       laptop_step_exec xcode-select --install

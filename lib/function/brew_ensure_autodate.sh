@@ -2,7 +2,7 @@
 
 laptop_require "laptop_step_start"
 laptop_require "laptop_step_exec"
-laptop_require "laptop_step_ok"
+laptop_require "laptop_step_status"
 
 laptop_brew_ensure_autodate() {
   local brew_auto_update_present
@@ -16,6 +16,6 @@ laptop_brew_ensure_autodate() {
   if ! brew autoupdate status | grep --quiet running; then
     laptop_step_exec brew autoupdate start
   else
-    laptop_step_ok
+    laptop_step_status "ok"
   fi
 }

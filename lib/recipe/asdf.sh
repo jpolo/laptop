@@ -12,7 +12,7 @@ laptop_package_ensure__asdf() {
       # shellcheck disable=SC1091
       source "$asdf_dir/asdf.sh"
     else
-      laptop_step_ok
+      laptop_step_status "ok"
     fi
   fi
 }

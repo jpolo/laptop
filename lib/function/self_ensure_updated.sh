@@ -12,6 +12,6 @@ laptop_self_ensure_updated() {
     laptop_step_eval "brew upgrade w5s/tap/laptop --fetch-HEAD"
     return
   else
-    laptop_step_pass
+    laptop_step_status "pass"
   fi
 }
