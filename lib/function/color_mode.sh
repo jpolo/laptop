@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_die"
+laptop_require "laptop_ansi"
+
 # Set the color mode
 #
 # Usage:

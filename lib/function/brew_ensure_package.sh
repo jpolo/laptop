@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure_start"
+laptop_require "laptop_step_eval"
+laptop_require "laptop_step_ok"
+
 # Install brew `package` if not present
 #
 # Usage:
