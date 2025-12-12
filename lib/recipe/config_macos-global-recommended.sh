@@ -15,4 +15,7 @@ laptop_package_ensure__config:macos-global-recommended() {
   # Fast key repeat
   laptop_defaults_ensure NSGlobalDomain InitialKeyRepeat -int 15 # 150ms seems to be the most common value that offers the best tradeoff (source = github)
   laptop_defaults_ensure NSGlobalDomain KeyRepeat -int 1
+
+  # Disable swipe navigation with scrolls
+  laptop_defaults_ensure NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -int 0
 }
