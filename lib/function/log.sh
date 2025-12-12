@@ -39,9 +39,9 @@ laptop_log() {
       level_name="Error"
       ;;
     *)
-      color="$COLOR_NORMAL"
+      color="$NORMAL"
       level_name="Unknown"
       ;;
   esac
-  echo -e "${color}${level_name}: ${message}${NORMAL}"
+  echo -e "${color}${level_name}: ${NORMAL}${message}"
 }
