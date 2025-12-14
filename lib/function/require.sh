@@ -14,7 +14,7 @@ laptop_require() {
       # remove laptop_ prefix
       local function_name_without_laptop_prefix="${function_name#laptop_}"
       # shellcheck disable=SC1090
-      source "${LAPTOP_LIB_DIR}/function/$function_name_without_laptop_prefix.sh"
+      source "${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}/function/$function_name_without_laptop_prefix.sh"
     fi
   fi
 
