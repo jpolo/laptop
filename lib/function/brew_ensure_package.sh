@@ -13,6 +13,7 @@ laptop_require "laptop_step_status"
 #   --status present|absent
 #
 laptop_brew_ensure_package() {
+  BREW_CASK="${BREW_CASK:-0}"
   local package="$1"
   # parse options
   local resource_status="present"
@@ -21,6 +22,10 @@ laptop_brew_ensure_package() {
     -s | --status)
       resource_status="$2"
       shift 2
+      ;;
+    --cask)
+      BREW_CASK=1
+      shift
       ;;
     *) shift ;;
     esac
@@ -49,8 +54,4 @@ laptop_brew_ensure_package() {
       laptop_step_eval "brew uninstall ${brew_args[*]} $(quote "$package") --force"
     fi
   fi
-}
-
-laptop_brew_ensure_cask_package() {
-  BREW_CASK=1 laptop_brew_ensure_package "$1"
 }
