@@ -21,8 +21,9 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 # Path to laptop installation
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
-# Installation method (git|zinit|brew)
-LAPTOP_INSTALL_METHOD=${LAPTOP_INSTALL_METHOD:-"git"}
+# Brew package name (only for brew installation method)
+LAPTOP_INSTALL_BREW_PACKAGE=${LAPTOP_INSTALL_BREW_PACKAGE:-"w5s/tap/laptop"}
+
 LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
 source "$LAPTOP_LIB_DIR/init.sh"
 source "$LAPTOP_LIB_DIR/command/cleanup.sh"

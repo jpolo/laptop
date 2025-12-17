@@ -30,4 +30,4 @@ install: ## Install laptop configuration
 	$(Q)cp -r bin lib profile share $(INSTALL_PREFIX)
 # add LAPTOP_HOME to bin/laptop
 	$(Q)$(call set_var,LAPTOP_HOME,$${LAPTOP_HOME:-"$(realpath $(INSTALL_PREFIX))"},$(INSTALL_PREFIX)/bin/laptop)
-	$(Q)$(call set_var,LAPTOP_INSTALL_METHOD,$${LAPTOP_INSTALL_METHOD:-"git"},$(INSTALL_PREFIX)/bin/laptop)
+	$(Q)$(call set_var,LAPTOP_INSTALL_BREW_PACKAGE,$${LAPTOP_INSTALL_BREW_PACKAGE:-$(INSTALL_BREW_PACKAGE)},$(INSTALL_PREFIX)/bin/laptop)

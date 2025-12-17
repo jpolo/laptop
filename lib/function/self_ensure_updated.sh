@@ -10,12 +10,8 @@ laptop_require "laptop_step_status"
 #   laptop_brew_ensure_updated
 #
 laptop_self_ensure_updated() {
-  laptop_step_upgrade_start "laptop updated"
-
-  if brew list w5s/tap/laptop &>/dev/null; then
-    laptop_step_eval "brew upgrade w5s/tap/laptop --fetch-HEAD"
-    return
-  else
-    laptop_step_status "pass"
+  if [ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+    laptop_step_upgrade_start "laptop updated (brew)"
+    laptop_step_eval "brew upgrade '$LAPTOP_INSTALL_BREW_PACKAGE' --fetch-HEAD"
   fi
 }
