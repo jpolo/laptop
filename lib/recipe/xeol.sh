@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure_default"
+laptop_require "laptop_brew_ensure_package"
+
 #
 # Install xeol on your project / docker container. This script will install xeol on your system using the package manager you have selected.
 #

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure"
+
 laptop_package_ensure__pack:cli-tools() {
   # A pack of useful tools
   laptop_package_ensure "adr-tools"

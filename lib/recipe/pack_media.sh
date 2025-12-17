@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure"
+
 # Pack to manipulate photo, videos and other media
 laptop_package_ensure__pack:media() {
   laptop_package_ensure "excalidrawz"

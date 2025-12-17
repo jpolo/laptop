@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_defaults_ensure"
+
 laptop_package_ensure__config:macos-update-recommended() {
   # Software updates recommended
 

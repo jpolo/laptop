@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_defaults_ensure"
+
 # macOS defaults settings for developers
 laptop_package_ensure__config:macos-global-recommended() {
 

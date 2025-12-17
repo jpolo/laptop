@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure"
+
 laptop_package_ensure__pack:cloud-utils() {
   # Install devops / cloud provider
   laptop_package_ensure "az"       # Azure CLI

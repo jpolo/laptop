@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure_default"
+laptop_require "laptop_sdkmanager_ensure_package"
+laptop_require "laptop_step_start"
+laptop_require "laptop_step_eval"
+
 laptop_package_ensure__android-sdk() {
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
     brew remove android-sdk &>/dev/null

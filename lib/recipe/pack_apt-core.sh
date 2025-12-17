@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_apt_ensure_package"
+
 laptop_package_ensure__pack:apt-core() {
   laptop_apt_ensure_package "build-essential"
   laptop_apt_ensure_package "procps"

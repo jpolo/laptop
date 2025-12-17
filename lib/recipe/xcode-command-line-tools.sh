@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_command_exists"
+laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_status"
+laptop_require "laptop_step_exec"
+
 laptop_package_ensure__xcode-command-line-tools() {
   local resource_status="present"
   while [[ $# -gt 0 ]]; do

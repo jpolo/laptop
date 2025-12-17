@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_vscode_ensure_setting"
+
 # macOS defaults settings for developers
 laptop_package_ensure__config:vscode-recommended() {
 

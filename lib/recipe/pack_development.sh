@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure"
+
 laptop_package_ensure__pack:development() {
   # laptop_package_ensure "chromedriver" // DEPRECATED
   laptop_package_ensure "docker"

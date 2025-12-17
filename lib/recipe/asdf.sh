@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure_default"
+laptop_require "laptop_step_start"
+laptop_require "laptop_step_eval"
+laptop_require "laptop_step_status"
+
 laptop_package_ensure__asdf() {
   local asdf_dir
   asdf_dir="${ASDF_DIR:-$HOME/.asdf}"

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_package_ensure"
+laptop_require "laptop_asdf_ensure_plugin"
+
 laptop_package_ensure__pack:core() {
   # A pack of required packages
 
