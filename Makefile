@@ -6,6 +6,11 @@
 # 4. .modules/*/module.mk
 include .modules/core.mk
 
+# Set a variable in a file (portable, works on macOS/BSD sed)
+define set_var
+	sed -i '' 's|^$(1)=.*|$(1)=$(2)|' $(3)
+endef
+
 .PHONY: project-setup
 project-setup: ## Run all tests
 	$(Q)brew install augeas --quiet
@@ -24,4 +29,4 @@ install: ## Install laptop configuration
 	$(Q)mkdir -p $(INSTALL_PREFIX)
 	$(Q)cp -r bin lib profile share $(INSTALL_PREFIX)
 # add LAPTOP_HOME to bin/laptop
-	$(Q)sed -i '' "s|^LAPTOP_HOME=.*|LAPTOP_HOME=\$${LAPTOP_HOME:-\"$(realpath $(INSTALL_PREFIX))\"}|" $(INSTALL_PREFIX)/bin/laptop
+	$(call set_var,LAPTOP_HOME,$${LAPTOP_HOME:-"$(realpath $(INSTALL_PREFIX))"},$(INSTALL_PREFIX)/bin/laptop)
