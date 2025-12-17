@@ -87,7 +87,7 @@ Although there are some implementation tradeoffs, it should never limit develope
     - `.zshrc.local` : For local override (that should not be synched between devices)
     - `$XDG_DATA_HOME/zsh/*.sh` : For generic overrides (zsh plugins, etc). Files are included in alphabetic order, so as a convention each file starts with two digits.
 
-  Example `$XDG_DATA_HOME/zsh/personal.sh` :
+  Example `$XDG_DATA_HOME/zsh/init` :
 
   ```shell
   # Load OhMyZSH ruby plugin

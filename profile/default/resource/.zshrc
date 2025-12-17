@@ -14,7 +14,7 @@
 #
 # 👉 [Recommended] Shared (could be synchronizable to iCloud, Drive, etc) :
 #
-# > code "$XDG_DATA_HOME/zsh/personal.sh"
+# > code "$XDG_CONFIG_HOME/zsh/init"
 #
 # 👉 Local only :
 #
