@@ -18,6 +18,8 @@ laptop_setup_default_shell() {
 
   laptop_file_ensure_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
   laptop_file_ensure_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
+  # Legacy migration
+  laptop_file_moved "$(laptop_xdg_dir "data")/zsh/personal.sh" "$(laptop_xdg_dir "config")/zsh/init"
 
   # Configure ZSH
   laptop_shell_exec "zsh" "$profile_dir/bootstrap-shell.zsh"
