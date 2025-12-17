@@ -20,15 +20,23 @@ laptop_step_status() {
   case "$step_status" in
     "ok")
       color="${SUCCESS}"
+      message=" OK "
       ;;
     "fail")
       color="${FAILURE}"
+      message="FAIL"
+      ;;
+    "pass")
+      color="${DIM}"
+      message="PASS"
       ;;
     *)
       color="${NORMAL}"
+      message=" ?? "
       ;;
   esac
 
-  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${color} ${message} ${BRACKET}]${NORMAL}"
+  # make sure the message has always same length by adding spaces at start and end
+  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${color} ${message} ${NORMAL}${BRACKET}]${NORMAL}"
   return 0
 }
