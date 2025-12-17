@@ -87,11 +87,6 @@ zshrc_profile() {
   time ZPROF=1 zsh -i -c exit
 }
 
-# Edit .zshrc
-zshrc_edit() {
-  ${=EDITOR} ~/.zshrc
-}
-
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
 # Custom scripts
