@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_confirm"
+laptop_require "laptop_die"
+laptop_require "laptop_handler_call"
+laptop_require "laptop_log"
+laptop_require "laptop_step_upgrade_start"
+laptop_require "laptop_self_ensure_updated"
+laptop_require "laptop_brew_ensure_updated"
+laptop_require "laptop_asdf_ensure_updated"
+laptop_require "laptop_sdkmanager_ensure_updated"
+laptop_require "laptop_vscode_ensure_updated"
+laptop_require "laptop_xcode_ensure_license_accepted"
+laptop_require "laptop_zinit_ensure_updated"
+laptop_require "laptop_apt_ensure_updated"
+laptop_require "laptop_filter_command_exists"
+
 __LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "code" "cursor" "sdkmanager" "softwareupdate")
 
 laptop_command__upgrade_detect() {

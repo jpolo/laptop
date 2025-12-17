@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_log"
+laptop_require "laptop_step_start"
+laptop_require "laptop_step_eval"
+laptop_require "laptop_confirm"
+laptop_require "laptop_die"
+laptop_require "laptop_disk_available_space"
+laptop_require "laptop_directory_ensure_empty"
+laptop_require "laptop_filter_command_exists"
+laptop_require "laptop_self_check_version"
+laptop_require "laptop_handler_call"
+
 __LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zinit")
 
 laptop_command__cleanup_detect() {

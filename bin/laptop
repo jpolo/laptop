@@ -24,8 +24,13 @@ LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
 # Brew package name (only for brew installation method)
 LAPTOP_INSTALL_BREW_PACKAGE=${LAPTOP_INSTALL_BREW_PACKAGE:-"w5s/tap/laptop"}
 
+# Load laptop library
 LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
 source "$LAPTOP_LIB_DIR/init.sh"
+laptop_require "laptop_color_mode"
+laptop_require "laptop_die"
+
+# Load commands
 source "$LAPTOP_LIB_DIR/command/cleanup.sh"
 source "$LAPTOP_LIB_DIR/command/config.sh"
 source "$LAPTOP_LIB_DIR/command/setup.sh"

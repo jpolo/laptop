@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_die"
+laptop_require "laptop_xdg_dir"
+
 laptop_command__config() {
   local action="$1"
   shift
