@@ -40,7 +40,7 @@ laptop_brew_ensure_package() {
   current_resource_status=$(brew list "$package" &>/dev/null && echo "present" || echo "absent")
 
   # shellcheck disable=SC2076
-  if [ ! -z "$BREW_CASK" ]; then
+  if [ "$BREW_CASK" = "1" ]; then
     brew_args+=("--cask")
   fi
 
