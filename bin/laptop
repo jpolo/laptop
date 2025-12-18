@@ -30,13 +30,6 @@ source "$LAPTOP_LIB_DIR/init.sh"
 laptop_require "laptop_color_mode"
 laptop_require "laptop_die"
 
-# Load commands
-source "$LAPTOP_LIB_DIR/command/cleanup.sh"
-source "$LAPTOP_LIB_DIR/command/config.sh"
-source "$LAPTOP_LIB_DIR/command/setup.sh"
-source "$LAPTOP_LIB_DIR/command/upgrade.sh"
-source "$LAPTOP_LIB_DIR/command/version.sh"
-
 # Change current directory to home (to avoid issues with asdf)
 cd "$HOME" || exit 1
 
@@ -136,12 +129,20 @@ case $LAPTOP_SUBCOMMAND in
       laptop_command__help "$LAPTOP_SUBCOMMAND"
       exit 0
     fi
-    # Call the subcommand
-    laptop_command__${LAPTOP_SUBCOMMAND} "${LAPTOP_ARGS[@]}"
-    if [ $? = 127 ]; then
-      echo "Error: '$LAPTOP_SUBCOMMAND' is not a known subcommand." >&2
-      echo "       Run '$SCRIPT_NAME --help' for a list of known subcommands." >&2
-      exit 1
+
+    command_function="laptop_command__${LAPTOP_SUBCOMMAND}"
+    command_file="$LAPTOP_LIB_DIR/command/$LAPTOP_SUBCOMMAND.sh"
+    if ! laptop_function_exists "$command_function" && [ -f "$command_file" ]; then
+      source "$command_file"
     fi
+    if ! laptop_function_exists "$command_function"; then
+      laptop_die "$(cat <<EOF
+'$LAPTOP_SUBCOMMAND' is not a known subcommand. Run '$LAPTOP_APP_NAME --help' for a list of available subcommands
+EOF
+)"
+    fi
+
+    # Call the subcommand
+    ${command_function} "${LAPTOP_ARGS[@]}"
     ;;
 esac
