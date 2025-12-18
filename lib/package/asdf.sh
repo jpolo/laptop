@@ -9,6 +9,11 @@ laptop_package_ensure__asdf() {
   local asdf_dir
   asdf_dir="${ASDF_DIR:-$HOME/.asdf}"
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
+    laptop_brew_ensure_package "pkg-config"
+    # unlink pkg-config on linux to avoid conflicts
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      laptop_brew_ensure_link "pkg-config" --status absent
+    fi
     laptop_package_ensure_default "asdf"
   else
     if [ ! -d "$asdf_dir" ]; then
