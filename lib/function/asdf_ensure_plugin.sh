@@ -27,7 +27,7 @@ laptop_asdf_ensure_plugin() {
     esac
   done
   local current_resource_status
-  current_resource_status=$(asdf plugin list | grep -Fq "$name" && echo "present" || echo "absent")
+  current_resource_status=$(asdf plugin list | grep -Fq "$name" 2>/dev/null && echo "present" || echo "absent")
   local message="asdf plugin '$name'"
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
