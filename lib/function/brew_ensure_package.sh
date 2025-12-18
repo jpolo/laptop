@@ -13,7 +13,7 @@ laptop_require "laptop_step_status"
 #   --status present|absent
 #
 laptop_brew_ensure_package() {
-  BREW_CASK="${BREW_CASK:-0}"
+  local cask_enabled="${BREW_CASK:-0}"
   local package="$1"
   # parse options
   local resource_status="present"
@@ -24,7 +24,7 @@ laptop_brew_ensure_package() {
       shift 2
       ;;
     --cask)
-      BREW_CASK=1
+      cask_enabled=1
       shift
       ;;
     *) shift ;;
@@ -40,7 +40,7 @@ laptop_brew_ensure_package() {
   current_resource_status=$(brew list "$package" &>/dev/null && echo "present" || echo "absent")
 
   # shellcheck disable=SC2076
-  if [ "$BREW_CASK" = "1" ]; then
+  if [ "$cask_enabled" = "1" ]; then
     brew_args+=("--cask")
   fi
 
