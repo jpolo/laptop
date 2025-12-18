@@ -16,13 +16,13 @@ laptop_require "laptop_die"
 laptop_package_ensure() {
   local package="${1}"
 
-  laptop_package_load_recipe "$package"
+  laptop_package_load_definition "$package"
 
   # Attempt to launch a function named laptop_package_ensure__$package" if exists
-  local recipe_function="laptop_package_ensure__$package"
+  local definition_function="laptop_package_ensure__$package"
 
-  if laptop_function_exists "$recipe_function"; then
-    $recipe_function "$@"
+  if laptop_function_exists "$definition_function"; then
+    $definition_function "$@"
     return 0
   else
     # pass all arguments
@@ -30,25 +30,25 @@ laptop_package_ensure() {
   fi
 }
 
-laptop_package_load_recipe() {
+laptop_package_load_definition() {
   local package="${1}"
-  local recipe_function="laptop_package_ensure__$package"
-  if ! laptop_function_exists "$recipe_function"; then
-    # try to load recipe from $LAPTOP_LIB_DIR/recipe, then profile/recipe, if file is found then check function was declared
-    local recipe_path=(
-      "$(laptop_profile_dir)/recipe"
-      "$LAPTOP_LIB_DIR/recipe"
+  local definition_function="laptop_package_ensure__$package"
+  if ! laptop_function_exists "$definition_function"; then
+    # try to load recipe from $LAPTOP_LIB_DIR/package, then profile/package, if file is found then check function was declared
+    local definition_path=(
+      "$(laptop_profile_dir)/package"
+      "$LAPTOP_LIB_DIR/package"
     )
 
-    for recipe_dir in "${recipe_path[@]}"; do
+    for definition_dir in "${definition_path[@]}"; do
       # replace : with _ in file name
-      local recipe_file="$recipe_dir/${package//:/_}.sh"
+      local definition_file="$definition_dir/${package//:/_}.sh"
 
-      if [ -f "$recipe_file" ]; then
+      if [ -f "$definition_file" ]; then
         # shellcheck disable=SC1090
-        source "$recipe_file"
-        if ! laptop_function_exists "$recipe_function"; then
-          laptop_die "Function '$recipe_function' not found in file '$recipe_file'"
+        source "$definition_file"
+        if ! laptop_function_exists "$definition_function"; then
+          laptop_die "Function '$definition_function' not found in file '$definition_file'"
         fi
         break
       fi
