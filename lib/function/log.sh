@@ -30,7 +30,7 @@ laptop_log() {
       color="$COLOR_INFO"
       level_name="Info"
       ;;
-    "warning")
+    "warn")
       color="$COLOR_WARNING"
       level_name="Warning"
       ;;
