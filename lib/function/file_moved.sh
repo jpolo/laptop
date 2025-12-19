@@ -14,7 +14,7 @@ laptop_file_moved() {
   local source="$1"
   local target="$2"
   local message
-  message="File '$(laptop_path_print "$source")' > '$(laptop_path_print "$target")'"
+  message="Moved '$(laptop_path_print "$source")' > '$(laptop_path_print "$target")'"
 
   if [ -f "$source" ]; then
     laptop_step_start_status "present" "absent" "$message"
