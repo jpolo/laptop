@@ -25,7 +25,7 @@ laptop_npm_ensure_package() {
     esac
   done
   local resource_current_status
-  resource_current_status=$(npm list --global --parseable "$package" | grep "$package" && echo "present" || echo "absent")
+  resource_current_status=$(npm list --global --parseable "$package" &>/dev/null && echo "present" || echo "absent")
 
   laptop_step_start_status "$resource_status" "$resource_current_status" "NPM package '$package'"
 
