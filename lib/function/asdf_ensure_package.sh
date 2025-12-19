@@ -26,8 +26,10 @@ laptop_asdf_ensure_package() {
     *) shift ;;
     esac
   done
+  local current_package_version
+  current_package_version="$(basename "$(asdf where "$package")" 2>/dev/null)"
   local current_resource_status
-  current_resource_status=$([ "$(basename "$(asdf where nodejs)" 2>/dev/null)" = "$version" ] && echo "present" || echo "absent")
+  current_resource_status=$([ "$current_package_version" = "$version" ] && echo "present" || echo "absent")
   local message="asdf '$package' '$version'"
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
