@@ -12,6 +12,7 @@ fi
 
 # Install standard utils
 laptop_package_ensure "pack:core"
+laptop_package_ensure "config:asdf-recommended"
 laptop_package_ensure "pack:cli-tools"
 laptop_package_ensure "pack:kube-utils"
 laptop_package_ensure "pack:cloud-utils"

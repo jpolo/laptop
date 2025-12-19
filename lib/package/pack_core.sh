@@ -32,6 +32,4 @@ laptop_package_ensure__pack:core() {
   laptop_package_ensure "libyaml"
   laptop_package_ensure "libvips"
   laptop_package_ensure "openssl"
-
-  laptop_package_ensure "config:asdf-recommended"
 }
