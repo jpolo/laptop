@@ -4,6 +4,8 @@ laptop_require "laptop_profile_dir"
 laptop_require "laptop_file_ensure_template"
 laptop_require "laptop_shell_ensure_var"
 laptop_require "laptop_shell_exec"
+laptop_require "laptop_file_moved"
+laptop_require "laptop_xdg_dir"
 
 # Configure default profile (.profile, .zprofile, .zshrc, etc) using default profile templates
 #
