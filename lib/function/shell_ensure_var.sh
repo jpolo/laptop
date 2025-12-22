@@ -20,7 +20,12 @@ laptop_shell_ensure_var() {
 
   local resource_status="present"
 
+  local current_value
+  current_value=$(laptop_file_var_get "$script_file" "$var_name")
+
   local resource_current_status="unknown"
+  resource_current_status=$([ "$current_value" = "$value" ] && echo "present" || echo "absent")
+
   laptop_step_start_status "$resource_status" "$resource_current_status" "Variable '$var_name=$value' in '$(laptop_path_print "$script_file")'"
 
   if [ "$resource_current_status" = "$resource_status" ]; then
