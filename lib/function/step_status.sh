@@ -35,8 +35,10 @@ laptop_step_status() {
       message=" ?? "
       ;;
   esac
+  local color_bracket
+  color_bracket="$(laptop_ansi bold)$(laptop_ansi blue)"
 
   # make sure the message has always same length by adding spaces at start and end
-  echo -e "${_LAPTOP_SET_COL}${BRACKET}[${color} ${message} ${NORMAL}${BRACKET}]${NORMAL}"
+  echo -e "${_LAPTOP_SET_COL}${color_bracket}[${color} ${message} ${NORMAL}${color_bracket}]${NORMAL}"
   return 0
 }

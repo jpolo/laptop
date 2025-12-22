@@ -32,14 +32,17 @@ laptop_command__setup() {
     read -e -r LAPTOP_GIT_REMOTE
   fi
 
-  laptop_log info "  Profile: ${BRACKET}${LAPTOP_PROFILE}${NORMAL}"
-  laptop_log info "  Dev Container: ${BRACKET}${LAPTOP_DEVCONTAINER}${NORMAL}"
+  local color_config
+  color_config="$(laptop_ansi bold)$(laptop_ansi blue)"
+
+  laptop_log info "  Profile: ${color_config}${LAPTOP_PROFILE}${NORMAL}"
+  laptop_log info "  Dev Container: ${color_config}${LAPTOP_DEVCONTAINER}${NORMAL}"
 
   # Ask confirmation
   if [ "${LAPTOP_BOOTSTRAP:-false}" = true ]; then
-    laptop_log info "  Install Mode: ${BRACKET}bootstrap${NORMAL} ${DIM}(only laptop and zshrc)${NORMAL}"
+    laptop_log info "  Install Mode: ${color_config}bootstrap${NORMAL} ${DIM}(only laptop and zshrc)${NORMAL}"
   else
-    laptop_log info "  Install Mode: ${BRACKET}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
+    laptop_log info "  Install Mode: ${color_config}complete${NORMAL} ${DIM}(complete installation)${NORMAL}"
   fi
   if laptop_confirm "Continue? (y/N)"; then
     laptop_command__setup_run
