@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_step_start"
+laptop_require "laptop_color_intent"
 
 # Display a step with a target status
 #
@@ -21,10 +22,10 @@ laptop_step_start_status() {
 
   local status_message
   if [ "$target_status" = "absent" ]; then
-    color="${color:-$COLOR_ERROR}" # delete action
+    color="${color:-$(laptop_color_intent error)}" # delete action
     status_message="${color}-${NORMAL}"
   else
-    color="${color:-$COLOR_SUCCESS}" # create action
+    color="${color:-$(laptop_color_intent success)}" # create action
     status_message="${color}+${NORMAL}"
   fi
 

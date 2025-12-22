@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_color_intent"
+
 ##
 # Log a message
 #
@@ -27,15 +29,15 @@ laptop_log() {
 
   case "$level" in
     "info")
-      color="$COLOR_INFO"
+      color="$(laptop_color_intent info)"
       level_name="Info"
       ;;
     "warn")
-      color="$COLOR_WARNING"
+      color="$(laptop_color_intent warn)"
       level_name="Warning"
       ;;
     "error")
-      color="$COLOR_ERROR"
+      color="$(laptop_color_intent error)"
       level_name="Error"
       ;;
     *)

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_die"
+laptop_require "laptop_color_intent"
+laptop_require "laptop_ansi"
 
 # Display a step as OK
 #
@@ -19,19 +21,19 @@ laptop_step_status() {
   message=$(echo "$step_status" | tr '[:lower:]' '[:upper:]')
   case "$step_status" in
     "ok")
-      color="${SUCCESS}"
+      color="$(laptop_ansi bold)$(laptop_color_intent success)"
       message=" OK "
       ;;
     "fail")
-      color="${FAILURE}"
+      color="$(laptop_ansi bold)$(laptop_color_intent fail)"
       message="FAIL"
       ;;
     "pass")
-      color="${DIM}"
+      color="$(laptop_color_intent dim)"
       message="PASS"
       ;;
     *)
-      color="${NORMAL}"
+      color="$(laptop_color_intent reset)"
       message=" ?? "
       ;;
   esac

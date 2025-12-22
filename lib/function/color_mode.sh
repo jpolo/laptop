@@ -37,15 +37,5 @@ laptop_color_mode() {
   # shellcheck disable=SC2034,SC2155
   export NORMAL="$(laptop_ansi reset)"
   # shellcheck disable=SC2034,SC2155
-  export SUCCESS="$(laptop_ansi bold)$(laptop_ansi green)"
-  # shellcheck disable=SC2034,SC2155
-  export COLOR_ERROR="$(laptop_ansi red)"
-  # shellcheck disable=SC2034,SC2155
-  export COLOR_WARNING="$(laptop_ansi yellow)"
-  # shellcheck disable=SC2034,SC2155
-  export COLOR_INFO="$(laptop_ansi green)"
-  # shellcheck disable=SC2034,SC2155
-  export COLOR_SUCCESS="$(laptop_ansi green)"
-  # shellcheck disable=SC2034,SC2155
   export DIM="$(laptop_ansi dim)"
 }
