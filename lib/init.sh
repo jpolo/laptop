@@ -45,11 +45,11 @@ laptop_handler__logo() {
 }
 
 laptop_handler__setup_bootstrap() {
-  laptop_require "laptop_bootstrap"
+  laptop_require "laptop_setup_bootstrap"
   laptop_require "laptop_setup_xdg_desktop"
   laptop_require "laptop_setup_default_profile"
 
-  laptop_bootstrap
+  laptop_setup_bootstrap
   laptop_setup_xdg_desktop
   laptop_setup_default_profile
 }

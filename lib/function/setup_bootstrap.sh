@@ -2,7 +2,7 @@
 
 laptop_require "laptop_die"
 
-laptop_bootstrap_debian() {
+laptop_setup_bootstrap_debian() {
   laptop_require "laptop_apt_ensure_updated"
   laptop_require "laptop_apt_ensure_package"
   laptop_require "laptop_shell_ensure"
@@ -18,7 +18,7 @@ laptop_bootstrap_debian() {
   laptop_apt_ensure_package "augeas-tools"
 }
 
-laptop_bootstrap_macos() {
+laptop_setup_bootstrap_macos() {
   laptop_require "laptop_package_ensure"
   laptop_require "laptop_xcode_ensure_license_accepted"
   laptop_require "laptop_shell_ensure"
@@ -34,11 +34,11 @@ laptop_bootstrap_macos() {
   laptop_brew_ensure_package "augeas"
 }
 
-laptop_bootstrap() {
+laptop_setup_bootstrap() {
   if command -v apt-get &>/dev/null; then
-    laptop_bootstrap_debian
+    laptop_setup_bootstrap_debian
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    laptop_bootstrap_macos
+    laptop_setup_bootstrap_macos
   else
     laptop_die "Unsupported OS. Only debian based and macos is supported."
   fi

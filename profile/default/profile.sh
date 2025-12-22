@@ -11,7 +11,7 @@ LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 # }
 
 # laptop_handler__setup_bootstrap() {
-#   laptop_bootstrap
+#   laptop_setup_bootstrap
 # }
 
 # laptop_handler__setup_shell() {
