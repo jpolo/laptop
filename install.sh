@@ -9,6 +9,9 @@ REPOSITORY_NAME=${REPOSITORY_NAME:-"jpolo/laptop"}
 # export LAPTOP_PROFILE=${LAPTOP_PROFILE:-"default"}
 export LAPTOP_GIT_REMOTE="https://github.com/$REPOSITORY_NAME.git"
 
+# ⬇ Uncomment this if you want to install a specific brew package
+# export LAPTOP_INSTALL_BREW_PACKAGE=${LAPTOP_INSTALL_BREW_PACKAGE:-"w5s/tap/laptop"}
+
 #==============================================================================
 # 🔶 Do not change the content below
 #
