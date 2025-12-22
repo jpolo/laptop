@@ -3,9 +3,9 @@
 # Set or update a variable in a shell script file.
 #
 # Usage:
-#   laptop_file_var "my_shell.sh" "MY_VARIABLE" "MY_VALUE"
+#   laptop_file_var_set "my_shell.sh" "MY_VARIABLE" "MY_VALUE"
 #
-laptop_file_var() {
+laptop_file_var_set() {
   local script_file="$1"
   local var_name="$2"
   local new_value="$3"
