@@ -20,7 +20,9 @@ laptop_require "laptop_source_all"
 laptop_env_reload
 
 # Source global functions
-laptop_source_all "$LAPTOP_LIB_DIR/function"
+if [ "$LAPTOP_SOURCE_ALL" = true ]; then
+  laptop_source_all "$LAPTOP_LIB_DIR/function"
+fi
 
 ## Screen Dimensions
 
@@ -33,8 +35,10 @@ quote() {
 laptop_profile_select
 
 # Source profile functions
-if [ -d "$(laptop_profile_dir)/function" ]; then
-  laptop_source_all "$(laptop_profile_dir)/function"
+if [ "$LAPTOP_SOURCE_ALL" = true ]; then
+  if [ -d "$(laptop_profile_dir)/function" ]; then
+    laptop_source_all "$(laptop_profile_dir)/function"
+  fi
 fi
 
 # Default handlers

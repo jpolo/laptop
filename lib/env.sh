@@ -65,6 +65,9 @@ export LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 export LAPTOP_COLOR_MODE=${LAPTOP_COLOR_MODE:-"auto"}
 export LAPTOP_COLOR=${LAPTOP_COLOR:-false}
 
+# Source all functions mode (set to false for performances)
+export LAPTOP_SOURCE_ALL=${LAPTOP_SOURCE_ALL:-false}
+
 # Detect screen size
 if [ -z "${COLUMNS}" ]; then
   COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)

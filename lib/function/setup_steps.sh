@@ -16,6 +16,6 @@ laptop_setup_steps() {
   script_files=$(find "$steps_dir" -maxdepth 1 -mindepth 1 -name '*.sh' -o -name "*.zsh" -type f | sort)
 
   for script_file in $script_files; do
-    laptop_shell_exec "$shell" "$script_file"
+    LAPTOP_SOURCE_ALL=true laptop_shell_exec "$shell" "$script_file"
   done
 }
