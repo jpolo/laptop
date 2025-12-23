@@ -29,6 +29,7 @@ LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
 source "$LAPTOP_LIB_DIR/init.sh"
 laptop_require "laptop_color_mode"
 laptop_require "laptop_die"
+laptop_require "laptop_function_exists"
 
 # Change current directory to home (to avoid issues with asdf)
 cd "$HOME" || exit 1

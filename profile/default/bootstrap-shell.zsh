@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
-source "$LAPTOP_HOME/lib/init.sh"
+laptop_require "laptop_profile_dir"
+laptop_require "laptop_file_ensure_template"
+laptop_require "laptop_xdg_dir"
+
 LAPTOP_PROFILE_DEFAULT_DIR=$(laptop_profile_dir default)
 
 # Ensure ZSH Configuration
