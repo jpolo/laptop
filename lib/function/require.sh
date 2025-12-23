@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# load profile_dir.sh
+# shellcheck disable=SC1091
+source "${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}/function/profile_dir.sh"
+
 # Load a function if it is not already loaded
 #
 # Usage:
@@ -13,8 +17,17 @@ laptop_require() {
     if [[ "$function_name" == laptop_* ]]; then
       # remove laptop_ prefix
       local function_name_without_laptop_prefix="${function_name#laptop_}"
-      # shellcheck disable=SC1090
-      source "${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}/function/$function_name_without_laptop_prefix.sh"
+      local function_path=(
+        "$(laptop_profile_dir)/function"
+        "${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}/function"
+      )
+      for function_dir in "${function_path[@]}"; do
+        if [ -f "$function_dir/$function_name_without_laptop_prefix.sh" ]; then
+          # shellcheck disable=SC1090
+          source "$function_dir/$function_name_without_laptop_prefix.sh"
+          break
+        fi
+      done
     fi
   fi
 
