@@ -6,6 +6,7 @@ laptop_require "laptop_step_status"
 laptop_require "laptop_log"
 laptop_require "laptop_path_print"
 laptop_require "laptop_file_var_set"
+laptop_require "laptop_file_var_get"
 
 #
 # Add or Update variable expression in script file
