@@ -21,8 +21,8 @@ ROOT_DIR=$(dirname "$SCRIPT_DIR")
 
 # Path to laptop installation
 LAPTOP_HOME=${LAPTOP_HOME:-"$ROOT_DIR"}
-# Brew package name (only for brew installation method)
-LAPTOP_INSTALL_BREW_PACKAGE=${LAPTOP_INSTALL_BREW_PACKAGE:-"w5s/tap/laptop"}
+# Brew package name (only for brew installation method) example: w5s/tap/laptop
+LAPTOP_INSTALL_BREW_PACKAGE=${LAPTOP_INSTALL_BREW_PACKAGE:-""}
 
 # Load laptop library
 LAPTOP_LIB_DIR=${LAPTOP_LIB_DIR:-"$LAPTOP_HOME/lib"}
