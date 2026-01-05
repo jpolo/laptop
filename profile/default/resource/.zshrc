@@ -156,6 +156,7 @@ fi
 ##
 unset -f .zshrc-command-alternative
 unset -f .zshrc-load-file
+unset -f .zshrc-load-file-wildcard
 
 # Print ZPROF results
 [[ -n "$ZPROF" ]] && zprof
