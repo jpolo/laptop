@@ -80,6 +80,17 @@ fi;
   fi
 }
 
+.zshrc-load-file-wildcard() {
+  local base_file="$1"
+  local directory="$base_file.d"
+  if [ -d "$directory" ]; then
+    for file in "$directory"/*; do
+      source "$file"
+    done
+  fi
+  .zshrc-load-file "$base_file"
+}
+
 # Profile a command and print the results
 zshrc_profile() {
   time ZPROF=1 zsh -i -c exit
@@ -91,8 +102,8 @@ zshrc_profile() {
 ##
 
 # Load .zshrc.local
-[ -n "$XDG_CONFIG_HOME" ] && .zshrc-load-file "$XDG_CONFIG_HOME/zsh/init"
-[ -n "$XDG_DATA_HOME" ] && .zshrc-load-file "$XDG_DATA_HOME/zsh/global.sh"
+[ -n "$XDG_CONFIG_HOME" ] && .zshrc-load-file-wildcard "$XDG_CONFIG_HOME/zsh/init"
+[ -n "$XDG_DATA_HOME" ] && .zshrc-load-file-wildcard "$XDG_DATA_HOME/zsh/init"
 if [ -f "$XDG_DATA_HOME/zsh/personal.sh" ]; then
   echo "WARNING: $XDG_DATA_HOME/zsh/personal.sh detected"
   echo "  Its use is deprecated, and was replaced by $XDG_CONFIG_HOME/zsh/init"

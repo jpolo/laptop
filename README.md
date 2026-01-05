@@ -82,13 +82,15 @@ Although there are some implementation tradeoffs, it should never limit develope
 
   1. 🔒 `~/.zprofile` (managed by laptop)
       1. 🔒 `~/.profile` (managed by laptop)
-      2. ✍️ `$XDG_CONFIG_HOME/zsh/profile` : user settings (recommended)
-      3. ✍️ `$XDG_DATA_HOME/zsh/profile` : local machine settings (recommended)
+      2. ✍️ `$XDG_CONFIG_HOME/zsh/profile` : user settings
+      3. ✍️ `$XDG_DATA_HOME/zsh/profile` : local machine settings
 
   2. 🔒 `~/.zshrc` (managed by laptop)
-      1. ✍️ `$XDG_CONFIG_HOME/zsh/init` : user settings (recommended)
-      2. 🔒 `$XDG_DATA_HOME/zsh/global.sh` : local machine settings (recommended)
-      3. ✍️ `.zshrc.local` : local machine settings (alternate solution)
+      1. ✍️ `$XDG_CONFIG_HOME/zsh/init.d/*` : user settings as directory
+      2. ✍️ `$XDG_CONFIG_HOME/zsh/init` : user settings as file
+      3. ✍️ `$XDG_DATA_HOME/zsh/init.d/*` : local machine settings as directory
+      4. ✍️ `$XDG_DATA_HOME/zsh/init` : local machine settings as file
+      5. ✍️ `.zshrc.local` : local machine settings (alternate solution)
 
   Example `$XDG_CONFIG_HOME/zsh/init` :
 
