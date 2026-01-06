@@ -98,21 +98,6 @@ zshrc_profile() {
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
-# Custom scripts
-##
-
-# Load .zshrc.local
-[ -n "$XDG_CONFIG_HOME" ] && .zshrc-load-file-wildcard "$XDG_CONFIG_HOME/zsh/init"
-[ -n "$XDG_DATA_HOME" ] && .zshrc-load-file-wildcard "$XDG_DATA_HOME/zsh/init"
-if [ -f "$XDG_DATA_HOME/zsh/personal.sh" ]; then
-  echo "WARNING: $XDG_DATA_HOME/zsh/personal.sh detected"
-  echo "  Its use is deprecated, and was replaced by $XDG_CONFIG_HOME/zsh/init"
-  echo "  Run 'mv $XDG_DATA_HOME/zsh/personal.sh $XDG_CONFIG_HOME/zsh/init' to migrate"
-fi
-[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
-
-#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-##
 # History
 ##
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
@@ -145,10 +130,24 @@ if [ -z "$EDITOR" ]; then
   export EDITOR
 fi
 
-
 if [ -z "$VISUAL" ] && [ ! -z "$EDITOR" ]; then
   export VISUAL="$EDITOR"
 fi
+
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+##
+# Custom scripts
+##
+
+# Load .zshrc.local
+[ -n "$XDG_CONFIG_HOME" ] && .zshrc-load-file-wildcard "$XDG_CONFIG_HOME/zsh/init"
+[ -n "$XDG_DATA_HOME" ] && .zshrc-load-file-wildcard "$XDG_DATA_HOME/zsh/init"
+if [ -f "$XDG_DATA_HOME/zsh/personal.sh" ]; then
+  echo "WARNING: $XDG_DATA_HOME/zsh/personal.sh detected"
+  echo "  Its use is deprecated, and was replaced by $XDG_CONFIG_HOME/zsh/init"
+  echo "  Run 'mv $XDG_DATA_HOME/zsh/personal.sh $XDG_CONFIG_HOME/zsh/init' to migrate"
+fi
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
