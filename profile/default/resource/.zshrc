@@ -28,14 +28,45 @@
 # Example 1: Install and load OhMyZSH plugin named "ruby"
 # `zinit snippet OMZP::ruby`
 
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Enable ZPROF for profiling when ZPROF environment variable is set
 [[ -n "$ZPROF" ]] && zmodload zsh/zprof
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+##
+# Functions
+##
+
+# Source a file if it exists
+.zshrc-load-file() {
+  [ -f "$1" ] && source "$1"
+}
+
+# Source a file or a directory appending .d to the base file name if it exists
+.zshrc-load-file-wildcard() {
+  local base_file="$1"
+  local directory="$base_file.d"
+  if [ -d "$directory" ]; then
+    for file in "$directory"/*; do
+      source "$file"
+    done
+  fi
+  .zshrc-load-file "$base_file"
+}
+
+# Find the first command available
+.zshrc-command-alternative() {
+  for command_to_test in "$@"; do
+    if type "$command_to_test" &>/dev/null; then
+      printf "%s" "${command_to_test}"
+      break
+    fi
+  done
+}
+
+#⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
-if [ -f "${HOME}/.zprofile" ]; then
-  source "${HOME}/.zprofile"
-fi
+.zshrc-load-file "$HOME/.zprofile"
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
@@ -62,34 +93,6 @@ if [[ -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
 else
   echo "zinit cannot be installed"
 fi;
-
-# Find the first command available
-.zshrc-command-alternative() {
-  for command_to_test in "$@"; do
-    if type "$command_to_test" &>/dev/null; then
-      printf "%s" "${command_to_test}"
-      break
-    fi
-  done
-}
-
-# Load plugins
-.zshrc-load-file() {
-  if [ -f "$1" ]; then
-    source "$1"
-  fi
-}
-
-.zshrc-load-file-wildcard() {
-  local base_file="$1"
-  local directory="$base_file.d"
-  if [ -d "$directory" ]; then
-    for file in "$directory"/*; do
-      source "$file"
-    done
-  fi
-  .zshrc-load-file "$base_file"
-}
 
 # Profile a command and print the results
 zshrc_profile() {
