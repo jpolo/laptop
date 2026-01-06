@@ -64,6 +64,11 @@
   done
 }
 
+# Profile a command and print the results
+zshrc_profile() {
+  time ZPROF=1 zsh -i -c exit
+}
+
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Load .zprofile when it seems not to have loaded (Linux)
 .zshrc-load-file "$HOME/.zprofile"
@@ -93,11 +98,6 @@ if [[ -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
 else
   echo "zinit cannot be installed"
 fi;
-
-# Profile a command and print the results
-zshrc_profile() {
-  time ZPROF=1 zsh -i -c exit
-}
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
