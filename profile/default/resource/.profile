@@ -86,6 +86,7 @@ export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export GHCUP_USE_XDG_DIRS=1
 # export GEM_HOME="$XDG_DATA_HOME/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export GRADLE_USER_HOME="$XDG_CACHE_HOME/gradle"
