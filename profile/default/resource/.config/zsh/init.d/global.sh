@@ -70,9 +70,4 @@ if command -v zinit &>/dev/null; then
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
     OMZ::plugins/colored-man-pages
-
-  # Install also as a zsh plugin
-  if [ -n "$LAPTOP_GIT_REMOTE" ]; then
-    zinit light "$LAPTOP_GIT_REMOTE"
-  fi
 fi

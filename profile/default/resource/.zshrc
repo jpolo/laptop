@@ -114,6 +114,14 @@ if [ ! -d "$(dirname $HISTFILE)" ]; then
 fi
 
 ##
+# Laptop installation as a zinit plugin
+##
+# Install also as a zsh plugin
+if [ -n "$LAPTOP_GIT_REMOTE" ]; then
+  zinit light "$LAPTOP_GIT_REMOTE"
+fi
+
+##
 # Editor and Pager
 ##
 if [ -z "$PAGER" ]; then
