@@ -15,7 +15,7 @@ laptop_require "laptop_zinit_ensure_updated"
 laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
 
-__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "code" "cursor" "sdkmanager" "softwareupdate")
+__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate")
 
 laptop_command__upgrade_detect() {
   local filtered_commands
@@ -41,6 +41,9 @@ laptop_command__upgrade_run() {
       ;;
     asdf)
       laptop_asdf_ensure_updated
+      ;;
+    npm)
+      laptop_npm_ensure_updated
       ;;
     brew)
       laptop_brew_ensure_updated
