@@ -6,7 +6,8 @@ laptop_package_ensure__pack:development() {
   # laptop_package_ensure "chromedriver" // DEPRECATED
   laptop_package_ensure "docker"
   laptop_package_ensure "iterm2"
-  laptop_package_ensure "pgadmin4"
+  # laptop_package_ensure "pgadmin4"
+  laptop_package_ensure "dbeaver-community"
   laptop_package_ensure "postman" --status absent
   laptop_package_ensure "bruno"
   laptop_package_ensure "virtualbox"
