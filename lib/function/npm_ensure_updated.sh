@@ -10,5 +10,5 @@ laptop_require "laptop_step_eval"
 #
 laptop_npm_ensure_updated() {
   laptop_step_upgrade_start "npm updated"
-  laptop_step_eval "npm install -g"
+  laptop_step_eval "npm update -g"
 }
