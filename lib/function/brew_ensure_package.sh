@@ -7,10 +7,12 @@ laptop_require "laptop_step_status"
 # Install brew `package` if not present
 #
 # Usage:
-#   laptop_brew_ensure_package <package> [--status present|absent]
+#   laptop_brew_ensure_package <package> [--status present|absent] [--cask] [--HEAD]
 #
 # Options:
 #   --status present|absent
+#   --cask
+#   --HEAD
 #
 laptop_brew_ensure_package() {
   local cask_enabled="${BREW_CASK:-0}"
@@ -25,6 +27,10 @@ laptop_brew_ensure_package() {
       ;;
     --cask)
       cask_enabled=1
+      shift
+      ;;
+    --HEAD)
+      head_enabled=1
       shift
       ;;
     *) shift ;;
@@ -42,6 +48,10 @@ laptop_brew_ensure_package() {
   # shellcheck disable=SC2076
   if [ "$cask_enabled" = "1" ]; then
     brew_args+=("--cask")
+  fi
+
+  if [ "$head_enabled" = "1" ]; then
+    brew_args+=("--HEAD")
   fi
 
   laptop_step_resource_start_status "$package" --status "$resource_status" --current-status "$current_resource_status"
