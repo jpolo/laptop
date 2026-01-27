@@ -2,6 +2,8 @@
 
 # Profile privacy settings
 LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
+# shellcheck disable=SC2034
+LAPTOP_INSTALL_BREW_PACKAGE="w5s/tap/laptop"
 
 # Handlers
 # Uncomment to override the default handler
