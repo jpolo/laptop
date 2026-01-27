@@ -116,8 +116,8 @@ fi
 ##
 # Laptop installation as a zinit plugin
 ##
-# Install also as a zsh plugin
-if [ -n "$LAPTOP_GIT_REMOTE" ]; then
+# Install also as a zsh plugin when laptop command is not available
+if [ -n "$LAPTOP_GIT_REMOTE" ] && ! command -v laptop &>/dev/null; then
   zinit light "$LAPTOP_GIT_REMOTE"
 fi
 
