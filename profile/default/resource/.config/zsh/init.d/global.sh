@@ -63,7 +63,8 @@ if command -v zinit &>/dev/null; then
   zinit snippet OMZP::asdf
   # zinit snippet OMZP::fzf
 
-  zinit light hlissner/zsh-autopair
+  zinit wait lucid for \
+    hlissner/zsh-autopair
 
   # Fast highlight
   # @see https://github.com/zdharma-continuum/fast-syntax-highlighting?tab=readme-ov-file#zinit
