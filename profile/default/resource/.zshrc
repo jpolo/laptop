@@ -96,7 +96,7 @@ if [[ -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
   autoload -Uz _zinit
   (( ${+_comps} )) && _comps[zinit]=_zinit
 else
-  echo "zinit cannot be installed"
+  echo "zinit cannot be installed" >&2
 fi;
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
