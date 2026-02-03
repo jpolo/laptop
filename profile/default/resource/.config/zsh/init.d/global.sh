@@ -40,10 +40,10 @@ if command -v zinit &>/dev/null; then
     as"completion" OMZ::plugins/docker/completions/_docker \
     as'completion' OMZ::plugins/docker-compose/_docker-compose
 
-  # Brew completions
+  # Brew completions (use cached HOMEBREW_PREFIX, compinit handled by zicompinit)
   if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-    autoload -Uz compinit && compinit
+    : "${HOMEBREW_PREFIX:=$(brew --prefix)}"
+    FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
   fi
 
   # Zsh OMZ libraries
