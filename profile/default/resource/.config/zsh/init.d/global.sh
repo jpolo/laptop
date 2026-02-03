@@ -47,13 +47,17 @@ if command -v zinit &>/dev/null; then
   fi
 
   # Zsh OMZ libraries
-  zinit snippet OMZL::clipboard.zsh
-  zinit snippet OMZL::compfix.zsh
-  zinit snippet OMZL::correction.zsh
-  zinit snippet OMZL::completion.zsh
-  zinit snippet OMZL::grep.zsh
+  # History loaded immediately (needed for shell behavior)
   zinit snippet OMZL::history.zsh
-  zinit snippet OMZL::spectrum.zsh
+
+  # Non-essential libraries deferred
+  zinit wait lucid for \
+    OMZL::clipboard.zsh \
+    OMZL::compfix.zsh \
+    OMZL::correction.zsh \
+    OMZL::completion.zsh \
+    OMZL::grep.zsh \
+    OMZL::spectrum.zsh
 
   # Zsh OMZ plugins
   zinit snippet OMZP::asdf
