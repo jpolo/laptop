@@ -4,6 +4,7 @@ laptop_require "laptop_function_exists"
 laptop_require "laptop_step_start_status"
 laptop_require "laptop_profile_dir"
 laptop_require "laptop_die"
+laptop_require "laptop_package_ensure_default"
 
 # Install `package` if not present
 #
