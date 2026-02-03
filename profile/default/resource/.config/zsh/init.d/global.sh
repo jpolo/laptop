@@ -23,12 +23,9 @@ if command -v zinit &>/dev/null; then
     zsh-users/zsh-autosuggestions
 
   # History Substring Search
-  # shellcheck disable=SC2016
-  zinit load 'zsh-users/zsh-history-substring-search'
-  zinit ice wait atload'_history_substring_search_config'
-  # Bind keys
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
+  zinit wait lucid for \
+    atload'bindkey "^[[A" history-substring-search-up; bindkey "^[[B" history-substring-search-down' \
+    zsh-users/zsh-history-substring-search
 
   # Completions
   ##
