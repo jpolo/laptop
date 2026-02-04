@@ -37,7 +37,7 @@
     XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
     XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
     XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
-    XDG_RUNTIME_DIR_DEFAULT="/run/user/$(id -u)"
+    XDG_RUNTIME_DIR_DEFAULT="/run/user/${UID:-$(id -u)}"
   fi
   # export variables
   [[ -n "$XDG_BIN_HOME" ]] || export XDG_BIN_HOME=$XDG_BIN_HOME_DEFAULT
