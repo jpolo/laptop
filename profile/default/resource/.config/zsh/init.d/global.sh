@@ -55,9 +55,9 @@ if command -v zinit &>/dev/null; then
     OMZL::clipboard.zsh \
     OMZL::compfix.zsh \
     OMZL::correction.zsh \
-    OMZL::completion.zsh \
     OMZL::grep.zsh \
     OMZL::spectrum.zsh
+  # OMZL::completion.zsh - DISABLED: calls compinit internally, conflicts with zicompinit below
 
   # Zsh OMZ plugins
   zinit snippet OMZP::asdf
