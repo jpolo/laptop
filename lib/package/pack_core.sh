@@ -30,6 +30,7 @@ laptop_package_ensure__pack:core() {
   laptop_package_ensure "libpq"
   laptop_package_ensure "mysql-client"
   laptop_package_ensure "libyaml"
-  laptop_package_ensure "libvips"
+  # Global libvips conflicts with npm sharp
+  laptop_package_ensure "libvips" --absent
   laptop_package_ensure "openssl"
 }
