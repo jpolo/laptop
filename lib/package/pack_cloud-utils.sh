@@ -8,4 +8,5 @@ laptop_package_ensure__pack:cloud-utils() {
   laptop_package_ensure "heroku"   # Heroku CLI
   laptop_package_ensure "gcloud"   # Google Cloud CLI
   laptop_package_ensure "scalingo" # Scalingo CLI
+  laptop_package_ensure "vercel-cli" # Vercel CLI
 }
