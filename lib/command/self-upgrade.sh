@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_log"
+laptop_require "laptop_confirm"
+laptop_require "laptop_die"
+laptop_require "laptop_handler_call"
 laptop_require "laptop_self_ensure_updated"
 
 laptop_command__self-upgrade() {
