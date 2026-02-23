@@ -7,10 +7,12 @@ laptop-upgrade \- Upgrade all tools and packages
 .SH DESCRIPTION
 The upgrade subcommand updates all installed tools and packages to their latest versions. It detects which tools are installed on your system and upgrades only those tools.
 .PP
+To upgrade only the laptop CLI without updating other tools, use \fBlaptop self-upgrade\fR (see \fBlaptop-self-upgrade\fR(1)).
+.PP
 Supported tools for upgrade include:
 .RS
 .TP
-\- laptop (self-update)
+\- laptop (use \fBlaptop self-upgrade\fR to update only the CLI)
 .TP
 \- brew (Homebrew)
 .TP
@@ -50,6 +52,7 @@ Same as above (options before subcommand).
 The upgrade command will first detect which tools are available on your system and display them before proceeding. On macOS, you may be prompted to accept the Xcode license.
 .SH SEE ALSO
 .BR laptop (1),
-.BR laptop-cleanup (1)
+.BR laptop-cleanup (1),
+.BR laptop-self-upgrade (1)
 .SH AUTHOR
 Written by jpolo.

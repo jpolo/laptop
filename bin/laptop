@@ -37,6 +37,7 @@ cd "$HOME" || exit 1
 ###   cleanup: empty cache and prune unused resources
 ###   config edit <config_type> : edit the configuration file (default: self)
 ###   config view <config_type> : view the configuration file (default: self)
+###   self-upgrade: upgrade only the laptop CLI (Homebrew installs)
 ###   setup: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
 ###   help: show this message

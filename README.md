@@ -124,7 +124,7 @@ Although there are some implementation tradeoffs, it should never limit develope
 
 ## 💡 The `laptop` CLI
 
-Laptop CLI has 3 subcommands `setup`, `upgrade` and `cleanup`
+Laptop CLI has 4 subcommands `setup`, `upgrade`, `self-upgrade` and `cleanup`
 
 More information is available with the command `laptop help`.
 
@@ -138,7 +138,11 @@ Detect many tools (`brew`, `asdf`, etc) and launch their respective update comma
 
 This will also update the laptop plugin and executable itself.
 
-Launch this command regularly to be up to date and avoir keeping old software with potential security vulnerabilities.
+Launch this command regularly to be up to date and avoid keeping old software with potential security vulnerabilities.
+
+### `laptop self-upgrade`
+
+Upgrade only the laptop CLI to the latest version. Use this when you are notified that a new version is available, or when you want to update the CLI without upgrading other tools. When laptop is installed via Homebrew, this runs `brew upgrade` for the laptop formula.
 
 ### `laptop cleanup`
 

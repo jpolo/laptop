@@ -1,0 +1,17 @@
+." Manpage for laptop-self-upgrade
+.TH LAPTOP-SELF-UPGRADE 1 "December 2025" "1.0" "Laptop Self-Upgrade Subcommand Manual"
+.SH NAME
+laptop-self-upgrade \- Upgrade only the laptop CLI
+.SH SYNOPSIS
+.B laptop self-upgrade
+.SH DESCRIPTION
+The self-upgrade subcommand updates only the laptop executable and library to the latest version. It is intended for installations via Homebrew (\fBLAPTOP_INSTALL_BREW_PACKAGE\fR).
+.PP
+When laptop is installed via Homebrew, this runs \fBbrew upgrade\fR for the laptop formula. When laptop is not installed via Homebrew (e.g. git or zinit), the command reports that and suggests using \fBlaptop upgrade\fR to update all tools.
+.PP
+Use \fBlaptop self-upgrade\fR when a new version notification appears, or whenever you want to update only the CLI without upgrading other tools (brew, asdf, npm, etc.).
+.SH SEE ALSO
+.BR laptop (1),
+.BR laptop-upgrade (1)
+.SH AUTHOR
+Written by jpolo.

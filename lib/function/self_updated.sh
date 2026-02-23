@@ -4,8 +4,16 @@ laptop_self_updated() {
   local current_branch
   local behind_count
 
+  # Homebrew install: check if a newer formula version is available
+  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+    if brew outdated --quiet "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null | grep -q .; then
+      return 1 # Outdated
+    fi
+    return 0 # Up-to-date
+  fi
+
+  # Git install (e.g. zinit or manual clone): check if remote is ahead
   if [[ -d "$LAPTOP_HOME/.git" ]]; then
-    # laptop is managed with git
     current_branch=$(git -C "$LAPTOP_HOME" rev-parse --abbrev-ref HEAD 2>/dev/null)
 
     # Fetch updates from the remote
