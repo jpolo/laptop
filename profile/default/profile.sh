@@ -5,6 +5,8 @@ LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
 # shellcheck disable=SC2034
 LAPTOP_INSTALL_BREW_PACKAGE="w5s/tap/laptop"
 
+LAPTOP_BREW_AUTOUPDATE=${LAPTOP_BREW_AUTOUPDATE:-"false"}
+
 # Handlers
 # Uncomment to override the default handler
 
