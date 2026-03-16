@@ -58,6 +58,9 @@ if [ "$LAPTOP_PACKAGE_MANAGER" = "unknown" ]; then
   fi
 fi
 
+# Laptop brew autoupdate
+export LAPTOP_BREW_AUTOUPDATE=${LAPTOP_BREW_AUTOUPDATE:-"false"}
+
 # Laptop shell used for running scripts
 export LAPTOP_SHELL="${LAPTOP_SHELL:-"zsh"}"
 

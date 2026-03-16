@@ -4,7 +4,7 @@ laptop_require "laptop_step_start"
 laptop_require "laptop_step_exec"
 laptop_require "laptop_step_status"
 
-laptop_brew_ensure_autodate() {
+laptop_brew_ensure_autoupdate() {
   local brew_auto_update_present
   brew_auto_update_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?')
 

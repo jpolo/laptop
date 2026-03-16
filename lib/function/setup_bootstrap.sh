@@ -45,6 +45,11 @@ laptop_setup_bootstrap() {
   # Install brew package if LAPTOP_INSTALL_BREW_PACKAGE is set
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ] && [ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]; then
     laptop_require "laptop_brew_ensure_package"
+    laptop_require "laptop_brew_ensure_autoupdate"
     laptop_brew_ensure_package "$LAPTOP_INSTALL_BREW_PACKAGE" --HEAD
+
+    if [ "$LAPTOP_BREW_AUTOUPDATE" = "true" ]; then
+      laptop_brew_ensure_autoupdate
+    fi
   fi
 }
