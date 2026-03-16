@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_step_start_status"
+laptop_require "laptop_step_eval"
 laptop_require "laptop_step_status"
 
 laptop_package_ensure__brew() {
@@ -16,10 +17,15 @@ laptop_package_ensure__brew() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      # shellcheck disable=SC2015
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&
-        # eval "$(/opt/homebrew/bin/brew shellenv)" && \;
-        laptop_step_status "ok" || laptop_step_status "fail"
+      laptop_step_eval 'NONINTERACTIVE=1 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+      # if brew not found
+      for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
+      do
+        if [ -f "$prefix/bin/brew" ] ; then
+          eval "$("$prefix/bin/brew" shellenv)"
+          break
+        fi
+      done
     else
       laptop_step_status "fail"
     fi

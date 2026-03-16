@@ -6,9 +6,10 @@
 # 4. .modules/*/module.mk
 include .modules/core.mk
 
-# Set a variable in a file (portable, works on macOS/BSD sed)
+# Set a variable in a file (portable across BSD/GNU sed)
 define set_var
-	sed -i '' 's|^$(1)=.*|$(1)=$(2)|' $(3)
+	sed -i.bak 's|^$(1)=.*|$(1)=$(2)|' $(3)
+	rm -f $(3).bak
 endef
 
 .PHONY: project-setup
