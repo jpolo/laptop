@@ -11,17 +11,23 @@ laptop_require "laptop_path_print"
 #   laptop_file_ensure_template <template> <target>
 # Options:
 #   --force  Force to overwrite file if present
+#   --sudo   Run mkdir/cp under sudo (via sh -c so the whole pipeline is elevated)
 #
 laptop_file_ensure_template() {
   local template="$1"
   local target="$2"
   local force=0
+  local use_sudo=0
   local positional_args=()
 
   while [[ $# -gt 0 ]]; do
     case $1 in
     -f | --force)
       force=1
+      shift
+      ;;
+    --sudo)
+      use_sudo=1
       shift
       ;;
     -*)
@@ -48,9 +54,10 @@ laptop_file_ensure_template() {
   if [ "$force" -eq 0 ] && [ -f "$target" ]; then
     laptop_step_status "pass"
   else
-    laptop_step_eval "\
-    mkdir -p $(quote "$(dirname "$target")") && \
-    cp -f $(quote "$template") $(quote "$target") \
-    "
+    local sudo
+    if [ "$use_sudo" -eq 1 ]; then
+      sudo="sudo"
+    fi
+    laptop_step_eval "$sudo mkdir -p $(quote "$(dirname "$target")") && $sudo cp -f $(quote "$template") $(quote "$target")"
   fi
 }
