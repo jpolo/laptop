@@ -51,8 +51,8 @@ laptop_file_ensure_template() {
   fi
 
   laptop_step_start_status "present" "$current_resource_status" "Template '$(laptop_path_print "$target")'$([ "$force" -eq 1 ] && echo ' (force)') "
-  if [ "$force" -eq 0 ] && [ -f "$target" ]; then
-    laptop_step_status "pass"
+  if  [ "$current_resource_status" = "present" ] || [ "$force" -eq 0 ] && [ -f "$target" ]; then
+    laptop_step_status "ok"
   else
     local sudo
     if [ "$use_sudo" -eq 1 ]; then
