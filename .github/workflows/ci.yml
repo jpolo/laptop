@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - name: ⬇️ Checkout
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+    - name: ⚙️ Setup
+      uses: w5s/actions/setup@426fbc5cefe7436dc459a172b70dc3f158e4638e # main
+
+    - name: Setup
+      run: make setup
+
+    - name: 🔍 Validate
+      uses: w5s/actions/task@426fbc5cefe7436dc459a172b70dc3f158e4638e # main
+      with:
+        task: validate
+      env:
+        TEST_TMP_DIR: "${{ runner.temp }}"
+
+
