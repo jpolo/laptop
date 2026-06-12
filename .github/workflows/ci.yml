@@ -16,8 +16,14 @@ jobs:
     - name: ⚙️ Setup
       uses: w5s/actions/setup@426fbc5cefe7436dc459a172b70dc3f158e4638e # main
 
-    - name: Setup
-      run: make setup
+    - name: ⚙️ Setup tools
+      run: |
+        brew install coreutils
+
+    - name: ⚙️ Project Setup
+      uses: w5s/actions/task@426fbc5cefe7436dc459a172b70dc3f158e4638e # main
+      with:
+        task: setup
 
     - name: 🔍 Validate
       uses: w5s/actions/task@426fbc5cefe7436dc459a172b70dc3f158e4638e # main
