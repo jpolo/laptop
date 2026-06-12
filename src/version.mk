@@ -7,7 +7,7 @@ VERSION_FILE := VERSION
 ifneq ($(wildcard $(VERSION_FILE)),)
 	VERSION := $(shell cat $(VERSION_FILE) 2>/dev/null)
 else ifneq ($(wildcard package.json),)
-	VERSION := $(shell npm pkg get version | tr -d '"' | tr -d '{}')
+	VERSION := $(shell npm pkg get version 2>/dev/null | tr -d '"' | tr -d '{}')
 endif
 ## Source code version
 VERSION ?= $(VERSION_DEFAULT)

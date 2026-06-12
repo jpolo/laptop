@@ -1,7 +1,3 @@
-ifneq ($(wildcard .shellcheckrc shellcheckrc),)
-	SHELLCHECK_ENABLED := true
-endif
-
 SHELLCHECK := shellcheck
 SHFMT := shfmt
 
@@ -14,7 +10,9 @@ SHELL_FILES ?= $(filter-out ./$(MODULES_PATH)/%, $(shell find . -iname '*.sh' -o
 #
 .PHONY: shell-setup
 shell-setup:
-	$(Q)[ -x "$$(command -v $(SHELLCHECK))" ] || brew install $(SHELLCHECK)
+	$(Q)if [ -n "$(call filter-false,$(SHELLCHECK_ENABLED))" ]; then \
+		[ -x "$$(command -v $(SHELLCHECK))" ] || brew install $(SHELLCHECK); \
+	fi
 	$(Q)[ -x "$$(command -v $(SHFMT))" ] || brew install $(SHFMT)
 .setup:: shell-setup # Add `shell-setup` to `make setup`
 
@@ -22,16 +20,18 @@ shell-setup:
 shell-dependencies: shell-setup
 	$(Q):
 
-ifneq ($(call filter-false,$(SHELLCHECK_ENABLED)),)
 #
 # Run shellcheck linting
 #
 .PHONY: shell-lint
 shell-lint: shell-dependencies
 	@$(call log,info,"[Shell] Lint sources...",1)
-	$(Q)$(SHELLCHECK) $(SHELL_FILES)
+	$(Q)if [ -n "$(strip $(SHELL_FILES))" ]; then \
+		$(SHELLCHECK) $(SHELL_FILES); \
+	else \
+		echo "No shell files found, skipping shell lint."; \
+	fi
 .lint::	shell-lint # Add `shell-lint` to `make lint`
-endif
 
 #
 # Run shfmt formatting
@@ -39,5 +39,9 @@ endif
 .PHONY: shell-format
 shell-format: shell-dependencies
 	@$(call log,info,"[Shell] Format sources...",1)
-	$(Q)$(SHFMT) --write $(SHELL_FILES)
+	$(Q)if [ -n "$(strip $(SHELL_FILES))" ]; then \
+		$(SHFMT) --write $(SHELL_FILES); \
+	else \
+		echo "No shell files found, skipping shell format."; \
+	fi
 .format::	shell-format # Add `shell-format` to `make format`
