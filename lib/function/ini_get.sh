@@ -54,7 +54,7 @@ laptop_ini_get() {
         break
       fi
     fi
-  done < "$config_file"
+  done <"$config_file"
 
   echo "$result"
 }

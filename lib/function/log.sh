@@ -28,22 +28,22 @@ laptop_log() {
   local level_name
 
   case "$level" in
-    "info")
-      color="$(laptop_color_intent info)"
-      level_name="Info"
-      ;;
-    "warn")
-      color="$(laptop_color_intent warn)"
-      level_name="Warning"
-      ;;
-    "error")
-      color="$(laptop_color_intent error)"
-      level_name="Error"
-      ;;
-    *)
-      color="$NORMAL"
-      level_name="Unknown"
-      ;;
+  "info")
+    color="$(laptop_color_intent info)"
+    level_name="Info"
+    ;;
+  "warn")
+    color="$(laptop_color_intent warn)"
+    level_name="Warning"
+    ;;
+  "error")
+    color="$(laptop_color_intent error)"
+    level_name="Error"
+    ;;
+  *)
+    color="$NORMAL"
+    level_name="Unknown"
+    ;;
   esac
   echo -e "${color}${level_name}: ${NORMAL}${message}"
 }

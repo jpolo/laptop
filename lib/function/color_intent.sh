@@ -15,16 +15,17 @@ laptop_require "laptop_ansi"
 laptop_color_intent() {
   local intent="$1"
   case "$intent" in
-    "success")
-      laptop_ansi green
+  "success")
+    laptop_ansi green
     ;;
-    "error")
-      laptop_ansi red
+  "error")
+    laptop_ansi red
     ;;
-    "warn")
-      laptop_ansi yellow
+  "warn")
+    laptop_ansi yellow
     ;;
-    "info")
-      laptop_ansi blue
+  "info")
+    laptop_ansi blue
+    ;;
   esac
 }

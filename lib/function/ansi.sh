@@ -32,74 +32,75 @@ laptop_ansi() {
   local code="$1"
   if [ "$LAPTOP_COLOR" = "true" ]; then
     case "$code" in
-      "reset")
-        echo -e "${_LAPTOP_COLOR_RESET}"
-        ;;
-      "bold")
-        echo -e "${_LAPTOP_COLOR_BOLD}"
-        ;;
-      "dim")
-        echo -e "${_LAPTOP_COLOR_DIM}"
-        ;;
-      "underline")
-        echo -e "${_LAPTOP_COLOR_UNDERLINE}"
-        ;;
-      "reverse")
-        echo -e "${_LAPTOP_COLOR_REVERSE}"
-        ;;
-      "clear")
-        echo -e "${_LAPTOP_COLOR_CLEAR}"
-        ;;
-      "black")
-        echo -e "${_LAPTOP_COLOR_BLACK}"
-        ;;
-      "red")
-        echo -e "${_LAPTOP_COLOR_RED}"
-        ;;
-      "green")
-        echo -e "${_LAPTOP_COLOR_GREEN}"
-        ;;
-      "yellow")
-        echo -e "${_LAPTOP_COLOR_YELLOW}"
-        ;;
-      "blue")
-        echo -e "${_LAPTOP_COLOR_BLUE}"
-        ;;
-      "magenta")
-        echo -e "${_LAPTOP_COLOR_MAGENTA}"
-        ;;
-      "cyan")
-        echo -e "${_LAPTOP_COLOR_CYAN}"
-        ;;
-      "white")
-        echo -e "${_LAPTOP_COLOR_WHITE}"
-        ;;
-      "bg_black")
-        echo -e "${_LAPTOP_COLOR_BG_BLACK}"
-        ;;
-      "bg_red")
-        echo -e "${_LAPTOP_COLOR_BG_RED}"
-        ;;
-      "bg_green")
-        echo -e "${_LAPTOP_COLOR_BG_GREEN}"
-        ;;
-      "bg_yellow")
-        echo -e "${_LAPTOP_COLOR_BG_YELLOW}"
-        ;;
-      "bg_blue")
-        echo -e "${_LAPTOP_COLOR_BG_BLUE}"
-        ;;
-      "bg_magenta")
-        echo -e "${_LAPTOP_COLOR_BG_MAGENTA}"
-        ;;
-      "bg_cyan")
-        echo -e "${_LAPTOP_COLOR_BG_CYAN}"
-        ;;
-      "bg_white")
-        echo -e "${_LAPTOP_COLOR_BG_WHITE}"
-        ;;
-      *)
-        laptop_die "Invalid ANSI code: $code"
+    "reset")
+      echo -e "${_LAPTOP_COLOR_RESET}"
+      ;;
+    "bold")
+      echo -e "${_LAPTOP_COLOR_BOLD}"
+      ;;
+    "dim")
+      echo -e "${_LAPTOP_COLOR_DIM}"
+      ;;
+    "underline")
+      echo -e "${_LAPTOP_COLOR_UNDERLINE}"
+      ;;
+    "reverse")
+      echo -e "${_LAPTOP_COLOR_REVERSE}"
+      ;;
+    "clear")
+      echo -e "${_LAPTOP_COLOR_CLEAR}"
+      ;;
+    "black")
+      echo -e "${_LAPTOP_COLOR_BLACK}"
+      ;;
+    "red")
+      echo -e "${_LAPTOP_COLOR_RED}"
+      ;;
+    "green")
+      echo -e "${_LAPTOP_COLOR_GREEN}"
+      ;;
+    "yellow")
+      echo -e "${_LAPTOP_COLOR_YELLOW}"
+      ;;
+    "blue")
+      echo -e "${_LAPTOP_COLOR_BLUE}"
+      ;;
+    "magenta")
+      echo -e "${_LAPTOP_COLOR_MAGENTA}"
+      ;;
+    "cyan")
+      echo -e "${_LAPTOP_COLOR_CYAN}"
+      ;;
+    "white")
+      echo -e "${_LAPTOP_COLOR_WHITE}"
+      ;;
+    "bg_black")
+      echo -e "${_LAPTOP_COLOR_BG_BLACK}"
+      ;;
+    "bg_red")
+      echo -e "${_LAPTOP_COLOR_BG_RED}"
+      ;;
+    "bg_green")
+      echo -e "${_LAPTOP_COLOR_BG_GREEN}"
+      ;;
+    "bg_yellow")
+      echo -e "${_LAPTOP_COLOR_BG_YELLOW}"
+      ;;
+    "bg_blue")
+      echo -e "${_LAPTOP_COLOR_BG_BLUE}"
+      ;;
+    "bg_magenta")
+      echo -e "${_LAPTOP_COLOR_BG_MAGENTA}"
+      ;;
+    "bg_cyan")
+      echo -e "${_LAPTOP_COLOR_BG_CYAN}"
+      ;;
+    "bg_white")
+      echo -e "${_LAPTOP_COLOR_BG_WHITE}"
+      ;;
+    *)
+      laptop_die "Invalid ANSI code: $code"
+      ;;
     esac
   fi
 }

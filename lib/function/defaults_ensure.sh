@@ -36,9 +36,9 @@ laptop_defaults_ensure() {
   local current_value
   current_value=$(defaults read "$domain" "$key" "$value_type" 2>/dev/null)
   case "$value_type" in
-    -bool)
-      current_value=$([ "$current_value" = "0" ] && echo "false" || echo "true")
-      ;;
+  -bool)
+    current_value=$([ "$current_value" = "0" ] && echo "false" || echo "true")
+    ;;
   esac
 
   local current_resource_status

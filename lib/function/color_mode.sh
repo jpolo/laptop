@@ -33,7 +33,6 @@ laptop_color_mode() {
     export LAPTOP_COLOR=false
   fi
 
-
   # shellcheck disable=SC2034,SC2155
   export NORMAL="$(laptop_ansi reset)"
   # shellcheck disable=SC2034,SC2155

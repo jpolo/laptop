@@ -10,7 +10,7 @@ laptop_require "laptop_log"
 laptop_step_finished() {
   laptop_log info "🎉 Finished"
   laptop_log info "$(
-  cat <<EOF
+    cat <<EOF
   What next ?
 
   1️⃣ If you want to customize your configuration :
@@ -24,6 +24,6 @@ laptop_step_finished() {
     ⤵️ Clone your repositories in ~/Code
     📸 Manage your Capture in ~/Captures
 EOF
-)"
+  )"
   laptop_log warn "ZSH configuration was potentially modified, please close/open a new terminal to see changes."
 }

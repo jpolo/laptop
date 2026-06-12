@@ -20,9 +20,8 @@ laptop_package_ensure__brew() {
       # shellcheck disable=SC2016
       laptop_step_eval 'NONINTERACTIVE=1 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
       # if brew not found
-      for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
-      do
-        if [ -f "$prefix/bin/brew" ] ; then
+      for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"; do
+        if [ -f "$prefix/bin/brew" ]; then
           eval "$("$prefix/bin/brew" shellenv)"
           break
         fi
