@@ -232,6 +232,29 @@ endif
 	fi
 .rescue.after:: dependencies
 
+#-------------
+# VALIDATE
+#-------------
+#
+# To add a new target to validate
+#
+# my-target-validate:
+# 	@echo 'Validate!'
+#
+# MAKEFILE_VALIDATE_TARGETS += my-target-validate
+#
+MAKEFILE_VALIDATE_TARGETS := build lint test
+
+.PHONY: validate $(call core-hooks,.validate)
+validate: validate.workflow-intro $(call core-hooks,.validate) ## Validate code for potential issues
+
+.validate.before::
+	@:
+.validate: $(MAKEFILE_VALIDATE_TARGETS)
+
+.validate.after::
+	@:
+
 # This generic job allow to easily switch implementation between local and CI mode
 #
 # Example :

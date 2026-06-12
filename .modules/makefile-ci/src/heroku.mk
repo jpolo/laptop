@@ -26,7 +26,7 @@ $(MAKE_CACHE_PATH)/job/heroku-setup: $(MAKE_CACHE_PATH)
 	$(Q)command -v heroku >/dev/null 2>&1 || { \
 		$(call log,info,"[Heroku] Install CLI...",1); \
 		if command -v brew >/dev/null 2>&1; then \
-			brew tap heroku/brew && brew install heroku; \
+			brew install heroku; \
 		else \
 			curl https://cli-assets.heroku.com/install.sh | sh; \
 		fi \
