@@ -17,6 +17,7 @@ laptop_package_ensure__brew() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
+      # shellcheck disable=SC2016
       laptop_step_eval 'NONINTERACTIVE=1 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
       # if brew not found
       for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
