@@ -15,7 +15,7 @@ endef
 .PHONY: project-setup
 project-setup: ## Run all tests
 	$(Q)brew install augeas --quiet
-	$(Q)brew install shellfmt --quiet
+	$(Q)brew install shfmt --quiet
 	$(Q)brew install shellcheck --quiet
 .setup:: project-setup
 
