@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091
 
-SCRIPT_DIR="$(dirname "$0")"
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 cd "$SCRIPT_DIR/.." || exit 1
+
+# Temporary directory
+if [ -z "$TEST_TMP_DIR" ]; then
+  TEST_TMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
+  export TEST_TMP_DIR
+fi
+
+# Use isolated HOME for tests to avoid sourcing user's shell config
+_HOME_TMP=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop_home')
+export HOME="$_HOME_TMP"
 
 # Disable colors
 unset TERM
@@ -13,15 +23,12 @@ LAPTOP_HOME="$(pwd)"
 export LAPTOP_HOME
 export LAPTOP_PROFILE=default
 
+# Source all functions for tests
+export LAPTOP_SOURCE_ALL=true
+
 # Source laptop environment
 source "$LAPTOP_HOME/lib/init.sh"
 
 # Source assert.sh
 source "$LAPTOP_HOME/test/assert.sh"
 source "$LAPTOP_HOME/test/assert_snapshot.sh"
-
-# Temporary directory
-if [ -z "$TEST_TMP_DIR" ]; then
-  TEST_TMP_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'laptop')
-  export TEST_TMP_DIR
-fi
