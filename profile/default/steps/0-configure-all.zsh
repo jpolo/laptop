@@ -8,6 +8,7 @@ if laptop_command_exists "defaults"; then
   laptop_package_ensure "config:macos-global-recommended"
   laptop_package_ensure "config:macos-screencapture-recommended"
   laptop_package_ensure "config:macos-update-recommended"
+  laptop_package_ensure "config:macos-apps-recommended"
 fi
 
 # Install standard utils
