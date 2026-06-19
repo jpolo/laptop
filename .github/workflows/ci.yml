@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: ⬇️ Checkout
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
     - name: ⚙️ Setup
       uses: w5s/actions/setup@f43e3ab61de5e8f1471ed61d184fc5b67ab9c2af # main
