@@ -5,8 +5,12 @@ on:
     branches:
       - main
 
+permissions:
+  actions: read
+  contents: read
+
 jobs:
-  build:
+  validate:
     runs-on: macOS-latest
 
     steps:
