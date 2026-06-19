@@ -59,6 +59,9 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_package_ensure "pack:vscode-extension-recommended"
   laptop_package_ensure "profile:vscode-extensions"
 
+  # Configure npm
+  laptop_package_ensure "config:npm-recommended"
+
   # Configure VSCode
   laptop_package_ensure "config:vscode-recommended"
   laptop_vscode_ensure_setting '["editor.fontFamily"]' "\"'Monaspace Neon', Menlo, Monaco, Courier New, monospace\""
