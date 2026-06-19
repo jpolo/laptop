@@ -23,6 +23,13 @@ laptop_brew_ensure_autoupdate() {
     *) shift ;;
     esac
   done
+
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    laptop_step_start "  brew autoupdate (macOS only)"
+    laptop_step_status "pass"
+    return 0
+  fi
+
   local brew_auto_update_present
   brew_auto_update_present=$(env -i zsh --login -c 'brew autoupdate status &>/dev/null;echo $?')
 
