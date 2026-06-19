@@ -14,6 +14,7 @@ fi
 # Install standard utils
 laptop_package_ensure "pack:core"
 laptop_package_ensure "config:asdf-recommended"
+laptop_package_ensure "config:npm-recommended"
 laptop_package_ensure "profile:core"
 laptop_package_ensure "pack:cli-tools"
 laptop_package_ensure "pack:kube-utils"
@@ -57,9 +58,6 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   # Install VSCode extensions
   laptop_package_ensure "pack:vscode-extension-recommended"
   laptop_package_ensure "profile:vscode-extensions"
-
-  # Configure npm
-  laptop_package_ensure "config:npm-recommended"
 
   # Configure VSCode
   laptop_package_ensure "config:vscode-recommended"
