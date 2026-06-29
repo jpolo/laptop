@@ -32,8 +32,23 @@ laptop_npm_config_ensure() {
     esac
   done
 
-  local current_value
-  current_value=$(npm config get "$key" --location="$location" 2>/dev/null)
+  if ! laptop_command_exists "npm"; then
+    laptop_step_status "fail"
+    laptop_log error "npm is required to manage npm config"
+    return 1
+  fi
+
+  local config_file line current_value=""
+  if [ -n "${npm_config_userconfig:-}" ]; then
+    config_file="$npm_config_userconfig"
+  else
+    config_file=$(npm config get userconfig --location="$location" 2>/dev/null)
+  fi
+
+  if [ -f "$config_file" ]; then
+    line=$(grep -F "${key}=" "$config_file" 2>/dev/null | head -1)
+    [ -n "$line" ] && current_value="${line#"${key}="}"
+  fi
 
   local current_resource_status
   current_resource_status=$([ "$current_value" = "$value" ] && echo "present" || echo "absent")
@@ -41,19 +56,13 @@ laptop_npm_config_ensure() {
 
   laptop_step_start_status "$resource_status" "$current_resource_status" "$message"
 
-  if ! laptop_command_exists "npm"; then
-    laptop_step_status "fail"
-    laptop_log error "npm is required to manage npm config"
-    return 1
-  fi
-
   if [ "$current_resource_status" = "$resource_status" ]; then
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_exec npm config set "$key" "$value" --location="$location"
+      laptop_step_exec npm config set "$key" "$value" --userconfig="$config_file"
     else
-      laptop_step_exec npm config delete "$key" --location="$location"
+      laptop_step_exec npm config delete "$key" --userconfig="$config_file"
     fi
   fi
 }
