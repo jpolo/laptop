@@ -6,6 +6,7 @@ laptop_require "laptop_self_check_version"
 laptop_require "laptop_confirm"
 laptop_require "laptop_die"
 laptop_require "laptop_setup_steps"
+laptop_require "laptop_self_ensure_profile_updated"
 
 laptop_command__setup_run() {
   # Bootstrap
@@ -14,6 +15,7 @@ laptop_command__setup_run() {
 
   # Complete installation if LAPTOP_BOOTSTRAP omitted or false
   if [ "${LAPTOP_BOOTSTRAP:-false}" = false ]; then
+    laptop_self_ensure_profile_updated
     laptop_setup_steps
   fi
 }
