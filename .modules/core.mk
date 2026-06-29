@@ -12,16 +12,16 @@
 # @see src/init.mk
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-## Optional Makefile versioned that override any value (default "Makefile.config")
-MAKEFILE_CONFIG ?= Makefile.config
-## Optional Makefile unversioned that override any value (default "Makefile.local")
-MAKEFILE_LOCAL ?= Makefile.local
+## Optional Makefile versioned that override any value (default "Makefile.config.mk")
+MAKEFILE_CONFIG ?= Makefile.config.mk
+## Optional Makefile unversioned that override any value (default "Makefile.local.mk")
+MAKEFILE_LOCAL ?= Makefile.local.mk
 
 # Include Makefile.local if it exists
--include $(MAKEFILE_LOCAL)
+-include $(wildcard $(MAKEFILE_LOCAL:.mk=) $(MAKEFILE_LOCAL) $(MAKEFILE_LOCAL:.mk=).*)
 
 # Include Makefile.config if it exists
--include $(MAKEFILE_CONFIG)
+-include $(wildcard $(MAKEFILE_CONFIG:.mk=) $(MAKEFILE_CONFIG) $(MAKEFILE_CONFIG:.mk=).*)
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # CONSOLE
@@ -420,9 +420,27 @@ FORCE: ;
 # @see src/updater.mk
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-MODULES_FILE := module.json
-MODULE_ADD_COMMIT_MESSAGE_PREFIX ?= 🔨 Add
-MODULE_UPDATE_COMMIT_MESSAGE_PREFIX ?= 🔨 Upgrade
+MAKEFILE_CORE_MODULES_FILE := module.json
+
+## Commit format: gitmoji | conventional
+MAKEFILE_CORE_GIT_COMMIT_FORMAT ?= conventional
+
+ifeq ($(MAKEFILE_CORE_GIT_COMMIT_FORMAT),conventional)
+.MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX_DEFAULT := chore(subtree): add
+.MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX_DEFAULT := chore(subtree): upgrade
+else
+.MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX_DEFAULT := 🔨 Add
+.MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX_DEFAULT := 🔨 Upgrade
+endif
+
+# Allow users to override prefixes explicitly.
+ifeq ($(origin MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX), undefined)
+MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX := $(.MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX_DEFAULT)
+endif
+
+ifeq ($(origin MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX), undefined)
+MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX := $(.MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX_DEFAULT)
+endif
 
 .self_add_module=$(or $(name), $(notdir $(url)), '')
 
@@ -433,10 +451,10 @@ MODULE_UPDATE_COMMIT_MESSAGE_PREFIX ?= 🔨 Upgrade
 #
 .PHONY: self-list
 self-list: ## List all installed modules (in module.json)
-	$(Q)if [ ! -f "$(MODULES_FILE)" ]; then \
-		$(call panic,$(MODULES_FILE) does not exist. Try make self-add to add modules.); \
+	$(Q)if [ ! -f "$(MAKEFILE_CORE_MODULES_FILE)" ]; then \
+		$(call panic,$(MAKEFILE_CORE_MODULES_FILE) does not exist. Try make self-add to add modules.); \
 	fi
-	$(Q)$(JQ) -r 'keys[]' $(MODULES_FILE)
+	$(Q)$(JQ) -r 'keys[]' $(MAKEFILE_CORE_MODULES_FILE)
 
 # Returns a list of all module names from the modules.json file.
 #
@@ -454,8 +472,8 @@ self-add: $(MODULES_PATH) ## url=<git-repository> [name=<string>] Install a modu
 # Create folder
 	$(Q)$(MKDIRP) $(MODULES_PATH)
 # Check if module is already present
-	$(Q)if $(JQ) -e '.["$(.self_add_module)"]' $(MODULES_FILE) &>/dev/null; then \
-		$(call panic,$(.self_add_module) already present in $(MODULES_FILE)); \
+	$(Q)if $(JQ) -e '.["$(.self_add_module)"]' $(MAKEFILE_CORE_MODULES_FILE) &>/dev/null; then \
+		$(call panic,$(.self_add_module) already present in $(MAKEFILE_CORE_MODULES_FILE)); \
 	elif [ -d "$(MODULES_PATH)/$(.self_add_module)" ]; then \
 		$(call panic,$(MODULES_PATH)/$(.self_add_module) should be empty); \
 	fi
@@ -464,21 +482,21 @@ self-add: $(MODULES_PATH) ## url=<git-repository> [name=<string>] Install a modu
 	@$(call log,info,[Make] Adding subtree: $(.self_add_module) from $(url),0);
 	$(Q)$(GIT) subtree add --prefix=$(MODULES_PATH)/$(.self_add_module) $(url) main \
 		--squash \
-		--message "$(MODULE_ADD_COMMIT_MESSAGE_PREFIX) $(.self_add_module)";
+		--message "$(MAKEFILE_CORE_ADD_COMMIT_MESSAGE_PREFIX) $(.self_add_module)";
 # git commit -m "chore(subtree): add $(name) from $(repo)";
 
 # Create empty file if it does not exist
-	$(Q)if [ ! -f "$(MODULES_FILE)" ]; then \
-		echo "{}" > $(MODULES_FILE); \
+	$(Q)if [ ! -f "$(MAKEFILE_CORE_MODULES_FILE)" ]; then \
+		echo "{}" > $(MAKEFILE_CORE_MODULES_FILE); \
 	fi
 
 # Edit module.json file
-	$(Q)echo "Adding $(.self_add_module) to $(MODULES_FILE)";
+	$(Q)echo "Adding $(.self_add_module) to $(MAKEFILE_CORE_MODULES_FILE)";
 	$(Q)$(JQ) \
 		'.["$(.self_add_module)"] = "$(url)"' \
-		$(MODULES_FILE) > $(MODULES_FILE).tmp \
-	&& mv $(MODULES_FILE).tmp $(MODULES_FILE) \
-	&& git add $(MODULES_FILE) \
+		$(MAKEFILE_CORE_MODULES_FILE) > $(MAKEFILE_CORE_MODULES_FILE).tmp \
+	&& mv $(MAKEFILE_CORE_MODULES_FILE).tmp $(MAKEFILE_CORE_MODULES_FILE) \
+	&& git add $(MAKEFILE_CORE_MODULES_FILE) \
 	&& git commit --amend --no-edit
 
 
@@ -505,23 +523,23 @@ self-update.core:
 	$(Q)-$(GIT) update-index --refresh $(MAKEFILE_CORE) || true
 # Commit changes if needed
 	$(Q)$(GIT) diff --quiet HEAD -- $(MAKEFILE_CORE) \
-		|| $(GIT) commit -m "$(MODULE_UPDATE_COMMIT_MESSAGE_PREFIX) makefile-core" $(MAKEFILE_CORE)
+		|| $(GIT) commit -m "$(MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX) makefile-core" $(MAKEFILE_CORE)
 
 # Target for makefile modules
 .PHONY: self-update.modules
 self-update.modules:
 	@$(call log,info,[Make] Updating $(MODULES_PATH)/* ...,0)
 
-ifeq ($(wildcard $(MODULES_FILE)),)
+ifeq ($(wildcard $(MAKEFILE_CORE_MODULES_FILE)),)
 # No module.json found
 	@$(call log,warn,[Make] Update skipped (no module.json found),0)
 else
 # module.json found
-	$(Q)$(JQ) -r 'to_entries[] | "\(.key) \(.value)"' $(MODULES_FILE) | while read name repo; do \
+	$(Q)$(JQ) -r 'to_entries[] | "\(.key) \(.value)"' $(MAKEFILE_CORE_MODULES_FILE) | while read name repo; do \
 		$(call log,info,>> $$name,1); \
 		git subtree pull --prefix=$(MODULES_PATH)/$$name $$repo main \
 			--squash \
-			--message "$(MODULE_UPDATE_COMMIT_MESSAGE_PREFIX) $$name"; \
+			--message "$(MAKEFILE_CORE_UPDATE_COMMIT_MESSAGE_PREFIX) $$name"; \
 	done
 	@$(call log,info,[Make] Update finished,0)
 endif
@@ -605,12 +623,13 @@ doctor: ## Check your system for potential problems.
 	@$(call log,info,"✓ Checking git submodules",1);
 	$(Q)if [ ! -f .gitmodules ]; then \
 		exit 0; \
-	fi
-	$(Q)MISSING=$$(grep path .gitmodules | sed 's/.*= //' | xargs -n 1 sh -c 'test ! -d "$$0" && echo $$0'); \
-	if [ -n "$$MISSING" ]; then \
-		$(call log,error,Some git submodules are not installed,2); \
-		$(call log,error,Run 'make self-install to fix.',2); \
-		exit 1; \
+	else \
+		MISSING=$$(grep path .gitmodules | sed 's/.*= //' | xargs -n 1 sh -c 'test ! -d "$$0" && echo $$0'); \
+		if [ -n "$$MISSING" ]; then \
+			$(call log,error,Some git submodules are not installed,2); \
+			$(call log,error,Run 'make self-install to fix.',2); \
+			exit 1; \
+		fi; \
 	fi
 
 MAKEFILE_DOCTOR_TARGETS += .doctor.git-submodules
