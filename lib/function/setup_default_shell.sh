@@ -16,7 +16,7 @@ laptop_setup_default_shell() {
   local profile_dir
   profile_dir=$(laptop_profile_dir default)
 
-  laptop_shell_ensure_var "$HOME/.profile" "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}"
+  laptop_shell_ensure_var "$HOME/.profile" "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}" --export
 
   laptop_file_ensure_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
   laptop_file_ensure_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
