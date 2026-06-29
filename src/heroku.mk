@@ -21,8 +21,11 @@ endif
 # Register variables to be displayed before deployment
 DEPLOY_VARIABLES += HEROKU_APP
 
-# Fake target to setup heroku
-$(MAKE_CACHE_PATH)/job/heroku-setup: $(MAKE_CACHE_PATH)
+#
+# Install heroku cli if not present
+#
+.PHONY: heroku-setup
+heroku-setup:
 	$(Q)command -v heroku >/dev/null 2>&1 || { \
 		$(call log,info,"[Heroku] Install CLI...",1); \
 		if command -v brew >/dev/null 2>&1; then \
@@ -31,12 +34,6 @@ $(MAKE_CACHE_PATH)/job/heroku-setup: $(MAKE_CACHE_PATH)
 			curl https://cli-assets.heroku.com/install.sh | sh; \
 		fi \
 	}
-
-#
-# Install heroku cli if not present
-#
-.PHONY: heroku-setup
-heroku-setup: $(MAKE_CACHE_PATH)/job/heroku-setup
 
 #
 # Login to heroku (will open a browser)

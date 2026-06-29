@@ -15,9 +15,11 @@ export SCALINGO_APP
 
 # Register variables to be displayed before deployment
 DEPLOY_VARIABLES += SCALINGO_APP SCALINGO_REGION
-
-# Fake target to setup scalingo
-$(MAKE_CACHE_PATH)/job/scalingo-setup: $(MAKE_CACHE_PATH)
+#
+# Install scalingo cli if not present
+#
+.PHONY: scalingo-setup
+scalingo-setup:
 	$(Q)command -v scalingo >/dev/null 2>&1 || { \
 		$(call log,info,"[Scalingo] Install CLI...",1); \
 		if command -v brew >/dev/null 2>&1; then \
@@ -26,12 +28,6 @@ $(MAKE_CACHE_PATH)/job/scalingo-setup: $(MAKE_CACHE_PATH)
 			curl -O https://cli-dl.scalingo.com/install && bash install; \
 		fi \
 	}
-
-#
-# Install scalingo cli if not present
-#
-.PHONY: scalingo-setup
-scalingo-setup: $(MAKE_CACHE_PATH)/job/scalingo-setup
 
 #
 # Create a tarball of the app, to be deployed in scalingo
