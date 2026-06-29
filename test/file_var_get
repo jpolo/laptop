@@ -1,2 +1,4 @@
-MY_VARIABLE=MY_VALUE
-MY_EXPRESSION=$(foo bar)
+export MY_VARIABLE=MY_VALUE
+export MY_EXPRESSION=\$(foo)
+MY_PLAIN_VAR=plain_value
+MY_PLAIN_EXPRESSION=\$(bar)

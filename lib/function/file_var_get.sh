@@ -8,5 +8,5 @@
 laptop_file_var_get() {
   local script_file="$1"
   local var_name="$2"
-  grep -E "^[[:blank:]]*export[[:blank:]]*${var_name}=[^[:blank:]]*" "$script_file" | cut -d'=' -f2
+  grep -E "^[[:blank:]]*(export[[:blank:]]+)?${var_name}=" "$script_file" | tail -1 | cut -d'=' -f2-
 }
