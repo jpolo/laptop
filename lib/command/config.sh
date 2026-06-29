@@ -42,6 +42,9 @@ laptop_command__config() {
   "edit")
     ${EDITOR} "$config_file"
     ;;
+  "path")
+    printf '%s\n' "$config_file"
+    ;;
   *)
     laptop_die "Unknown action: $action"
     ;;
