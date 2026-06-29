@@ -22,6 +22,9 @@ Print the resolved path of the specified configuration file.
 .B self
 The laptop tool's own configuration file ($LAPTOP_USER_CONFIG_FILE).
 .TP
+.B asdf
+asdf versions file ($HOME/.tool-versions).
+.TP
 .B git
 Git configuration file ($XDG_CONFIG_HOME/git/config).
 .TP
@@ -50,6 +53,9 @@ View the npm user configuration file.
 .B laptop config view starship
 View the starship prompt configuration file.
 .TP
+.B laptop config view asdf
+View the asdf versions file.
+.TP
 .B laptop config edit self
 Edit the laptop configuration file in your default editor.
 .TP
@@ -62,11 +68,17 @@ Edit the npm user configuration file in your default editor.
 .B laptop config edit zsh
 Edit the zsh configuration file in your default editor.
 .TP
+.B laptop config edit asdf
+Edit the asdf versions file in your default editor.
+.TP
 .B laptop config path
 Print the laptop configuration file path (default).
 .TP
 .B laptop config path starship
 Print the starship configuration file path.
+.TP
+.B laptop config path asdf
+Print the asdf versions file path.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B EDITOR

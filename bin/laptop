@@ -58,6 +58,7 @@ laptop_command__help() {
 ###
 ### Configuration type:
 ###   self: laptop configuration file
+###   asdf: asdf versions file (.tool-versions)
 ###   git: git configuration file
 ###   npm: npm user configuration file (.npmrc)
 ###   starship: starship configuration file
