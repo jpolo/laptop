@@ -56,7 +56,7 @@ _file_var_set_old_sed_substitute() {
   sed -i.bak "s/^export ${var_name}=.*/export ${var_name}=${new_value}/" "$script_file" 2>/dev/null
   rm -f "${script_file}.bak"
 }
-github_token_value='"\$(GITHUB_TOKEN= gh auth token 2>/dev/null)"'
+github_token_value="\"\$(GITHUB_TOKEN= gh auth token 2>/dev/null)\""
 sed_slash_file="$TEST_TMP_DIR/sed_slash_value"
 echo 'export GITHUB_TOKEN=old' >"$sed_slash_file"
 _file_var_set_old_sed_substitute "$sed_slash_file" "GITHUB_TOKEN" "$github_token_value"
