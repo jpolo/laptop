@@ -6,7 +6,9 @@ if command -v npm >/dev/null 2>&1; then
   touch "$npm_config_file"
 
   auth_key="//npm.pkg.github.com/:_authToken"
+  # shellcheck disable=SC2016
   auth_value='${GITHUB_TOKEN}'
+  # shellcheck disable=SC2034
   GITHUB_TOKEN=interpolated-secret-token
 
   assert_raises "laptop_npm_config_ensure '$auth_key' '$auth_value'" 0
