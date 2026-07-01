@@ -1,0 +1,77 @@
+# shellcheck disable=SC2148
+_laptop_completion() {
+  local cur prev cword
+  local -a words
+
+  if declare -F _init_completion >/dev/null 2>&1; then
+    _init_completion -n : || return
+  else
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    cword=$COMP_CWORD
+    words=("${COMP_WORDS[@]}")
+  fi
+
+  local -a subcommands=(cleanup config self-upgrade setup upgrade help version)
+  local -a global_opts=(-h --help -y --yes -v --version --color)
+  local -a color_modes=(auto always never)
+  local -a config_actions=(edit path view)
+  local -a config_types=(self asdf git npm starship zsh)
+
+  if [[ "$cur" == --color=* ]]; then
+    COMPREPLY=($(compgen -W "--color=auto --color=always --color=never" -- "$cur"))
+    return
+  fi
+
+  if [[ "$prev" == "--color" ]]; then
+    COMPREPLY=($(compgen -W "${color_modes[*]}" -- "$cur"))
+    return
+  fi
+
+  local subcmd=""
+  local subcmd_idx=-1
+  local i word
+
+  for ((i = 1; i < cword; i++)); do
+    word=${words[i]}
+    case "$word" in
+      --color)
+        ((i++))
+        ;;
+      --color=*)
+        ;;
+      -h|--help|-y|--yes|-v|--version)
+        ;;
+      -*)
+        ;;
+      *)
+        subcmd=$word
+        subcmd_idx=$i
+        break
+        ;;
+    esac
+  done
+
+  if [[ -z "$subcmd" ]]; then
+    COMPREPLY=($(compgen -W "${global_opts[*]} ${subcommands[*]}" -- "$cur"))
+    return
+  fi
+
+  case "$subcmd" in
+    help)
+      if ((cword == subcmd_idx + 1)); then
+        COMPREPLY=($(compgen -W "${subcommands[*]}" -- "$cur"))
+      fi
+      ;;
+    config)
+      local rel_pos=$((cword - subcmd_idx))
+      if ((rel_pos == 1)); then
+        COMPREPLY=($(compgen -W "${config_actions[*]}" -- "$cur"))
+      elif ((rel_pos == 2)); then
+        COMPREPLY=($(compgen -W "${config_types[*]}" -- "$cur"))
+      fi
+      ;;
+  esac
+}
+
+complete -F _laptop_completion laptop

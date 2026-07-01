@@ -1,0 +1,73 @@
+# shellcheck disable=SC2148
+#compdef laptop
+
+_laptop() {
+  local -a subcommands global_opts color_modes config_actions config_types
+  subcommands=(cleanup config self-upgrade setup upgrade help version)
+  global_opts=(-h --help -y --yes -v --version --color)
+  color_modes=(auto always never)
+  config_actions=(edit path view)
+  config_types=(self asdf git npm starship zsh)
+
+  local cur_word="${words[CURRENT]}"
+
+  if [[ "$cur_word" == --color=* ]]; then
+    compadd -Q -S '' -- --color=auto --color=always --color=never
+    return
+  fi
+
+  if ((CURRENT > 1)) && [[ "${words[CURRENT-1]}" == "--color" ]]; then
+    compadd -a color_modes
+    return
+  fi
+
+  local cmd=""
+  local cmd_index=0
+  local i=2
+  local token
+
+  while ((i < CURRENT)); do
+    token="${words[i]}"
+    case "$token" in
+      --color)
+        ((i++))
+        ;;
+      --color=*)
+        ;;
+      -h|--help|-y|--yes|-v|--version)
+        ;;
+      -*)
+        ;;
+      *)
+        cmd="$token"
+        cmd_index=$i
+        break
+        ;;
+    esac
+    ((i++))
+  done
+
+  if [[ -z "$cmd" ]]; then
+    compadd -a global_opts
+    compadd -a subcommands
+    return
+  fi
+
+  case "$cmd" in
+    help)
+      if ((CURRENT == cmd_index + 1)); then
+        compadd -a subcommands
+      fi
+      ;;
+    config)
+      local rel_pos=$((CURRENT - cmd_index))
+      if ((rel_pos == 1)); then
+        compadd -a config_actions
+      elif ((rel_pos == 2)); then
+        compadd -a config_types
+      fi
+      ;;
+  esac
+}
+
+compdef _laptop laptop

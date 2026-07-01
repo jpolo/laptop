@@ -57,6 +57,8 @@ The laptop ZSH plugin provides a `laptop` executable. This executable was create
 - remove all unneeded files and free disk space
 - auto-update itself. laptop can be updated itself to benefit to the latest tools / configuration of the organization
 
+Shell completions are also provided for Bash and Zsh. When installed with `make install` (including from a Homebrew formula), completion files are installed under `share/bash-completion/completions` and `share/zsh/site-functions`.
+
 ### ✅ Customize your laptop tool for your organization
 
 - Built to be easily forked (better for security, so everyone can review the code)
