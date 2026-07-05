@@ -9,5 +9,5 @@ laptop_require "laptop_shell_exec_dir_d"
 #   laptop_setup_steps <steps_dir>
 #
 laptop_setup_steps() {
-  LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/steps"
+  LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/setup.d"
 }

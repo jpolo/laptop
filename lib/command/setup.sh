@@ -52,9 +52,3 @@ laptop_command__setup() {
     laptop_die "🛑 Upgrade aborted"
   fi
 }
-
-## Legacy command handler
-laptop_command__configure() {
-  laptop_handler_call "logo"
-  laptop_die "🛑 'laptop configure' was removed. Use 'laptop setup' instead."
-}
