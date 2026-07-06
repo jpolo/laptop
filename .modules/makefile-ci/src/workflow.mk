@@ -18,7 +18,7 @@ setup: setup.workflow-intro $(call core-hooks,.setup) ## Install global dependen
 # INSTALL
 #-------------
 .PHONY: install $(call core-hooks,.install)
-install: install.workflow-intro $(call core-hooks,.install) ## Install project dependencies (force installation)
+install: install.workflow-intro $(call core-hooks,.install) ## Install built artifacts in the system
 
 .install.before::
 	@:

@@ -206,17 +206,6 @@ endif
 .setup:: node-setup # Add to `make setup`
 
 #
-# Install node dependencies (ex: npm install)
-#
-# This will install dependencies using $(NODEJS_PACKAGE_MANAGER). In CI mode, the lockfile update will be forbidden.
-#
-.PHONY: node-install
-node-install: node-setup
-	$(Q)$(RM) -f $(NODEJS_STATEFILE)
-	$(Q)$(MAKE) node-dependencies
-.install:: node-install	# Add `npm install` to `make install`
-
-#
 # Run npm lint script (ex: npm run lint)
 #
 .PHONY: node-lint
