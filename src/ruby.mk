@@ -110,15 +110,6 @@ ruby-dependencies: ruby-setup
 	fi
 .dependencies:: ruby-dependencies
 
-#
-# Force install ruby gem dependencies (bundle install)
-#
-.PHONY: ruby-install
-ruby-install: ruby-setup
-	@$(call log,info,"[Ruby] Install dependencies....",1)
-	$(Q)${BUNDLE_INSTALL}
-.install:: ruby-install # Add `bundle install` to `make install`
-
 # Rubocop targets
 ifneq ($(call filter-false,$(RUBOCOP_ENABLED)),)
 

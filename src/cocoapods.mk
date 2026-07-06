@@ -10,17 +10,6 @@ POD_INSTALL := cd $(dir $(POD_FILE)) && $(POD) install --repo-update
 .PHONY: pod-setup
 pod-setup: $(wildcard ruby-dependencies)
 
-#
-# Force install Pod dependencies
-#
-# If present node dependencies will be installed before (useful for react-native, ionic, etc)
-#
-.PHONY: pod-install
-pod-install: pod-setup $(wildcard node-dependencies)
-	@$(call log,info,"[Pod] Install dependencies...",1)
-	$(Q)$(POD_INSTALL)
-.install:: pod-install	# Add `pod install` to `make install`
-
 $(POD_MANIFEST): $(POD_LOCKFILE)
 	@$(call log,info,"[Pod] Ensure dependencies....",1)
 	$(Q)$(POD_INSTALL)
