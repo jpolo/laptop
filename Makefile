@@ -13,18 +13,16 @@ define set_var
 endef
 
 .PHONY: project-setup
-project-setup: ## Run all tests
+project-setup:
 	$(Q)brew install augeas --quiet
 	$(Q)brew install shfmt --quiet
 	$(Q)brew install shellcheck --quiet
 .setup:: project-setup
 
-.PHONY: test
-test: ## Run all tests
+.PHONY: project-test
+project-test:
 	$(Q) ./test/suite.sh
-
-.PHONY: validate
-validate: lint test
+.test:: project-test
 
 .PHONY: install
 install: ## Install laptop configuration
