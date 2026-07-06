@@ -32,3 +32,9 @@ install: ## Install laptop configuration
 # add LAPTOP_HOME to bin/laptop
 	$(Q)$(call set_var,LAPTOP_HOME,$${LAPTOP_HOME:-"$(realpath $(INSTALL_PREFIX))"},$(INSTALL_PREFIX)/bin/laptop)
 	$(Q)$(call set_var,LAPTOP_INSTALL_BREW_PACKAGE,$${LAPTOP_INSTALL_BREW_PACKAGE:-$(INSTALL_BREW_PACKAGE)},$(INSTALL_PREFIX)/bin/laptop)
+
+
+.PHONY: pull-upstream
+pull-upstream: ## Pull upstream changes from GitHub
+	$(Q)gh repo sync $(CI_PROJECT_PATH) -b main
+
