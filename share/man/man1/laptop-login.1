@@ -1,0 +1,19 @@
+.TH laptop-login 1 "$(date +%Y)" "laptop"
+.SH NAME
+laptop-login \- run profile login steps (e.g. GitHub auth)
+.SH SYNOPSIS
+.B laptop login
+.SH DESCRIPTION
+The
+.B laptop login
+command runs the profile's
+.I login.d
+steps in alphabetical order. The default profile includes a GitHub login step which ensures you are authenticated with the GitHub CLI.
+
+.SH EXAMPLES
+.nf
+laptop login
+.fi
+
+.SH SEE ALSO
+.BR laptop-setup (1)
