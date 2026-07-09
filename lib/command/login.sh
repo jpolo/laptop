@@ -13,6 +13,5 @@ laptop_command__login() {
   laptop_self_check_version
 
   laptop_log info "Running login steps for profile ${LAPTOP_PROFILE}"
-  laptop_self_ensure_profile_updated
   LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/login.d"
 }
