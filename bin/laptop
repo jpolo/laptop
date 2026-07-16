@@ -38,6 +38,7 @@ cd "$HOME" || exit 1
 ###   config edit <config_type> : edit the configuration file (default: self)
 ###   config path <config_type> : print the configuration file path (default: self)
 ###   config view <config_type> : view the configuration file (default: self)
+###   doctor: show laptop version, update status and environment health
 ###   self-upgrade: upgrade only the laptop CLI (Homebrew installs)
 ###   setup: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages

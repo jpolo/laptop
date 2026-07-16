@@ -1,0 +1,39 @@
+." Manpage for laptop-doctor
+.TH LAPTOP-DOCTOR 1 "July 2026" "1.0" "Laptop Doctor Subcommand Manual"
+.SH NAME
+laptop-doctor \- Show laptop version, update status and environment health
+.SH SYNOPSIS
+.B laptop doctor
+.SH DESCRIPTION
+The doctor subcommand reports the health of your laptop installation.
+It runs a series of checks and displays their results in a human-readable format.
+.PP
+Shipped checks (in order):
+.RS
+.TP
+.B version
+Current installed version, latest available version, and update status (\fIup-to-date\fR or \fIoutdated\fR).
+.TP
+.B install
+Installation method (brew, git, or manual) and the LAPTOP_HOME path.
+.TP
+.B profile
+Active profile name and whether it resolves to a known profile.
+.TP
+.B disk
+Available disk space on the root filesystem.
+.RE
+.SH OPTIONS
+None. Use parent command options:
+.TP
+.B --color \fImode\fR
+Enable or disable ANSI colors (auto, always, never).
+.SH EXAMPLES
+.TP
+.B laptop doctor
+Run all doctor checks and display results.
+.SH SEE ALSO
+.BR laptop (1),
+.BR laptop-self-upgrade (1)
+.SH AUTHOR
+Written by jpolo.

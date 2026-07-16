@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 laptop_disk_available_space() {
-  df / | tail -1 | awk '{print $4}'
+  df -k / | awk 'NR==2 {print $4}'
 }

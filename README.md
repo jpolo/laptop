@@ -146,6 +146,12 @@ Launch this command regularly to be up to date and avoid keeping old software wi
 
 Upgrade only the laptop CLI to the latest version. Use this when you are notified that a new version is available, or when you want to update the CLI without upgrading other tools. When laptop is installed via Homebrew, this runs `brew upgrade` for the laptop formula.
 
+### `laptop doctor`
+
+Display the current laptop version, the latest available version, and overall update status (`up-to-date` or `outdated`). Also reports the installation method, active profile, and available disk space.
+
+Run this to quickly verify that your laptop installation is healthy and up to date.
+
 ### `laptop cleanup`
 
 Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" manner) :

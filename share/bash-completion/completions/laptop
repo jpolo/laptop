@@ -12,7 +12,7 @@ _laptop_completion() {
     words=("${COMP_WORDS[@]}")
   fi
 
-  local -a subcommands=(cleanup config self-upgrade setup upgrade help version)
+  local -a subcommands=(cleanup config doctor self-upgrade setup upgrade help version)
   local -a global_opts=(-h --help -y --yes -v --version --color)
   local -a color_modes=(auto always never)
   local -a config_actions=(edit path view)

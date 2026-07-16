@@ -3,7 +3,7 @@
 
 _laptop() {
   local -a subcommands global_opts color_modes config_actions config_types
-  subcommands=(cleanup config self-upgrade setup upgrade help version)
+  subcommands=(cleanup config doctor self-upgrade setup upgrade help version)
   global_opts=(-h --help -y --yes -v --version --color)
   color_modes=(auto always never)
   config_actions=(edit path view)
