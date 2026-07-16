@@ -123,14 +123,16 @@ export VOLTA_HOME="$XDG_DATA_HOME/volta"
 # export VSCODIUM_PORTABLE="$XDG_DATA_HOME/vscode"
 
 
-# Initialize brew
-for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
-do
-  if [ -f "$prefix/bin/brew" ] ; then
-    eval "$("$prefix/bin/brew" shellenv)"
-    break
-  fi
-done
+# Initialize brew (skip if already initialized to avoid the subprocess cost on every shell)
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
+  do
+    if [ -f "$prefix/bin/brew" ] ; then
+      eval "$("$prefix/bin/brew" shellenv)"
+      break
+    fi
+  done
+fi
 
 if [ -z "$ANDROID_HOME" ]; then
   if [ -d "$HOME/Library/Android/sdk" ]; then
