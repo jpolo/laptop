@@ -32,15 +32,16 @@ CI ?=
 # Well known default branch list
 .CI_DEFAULT_BRANCH_LIST := main master
 
-.CI_DEFAULT_BRANCH := $(firstword $(foreach var,$(.CI_DEFAULT_BRANCH_LIST), $(filter $(var),$(shell ${GIT} branch --list))))
+.CI_GIT_BRANCH_LIST = $(call memoize,.CI_GIT_BRANCH_LIST,$(shell $(GIT) branch --list))
+.CI_DEFAULT_BRANCH = $(firstword $(foreach var,$(.CI_DEFAULT_BRANCH_LIST), $(filter $(var),$(.CI_GIT_BRANCH_LIST))))
 ## The name of the project’s default branch.
 CI_DEFAULT_BRANCH ?= $(.CI_DEFAULT_BRANCH)
 
-.CI_COMMIT_BRANCH := $(shell ${GIT} rev-parse --abbrev-ref HEAD)
+.CI_COMMIT_BRANCH = $(call memoize,.CI_COMMIT_BRANCH,$(shell $(GIT) rev-parse --abbrev-ref HEAD))
 ## The commit branch name
 CI_COMMIT_BRANCH ?= $(.CI_COMMIT_BRANCH)
 
-.CI_COMMIT_AUTHOR := $(shell ${GIT} log -1 --format='%an <%ae>')
+.CI_COMMIT_AUTHOR = $(call memoize,.CI_COMMIT_AUTHOR,$(shell $(GIT) log -1 --format='%an <%ae>'))
 ## The author of the commit in Name <email> format
 CI_COMMIT_AUTHOR ?= $(.CI_COMMIT_AUTHOR)
 
@@ -48,31 +49,31 @@ CI_COMMIT_AUTHOR ?= $(.CI_COMMIT_AUTHOR)
 CI_COMMIT_REF_NAME ?= $(CI_COMMIT_BRANCH)
 
 ## CI_COMMIT_REF_NAME in lowercase, shortened to 63 bytes
-CI_COMMIT_REF_SLUG ?= $(call slugify, $(CI_COMMIT_REF_NAME))
+CI_COMMIT_REF_SLUG ?= $(call memoize,CI_COMMIT_REF_SLUG,$(call slugify,$(CI_COMMIT_REF_NAME)))
 
-.CI_COMMIT_SHA := $(shell ${GIT} rev-parse HEAD)
+.CI_COMMIT_SHA = $(call memoize,.CI_COMMIT_SHA,$(shell $(GIT) rev-parse HEAD))
 ## The commit revision the project is built for
 CI_COMMIT_SHA ?= $(.CI_COMMIT_SHA)
 
-.CI_COMMIT_SHORT_SHA := $(shell ${GIT} rev-parse --short HEAD)
+.CI_COMMIT_SHORT_SHA = $(call memoize,.CI_COMMIT_SHORT_SHA,$(shell $(GIT) rev-parse --short HEAD))
 ## The first eight characters of CI_COMMIT_SHA
 CI_COMMIT_SHORT_SHA ?= $(.CI_COMMIT_SHORT_SHA)
 
-.CI_COMMIT_TIMESTAMP := $(shell ${DATE} -d "@$(shell ${GIT} show -s --format=%ct)" --utc +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null)
+.CI_COMMIT_TIMESTAMP = $(call memoize,.CI_COMMIT_TIMESTAMP,$(shell $(DATE) -d "@$(shell $(GIT) show -s --format=%ct)" --utc +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null))
 ## The timestamp of the commit in the ISO 8601 format.
 CI_COMMIT_TIMESTAMP ?= $(.CI_COMMIT_TIMESTAMP)
 
 ## The full path the repository is cloned to
 CI_PROJECT_DIR ?= $(PROJECT_PATH)
 
-.CI_COMMIT_TAG := $(shell ${GIT} describe --tags --exact-match 2>/dev/null)
+.CI_COMMIT_TAG = $(call memoize,.CI_COMMIT_TAG,$(shell $(GIT) describe --tags --exact-match 2>/dev/null))
 ## The commit tag name. Can be empty if no tag corresponds to commit
 CI_COMMIT_TAG ?= $(.CI_COMMIT_TAG)
 
 ## The instance-level ID of the current pipeline
 CI_PIPELINE_ID ?= $(MAKE_PPID)
 
-.CI_PIPELINE_CREATED_AT := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
+.CI_PIPELINE_CREATED_AT = $(call memoize,.CI_PIPELINE_CREATED_AT,$(shell date -u +"%Y-%m-%dT%H:%M:%SZ"))
 ## The UTC datetime when the pipeline was created
 CI_PIPELINE_CREATED_AT ?= $(.CI_PIPELINE_CREATED_AT)
 
@@ -90,26 +91,26 @@ ifeq ($(CI_ENVIRONMENT_NAME),)
 endif
 
 ## The simplified version of CI_ENVIRONMENT_NAME
-CI_ENVIRONMENT_SLUG ?= $(call slugify, $(CI_ENVIRONMENT_NAME))
+CI_ENVIRONMENT_SLUG ?= $(call memoize,CI_ENVIRONMENT_SLUG,$(call slugify,$(CI_ENVIRONMENT_NAME)))
 
 ## The URL of the environment for this job.
 CI_ENVIRONMENT_URL ?=
 
-.GIT_REMOTE_ORIGIN_URL := $(shell ${GIT} remote get-url origin)
+.GIT_REMOTE_ORIGIN_URL = $(call memoize,.GIT_REMOTE_ORIGIN_URL,$(shell $(GIT) remote get-url origin))
 
-.CI_PROJECT_URL := $(basename $(shell echo "$(.GIT_REMOTE_ORIGIN_URL)" | sed -r 's:git@([^/]+)\:(.*):https\://\1/\2:g' ))
+.CI_PROJECT_URL = $(call memoize,.CI_PROJECT_URL,$(basename $(shell echo "$(.GIT_REMOTE_ORIGIN_URL)" | sed -r 's:git@([^/]+)\:(.*):https\://\1/\2:g' )))
 ## The HTTP(S) address of the project.
 CI_PROJECT_URL ?= $(.CI_PROJECT_URL)
 
-.CI_PROJECT_NAME := $(basename $(notdir $(.GIT_REMOTE_ORIGIN_URL)))
+.CI_PROJECT_NAME = $(basename $(notdir $(.GIT_REMOTE_ORIGIN_URL)))
 ## The project name
 CI_PROJECT_NAME ?= $(.CI_PROJECT_NAME)
 
 ## The project namespace (username or group name).
-CI_PROJECT_NAMESPACE ?= $(shell echo $(CI_PROJECT_URL) | sed -r 's|^https?://||' | cut -d '/' -f2- | xargs dirname)
+CI_PROJECT_NAMESPACE ?= $(call memoize,CI_PROJECT_NAMESPACE,$(shell echo $(CI_PROJECT_URL) | sed -r 's|^https?://||' | cut -d '/' -f2- | xargs dirname))
 
 ## The root project namespace (username or group name).
-CI_PROJECT_ROOT_NAMESPACE ?= $(shell echo $(CI_PROJECT_NAMESPACE) | cut -d '/' -f1)
+CI_PROJECT_ROOT_NAMESPACE ?= $(call memoize,CI_PROJECT_ROOT_NAMESPACE,$(shell echo $(CI_PROJECT_NAMESPACE) | cut -d '/' -f1))
 
 ## The project namespace with the project name included.
 CI_PROJECT_PATH ?= $(CI_PROJECT_NAMESPACE)/$(CI_PROJECT_NAME)
@@ -125,12 +126,12 @@ CI_RUNNER_DESCRIPTION ?= $(CI_RUNNER_ID)
 CI_REGISTRY ?=
 
 ifneq ($(CI_REGISTRY),)
-.CI_REGISTRY_IMAGE_DEFAULT := $(CI_REGISTRY)/$(CI_PROJECT_PATH)
+.CI_REGISTRY_IMAGE_RAW = $(CI_REGISTRY)/$(CI_PROJECT_PATH)
 else
-.CI_REGISTRY_IMAGE_DEFAULT := $(CI_PROJECT_PATH)
+.CI_REGISTRY_IMAGE_RAW = $(CI_PROJECT_PATH)
 endif
 # lower case by default
-.CI_REGISTRY_IMAGE_DEFAULT := $(shell echo $(.CI_REGISTRY_IMAGE_DEFAULT) | tr '[:upper:]' '[:lower:]')
+.CI_REGISTRY_IMAGE_DEFAULT = $(call memoize,.CI_REGISTRY_IMAGE_DEFAULT,$(shell echo $(.CI_REGISTRY_IMAGE_RAW) | tr '[:upper:]' '[:lower:]'))
 
 ## The address of the project’s Container Registry
 CI_REGISTRY_IMAGE ?= $(.CI_REGISTRY_IMAGE_DEFAULT)
