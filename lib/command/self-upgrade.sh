@@ -5,6 +5,7 @@ laptop_require "laptop_confirm"
 laptop_require "laptop_die"
 laptop_require "laptop_handler_call"
 laptop_require "laptop_self_ensure_updated"
+laptop_require "laptop_brew_package_installed"
 
 laptop_command__self-upgrade() {
   laptop_handler_call "logo"
@@ -23,7 +24,7 @@ laptop_command__self-upgrade() {
 # When installed via git/zinit, use 'laptop upgrade' to update from the remote.
 #
 laptop_command__self-upgrade_run() {
-  if [ -z "$LAPTOP_INSTALL_BREW_PACKAGE" ] || ! brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+  if [ -z "$LAPTOP_INSTALL_BREW_PACKAGE" ] || ! laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
     laptop_log warn "laptop is not installed via Homebrew ($LAPTOP_INSTALL_BREW_PACKAGE). Please run in your terminal :\n\n\
     brew install $LAPTOP_INSTALL_BREW_PACKAGE\n\n"
     return 0

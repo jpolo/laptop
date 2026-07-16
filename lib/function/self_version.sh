@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_brew_package_installed"
+laptop_require "laptop_brew_package_version"
+
 # Returns the current installed version of laptop
 #
 # Resolution order:
-#   1. Homebrew install: `brew list --versions`
+#   1. Homebrew install: cellar directory version
 #   2. Git install: `git describe --tags --always` (nearest tag, or short SHA)
 #   3. Fallback: $LAPTOP_VERSION env var
 #
@@ -13,8 +16,8 @@
 laptop_self_version() {
   local version
 
-  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
-    version=$(brew list --versions "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null | awk '{print $2}')
+  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
+    version=$(laptop_brew_package_version "$LAPTOP_INSTALL_BREW_PACKAGE")
     [[ -n "$version" ]] && echo "$version" && return 0
   fi
 

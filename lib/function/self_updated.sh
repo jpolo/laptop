@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_brew_package_installed"
+
 laptop_self_updated() {
   local current_branch
   local remote_sha
@@ -7,7 +9,7 @@ laptop_self_updated() {
 
   # Homebrew install (--HEAD): check if upstream has new commits
   # --fetch-HEAD is required for HEAD formulae; HOMEBREW_NO_AUTO_UPDATE=1 avoids slow tap updates
-  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
     if HOMEBREW_NO_AUTO_UPDATE=1 brew outdated --quiet --fetch-HEAD "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null | grep -q .; then
       return 1 # Outdated
     fi

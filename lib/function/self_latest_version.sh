@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+laptop_require "laptop_brew_package_installed"
+
 # Returns the latest available version of laptop from the remote
 #
 # Resolution order:
@@ -13,7 +15,7 @@
 laptop_self_latest_version() {
   local version
 
-  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
     version=$(HOMEBREW_NO_AUTO_UPDATE=1 brew info --json=v1 "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null \
       | grep -o '"stable":"[^"]*"' | head -1 | cut -d'"' -f4)
     [[ -n "$version" ]] && echo "$version" && return 0

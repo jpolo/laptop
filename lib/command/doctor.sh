@@ -7,6 +7,7 @@ laptop_require "laptop_handler_call"
 laptop_require "laptop_self_version"
 laptop_require "laptop_self_latest_version"
 laptop_require "laptop_self_updated"
+laptop_require "laptop_brew_package_installed"
 laptop_require "laptop_profile_available"
 laptop_require "laptop_disk_available_space"
 
@@ -58,7 +59,7 @@ laptop_doctor_check__version() {
 laptop_doctor_check__install() {
   local method
 
-  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
+  if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
     method="brew ($LAPTOP_INSTALL_BREW_PACKAGE)"
   elif [[ -d "$LAPTOP_HOME/.git" ]]; then
     method="git"
