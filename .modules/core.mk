@@ -31,18 +31,19 @@ MAKEFILE_LOCAL ?= Makefile.local.mk
 # Terminal colors
 
 ifneq ($(TERM),)
-	BOLD         := $(shell tput bold)
-	BLACK        := $(shell tput setaf 0)
-	RED          := $(shell tput setaf 1)
-	GREEN        := $(shell tput setaf 2)
-	YELLOW       := $(shell tput setaf 3)
-	LIGHTPURPLE  := $(shell tput setaf 4)
-	PURPLE       := $(shell tput setaf 5)
-	BLUE         := $(shell tput setaf 6)
-	WHITE        := $(shell tput setaf 7)
-	RESET        := $(shell tput sgr0)
-	SMUL         := $(shell tput smul)
-	RMUL         := $(shell tput rmul)
+	ESC          := $(shell printf '\033')
+	BOLD         := $(ESC)[1m
+	BLACK        := $(ESC)[30m
+	RED          := $(ESC)[31m
+	GREEN        := $(ESC)[32m
+	YELLOW       := $(ESC)[33m
+	LIGHTPURPLE  := $(ESC)[34m
+	PURPLE       := $(ESC)[35m
+	BLUE         := $(ESC)[36m
+	WHITE        := $(ESC)[37m
+	RESET        := $(ESC)[0m
+	SMUL         := $(ESC)[4m
+	RMUL         := $(ESC)[24m
 else
 	BOLD         :=
 	BLACK        :=
