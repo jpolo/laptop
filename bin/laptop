@@ -56,6 +56,16 @@ laptop_command__help() {
   fi
 }
 
+.laptop_command_load() {
+  local subcommand="$1"
+  local command_function="laptop_command__${subcommand}"
+  local command_file="$LAPTOP_LIB_DIR/command/${subcommand}.sh"
+  if ! laptop_function_exists "$command_function" && [ -f "$command_file" ]; then
+    # shellcheck disable=SC1090
+    source "$command_file"
+  fi
+}
+
 ###
 ### Configuration type:
 ###   self: laptop configuration file
@@ -102,7 +112,7 @@ while [[ $# -gt 0 ]]; do
       fi
       ;;
     -v|--version)
-      # shellcheck disable=SC2034
+      .laptop_command_load "version"
       laptop_command__version
       exit 0
       ;;
@@ -126,6 +136,7 @@ case $LAPTOP_SUBCOMMAND in
     laptop_command__help "${LAPTOP_ARGS[0]}"
     ;;
   "version")
+    .laptop_command_load "version"
     laptop_command__version
     ;;
   *)
@@ -135,11 +146,8 @@ case $LAPTOP_SUBCOMMAND in
       exit 0
     fi
 
+    .laptop_command_load "$LAPTOP_SUBCOMMAND"
     command_function="laptop_command__${LAPTOP_SUBCOMMAND}"
-    command_file="$LAPTOP_LIB_DIR/command/$LAPTOP_SUBCOMMAND.sh"
-    if ! laptop_function_exists "$command_function" && [ -f "$command_file" ]; then
-      source "$command_file"
-    fi
     if ! laptop_function_exists "$command_function"; then
       laptop_die "$(cat <<EOF
 '$LAPTOP_SUBCOMMAND' is not a known subcommand. Run '$LAPTOP_APP_NAME --help' for a list of available subcommands
