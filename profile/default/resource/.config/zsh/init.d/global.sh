@@ -59,8 +59,9 @@ if command -v zinit &>/dev/null; then
     OMZL::spectrum.zsh
   # OMZL::completion.zsh - DISABLED: calls compinit internally, conflicts with zicompinit below
 
-  # Zsh OMZ plugins
-  zinit snippet OMZP::asdf
+  # Zsh OMZ plugins (deferred: shims already in PATH via .profile so tools work immediately)
+  zinit wait lucid for \
+    OMZP::asdf
   # zinit snippet OMZP::fzf
 
   zinit wait lucid for \
