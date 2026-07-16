@@ -5,10 +5,10 @@ laptop_self_updated() {
   local remote_sha
   local local_sha
 
-  # Homebrew install: check if a newer formula version is available
-  # HOMEBREW_NO_AUTO_UPDATE=1 avoids slow tap updates when only checking one formula
+  # Homebrew install (--HEAD): check if upstream has new commits
+  # --fetch-HEAD is required for HEAD formulae; HOMEBREW_NO_AUTO_UPDATE=1 avoids slow tap updates
   if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && brew list "$LAPTOP_INSTALL_BREW_PACKAGE" &>/dev/null; then
-    if HOMEBREW_NO_AUTO_UPDATE=1 brew outdated --quiet "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null | grep -q .; then
+    if HOMEBREW_NO_AUTO_UPDATE=1 brew outdated --quiet --fetch-HEAD "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null | grep -q .; then
       return 1 # Outdated
     fi
     return 0 # Up-to-date
