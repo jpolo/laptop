@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-# Test the `laptop_command__login` wrapper using a temporary profile
+# Test the `laptop_command__login` wrapper using an isolated temporary profile.
+# Fixtures are written under $TEST_TMP_DIR so the versioned profile/ directory
+# is never touched.
 
-mkdir -p "$LAPTOP_HOME/profile/test-profile/login.d"
-cat > "$LAPTOP_HOME/profile/test-profile/login.d/0-test.sh" <<'EOF'
+login_test_profile_dir="$TEST_TMP_DIR/profile/test-profile"
+mkdir -p "$login_test_profile_dir/login.d"
+cat > "$login_test_profile_dir/login.d/0-test.sh" <<'EOF'
 #!/usr/bin/env zsh
 echo "login-step-run"
 exit 0
 EOF
-chmod +x "$LAPTOP_HOME/profile/test-profile/login.d/0-test.sh"
+chmod +x "$login_test_profile_dir/login.d/0-test.sh"
 
 # Run the step script directly to verify it executes successfully.
-assert_raises "zsh \"$LAPTOP_HOME/profile/test-profile/login.d/0-test.sh\"" 0
+assert_raises "zsh \"$login_test_profile_dir/login.d/0-test.sh\"" 0
