@@ -14,5 +14,6 @@ laptop_brew_package_version() {
   cellar_name=$(.laptop_brew_cellar_name "$1")
   cellar_dir="$prefix/Cellar/$cellar_name"
   [[ -d "$cellar_dir" ]] || return 1
+  # shellcheck disable=SC2012
   ls -1 "$cellar_dir" 2>/dev/null | tail -1
 }
