@@ -72,8 +72,8 @@ laptop_github_ensure_login() {
   if [ "$resource_current_status" = "$resource_status" ]; then
     laptop_step_status "ok"
   elif [ "$logged_in" -eq 1 ]; then
-    laptop_step_exec gh auth refresh -h "$host" --scopes "$scopes"
+    GITHUB_TOKEN='' laptop_step_exec gh auth refresh -h "$host" --scopes "$scopes"
   else
-    laptop_step_eval "gh auth login -p ssh -h \"$host\" --scopes \"$scopes\" -w && eval \"\$(ssh-agent -s)\""
+    laptop_step_eval "GITHUB_TOKEN='' gh auth login -p ssh -h \"$host\" --scopes \"$scopes\" -w && eval \"\$(ssh-agent -s)\""
   fi
 }
