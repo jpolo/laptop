@@ -1,5 +1,5 @@
-# shellcheck disable=SC2148
 #compdef laptop
+# shellcheck disable=SC2148
 
 _laptop() {
   local -a subcommands global_opts color_modes config_actions config_types
