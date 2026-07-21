@@ -21,3 +21,7 @@ LAPTOP_BREW_AUTOUPDATE="true"
 # laptop_handler__setup_shell() {
 #   laptop_setup_default_shell
 # }
+
+# laptop_handler__login() {
+#   LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/login.d"
+# }

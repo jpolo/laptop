@@ -64,6 +64,13 @@ laptop_handler__setup_shell() {
   laptop_setup_default_shell
 }
 
+laptop_handler__login() {
+  laptop_require "laptop_shell_exec_dir_d"
+  laptop_require "laptop_profile_dir"
+
+  LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/login.d"
+}
+
 # IMPORTANT: Load profile at the end
 # Load profile (with overrides)# Load profile (with overrides)
 laptop_profile_load
