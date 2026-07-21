@@ -20,10 +20,14 @@ laptop_package_ensure "pack:cli-tools"
 laptop_package_ensure "pack:kube-utils"
 laptop_package_ensure "pack:cloud-utils"
 
+# Configure git
 if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   # Configure git
   laptop_file_ensure "$(laptop_xdg_dir "config")/git/config"
   laptop_package_ensure "config:git-recommended"
+fi
+
+if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   # Configure github
   laptop_github_ensure_login
   # Configure ssh

@@ -5,6 +5,9 @@
 
 laptop_github_ensure_login
 
+# Configure ssh
+laptop_ssh_ensure_setting "Host *" "IdentityFile" "~/.ssh/id_ed25519"
+
 # Login using GITHUB_TOKEN to npm github npm.pkg.github.com
 # shellcheck disable=SC2016
 laptop_shell_ensure_var "$HOME/.profile" "GITHUB_TOKEN" '"$(GITHUB_TOKEN= gh auth token 2>/dev/null)"' --export
