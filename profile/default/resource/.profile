@@ -79,6 +79,7 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export CABAL_DIR="$XDG_CACHE_HOME/cabal"
 export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
 #export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 🟠 Does not work well on macOS
 export ELM_HOME="$XDG_CONFIG_HOME/elm"
