@@ -6,6 +6,7 @@
 laptop_github_ensure_login
 
 # Configure ssh
+laptop_ssh_ensure_key "ed25519"
 laptop_ssh_ensure_setting "Host *" "IdentityFile" "~/.ssh/id_ed25519"
 
 # Login using GITHUB_TOKEN to npm github npm.pkg.github.com
