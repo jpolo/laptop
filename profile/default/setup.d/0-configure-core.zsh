@@ -1,15 +1,6 @@
 #!/usr/bin/env zsh
 
-# Ensure Code
-laptop_directory_ensure "$HOME/Code"
-laptop_directory_ensure "$HOME/Captures"
-
-if laptop_command_exists "defaults"; then
-  laptop_package_ensure "config:macos-global-recommended"
-  laptop_package_ensure "config:macos-screencapture-recommended"
-  laptop_package_ensure "config:macos-update-recommended"
-  laptop_package_ensure "config:macos-apps-recommended"
-fi
+laptop_package_ensure "config:os-recommended"
 
 # Install standard utils
 laptop_package_ensure "pack:core"
