@@ -2,9 +2,12 @@
 
 laptop_require "laptop_git_ensure_config"
 
-# macOS defaults settings for developers
+# Git settings for developers
 laptop_package_ensure__config:git-recommended() {
+  # Setup git config directory
+  laptop_file_ensure "$(laptop_xdg_dir "config")/git/config"
 
+  # Useful git settings
   laptop_git_ensure_config "core.ignorecase" "false"
   laptop_git_ensure_config "init.defaultBranch" "main"
   # https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream/

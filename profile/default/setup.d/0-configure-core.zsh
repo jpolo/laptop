@@ -22,8 +22,6 @@ laptop_package_ensure "pack:cloud-utils"
 
 # Configure git
 if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
-  # Configure git
-  laptop_file_ensure "$(laptop_xdg_dir "config")/git/config"
   laptop_package_ensure "config:git-recommended"
 fi
 
