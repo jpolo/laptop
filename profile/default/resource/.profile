@@ -80,6 +80,7 @@ export CABAL_DIR="$XDG_CACHE_HOME/cabal"
 export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
 export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
 #export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 🟠 Does not work well on macOS
