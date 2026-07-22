@@ -3,6 +3,7 @@
 laptop_require "laptop_package_ensure"
 
 laptop_package_ensure__pack:productivity() {
+  laptop_package_ensure "atlassian-cli"
   laptop_package_ensure "chatgpt"
   laptop_package_ensure "ollama"
   laptop_package_ensure "drawio"
