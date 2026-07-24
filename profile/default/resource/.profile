@@ -4,64 +4,59 @@
 # 🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-.profile-path-prepend() {
-  local new_path="$1"
-  if [ -d "$new_path" ] && [[ ":$PATH:" != *":$new_path:"* ]]; then
-    PATH="$new_path${PATH:+":$PATH"}"
-  fi
-}
-
-.profile-path-append() {
-  local new_path="$1"
-  if [ -d "$new_path" ] && [[ ":$PATH:" != *":$new_path:"* ]]; then
-    PATH="${PATH:+"$PATH:"}$new_path"
-  fi
-}
-
+# Initialize XDG Base Directory specification variables
 .profile-xdg-init() {
-  # Make sure XDG dirs are set
+  local darwin_temp=""
 
-  # Init default platform directories
-  # https://github.com/adrg/xdg/blob/master/README.md#xdg-base-directory
-  local XDG_CONFIG_HOME_DEFAULT XDG_CACHE_HOME_DEFAULT XDG_DATA_HOME_DEFAULT XDG_STATE_HOME_DEFAULT
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
-    XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
-    XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
-    XDG_DATA_HOME_DEFAULT="$HOME/Library"
-    XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
-    XDG_RUNTIME_DIR_DEFAULT=$(getconf DARWIN_USER_TEMP_DIR)
-  else
-    XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
-    XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
-    XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
-    XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
-    XDG_STATE_HOME_DEFAULT="$HOME/.local/state"
-    XDG_RUNTIME_DIR_DEFAULT="/run/user/${UID:-$(id -u)}"
+  if [ -z "${XDG_BIN_HOME:-}" ]; then
+    export XDG_BIN_HOME="$HOME/.local/bin"
   fi
-  # export variables
-  [[ -n "$XDG_BIN_HOME" ]] || export XDG_BIN_HOME=$XDG_BIN_HOME_DEFAULT
-  [[ -n "$XDG_CONFIG_HOME" ]] || export XDG_CONFIG_HOME=$XDG_CONFIG_HOME_DEFAULT
-  [[ -n "$XDG_CACHE_HOME"  ]] || export XDG_CACHE_HOME=$XDG_CACHE_HOME_DEFAULT
-  [[ -n "$XDG_DATA_HOME"   ]] || export XDG_DATA_HOME=$XDG_DATA_HOME_DEFAULT
-  [[ -n "$XDG_STATE_HOME"  ]] || export XDG_STATE_HOME=$XDG_STATE_HOME_DEFAULT
 
-  # XDG directories
-  [[ -n "$XDG_DESKTOP_DIR"     ]] || export XDG_DESKTOP_DIR="$HOME/Desktop"
-  [[ -n "$XDG_DOCUMENTS_DIR"   ]] || export XDG_DOCUMENTS_DIR="$HOME/Documents"
-  [[ -n "$XDG_DOWNLOAD_DIR"    ]] || export XDG_DOWNLOAD_DIR="$HOME/Downloads"
-  [[ -n "$XDG_MUSIC_DIR"       ]] || export XDG_MUSIC_DIR="$HOME/Music"
-  [[ -n "$XDG_PICTURES_DIR"    ]] || export XDG_PICTURES_DIR="$HOME/Pictures"
-  [[ -n "$XDG_PUBLICSHARE_DIR" ]] || export XDG_PUBLICSHARE_DIR="$HOME/Public"
-  [[ -n "$XDG_TEMPLATES_DIR"   ]] || export XDG_TEMPLATES_DIR="$HOME/Templates"
-  [[ -n "$XDG_VIDEOS_DIR"      ]] || export XDG_VIDEOS_DIR="$HOME/Videos"
-  [[ -n "$XDG_RUNTIME_DIR"    ]] || export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR_DEFAULT
+  case "${OSTYPE:-}" in
+    darwin*)
+      : "${XDG_CONFIG_HOME:=$HOME/Library/Preferences}"
+      : "${XDG_CACHE_HOME:=$HOME/Library/Caches}"
+      : "${XDG_DATA_HOME:=$HOME/Library}"
+      : "${XDG_STATE_HOME:=$HOME/Library/Application Support}"
+      if command -v getconf >/dev/null 2>&1; then
+        darwin_temp="$(getconf DARWIN_USER_TEMP_DIR 2>/dev/null || true)"
+      fi
+      : "${XDG_RUNTIME_DIR:=${darwin_temp:-}}"
+      ;;
+    *)
+      : "${XDG_CONFIG_HOME:=$HOME/.config}"
+      : "${XDG_CACHE_HOME:=$HOME/.cache}"
+      : "${XDG_DATA_HOME:=$HOME/.local/share}"
+      : "${XDG_STATE_HOME:=$HOME/.local/state}"
+      : "${XDG_RUNTIME_DIR:=/run/user/${UID:-$(id -u 2>/dev/null)}}"
+      ;;
+  esac
 
-  # Source file
-  [[ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]] && {
+  : "${XDG_DESKTOP_DIR:=$HOME/Desktop}"
+  : "${XDG_DOCUMENTS_DIR:=$HOME/Documents}"
+  : "${XDG_DOWNLOAD_DIR:=$HOME/Downloads}"
+  : "${XDG_MUSIC_DIR:=$HOME/Music}"
+  : "${XDG_PICTURES_DIR:=$HOME/Pictures}"
+  : "${XDG_PUBLICSHARE_DIR:=$HOME/Public}"
+  : "${XDG_TEMPLATES_DIR:=$HOME/Templates}"
+  : "${XDG_VIDEOS_DIR:=$HOME/Videos}"
+
+  export XDG_CONFIG_HOME XDG_CACHE_HOME XDG_DATA_HOME XDG_STATE_HOME
+  export XDG_DESKTOP_DIR XDG_DOCUMENTS_DIR XDG_DOWNLOAD_DIR XDG_MUSIC_DIR
+  export XDG_PICTURES_DIR XDG_PUBLICSHARE_DIR XDG_TEMPLATES_DIR XDG_VIDEOS_DIR
+
+  if [ -n "$XDG_RUNTIME_DIR" ] && [ -d "$XDG_RUNTIME_DIR" ]; then
+    export XDG_RUNTIME_DIR
+  else
+    unset XDG_RUNTIME_DIR
+  fi
+
+  mkdir -p "$XDG_BIN_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME"
+
+  if [ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]; then
     . "${XDG_CONFIG_HOME}/user-dirs.dirs"
     # TODO export variables
-  }
+  fi
 }
 
 .profile-xdg-init
@@ -83,7 +78,7 @@ export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 export CODEX_HOME="$XDG_CONFIG_HOME/codex"
 export COPILOT_HOME="$XDG_CONFIG_HOME/copilot"
 export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
-#export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 🟠 Does not work well on macOS
+# export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 🟠 Does not work well on macOS
 export ELM_HOME="$XDG_CONFIG_HOME/elm"
 export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export GHCUP_USE_XDG_DIRS=1
@@ -98,7 +93,7 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export JENV_ROOT="$XDG_DATA_HOME/jenv"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export K9SCONFIG="$XDG_CONFIG_HOME/k9s"
-export KUBECONFIG="$XDG_CONFIG_HOME/kube"
+export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
 export KUBECACHEDIR="$XDG_CACHE_HOME/kube"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
@@ -115,7 +110,7 @@ export OLLAMA_MODELS="$XDG_DATA_HOME/ollama/models"
 export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
 export POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/zsh/p10k.zsh"
 # export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
-export PSQL_HISTORY="$XDG_STATE_HOME/psql_history",
+export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 # export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 # export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
@@ -134,27 +129,22 @@ export VOLTA_HOME="$XDG_DATA_HOME/volta"
 # export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 # export VSCODIUM_PORTABLE="$XDG_DATA_HOME/vscode"
 
-
 # Initialize brew (skip if already initialized to avoid the subprocess cost on every shell)
-if [ -z "$HOMEBREW_PREFIX" ]; then
-  for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"
-  do
-    if [ -f "$prefix/bin/brew" ] ; then
+if [ -z "${HOMEBREW_PREFIX:-}" ]; then
+  for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"; do
+    if [ -f "$prefix/bin/brew" ]; then
       eval "$("$prefix/bin/brew" shellenv)"
       break
     fi
   done
 fi
 
-if [ -z "$ANDROID_HOME" ]; then
+# Auto-detect Android SDK directory
+if [ -z "${ANDROID_HOME:-}" ]; then
   if [ -d "$HOME/Library/Android/sdk" ]; then
     export ANDROID_HOME="$HOME/Library/Android/sdk"
   elif [ -d "/usr/local/opt/android-sdk" ]; then
     export ANDROID_HOME="/usr/local/opt/android-sdk"
-  fi
-  if [ -n "$ANDROID_HOME" ]; then
-    .profile-path-append "$ANDROID_HOME/platform-tools"
-    .profile-path-append "$ANDROID_HOME/cmdline-tools/latest/bin"
   fi
 fi
 
@@ -164,20 +154,91 @@ fi
 #   source "${ZDOTDIR:-$HOME}/.zprofile"
 # fi
 
-# set PATH so it includes user's private bin if it exists
-.profile-path-prepend "/usr/sbin"
-.profile-path-prepend "/usr/local/bin"
-.profile-path-prepend "/snap/bin"
-.profile-path-prepend "$XDG_BIN_HOME"
-if [ -n "$CARGO_HOME" ]; then
-  .profile-path-append "$CARGO_HOME/bin"
-fi
-if [ -n "$GEM_HOME" ]; then
-  .profile-path-append "$GEM_HOME/bin"
-fi
-.profile-path-prepend "$ASDF_DATA_DIR/shims"
-export PATH
+# Deterministic PATH Builder
+.profile-add-candidate() {
+  local candidate="$1"
 
+  [ -n "$candidate" ] || return 0
+  [ -d "$candidate" ] || return 0
+
+  case "$candidate" in
+    *":"*) return 0 ;;
+  esac
+
+  case ":${BUILDING_PATH}:" in
+    *":${candidate}:"*) ;;
+    *) BUILDING_PATH="${BUILDING_PATH:+$BUILDING_PATH:}$candidate" ;;
+  esac
+}
+
+.profile-rebuild-path() {
+  local BUILDING_PATH=""
+  local old_path="$PATH"
+  local old_ifs="${IFS-}"
+  local dir
+
+  # 1. Higher-priority developer tools
+  .profile-add-candidate "$ASDF_DATA_DIR/shims"
+  .profile-add-candidate "$XDG_BIN_HOME"
+
+  # 2. Homebrew binaries
+  if [ -n "${HOMEBREW_PREFIX:-}" ]; then
+    .profile-add-candidate "$HOMEBREW_PREFIX/bin"
+    .profile-add-candidate "$HOMEBREW_PREFIX/sbin"
+  fi
+
+  # 3. Android SDK tools
+  if [ -n "${ANDROID_HOME:-}" ]; then
+    .profile-add-candidate "$ANDROID_HOME/platform-tools"
+    .profile-add-candidate "$ANDROID_HOME/cmdline-tools/latest/bin"
+  fi
+
+  # 4. Language package managers
+  if [ -n "${CARGO_HOME:-}" ]; then
+    .profile-add-candidate "$CARGO_HOME/bin"
+  fi
+  if [ -n "${GEM_HOME:-}" ]; then
+    .profile-add-candidate "$GEM_HOME/bin"
+  fi
+
+  # 5. Distribution-specific package tools
+  .profile-add-candidate "/snap/bin"
+
+  # 6. Existing PATH entries (excluding system locations handled explicitly)
+  IFS=':'
+  set -f
+  for dir in $old_path; do
+    case "$dir" in
+      ""|"."|/usr/local/sbin|/usr/local/bin|/usr/sbin|/usr/bin|/sbin|/bin)
+        ;;
+      *)
+        .profile-add-candidate "$dir"
+        ;;
+    esac
+  done
+  set +f
+  if [ -n "$old_ifs" ]; then
+    IFS="$old_ifs"
+  else
+    unset IFS
+  fi
+
+  # 7. Standard System Directories
+  .profile-add-candidate "/usr/local/sbin"
+  .profile-add-candidate "/usr/local/bin"
+  .profile-add-candidate "/usr/sbin"
+  .profile-add-candidate "/usr/bin"
+  .profile-add-candidate "/sbin"
+  .profile-add-candidate "/bin"
+
+  PATH="$BUILDING_PATH"
+  export PATH
+}
+
+.profile-rebuild-path
 
 # Clean functions
-unset -f .profile-path-append .profile-path-prepend .profile-xdg-init
+unset -f \
+  .profile-xdg-init \
+  .profile-add-candidate \
+  .profile-rebuild-path
