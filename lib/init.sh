@@ -68,7 +68,7 @@ laptop_handler__login() {
   laptop_require "laptop_shell_exec_dir_d"
   laptop_require "laptop_profile_dir"
 
-  LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/login.d"
+  LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d zsh "$(laptop_profile_dir)/login.d"
 }
 
 # IMPORTANT: Load profile at the end

@@ -23,5 +23,5 @@ LAPTOP_BREW_AUTOUPDATE="false"
 # }
 
 # laptop_handler__login() {
-#   LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d "$(laptop_profile_dir)/login.d"
+#   LAPTOP_SOURCE_ALL=true laptop_shell_exec_dir_d zsh "$(laptop_profile_dir)/login.d"
 # }
