@@ -168,19 +168,14 @@ fi
 .profile-path-prepend "/usr/sbin"
 .profile-path-prepend "/usr/local/bin"
 .profile-path-prepend "/snap/bin"
-.profile-path-prepend "$HOME/bin"
-.profile-path-prepend "$HOME/.bin"
-.profile-path-prepend "$HOME/.local/bin"
+.profile-path-prepend "$XDG_BIN_HOME"
 if [ -n "$CARGO_HOME" ]; then
   .profile-path-append "$CARGO_HOME/bin"
 fi
 if [ -n "$GEM_HOME" ]; then
   .profile-path-append "$GEM_HOME/bin"
 fi
-.profile-path-append "$HOME/Application"
-.profile-path-append "$HOME/Applications"
 .profile-path-prepend "$ASDF_DATA_DIR/shims"
-.profile-path-append "$HOME/.yarn/bin"
 export PATH
 
 
