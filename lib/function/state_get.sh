@@ -9,7 +9,7 @@ laptop_require "laptop_file_var_get"
 #
 laptop_state_get() {
   local key="$1"
-  local state_file="$LAPTOP_USER_STATE_DIR/state"
+  local state_file="$LAPTOP_USER_STATE_DIR/state.ini"
 
   if [ ! -f "$state_file" ]; then
     echo ""
