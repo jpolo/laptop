@@ -7,6 +7,8 @@ laptop_require "laptop_confirm"
 laptop_require "laptop_die"
 laptop_require "laptop_setup_steps"
 laptop_require "laptop_self_ensure_profile_updated"
+laptop_require "laptop_state_set"
+laptop_require "laptop_date_now"
 
 laptop_command__setup_run() {
   # Bootstrap
@@ -18,6 +20,8 @@ laptop_command__setup_run() {
     laptop_self_ensure_profile_updated
     laptop_setup_steps
   fi
+
+  laptop_state_set "setup_last_completed_at" "$(laptop_date_now)"
 }
 
 laptop_command__setup() {
