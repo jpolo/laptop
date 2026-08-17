@@ -128,6 +128,8 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 # export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 # export VSCODIUM_PORTABLE="$XDG_DATA_HOME/vscode"
+export ZIM_HOME="$XDG_CONFIG_HOME/zim"
+export ZIM_CONFIG_FILE="$ZIM_HOME/zimrc"
 
 # Initialize brew (skip if already initialized to avoid the subprocess cost on every shell)
 if [ -z "${HOMEBREW_PREFIX:-}" ]; then
