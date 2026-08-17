@@ -15,7 +15,7 @@ laptop_require "laptop_xcode_ensure_license_accepted"
 laptop_require "laptop_zinit_ensure_updated"
 laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
-laptop_require "laptop_self_state_set"
+laptop_require "laptop_self_state_ensure"
 laptop_require "laptop_date_now"
 
 __LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate")
@@ -77,7 +77,7 @@ laptop_command__upgrade_run() {
     esac
   done
 
-  laptop_self_state_set "upgrade_last_completed_at" "$(laptop_date_now)"
+  laptop_self_state_ensure "upgrade_last_completed_at" "$(laptop_date_now)"
 }
 
 laptop_command__upgrade() {

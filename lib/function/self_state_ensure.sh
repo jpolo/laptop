@@ -5,9 +5,9 @@ laptop_require "laptop_file_var_set"
 # Set a value in the laptop state file.
 #
 # Usage:
-#   laptop_self_state_set <key> <value>
+#   laptop_self_state_ensure <key> <value>
 #
-laptop_self_state_set() {
+laptop_self_state_ensure() {
   local key="$1"
   local value="$2"
   local state_file="$LAPTOP_USER_STATE_DIR/state.vars"

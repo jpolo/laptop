@@ -85,4 +85,4 @@ _LAPTOP_STEP_STATUS_COLUMN=$((COLUMNS - 8))
 _LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"
 
 # Default environment variables
-export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_ini_get "$LAPTOP_USER_CONFIG_FILE" "profile")}
+export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_self_config_get "profile")}
