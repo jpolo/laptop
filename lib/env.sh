@@ -3,7 +3,7 @@
 # shellcheck disable=SC2155
 
 laptop_require "laptop_xdg_dir"
-laptop_require "laptop_ini_get"
+laptop_require "laptop_self_config_get"
 
 if [ -z "${LAPTOP_HOME}" ]; then
   echo "LAPTOP_HOME variable is required"
