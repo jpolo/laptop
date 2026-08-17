@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 
 # Ensure shell completions stay in sync with lib/command and config subcommand surface.
 
@@ -17,15 +18,15 @@ _completion_sync__expected_subcommands() {
 }
 
 _completion_sync__expected_config_types() {
-  sed -n '/case "$config_type" in/,/esac/p' "$LAPTOP_HOME/lib/command/config.sh" \
-    | grep -E '^[[:space:]]+"[a-z]+"\)' \
-    | sed 's/^[[:space:]]*"//;s/").*$//'
+  sed -n '/case "$config_type" in/,/esac/p' "$LAPTOP_HOME/lib/command/config.sh" |
+    grep -E '^[[:space:]]+"[a-z]+"\)' |
+    sed 's/^[[:space:]]*"//;s/").*$//'
 }
 
 _completion_sync__expected_config_actions() {
-  sed -n '/case "$action" in/,/esac/p' "$LAPTOP_HOME/lib/command/config.sh" \
-    | grep -E '^[[:space:]]+"[a-z]+"\)' \
-    | sed 's/^[[:space:]]*"//;s/").*$//'
+  sed -n '/case "$action" in/,/esac/p' "$LAPTOP_HOME/lib/command/config.sh" |
+    grep -E '^[[:space:]]+"[a-z]+"\)' |
+    sed 's/^[[:space:]]*"//;s/").*$//'
 }
 
 _completion_sync__completion_array() {
@@ -41,8 +42,8 @@ _completion_sync__assert_lists_equal() {
   local actual="$3"
   local expected_sorted actual_sorted
 
-  expected_sorted=$(printf '%s\n' $expected | _completion_sync__sorted_words)
-  actual_sorted=$(printf '%s\n' $actual | _completion_sync__sorted_words)
+  expected_sorted=$(printf '%s\n' "$expected" | _completion_sync__sorted_words)
+  actual_sorted=$(printf '%s\n' "$actual" | _completion_sync__sorted_words)
 
   if [[ "$expected_sorted" != "$actual_sorted" ]]; then
     echo "$label: expected [$expected_sorted], got [$actual_sorted]" >&2

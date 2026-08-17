@@ -16,19 +16,19 @@ laptop_self_latest_version() {
   local version
 
   if [[ -n "$LAPTOP_INSTALL_BREW_PACKAGE" ]] && laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then
-    version=$(HOMEBREW_NO_AUTO_UPDATE=1 brew info --json=v1 "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null \
-      | grep -o '"stable":"[^"]*"' | head -1 | cut -d'"' -f4)
+    version=$(HOMEBREW_NO_AUTO_UPDATE=1 brew info --json=v1 "$LAPTOP_INSTALL_BREW_PACKAGE" 2>/dev/null |
+      grep -o '"stable":"[^"]*"' | head -1 | cut -d'"' -f4)
     [[ -n "$version" ]] && echo "$version" && return 0
   fi
 
   if [[ -d "$LAPTOP_HOME/.git" ]]; then
-    version=$(git -C "$LAPTOP_HOME" ls-remote --tags origin 2>/dev/null \
-      | awk '{print $2}' \
-      | grep -E '^refs/tags/v?[0-9]+\.[0-9]+' \
-      | grep -v '\^{}' \
-      | sed 's|refs/tags/||' \
-      | sort -V \
-      | tail -1)
+    version=$(git -C "$LAPTOP_HOME" ls-remote --tags origin 2>/dev/null |
+      awk '{print $2}' |
+      grep -E '^refs/tags/v?[0-9]+\.[0-9]+' |
+      grep -v '\^{}' |
+      sed 's|refs/tags/||' |
+      sort -V |
+      tail -1)
     [[ -n "$version" ]] && echo "$version" && return 0
   fi
 

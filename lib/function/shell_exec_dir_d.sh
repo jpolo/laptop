@@ -15,5 +15,5 @@ laptop_shell_exec_dir_d() {
 
   while IFS= read -r script_file; do
     [[ -n "$script_file" ]] && laptop_shell_exec "$shell" "$script_file"
-  done <<< "$script_files"
+  done <<<"$script_files"
 }

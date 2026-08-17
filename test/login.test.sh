@@ -6,7 +6,7 @@
 
 login_test_profile_dir="$TEST_TMP_DIR/profile/test-profile"
 mkdir -p "$login_test_profile_dir/login.d"
-cat > "$login_test_profile_dir/login.d/0-test.sh" <<'EOF'
+cat >"$login_test_profile_dir/login.d/0-test.sh" <<'EOF'
 #!/usr/bin/env zsh
 echo "login-step-run"
 exit 0
