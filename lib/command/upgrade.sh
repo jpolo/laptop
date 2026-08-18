@@ -12,13 +12,14 @@ laptop_require "laptop_npm_ensure_updated"
 laptop_require "laptop_sdkmanager_ensure_updated"
 laptop_require "laptop_vscode_ensure_updated"
 laptop_require "laptop_xcode_ensure_license_accepted"
+laptop_require "laptop_zimfw_ensure_updated"
 laptop_require "laptop_zinit_ensure_updated"
 laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_self_state_ensure"
 laptop_require "laptop_date_now"
 
-__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate")
+__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "apt-get")
 
 laptop_command__upgrade_detect() {
   local filtered_commands
@@ -67,6 +68,9 @@ laptop_command__upgrade_run() {
       laptop_step_upgrade_start "macOS updated"
       echo ''
       softwareupdate --install --all
+      ;;
+    zimfw)
+      laptop_zimfw_ensure_updated
       ;;
     zinit)
       laptop_zinit_ensure_updated
