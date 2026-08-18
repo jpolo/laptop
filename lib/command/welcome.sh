@@ -2,21 +2,13 @@
 
 laptop_require "laptop_handler_call"
 laptop_require "laptop_log"
+laptop_require "laptop_date_now"
+laptop_require "laptop_date_to_epoch"
 laptop_require "laptop_self_config_get"
 laptop_require "laptop_self_state_get"
 
 __LAPTOP_WELCOME_COMMANDS=(setup upgrade cleanup)
 __LAPTOP_WELCOME_DEFAULT_INTERVALS=(7 7 30)
-
-laptop_command__welcome_timestamp() {
-  local value="$1"
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    date -j -u -f "%Y-%m-%dT%H:%M:%SZ" "$value" "+%s" 2>/dev/null
-  else
-    date -u -d "$value" "+%s" 2>/dev/null
-  fi
-}
 
 laptop_command__welcome_interval() {
   local command="$1"
@@ -59,8 +51,8 @@ laptop_command__welcome_status() {
     return
   fi
 
-  now="$(date -u +%s)"
-  timestamp_seconds="$(laptop_command__welcome_timestamp "$timestamp")"
+  now="$(laptop_date_to_epoch "$(laptop_date_now)")"
+  timestamp_seconds="$(laptop_date_to_epoch "$timestamp")"
   if [ -z "$timestamp_seconds" ]; then
     echo "$label: unknown"
     laptop_log warn "$label last execution date is invalid"
