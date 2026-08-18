@@ -43,6 +43,7 @@ cd "$HOME" || exit 1
 ###   self-upgrade: upgrade only the laptop CLI (Homebrew installs)
 ###   setup: install and setup every tool for the current profile for this device
 ###   upgrade: upgrade all tools and packages
+###   welcome: show the laptop logo and maintenance status
 ###   help: show this message
 ###   version: show version information
 

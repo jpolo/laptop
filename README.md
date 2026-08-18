@@ -126,7 +126,7 @@ Although there are some implementation tradeoffs, it should never limit develope
 
 ## 💡 The `laptop` CLI
 
-Laptop CLI has 4 subcommands `setup`, `upgrade`, `self-upgrade` and `cleanup`
+Laptop CLI has subcommands for setup, upgrades, cleanup, and maintenance status.
 
 More information is available with the command `laptop help`.
 
@@ -160,6 +160,12 @@ Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" 
 - Prune unused data
 
 NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
+
+### `laptop welcome`
+
+Display the laptop logo and the number of days since `setup`, `upgrade`, and `cleanup` were last completed. A warning is shown when a command has never completed or its interval has passed.
+
+The warning intervals can be customized with `LAPTOP_SETUP_INTERVAL`, `LAPTOP_UPGRADE_INTERVAL`, and `LAPTOP_CLEANUP_INTERVAL`. When unset, the corresponding self configuration keys `setup_interval`, `upgrade_interval`, and `cleanup_interval` are used. Defaults are 7, 7, and 30 days.
 
 ## ⭐️ Contributing
 
