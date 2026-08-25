@@ -165,7 +165,7 @@ NPM, docker, mobile development can be quite greedy on disk space. Launch this c
 
 Display the laptop logo and the number of days since `setup`, `upgrade`, and `cleanup` were last completed. A warning is shown when a command has never completed or its interval has passed.
 
-The warning intervals can be customized with `LAPTOP_SETUP_INTERVAL`, `LAPTOP_UPGRADE_INTERVAL`, and `LAPTOP_CLEANUP_INTERVAL`. When unset, the corresponding self configuration keys `setup_interval`, `upgrade_interval`, and `cleanup_interval` are used. Defaults are 7, 7, and 30 days.
+The warning intervals can be customized with `LAPTOP_SETUP_DELAY`, `LAPTOP_UPGRADE_DELAY`, and `LAPTOP_CLEANUP_DELAY`. When unset, the corresponding self configuration keys `setup_interval`, `upgrade_interval`, and `cleanup_interval` are used. Defaults are 7, 7, and 30 days.
 
 ## ⭐️ Contributing
 

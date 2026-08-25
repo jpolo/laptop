@@ -71,6 +71,11 @@ export LAPTOP_COLOR=${LAPTOP_COLOR:-false}
 # Source all functions mode (set to false for performances)
 export LAPTOP_SOURCE_ALL=${LAPTOP_SOURCE_ALL:-false}
 
+# Initialize command completed default delays
+export LAPTOP_SETUP_DELAY=${LAPTOP_SETUP_DELAY:-"7"}
+export LAPTOP_UPGRADE_DELAY=${LAPTOP_UPGRADE_DELAY:-"7"}
+export LAPTOP_CLEANUP_DELAY=${LAPTOP_CLEANUP_DELAY:-"30"}
+
 # Detect screen size
 if [ -z "${COLUMNS}" ]; then
   COLUMNS=$(stty size 2>/dev/null | cut -d' ' -f2)
