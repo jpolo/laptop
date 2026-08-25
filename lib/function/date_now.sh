@@ -5,5 +5,12 @@
 # Usage:
 #   laptop_date_now
 laptop_date_now() {
+  # for mocking
+  if [ -n "$LAPTOP_DATE_NOW" ]; then
+    echo "$LAPTOP_DATE_NOW"
+    return
+  fi
+
+  # default implementation
   date -u +"%Y-%m-%dT%H:%M:%SZ"
 }

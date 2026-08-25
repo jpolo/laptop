@@ -32,3 +32,13 @@ source "$LAPTOP_HOME/lib/init.sh"
 # Source assert.sh
 source "$LAPTOP_HOME/test/assert.sh"
 source "$LAPTOP_HOME/test/assert_snapshot.sh"
+
+# mock functions
+
+.laptop_user_state_reset() {
+  rm -rf "${LAPTOP_USER_STATE_DIR:?}"/*
+}
+
+.laptop_date_now_mock() {
+  export LAPTOP_DATE_NOW="$1"
+}

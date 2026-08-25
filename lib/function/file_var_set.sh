@@ -42,7 +42,7 @@ laptop_file_var_set() {
     assignment="${var_name}=${new_value}"
   fi
 
-  if grep -qE "$var_pattern" "$script_file"; then
+  if [ -f "$script_file" ] && grep -qE "$var_pattern" "$script_file"; then
     local tmp_file
     tmp_file=$(mktemp)
     grep -vE "$var_pattern" "$script_file" >"$tmp_file"
