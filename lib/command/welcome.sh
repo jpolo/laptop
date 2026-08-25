@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_handler_call"
+laptop_require "laptop_ansi"
 laptop_require "laptop_log"
 laptop_require "laptop_date_now"
 laptop_require "laptop_date_to_epoch"
@@ -15,14 +16,12 @@ laptop_command__welcome_status() {
   local command="$1"
   local timestamp days delay now timestamp_seconds label
 
-  case "$command" in
-    setup) label="Setup" ;;
-    upgrade) label="Upgrade" ;;
-    cleanup) label="Cleanup" ;;
-  esac
-
   timestamp="$(laptop_self_command_last_completed_at "$command")"
   delay="$(laptop_self_command_last_completed_delay "$command")"
+
+  label="$(laptop_ansi "bold")laptop ${command}$(laptop_ansi "reset")"
+  config_hint="$(laptop_ansi "dim")(recommended interval: $delay day(s))$(laptop_ansi "reset")"
+
 
   if [ -z "$timestamp" ]; then
     if [ "$command" = "upgrade" ] || [ "$command" = "cleanup" ]; then
@@ -30,7 +29,7 @@ laptop_command__welcome_status() {
       return
     fi
 
-    laptop_log warn "$label never executed"
+    laptop_log warn "$label never executed $config_hint"
     return
   fi
 
@@ -45,7 +44,7 @@ laptop_command__welcome_status() {
   [ "$days" -lt 0 ] && days=0
 
   if [ "$days" -ge "$delay" ]; then
-    laptop_log warn "$label not executed since $days day(s) (interval: $delay day(s))"
+    laptop_log warn "$label not executed since $days day(s) $config_hint"
   fi
 }
 

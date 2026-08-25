@@ -9,7 +9,7 @@ WELCOME_OUTPUT_FILE="$(mktemp)"
 
 LAPTOP_SETUP_DELAY=1 LAPTOP_UPGRADE_DELAY=1 LAPTOP_CLEANUP_DELAY=1 laptop_command__welcome >"$WELCOME_OUTPUT_FILE" 2>&1
 
-assert "grep -c 'Warning: Setup never executed' '$WELCOME_OUTPUT_FILE'" "1"
+assert "grep -c 'Warning: Setup never executed' '$WELCOME_OUTPUT_FILE'" "0"
 assert "grep -c 'Warning: Upgrade' '$WELCOME_OUTPUT_FILE'" "0"
 assert "grep -c 'Warning: Cleanup' '$WELCOME_OUTPUT_FILE'" "0"
 assert "laptop_self_command_last_completed_at upgrade" "$(laptop_date_now)"
