@@ -9,8 +9,7 @@ laptop_require "laptop_disk_available_space"
 laptop_require "laptop_directory_ensure_empty"
 laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_handler_call"
-laptop_require "laptop_self_state_ensure"
-laptop_require "laptop_date_now"
+laptop_require "laptop_self_command_touch"
 
 __LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zinit")
 
@@ -76,7 +75,7 @@ laptop_command__cleanup_run() {
   new_available_space=$(laptop_disk_available_space)
   laptop_command__cleanup_result $((new_available_space - initial_available_space))
 
-  laptop_self_state_ensure "cleanup_last_completed_at" "$(laptop_date_now)"
+  laptop_self_command_touch "cleanup"
 }
 
 laptop_command__cleanup_result() {

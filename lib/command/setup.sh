@@ -7,8 +7,7 @@ laptop_require "laptop_confirm"
 laptop_require "laptop_die"
 laptop_require "laptop_setup_steps"
 laptop_require "laptop_self_ensure_profile_updated"
-laptop_require "laptop_self_state_ensure"
-laptop_require "laptop_date_now"
+laptop_require "laptop_self_command_touch"
 
 laptop_command__setup_run() {
   # Bootstrap
@@ -21,7 +20,7 @@ laptop_command__setup_run() {
     laptop_setup_steps
   fi
 
-  laptop_self_state_ensure "setup_last_completed_at" "$(laptop_date_now)"
+  laptop_self_command_touch "setup"
 }
 
 laptop_command__setup() {
@@ -46,6 +45,6 @@ laptop_command__setup() {
   if laptop_confirm "Continue? (y/N)"; then
     laptop_command__setup_run
   else
-    laptop_die "🛑 Upgrade aborted"
+    laptop_die "🛑 Setup aborted"
   fi
 }

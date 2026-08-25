@@ -16,8 +16,7 @@ laptop_require "laptop_zimfw_ensure_updated"
 laptop_require "laptop_zinit_ensure_updated"
 laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
-laptop_require "laptop_self_state_ensure"
-laptop_require "laptop_date_now"
+laptop_require "laptop_self_command_touch"
 
 __LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "apt-get")
 
@@ -81,7 +80,7 @@ laptop_command__upgrade_run() {
     esac
   done
 
-  laptop_self_state_ensure "upgrade_last_completed_at" "$(laptop_date_now)"
+  laptop_self_command_touch "upgrade"
 }
 
 laptop_command__upgrade() {

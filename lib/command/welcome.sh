@@ -5,7 +5,7 @@ laptop_require "laptop_log"
 laptop_require "laptop_date_now"
 laptop_require "laptop_date_to_epoch"
 laptop_require "laptop_self_config_get"
-laptop_require "laptop_self_state_get"
+laptop_require "laptop_self_command_last_completed_at"
 
 __LAPTOP_WELCOME_COMMANDS=(setup upgrade cleanup)
 __LAPTOP_WELCOME_DEFAULT_INTERVALS=(7 7 30)
@@ -42,7 +42,7 @@ laptop_command__welcome_status() {
     cleanup) label="Cleanup" ;;
   esac
 
-  timestamp="$(laptop_self_state_get "${command}_last_completed_at")"
+  timestamp="$(laptop_self_command_last_completed_at "$command")"
   interval="$(laptop_command__welcome_interval "$command" "$default_interval")"
 
   if [ -z "$timestamp" ]; then
@@ -69,7 +69,7 @@ laptop_command__welcome_status() {
 }
 
 laptop_command__welcome() {
-  laptop_handler_call "logo"
+  laptop_handler_call "welcome-logo"
 
   local index command
   for index in "${!__LAPTOP_WELCOME_COMMANDS[@]}"; do
