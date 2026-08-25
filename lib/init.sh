@@ -48,6 +48,12 @@ laptop_handler__logo() {
   laptop_logo
 }
 
+laptop_handler__welcome-logo() {
+  laptop_require "laptop_logo"
+
+  laptop_logo
+}
+
 laptop_handler__setup_bootstrap() {
   laptop_require "laptop_setup_bootstrap"
   laptop_require "laptop_setup_xdg_desktop"

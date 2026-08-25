@@ -14,6 +14,11 @@ LAPTOP_BREW_AUTOUPDATE="false"
 #   echo "👋 Hello, world!"
 # }
 
+# laptop_handler__welcome-logo() {
+#   echo "👋 Hello, world!"
+# }
+
+
 # laptop_handler__setup_bootstrap() {
 #   laptop_setup_bootstrap
 # }
