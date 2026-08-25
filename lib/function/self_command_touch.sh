@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_self_state_ensure"
+laptop_require "laptop_date_now"
 
 # Mark the command as completed
 #
