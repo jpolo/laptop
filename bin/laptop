@@ -30,6 +30,8 @@ source "$LAPTOP_LIB_DIR/init.sh"
 laptop_require "laptop_color_mode"
 laptop_require "laptop_die"
 laptop_require "laptop_function_exists"
+laptop_require "laptop_self_command_touch"
+laptop_require "laptop_self_command_last_completed_at"
 
 # Change current directory to home (to avoid issues with asdf)
 cd "$HOME" || exit 1
@@ -132,6 +134,13 @@ done
 
 # Set the color mode
 laptop_color_mode "$LAPTOP_COLOR_MODE"
+
+# Initialize default command last completed
+for command in upgrade cleanup; do
+  if [ -z "$(laptop_self_command_last_completed_at "$command")" ]; then
+    laptop_self_command_touch "$command"
+  fi
+done
 
 # Run the program
 case $LAPTOP_SUBCOMMAND in
