@@ -12,16 +12,20 @@
 # @see src/init.mk
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-## Optional Makefile versioned that override any value (default "Makefile.config.mk")
-MAKEFILE_CONFIG ?= Makefile.config.mk
-## Optional Makefile unversioned that override any value (default "Makefile.local.mk")
-MAKEFILE_LOCAL ?= Makefile.local.mk
+## Common Makefile extensions resolved for optional overrides (bare name is always tried)
+MAKEFILE_EXTENSIONS ?= .mk .make
 
-# Include Makefile.local if it exists
--include $(wildcard $(MAKEFILE_LOCAL:.mk=) $(MAKEFILE_LOCAL) $(MAKEFILE_LOCAL:.mk=).*)
+# Candidates for a stem: Makefile.local Makefile.local.mk Makefile.local.make
+makefile-candidates = $(1) $(addprefix $(1),$(MAKEFILE_EXTENSIONS))
 
-# Include Makefile.config if it exists
--include $(wildcard $(MAKEFILE_CONFIG:.mk=) $(MAKEFILE_CONFIG) $(MAKEFILE_CONFIG:.mk=).*)
+# Optional versioned Makefile(s) that override defaults (override the whole list to bypass extension logic)
+MAKEFILE_CONFIG := $(call makefile-candidates,Makefile.config)
+# Optional unversioned Makefile(s) that override defaults (override the whole list to bypass extension logic)
+MAKEFILE_LOCAL := $(call makefile-candidates,Makefile.local)
+
+# Include config first, then local (local overrides config)
+-include $(wildcard $(MAKEFILE_CONFIG))
+-include $(wildcard $(MAKEFILE_LOCAL))
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # CONSOLE
