@@ -103,7 +103,7 @@ else ifeq ($(NODEJS_PACKAGE_MANAGER),pnpm)
 	ifneq ($(call filter-false,$(NODEJS_FROZEN)),)
 		NODEJS_INSTALL := pnpm install --frozen-lockfile
 	else
-		NODEJS_INSTALL := pnpm install --no-frozen-lockfile
+		NODEJS_INSTALL := pnpm install
 	endif
 export PNPM_CONFIG_CACHE
 else ifeq ($(NODEJS_PACKAGE_MANAGER),bun)
