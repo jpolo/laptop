@@ -8,12 +8,15 @@ laptop_package_ensure__pack:cli-tools() {
 
   laptop_package_ensure "gitmoji"
   # laptop_package_ensure "google-cloud-sdk" -> TODO: Change method to use asdf install
-  laptop_package_ensure "pv"
-  laptop_package_ensure "tmux"
-  laptop_package_ensure "tree"
+  laptop_package_ensure "bat"
+  laptop_package_ensure "fd"
   laptop_package_ensure "fzf"
   laptop_package_ensure "gh"
+  laptop_package_ensure "pv"
+  laptop_package_ensure "ripgrep"
   laptop_package_ensure "sops"
+  laptop_package_ensure "tmux"
+  laptop_package_ensure "tree"
   laptop_package_ensure "starship"
   laptop_package_ensure "watchman"
   # laptop_package_ensure "trash"
