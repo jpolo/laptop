@@ -2,6 +2,7 @@
 
 laptop_require "laptop_self_state_ensure"
 laptop_require "laptop_date_now"
+laptop_require "laptop_self_version"
 
 # Mark the command as completed
 #
@@ -12,5 +13,6 @@ laptop_self_command_touch() {
   local command="$1"
   local timestamp="${2:-$(laptop_date_now)}"
 
+  laptop_self_state_ensure "${command}_version" "$(laptop_self_version)"
   laptop_self_state_ensure "${command}_last_completed_at" "$timestamp"
 }
