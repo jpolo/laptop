@@ -1,4 +1,5 @@
 # shellcheck disable=SC2148
+# shellcheck disable=SC2034
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # ZSH startup script : specific config
 #
@@ -73,4 +74,10 @@ if command -v zinit &>/dev/null; then
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
     OMZ::plugins/colored-man-pages
+
+  # Set laptop welcome as welcome message
+  if command -v laptop &>/dev/null; then
+    ZSH_WELCOME_MESSAGE_COMMAND=${ZSH_WELCOME_MESSAGE:-"laptop welcome"}
+    zinit light "w5s/zsh-welcome-message"
+  fi
 fi
