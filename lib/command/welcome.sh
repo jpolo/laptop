@@ -9,6 +9,7 @@ laptop_require "laptop_self_config_get"
 laptop_require "laptop_self_command_last_completed_at"
 laptop_require "laptop_self_command_last_completed_delay"
 laptop_require "laptop_self_command_touch"
+laptop_require "laptop_uptime"
 
 __LAPTOP_WELCOME_COMMANDS=(setup upgrade cleanup)
 
@@ -57,8 +58,8 @@ laptop_command__welcome() {
     laptop_command__welcome_col "" ""
     laptop_command__welcome_gituser;
   } | column -t -s $'\t'
-  
-  
+
+
   local index command
   for index in "${!__LAPTOP_WELCOME_COMMANDS[@]}"; do
     command="${__LAPTOP_WELCOME_COMMANDS[$index]}"
@@ -67,7 +68,11 @@ laptop_command__welcome() {
 }
 
 laptop_command__welcome_os() {
-  laptop_command__welcome_col "Operating system:" "$(lsb_release -ds) ($(uname -o))"
+  if [ "$(uname -s)" = "Darwin" ]; then
+    laptop_command__welcome_col "Operating system:" "$(sw_vers -productName) $(sw_vers -productVersion) (Darwin)"
+  else
+    laptop_command__welcome_col "Operating system:" "$(lsb_release -ds) ($(uname -o))"
+  fi
 }
 
 laptop_command__welcome_kernel() {
@@ -93,7 +98,9 @@ laptop_command__welcome_col() {
 }
 
 laptop_print_uptime() {
-  local up_seconds="$(/usr/bin/cut -d. -f1 /proc/uptime)"
+  local up_seconds
+  up_seconds="$(laptop_uptime)"
+
   local mins=$(( (up_seconds / 60) % 60 ))
   local hours=$(( (up_seconds / 3600) % 24 ))
   local days=$(( up_seconds / 86400 ))

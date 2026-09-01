@@ -9,6 +9,11 @@ WELCOME_OUTPUT_FILE="$(mktemp)"
 WELCOME_MOCK_NOW="2024-06-15T12:00:00Z"
 .laptop_date_now_mock "$WELCOME_MOCK_NOW"
 
+## macOS support ##############################################################
+
+assert "(uname() { printf 'Darwin\\n'; }; sw_vers() { case \"\$1\" in -productName) printf 'macOS\\n' ;; -productVersion) printf '14.5\\n' ;; esac; }; laptop_command__welcome_os)" $'\tOperating system:\tmacOS 14.5 (Darwin)'
+assert "(uname() { printf 'Darwin\\n'; }; sysctl() { printf '{ sec = 1718452680, usec = 0 }\\n'; }; laptop_date_now() { printf '2024-06-15T12:00:00Z\\n'; }; laptop_date_to_epoch() { printf '1718452800\\n'; }; laptop_print_uptime)" "00 hours 02 minutes"
+
 
 # Run a single "laptop welcome" command block with a given delay and
 # capture its output.
