@@ -77,7 +77,7 @@ if command -v zinit &>/dev/null; then
 
   # Set laptop welcome as welcome message
   if command -v laptop &>/dev/null; then
-    ZSH_WELCOME_MESSAGE_COMMAND=${ZSH_WELCOME_MESSAGE:-"laptop welcome"}
+    ZSH_WELCOME_MESSAGE_COMMAND=${ZSH_WELCOME_MESSAGE_COMMAND:-"laptop welcome"}
     zinit light "w5s/zsh-welcome-message"
   fi
 fi
