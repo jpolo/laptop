@@ -50,10 +50,51 @@ laptop_command__welcome_status() {
 
 laptop_command__welcome() {
   laptop_handler_call "welcome-logo"
-
+  {
+    laptop_command__welcome_today;
+    laptop_command__welcome_os;
+    laptop_command__welcome_kernel;
+    laptop_command__welcome_uptime
+  } | column -t -s $'\t'
+  
+  
   local index command
   for index in "${!__LAPTOP_WELCOME_COMMANDS[@]}"; do
     command="${__LAPTOP_WELCOME_COMMANDS[$index]}"
     laptop_command__welcome_status "$command"
   done
+}
+
+laptop_command__welcome_today() {
+  laptop_command__welcome_col "Today is:" "$(date +'%A, %B %d, %Y')"
+}
+
+laptop_command__welcome_os() {
+  laptop_command__welcome_col "Operating system:" "$(lsb_release -ds) ($(uname -o))"
+}
+
+laptop_command__welcome_kernel() {
+  laptop_command__welcome_col "Kernel Information:" "$(uname -smr)"
+}
+
+laptop_command__welcome_uptime() {
+  laptop_command__welcome_col "Uptime:" "$(laptop_ansi "white")Host up for $(laptop_ansi "cyan")$(laptop_print_uptime)"
+}
+
+laptop_command__welcome_col() {
+  echo -e "$(laptop_ansi "magenta")\\t${1}\\t$(laptop_ansi "cyan")${2}$(laptop_ansi "white")"
+}
+
+laptop_print_uptime() {
+  local up_seconds="$(/usr/bin/cut -d. -f1 /proc/uptime)"
+  local mins=$(( (up_seconds / 60) % 60 ))
+  local hours=$(( (up_seconds / 3600) % 24 ))
+  local days=$(( up_seconds / 86400 ))
+  local uptime
+  if [ "$days" -eq 0 ]; then
+    uptime="$(printf "%02d hours %02d minutes" "$hours" "$mins")"
+  else
+    uptime="$(printf "%d days %02d hours %02d minutes" "$days" "$hours" "$mins")"
+  fi
+  echo "$uptime"
 }
