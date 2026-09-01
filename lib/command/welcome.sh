@@ -53,7 +53,9 @@ laptop_command__welcome() {
   {
     laptop_command__welcome_os;
     laptop_command__welcome_kernel;
-    laptop_command__welcome_uptime
+    laptop_command__welcome_uptime;
+    laptop_command__welcome_col "" ""
+    laptop_command__welcome_gituser;
   } | column -t -s $'\t'
   
   
@@ -74,6 +76,16 @@ laptop_command__welcome_kernel() {
 
 laptop_command__welcome_uptime() {
   laptop_command__welcome_col "Uptime:" "$(laptop_ansi "white")Host up for $(laptop_ansi "cyan")$(laptop_print_uptime)"
+}
+
+laptop_command__welcome_gituser() {
+  # Display the Git user if set, if not display nothing
+  local git_user git_email
+  git_user="$(git config --global user.name)"
+  git_email="$(git config --global user.email)"
+  if [ -n "$git_user" ] && [ -n "$git_email" ]; then
+    laptop_command__welcome_col "Git User:" "$git_user <$git_email>"
+  fi
 }
 
 laptop_command__welcome_col() {
