@@ -51,7 +51,6 @@ laptop_command__welcome_status() {
 laptop_command__welcome() {
   laptop_handler_call "welcome-logo"
   {
-    laptop_command__welcome_today;
     laptop_command__welcome_os;
     laptop_command__welcome_kernel;
     laptop_command__welcome_uptime
@@ -63,10 +62,6 @@ laptop_command__welcome() {
     command="${__LAPTOP_WELCOME_COMMANDS[$index]}"
     laptop_command__welcome_status "$command"
   done
-}
-
-laptop_command__welcome_today() {
-  laptop_command__welcome_col "Today is:" "$(date +'%A, %B %d, %Y')"
 }
 
 laptop_command__welcome_os() {
