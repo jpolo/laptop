@@ -46,6 +46,7 @@ laptop_handler__logo() {
   laptop_require "laptop_logo"
 
   laptop_logo
+  echo ""
 }
 
 laptop_handler__welcome-logo() {
