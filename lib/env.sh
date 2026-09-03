@@ -91,3 +91,6 @@ _LAPTOP_SET_COL="\\033[${_LAPTOP_STEP_STATUS_COLUMN}G"
 
 # Default environment variables
 export LAPTOP_PROFILE=${LAPTOP_PROFILE:-$(laptop_self_config_get "profile")}
+
+# Disable welcome message to avoid extra output during script execution
+export ZSH_WELCOME_MESSAGE_ENABLED=false
