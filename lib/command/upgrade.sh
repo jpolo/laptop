@@ -9,6 +9,7 @@ laptop_require "laptop_self_ensure_updated"
 laptop_require "laptop_brew_ensure_updated"
 laptop_require "laptop_asdf_ensure_updated"
 laptop_require "laptop_npm_ensure_updated"
+laptop_require "laptop_androidsdk_ensure_updated"
 laptop_require "laptop_sdkmanager_ensure_updated"
 laptop_require "laptop_vscode_ensure_updated"
 laptop_require "laptop_xcode_ensure_license_accepted"
@@ -18,7 +19,7 @@ laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_self_command_touch"
 
-__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "apt-get")
+__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "android" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "apt-get")
 
 laptop_command__upgrade_detect() {
   local filtered_commands
@@ -39,6 +40,9 @@ laptop_command__upgrade_run() {
   filtered_commands=$(laptop_filter_command_exists "${__LAPTOP_UPGRADE_TOOLS[@]}")
   for tool in $filtered_commands; do
     case "$tool" in
+    android)
+      laptop_androidsdk_ensure_updated
+      ;;
     apt-get)
       laptop_apt_ensure_updated
       ;;
