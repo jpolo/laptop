@@ -23,10 +23,10 @@
 # 2/ HOWTO ADD ZSH PLUGIN ?
 # ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 #
-# This file uses zinit plugin manager (https://zdharma-continuum.github.io/)
+# Plugins are declared in $ZIM_CONFIG_FILE (zimfw's zimrc).
 #
-# Example 1: Install and load OhMyZSH plugin named "ruby"
-# `zinit snippet OMZP::ruby`
+# Example: Install and load an Oh-My-Zsh plugin named "ruby" with:
+# `zmodule ohmyzsh/ohmyzsh --root plugins/ruby`
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 # Enable ZPROF for profiling when ZPROF environment variable is set
@@ -75,29 +75,41 @@ zshrc_profile() {
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
-# ZSH package manager : zi
+# ZSH package manager : zimfw
 ##
-ZINIT_HOME="$XDG_CACHE_HOME/zinit"
-typeset -Ag ZINIT
-typeset -gx ZINIT[HOME_DIR]="$ZINIT_HOME"
-typeset -gx ZINIT[BIN_DIR]="$ZINIT_HOME/bin"
-typeset -gx ZINIT[ZCOMPDUMP_PATH]="$XDG_CACHE_HOME/zsh/zcompdump"
+: "${ZIM_HOME:=${XDG_CONFIG_HOME:-$HOME/.config}/zim}"
+: "${ZIM_CONFIG_FILE:=$ZIM_HOME/zimrc}"
+export ZIM_HOME ZIM_CONFIG_FILE
 
-if [[ ! -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
-  rm -rf "${ZINIT[BIN_DIR]}"
-  # compaudit | xargs chown -R "$(whoami)" "$ZINIT[HOME_DIR]"
-  # compaudit | xargs chmod -R go-w "$ZINIT[HOME_DIR]"
-  command git clone https://github.com/zdharma-continuum/zinit.git "${ZINIT[BIN_DIR]}"
-  # zcompile "${ZINIT[BIN_DIR]}/bin/zi.zsh"
+# Load Homebrew completions before zimfw initializes completion.
+if type brew &>/dev/null; then
+  : "${HOMEBREW_PREFIX:=$(brew --prefix)}"
+  FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH"
 fi
 
-if [[ -f "${ZINIT[BIN_DIR]}/zinit.zsh" ]]; then
-  source "${ZINIT[BIN_DIR]}/zinit.zsh"
-  autoload -Uz _zinit
-  (( ${+_comps} )) && _comps[zinit]=_zinit
+if [[ ! -s "$ZIM_HOME/zimfw.zsh" ]]; then
+  command mkdir -p "$ZIM_HOME"
+  if command -v curl &>/dev/null; then
+    command curl -fsSL -o "$ZIM_HOME/zimfw.zsh" https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh || command rm -f "$ZIM_HOME/zimfw.zsh"
+  elif command -v wget &>/dev/null; then
+    command wget -nv -O "$ZIM_HOME/zimfw.zsh" https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh || command rm -f "$ZIM_HOME/zimfw.zsh"
+  else
+    echo "zimfw cannot be installed: curl or wget is required" >&2
+  fi
+fi
+
+if [[ -s "$ZIM_HOME/zimfw.zsh" ]]; then
+  if [[ ! -s "$ZIM_HOME/init.zsh" || "$ZIM_CONFIG_FILE" -nt "$ZIM_HOME/init.zsh" ]]; then
+    source "$ZIM_HOME/zimfw.zsh" init
+  fi
+  if [[ -f "$ZIM_HOME/init.zsh" ]]; then
+    source "$ZIM_HOME/init.zsh"
+  else
+    echo "zimfw initialization failed" >&2
+  fi
 else
-  echo "zinit cannot be installed" >&2
-fi;
+  echo "zimfw cannot be installed" >&2
+fi
 
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 ##
@@ -111,14 +123,6 @@ fi;
 if [ ! -d "$(dirname $HISTFILE)" ]; then
   mkdir -p "$(dirname $HISTFILE)"
   touch $HISTFILE
-fi
-
-##
-# Laptop installation as a zinit plugin
-##
-# Install also as a zsh plugin when laptop command is not available
-if [ -n "$LAPTOP_GIT_REMOTE" ] && ! command -v laptop &>/dev/null; then
-  zinit light "$LAPTOP_GIT_REMOTE"
 fi
 
 ##

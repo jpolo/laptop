@@ -1,0 +1,48 @@
+# Zimfw module configuration. Add plugins here with zmodule.
+
+zmodule environment
+zmodule input
+
+# asdf, with auto install and optimized usage (replaces the OMZ asdf plugin, which crashes under zimfw)
+zmodule asdf
+
+# Prompt (starship binary is downloaded from GitHub releases on Linux when not provided by a package manager)
+zmodule starship --use mkdir \
+  --on-pull '[[ $OSTYPE == linux* ]] && curl -fsSL "https://github.com/starship/starship/releases/latest/download/starship-$(uname -m)-unknown-linux-musl.tar.gz" | tar -xz' \
+  --cmd '(( ${+commands[starship]} )) || path=({} $path)'
+zmodule joke/zim-starship
+
+# Suggestions and history search
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-history-substring-search
+zmodule zsh-users/zsh-history-substring-search --cmd 'bindkey "^[[A" history-substring-search-up; bindkey "^[[B" history-substring-search-down'
+
+# Completions
+zmodule zsh-users/zsh-completions --fpath src
+zmodule ohmyzsh/ohmyzsh --fpath plugins/docker/completions --if-command docker
+zmodule ohmyzsh/ohmyzsh --fpath plugins/docker-compose --if-command docker
+
+# Oh-My-Zsh libraries and plugins
+zmodule ohmyzsh/ohmyzsh --root lib --source history.zsh
+zmodule ohmyzsh/ohmyzsh --root lib --source clipboard.zsh
+zmodule ohmyzsh/ohmyzsh --root lib --source compfix.zsh
+zmodule ohmyzsh/ohmyzsh --root lib --source correction.zsh
+zmodule ohmyzsh/ohmyzsh --root lib --source grep.zsh
+zmodule ohmyzsh/ohmyzsh --root lib --source spectrum.zsh
+zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
+
+# Additional plugins
+zmodule hlissner/zsh-autopair
+zmodule w5s/zsh-welcome-message --if-command laptop \
+  --cmd 'ZSH_WELCOME_MESSAGE_COMMAND=${ZSH_WELCOME_MESSAGE_COMMAND:-"laptop welcome"}; source {}/zsh-welcome-message.plugin.zsh'
+ 
+# Must come after modules that contribute to fpath, or compinit gets called twice
+zmodule completion
+
+# Load syntax highlighting last, after completion.
+zmodule zdharma-continuum/fast-syntax-highlighting
+
+# Install laptop as a plugin when its executable is unavailable.
+if [[ -n ${LAPTOP_GIT_REMOTE:-} ]] && ! (( ${+commands[laptop]} )); then
+  zmodule "$LAPTOP_GIT_REMOTE"
+fi

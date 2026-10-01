@@ -9,6 +9,7 @@ LAPTOP_PROFILE_DEFAULT_DIR=$(laptop_profile_dir default)
 # Ensure ZSH Configuration
 laptop_file_ensure_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/starship.toml" "${STARSHIP_CONFIG:-$(laptop_xdg_dir "config")/starship/config.toml}"
 laptop_file_ensure_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/.config/zsh/init" "$(laptop_xdg_dir "config")/zsh/init"
+# zimrc is installed earlier in laptop_setup_default_shell, before this shell starts
 laptop_file_ensure_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/.config/zsh/init.d/global.sh" "$(laptop_xdg_dir "config")/zsh/init.d/global.sh" --force
 laptop_file_ensure_template "$LAPTOP_PROFILE_DEFAULT_DIR/resource/.config/zsh/profile" "$(laptop_xdg_dir "config")/zsh/profile"
 
