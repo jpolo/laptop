@@ -8,8 +8,8 @@ laptop_command_exists() {
   local tool
   tool="$1"
   case "$tool" in
-  zinit)
-    if env "$SHELL" --login -i -c "command -v $tool" &>/dev/null; then
+  zimfw | zinit)
+    if env zsh --login -i -c "command -v \"$tool\"" &>/dev/null; then
       return 0
     fi
     ;;

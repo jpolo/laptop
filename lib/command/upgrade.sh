@@ -19,7 +19,7 @@ laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_self_command_touch"
 
-__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "zinit" "android" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "apt-get")
+__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "android" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "zinit" "apt-get")
 
 laptop_command__upgrade_detect() {
   local filtered_commands

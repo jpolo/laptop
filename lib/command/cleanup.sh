@@ -11,7 +11,7 @@ laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_handler_call"
 laptop_require "laptop_self_command_touch"
 
-__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zinit")
+__LAPTOP_CLEANUP_TOOLS=("brew" "docker" "gem" "npm" "pod" "xcrun" "zimfw" "zinit")
 
 laptop_command__cleanup_detect() {
   local filtered_commands
@@ -57,6 +57,10 @@ laptop_command__cleanup_run() {
     xcrun)
       laptop_step_start "- Clean XCode simulators"
       laptop_step_eval "xcrun simctl delete unavailable"
+      ;;
+    zimfw)
+      laptop_step_start "- Cleanup zimfw"
+      laptop_step_eval "env zsh --login -i -c \"zimfw clean\""
       ;;
     zinit)
       laptop_step_start "- Cleanup zinit"
