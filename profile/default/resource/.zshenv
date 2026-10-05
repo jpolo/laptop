@@ -1,13 +1,9 @@
-# shellcheck disable=SC2148
-# shellcheck disable=SC2034
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-# ZSH startup script : specific config
+# ZSH startup script : always loaded
+# >>>.zshenv<<< → .zprofile → .zshrc → .zlogin → .zlogout
 #
-# 🔒🚨 Warning : this file was automatically generated, editing it is not recommended
+# 🚨 Warning : this file was automatically generated, editing it is not recommended
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-# shellcheck disable=SC2148
-# Laptop-managed plugin declarations are in $ZIM_CONFIG_FILE.
-if command -v laptop &>/dev/null; then
-	ZSH_WELCOME_MESSAGE_COMMAND=${ZSH_WELCOME_MESSAGE_COMMAND:-"laptop welcome"}
-fi
+# Must be set here: Ubuntu's /etc/zsh/zshrc reads it before ~/.zshrc, and zimfw calls compinit itself
+skip_global_compinit=1

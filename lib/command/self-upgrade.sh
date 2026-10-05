@@ -21,7 +21,7 @@ laptop_command__self-upgrade() {
 }
 
 # Upgrade only the laptop CLI (when installed via Homebrew).
-# When installed via git/zinit, use 'laptop upgrade' to update from the remote.
+# When installed via git/zimfw, use 'laptop upgrade' to update from the remote.
 #
 laptop_command__self-upgrade_run() {
   if [ -z "$LAPTOP_INSTALL_BREW_PACKAGE" ] || ! laptop_brew_package_installed "$LAPTOP_INSTALL_BREW_PACKAGE"; then

@@ -3,7 +3,7 @@
 Shell :
 
 - [ZSH] default shell
-- [ZDharmaContinuum/zinit] default zsh plugin manager
+- [zimfw] default zsh plugin manager
 - [Starship] Cross-shell prompt
 - [SSH] default algorithm `ed25519` [(explanation)](https://docs.gitlab.com/ee/user/ssh.html#ed25519-ssh-keys)
 
@@ -40,5 +40,5 @@ Misc :
 [SSH]: https://en.wikipedia.org/wiki/Secure_Shell
 [Visual Studio Code]: https://code.visualstudio.com/
 [Watchman]: https://facebook.github.io/watchman/
-[ZDharmaContinuum/zinit]: https://zdharma-continuum.github.io/
+[zimfw]: https://zimfw.sh/
 [ZSH]: http://www.zsh.org/

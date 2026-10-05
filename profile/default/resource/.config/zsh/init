@@ -5,14 +5,13 @@
 # 📝 This file can be modified and will never be overwritten by installation scripts
 #⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
 
-# Examples of common plugins
-# ⬇ Uncomment one of these line will install the plugin
+# Plugin modules belong in $ZIM_CONFIG_FILE, not this runtime config file.
+# Add modules with zmodule, for example:
 #
-# zinit snippet OMZP::common-aliases
-# zinit snippet OMZP::git
-# zinit snippet OMZP::bundler
-# zinit snippet OMZP::git
-# zinit snippet OMZP::ruby
-# zinit snippet OMZP::rails
+# zmodule ohmyzsh/ohmyzsh --root plugins/common-aliases
+# zmodule ohmyzsh/ohmyzsh --root plugins/git
+# zmodule ohmyzsh/ohmyzsh --root plugins/bundler
+# zmodule ohmyzsh/ohmyzsh --root plugins/ruby
+# zmodule ohmyzsh/ohmyzsh --root plugins/rails
 
-# 🟠 DO NOT ENABLE zinit snippet OMZP::dotenv
+# Be careful with dotenv plugins because they execute project environment files.

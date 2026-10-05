@@ -94,14 +94,18 @@ Although there are some implementation tradeoffs, it should never limit develope
       4. ✍️ `$XDG_DATA_HOME/zsh/init` : local machine settings as file
       5. ✍️ `.zshrc.local` : local machine settings (alternate solution)
 
-  Example `$XDG_CONFIG_HOME/zsh/init` :
+  Plugin modules are managed separately in `$ZIM_CONFIG_FILE` (by default, `$XDG_CONFIG_HOME/zim/zimrc`). Add modules there with zimfw's `zmodule` command. The default file is created if missing and is not overwritten on later setup runs.
+
+  Existing custom zinit declarations are not converted automatically. Move and manually convert those declarations to zimfw syntax in `zimrc`; the old zinit cache is left untouched.
+
+  Zimfw initializes modules in `zimrc` order through a generated startup script; zinit's `wait`-based deferred loading is not carried over.
+
+  Example `$ZIM_CONFIG_FILE` :
 
   ```shell
-  # Load OhMyZSH ruby plugin
-  zinit snippet OMZP::ruby
-  # Load OhMyZSH rails plugin
-  zinit snippet OMZP::rails
-
+  # Load Oh-My-Zsh ruby and rails plugins
+  zmodule ohmyzsh/ohmyzsh --root plugins/ruby
+  zmodule ohmyzsh/ohmyzsh --root plugins/rails
   ```
 
 </details>
@@ -138,6 +142,8 @@ Try to install all software from the current profile (that was configured at fir
 
 Detect many tools (`brew`, `asdf`, etc) and launch their respective update command.
 
+For zimfw, this updates installed modules and upgrades the zimfw manager itself. If zinit is detected instead, it runs `zinit update --all`.
+
 This will also update the laptop plugin and executable itself.
 
 Launch this command regularly to be up to date and avoid keeping old software with potential security vulnerabilities.
@@ -158,6 +164,8 @@ Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" 
 
 - Remove cache
 - Prune unused data
+
+For zimfw, this runs `zimfw clean` to remove compiled files and the completion dumpfile. It does not uninstall modules. If zinit is detected instead, it runs `zinit cclear` and `zinit delete --clean`.
 
 NPM, docker, mobile development can be quite greedy on disk space. Launch this command regularly to avoid to be out of free disk space.
 

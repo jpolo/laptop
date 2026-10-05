@@ -18,8 +18,11 @@ laptop_setup_default_shell() {
 
   laptop_shell_ensure_var "$HOME/.profile" "LAPTOP_GIT_REMOTE" "${LAPTOP_GIT_REMOTE}" --export
 
+  laptop_file_ensure_template "$profile_dir/resource/.zshenv" "$HOME/.zshenv" --force
   laptop_file_ensure_template "$profile_dir/resource/.zshrc" "$HOME/.zshrc" --force
   laptop_file_ensure_template "$profile_dir/resource/.zshrc.local" "$HOME/.zshrc.local"
+  # Install zimrc before any zsh login shell runs, otherwise zimfw auto-creates an empty one
+  laptop_file_ensure_template "$profile_dir/resource/.config/zim/zimrc" "$(laptop_xdg_dir "config")/zim/zimrc"
   # Legacy migration
   laptop_file_moved "$(laptop_xdg_dir "data")/zsh/personal.sh" "$(laptop_xdg_dir "config")/zsh/init"
   laptop_file_moved "$(laptop_xdg_dir "data")/zsh/init.d/global.sh" "$(laptop_xdg_dir "config")/zsh/init.d/global.sh"

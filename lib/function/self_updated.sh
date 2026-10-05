@@ -114,7 +114,7 @@ _laptop_self_updated_live_check() {
     return 0 # Up-to-date
   fi
 
-  # Git install (e.g. zinit or manual clone): check if remote is ahead
+  # Git install (e.g. zimfw or manual clone): check if remote is ahead
   # Use ls-remote instead of fetch so we don't download objects on every check
   if [[ -d "$LAPTOP_HOME/.git" ]]; then
     current_branch=$(git -C "$LAPTOP_HOME" rev-parse --abbrev-ref HEAD 2>/dev/null)
