@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>w5s/renovate-config:library"
+    "github>w5s/renovate-config:default"
   ],
   "assigneesSampleSize": 1,
   "assignees": ["team:maintainers"]
