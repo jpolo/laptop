@@ -33,6 +33,7 @@ _laptop_welcome_status_with_delay() {
     export LAPTOP_CLEANUP_DELAY=9999
 
     export "$env_name=$delay"
+    # shellcheck disable=SC2329 # invoked indirectly by laptop_command__welcome_status
     laptop_profile_version() { echo "$WELCOME_PROFILE_VERSION"; }
     laptop_command__welcome_status "$command"
   ) >"$WELCOME_OUTPUT_FILE" 2>&1
@@ -41,6 +42,7 @@ _laptop_welcome_status_with_delay() {
 _laptop_touch_profile_version() {
   local timestamp="$1"
   (
+    # shellcheck disable=SC2329 # invoked indirectly by laptop_self_command_touch
     laptop_profile_version() { echo "$WELCOME_PROFILE_VERSION"; }
     laptop_self_command_touch "setup" "$timestamp"
   )
@@ -132,6 +134,7 @@ _laptop_touch_profile_version "2024-06-14T12:00:00Z"
 laptop_self_command_touch "upgrade" "2024-06-01T12:00:00Z" # 14 days before now, overdue
 laptop_self_command_touch "cleanup" "2024-06-14T12:00:00Z" # 1 day before now, not due
 (
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_command__welcome
   laptop_profile_version() { echo "$WELCOME_PROFILE_VERSION"; }
   LAPTOP_SETUP_DELAY=2 LAPTOP_UPGRADE_DELAY=7 LAPTOP_CLEANUP_DELAY=7 \
     laptop_command__welcome

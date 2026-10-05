@@ -19,19 +19,19 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
     - name: ⚙️ Setup
-      uses: w5s/actions/setup@508116754f59434fb4d3b809d928bbfd0fb39410 # main
+      uses: w5s/actions/setup@f8e0956f20e76a8efdef74bf2ea6770c59768b3d # main
 
     - name: ⚙️ Setup tools
       run: |
         brew install coreutils
 
     - name: ⚙️ Project Setup
-      uses: w5s/actions/task@508116754f59434fb4d3b809d928bbfd0fb39410 # main
+      uses: w5s/actions/task@f8e0956f20e76a8efdef74bf2ea6770c59768b3d # main
       with:
         task: setup
 
     - name: 🔍 Validate
-      uses: w5s/actions/task@508116754f59434fb4d3b809d928bbfd0fb39410 # main
+      uses: w5s/actions/task@f8e0956f20e76a8efdef74bf2ea6770c59768b3d # main
       with:
         task: validate
       env:

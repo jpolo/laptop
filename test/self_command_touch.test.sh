@@ -10,6 +10,7 @@ assert "laptop_self_state_get upgrade_self_version" "$(laptop_self_version)"
 assert "laptop_self_state_get upgrade_profile_version" "$(laptop_profile_version)"
 
 (
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_self_command_touch
   laptop_profile_version() { echo "9.9.9"; }
   laptop_self_command_touch "setup" "2024-01-02T03:04:05Z"
 )
