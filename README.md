@@ -163,9 +163,11 @@ NPM, docker, mobile development can be quite greedy on disk space. Launch this c
 
 ### `laptop welcome`
 
-Display the laptop logo and the number of days since `setup`, `upgrade`, and `cleanup` were last completed. A warning is shown when a command has never completed or its interval has passed.
+Display the laptop logo and maintenance status for `setup`, `upgrade`, and `cleanup`.
 
-The warning intervals can be customized with `LAPTOP_SETUP_DELAY`, `LAPTOP_UPGRADE_DELAY`, and `LAPTOP_CLEANUP_DELAY`. When unset, the corresponding self configuration keys `setup_interval`, `upgrade_interval`, and `cleanup_interval` are used. Defaults are 7, 7, and 30 days.
+`setup` is warned only when the current laptop profile version has not been launched. The grace period starts the first time that version is seen. `upgrade` and `cleanup` warn when their last completion interval has passed.
+
+The warning intervals can be customized with `LAPTOP_SETUP_DELAY`, `LAPTOP_UPGRADE_DELAY`, and `LAPTOP_CLEANUP_DELAY`. When unset, the corresponding self configuration keys `setup_delay`, `upgrade_delay`, and `cleanup_delay` are used. Defaults are 2, 7, and 30 days.
 
 ## ⭐️ Contributing
 

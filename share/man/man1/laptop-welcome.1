@@ -5,20 +5,20 @@ laptop-welcome \- Show the laptop logo and maintenance status
 .SH SYNOPSIS
 .B laptop welcome
 .SH DESCRIPTION
-The welcome subcommand always displays the laptop logo and reports the number of days since setup, upgrade, and cleanup were last completed.
+The welcome subcommand always displays the laptop logo and reports maintenance status for setup, upgrade, and cleanup.
 .PP
-It warns when a command has never completed or when its configured interval has passed.
+It warns when setup has not been launched for the current laptop profile version after the configured grace period, or when upgrade or cleanup have exceeded their completion interval.
 .SH INTERVALS
 Intervals are measured in days. Environment variables take precedence over the laptop self configuration file:
 .TP
 .B LAPTOP_SETUP_DELAY
-Fallback configuration key: setup_interval. Default: 7 days.
+Grace period after a new profile version is first seen before warning that setup has not been launched. Fallback configuration key: setup_delay. Default: 2 days.
 .TP
 .B LAPTOP_UPGRADE_DELAY
-Fallback configuration key: upgrade_interval. Default: 7 days.
+Fallback configuration key: upgrade_delay. Default: 7 days.
 .TP
 .B LAPTOP_CLEANUP_DELAY
-Fallback configuration key: cleanup_interval. Default: 30 days.
+Fallback configuration key: cleanup_delay. Default: 30 days.
 .SH EXAMPLES
 .TP
 .B laptop welcome
