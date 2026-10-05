@@ -127,6 +127,34 @@ laptop_self_command_touch "cleanup" "2024-05-15T12:00:00Z" # 31 days before now
 _laptop_welcome_status_with_delay "cleanup" 30
 assert "grep -c 'not executed since 31 day(s)' '$WELCOME_OUTPUT_FILE'" "1"
 
+## uptime status ###############################################################
+
+_laptop_welcome_uptime_status_with_delay() {
+  local mock_up_seconds="$1"
+  local delay="$2"
+
+  (
+    export LAPTOP_UPTIME_DELAY="$delay"
+    # Use a distinct name so the stub is not shadowed by
+    # laptop_command__welcome_uptime_status's local up_seconds.
+    # shellcheck disable=SC2329 # invoked indirectly by laptop_command__welcome_uptime_status
+    laptop_uptime() { echo "$mock_up_seconds"; }
+    laptop_command__welcome_uptime_status
+  ) >"$WELCOME_OUTPUT_FILE" 2>&1
+}
+
+# example: below the threshold -> no warning
+_laptop_welcome_uptime_status_with_delay "$((29 * 86400))" 30
+assert "grep -c 'reboot recommended' '$WELCOME_OUTPUT_FILE'" "0"
+
+# example: exactly at the threshold -> warns
+_laptop_welcome_uptime_status_with_delay "$((30 * 86400))" 30
+assert "grep -c 'Host up for 30 day(s), reboot recommended' '$WELCOME_OUTPUT_FILE'" "1"
+
+# example: above the threshold -> warns with day count
+_laptop_welcome_uptime_status_with_delay "$((31 * 86400))" 30
+assert "grep -c 'Host up for 31 day(s), reboot recommended' '$WELCOME_OUTPUT_FILE'" "1"
+
 ## laptop_command__welcome: aggregates all commands ############################
 
 _laptop_user_state_reset
@@ -136,10 +164,13 @@ laptop_self_command_touch "cleanup" "2024-06-14T12:00:00Z" # 1 day before now, n
 (
   # shellcheck disable=SC2329 # invoked indirectly by laptop_command__welcome
   laptop_profile_version() { echo "$WELCOME_PROFILE_VERSION"; }
-  LAPTOP_SETUP_DELAY=2 LAPTOP_UPGRADE_DELAY=7 LAPTOP_CLEANUP_DELAY=7 \
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_command__welcome
+  laptop_uptime() { echo 120; }
+  LAPTOP_SETUP_DELAY=2 LAPTOP_UPGRADE_DELAY=7 LAPTOP_CLEANUP_DELAY=7 LAPTOP_UPTIME_DELAY=9999 \
     laptop_command__welcome
 ) >"$WELCOME_OUTPUT_FILE" 2>&1
 
 assert "grep -c 'not executed since' '$WELCOME_OUTPUT_FILE'" "1"
 assert "grep -c 'laptop upgrade' '$WELCOME_OUTPUT_FILE'" "1"
 assert "grep -c 'not launched' '$WELCOME_OUTPUT_FILE'" "0"
+assert "grep -c 'reboot recommended' '$WELCOME_OUTPUT_FILE'" "0"

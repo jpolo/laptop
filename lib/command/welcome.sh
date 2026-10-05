@@ -104,6 +104,7 @@ laptop_command__welcome() {
 
   echo ""
   laptop_command__welcome_status_outdated
+  laptop_command__welcome_uptime_status
   local index command
   for index in "${!__LAPTOP_WELCOME_COMMANDS[@]}"; do
     command="${__LAPTOP_WELCOME_COMMANDS[$index]}"
@@ -125,6 +126,19 @@ laptop_command__welcome_kernel() {
 
 laptop_command__welcome_uptime() {
   laptop_command__welcome_col "Uptime:" "$(laptop_ansi "white")Host up for $(laptop_ansi "cyan")$(laptop_print_uptime)"
+}
+
+laptop_command__welcome_uptime_status() {
+  local up_seconds days delay config_hint
+
+  up_seconds="$(laptop_uptime)"
+  days=$(( up_seconds / 86400 ))
+  delay="$(laptop_self_command_last_completed_delay "uptime" 30)"
+  config_hint="$(laptop_ansi "dim")(recommended interval: $delay day(s))$(laptop_ansi "reset")"
+
+  if [ "$days" -ge "$delay" ]; then
+    laptop_command__welcome_notification warn "Host up for $days day(s), reboot recommended $config_hint"
+  fi
 }
 
 laptop_command__welcome_gituser() {
