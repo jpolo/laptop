@@ -6,11 +6,10 @@ zmodule input
 # asdf, with auto install and optimized usage (replaces the OMZ asdf plugin, which crashes under zimfw)
 zmodule asdf
 
-# Prompt (starship binary is downloaded from GitHub releases on Linux when not provided by a package manager)
-zmodule starship --use mkdir \
-  --on-pull '[[ $OSTYPE == linux* ]] && curl -fsSL "https://github.com/starship/starship/releases/latest/download/starship-$(uname -m)-unknown-linux-musl.tar.gz" | tar -xz' \
-  --cmd '(( ${+commands[starship]} )) || path=({} $path)'
-zmodule joke/zim-starship
+# Prompt integration. Starship itself is installed separately (brew or another package manager).
+if (( ${+commands[starship]} )); then
+  zmodule joke/zim-starship
+fi
 
 # Suggestions and history search
 zmodule zsh-users/zsh-autosuggestions
