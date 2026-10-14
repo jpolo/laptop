@@ -8,6 +8,7 @@ assert_raises "(env() { [[ \"\$1\" == zsh && \"\$2\" == --login && \"\$3\" == -i
 assert_raises "(env() { [[ \"\$1\" == zsh && \"\$2\" == --login && \"\$3\" == -i && \"\$4\" == -c && \"\$5\" == 'command -v \"zimfw\"' && \"\$TEST_ZIMFW_AVAILABLE\" == yes ]]; }; TEST_ZIMFW_AVAILABLE=no laptop_command_exists zimfw)" 1
 assert_raises "(env() { [[ \"\$1\" == zsh && \"\$2\" == --login && \"\$3\" == -i && \"\$4\" == -c && \"\$5\" == 'command -v \"zinit\"' && \"\$TEST_ZINIT_AVAILABLE\" == yes ]]; }; TEST_ZINIT_AVAILABLE=yes laptop_command_exists zinit)" 0
 assert_raises "(env() { [[ \"\$1\" == zsh && \"\$2\" == --login && \"\$3\" == -i && \"\$4\" == -c && \"\$5\" == 'command -v \"zinit\"' && \"\$TEST_ZINIT_AVAILABLE\" == yes ]]; }; TEST_ZINIT_AVAILABLE=no laptop_command_exists zinit)" 1
+# shellcheck disable=SC2016
 assert_raises '[[ " ${__LAPTOP_UPGRADE_TOOLS[*]} " == *" zinit "* && " ${__LAPTOP_CLEANUP_TOOLS[*]} " == *" zinit "* ]]' 0
 
 assert "(laptop_step_upgrade_start() { printf 'start:%s\\n' \"\$1\"; }; laptop_step_eval() { printf 'eval:%s\\n' \"\$1\"; }; laptop_zimfw_ensure_updated)" $'start:zimfw updated\neval:env zsh --login -i -c "zimfw update && zimfw upgrade"'
@@ -37,8 +38,10 @@ zimfw_startup_smoke_test() {
   printf 'export ZIMFW_TEST_CONFIG=loaded\n' > "$config_home/zsh/init"
   printf 'export ZIMFW_TEST_DATA=loaded\n' > "$data_home/zsh/init"
   printf 'export ZIMFW_TEST_LOCAL=loaded\n' > "$smoke_home/.zshrc.local"
+  # shellcheck disable=SC2016
   printf 'print '\''export ZIMFW_TEST_INIT=loaded'\'' > "$ZIM_HOME/init.zsh"\n' > "$zim_home/zimfw.zsh"
 
+  # shellcheck disable=SC2016
   env HOME="$smoke_home" \
     PATH="$smoke_home/bin:/usr/bin:/bin" \
     XDG_CONFIG_HOME="$config_home" \
