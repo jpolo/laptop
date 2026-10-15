@@ -32,6 +32,9 @@ laptop_command__config() {
   "npm")
     config_file="$(npm config get userconfig)"
     ;;
+  "ssh")
+    config_file="$HOME/.ssh/config"
+    ;;
   *)
     laptop_die "Unknown config type: $config_type"
     ;;

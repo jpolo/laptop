@@ -77,6 +77,7 @@ _laptop_command_load() {
 ###   asdf: asdf versions file (.tool-versions)
 ###   git: git configuration file
 ###   npm: npm user configuration file (.npmrc)
+###   ssh: ssh client configuration file (~/.ssh/config)
 ###   starship: starship configuration file
 ###   zsh: zsh configuration file
 ###
