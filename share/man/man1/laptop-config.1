@@ -37,6 +37,9 @@ SSH client configuration file ($HOME/.ssh/config).
 .B starship
 Starship prompt configuration file ($STARSHIP_CONFIG or $XDG_CONFIG_HOME/starship/config.toml).
 .TP
+.B zimfw
+Zimfw module configuration file ($ZIM_CONFIG_FILE or $XDG_CONFIG_HOME/zim/zimrc).
+.TP
 .B zsh
 Zsh shell configuration file ($XDG_CONFIG_HOME/zsh/init).
 .SH EXAMPLES
@@ -58,6 +61,9 @@ View the SSH client configuration file.
 .TP
 .B laptop config view starship
 View the starship prompt configuration file.
+.TP
+.B laptop config view zimfw
+View the zimfw module configuration file.
 .TP
 .B laptop config view asdf
 View the asdf versions file.
@@ -86,6 +92,9 @@ Print the SSH client configuration file path.
 .B laptop config path starship
 Print the starship configuration file path.
 .TP
+.B laptop config path zimfw
+Print the zimfw module configuration file path.
+.TP
 .B laptop config path asdf
 Print the asdf versions file path.
 .SH ENVIRONMENT VARIABLES
@@ -98,6 +107,9 @@ Path to the laptop configuration file.
 .TP
 .B STARSHIP_CONFIG
 Path to the starship configuration file.
+.TP
+.B ZIM_CONFIG_FILE
+Path to the zimfw module configuration file.
 .TP
 .B XDG_CONFIG_HOME
 Base directory for configuration files (default: $HOME/.config).

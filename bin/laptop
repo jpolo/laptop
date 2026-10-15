@@ -79,6 +79,7 @@ _laptop_command_load() {
 ###   npm: npm user configuration file (.npmrc)
 ###   ssh: ssh client configuration file (~/.ssh/config)
 ###   starship: starship configuration file
+###   zimfw: zimfw module configuration file (zimrc)
 ###   zsh: zsh configuration file
 ###
 ### Environment variables:

@@ -35,6 +35,9 @@ laptop_command__config() {
   "ssh")
     config_file="$HOME/.ssh/config"
     ;;
+  "zimfw")
+    config_file="${ZIM_CONFIG_FILE:-$(laptop_xdg_dir "config")/zim/zimrc}"
+    ;;
   *)
     laptop_die "Unknown config type: $config_type"
     ;;
