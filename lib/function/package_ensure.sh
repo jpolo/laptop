@@ -23,8 +23,8 @@ laptop_package_ensure() {
   local definition_function="laptop_package_ensure__$package"
 
   if laptop_function_exists "$definition_function"; then
-    $definition_function "$@"
-    return 0
+    "$definition_function" "$@"
+    return $?
   else
     # pass all arguments
     laptop_package_ensure_default "$@"
