@@ -8,15 +8,38 @@ laptop_require "laptop_step_status"
 laptop_package_ensure__asdf() {
   local asdf_dir
   asdf_dir="${ASDF_DIR:-$HOME/.asdf}"
+  local target_status="present"
+  local args=("$@")
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -s | --status)
+      target_status="$2"
+      shift 2
+      ;;
+    *) shift ;;
+    esac
+  done
   if [ "$LAPTOP_PACKAGE_MANAGER" = "brew" ]; then
+    if [ "$target_status" = "absent" ]; then
+      laptop_package_ensure_default "${args[@]}"
+      return $?
+    fi
     laptop_brew_ensure_package "pkg-config"
     # unlink pkg-config on linux to avoid conflicts
     if [[ "$OSTYPE" != "darwin"* ]]; then
       laptop_brew_ensure_link "pkg-config" --status absent
     fi
-    laptop_package_ensure_default "asdf"
+    laptop_package_ensure_default "${args[@]}"
   else
-    if [ ! -d "$asdf_dir" ]; then
+    if [ "$target_status" = "absent" ]; then
+      if [ -d "$asdf_dir" ]; then
+        laptop_step_start "- Ensure asdf removed (via git)"
+        laptop_step_eval "rm -rf '$asdf_dir'"
+      else
+        laptop_step_start "- Ensure asdf removed (via git)"
+        laptop_step_status "ok"
+      fi
+    elif [ ! -d "$asdf_dir" ]; then
       laptop_step_start "- Ensure asdf installed (via git)"
       laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.14.0"
       # shellcheck disable=SC1091
