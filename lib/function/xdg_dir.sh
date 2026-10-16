@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  _XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
   _XDG_DATA_HOME_DEFAULT="$HOME/Library"
   _XDG_CONFIG_HOME_DEFAULT="$HOME/Library/Preferences"
   _XDG_CACHE_HOME_DEFAULT="$HOME/Library/Caches"
   _XDG_STATE_HOME_DEFAULT="$HOME/Library/Application Support"
 else
+  _XDG_BIN_HOME_DEFAULT="$HOME/.local/bin"
   _XDG_DATA_HOME_DEFAULT="$HOME/.local/share"
   _XDG_CONFIG_HOME_DEFAULT="$HOME/.config"
   _XDG_CACHE_HOME_DEFAULT="$HOME/.cache"
@@ -16,9 +18,12 @@ fi
 #
 # Usage: laptop_xdg_dir <type>
 #
-# type: data, config, cache, runtime
+# type: data, config, cache, state, bin
 laptop_xdg_dir() {
   case "$1" in
+  bin)
+    echo "${XDG_BIN_HOME:-$_XDG_BIN_HOME_DEFAULT}"
+    ;;
   data)
     echo "${XDG_DATA_HOME:-$_XDG_DATA_HOME_DEFAULT}"
     ;;
@@ -32,7 +37,7 @@ laptop_xdg_dir() {
     echo "${XDG_STATE_HOME:-$_XDG_STATE_HOME_DEFAULT}"
     ;;
   *)
-    echo "Usage: laptop_xdg_dir {data|config|cache|state}" >&2
+    echo "Usage: laptop_xdg_dir {data|config|cache|state|bin}" >&2
     return 1
     ;;
   esac

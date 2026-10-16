@@ -18,6 +18,9 @@ laptop_command__config() {
   "asdf")
     config_file="$HOME/.tool-versions"
     ;;
+  "mise")
+    config_file="${MISE_CONFIG_DIR:-$(laptop_xdg_dir "config")/mise}/config.toml"
+    ;;
   "git")
     config_file="$(laptop_xdg_dir "config")/git/config"
     ;;

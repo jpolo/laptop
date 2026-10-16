@@ -14,13 +14,9 @@ Source Control Manager :
 
 Programming language :
 
-- [asdf-vm] multi-language version manager (replaces nvm, rbenv, etc)
-  - ✅ Plugin Ruby
-  - ✅ Plugin NodeJS (+ `npm`, `yarn`)
-  - ✅ Plugin Java
-  - ✅ Plugin Python
-  - ✅ Plugin Terraform
-  - ✅ Plugin Cocoapods
+- [mise] multi-language version manager (replaces nvm, rbenv, etc)
+  - Uses the profile's `.tool-versions` for Ruby, Node.js, Java, and Python
+- Existing asdf installations retain the recommended asdf plugin setup and `.tool-versions` support
 
 Code Editor :
 
@@ -33,7 +29,7 @@ Misc :
 - `~/Code` folder to clone all repositories / organize projects
 - `~/Captures` folder to manage screen shots and screen captures
 
-[asdf-vm]: https://github.com/asdf-vm/asdf
+[mise]: https://mise.jdx.dev/
 [Git]: https://git-scm.com/
 [GitHub CLI]: https://cli.github.com/
 [Starship]: https://starship.rs

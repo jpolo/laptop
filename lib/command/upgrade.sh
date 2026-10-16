@@ -8,6 +8,7 @@ laptop_require "laptop_step_upgrade_start"
 laptop_require "laptop_self_ensure_updated"
 laptop_require "laptop_brew_ensure_updated"
 laptop_require "laptop_asdf_ensure_updated"
+laptop_require "laptop_mise_ensure_updated"
 laptop_require "laptop_npm_ensure_updated"
 laptop_require "laptop_androidsdk_ensure_updated"
 laptop_require "laptop_sdkmanager_ensure_updated"
@@ -19,7 +20,7 @@ laptop_require "laptop_apt_ensure_updated"
 laptop_require "laptop_filter_command_exists"
 laptop_require "laptop_self_command_touch"
 
-__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "android" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "zinit" "apt-get")
+__LAPTOP_UPGRADE_TOOLS=("laptop" "brew" "android" "mise" "asdf" "npm" "code" "cursor" "sdkmanager" "softwareupdate" "zimfw" "zinit" "apt-get")
 
 laptop_command__upgrade_detect() {
   local filtered_commands
@@ -45,6 +46,9 @@ laptop_command__upgrade_run() {
       ;;
     apt-get)
       laptop_apt_ensure_updated
+      ;;
+    mise)
+      laptop_mise_ensure_updated
       ;;
     asdf)
       laptop_asdf_ensure_updated

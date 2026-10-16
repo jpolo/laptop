@@ -33,7 +33,7 @@ laptop_require "laptop_function_exists"
 laptop_require "laptop_self_command_touch"
 laptop_require "laptop_self_command_last_completed_at"
 
-# Change current directory to home (to avoid issues with asdf)
+# Change current directory to home to avoid version-manager project overrides.
 cd "$HOME" || exit 1
 
 ###   cleanup: empty cache and prune unused resources
@@ -74,7 +74,8 @@ _laptop_command_load() {
 ###
 ### Configuration type:
 ###   self: laptop configuration file
-###   asdf: asdf versions file (.tool-versions)
+###   asdf: shared tool versions file (.tool-versions), compatible with asdf and mise
+###   mise: mise configuration file
 ###   git: git configuration file
 ###   npm: npm user configuration file (.npmrc)
 ###   ssh: ssh client configuration file (~/.ssh/config)

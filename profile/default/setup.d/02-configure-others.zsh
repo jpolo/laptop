@@ -32,8 +32,7 @@ if [ "$LAPTOP_DEVCONTAINER" = "false" ];then
   laptop_vscode_ensure_setting '["editor.fontFamily"]' "\"'Monaspace Neon', Menlo, Monaco, Courier New, monospace\""
   laptop_vscode_ensure_setting '["editor.fontLigatures"]' "\"'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'\""
 
-  # Fix ruby lsp with asdf
-  laptop_vscode_ensure_setting '["rubyLsp.rubyVersionManager","identifier"]' '"asdf"'
+  # Fix ruby lsp with mise
+  laptop_vscode_ensure_setting '["rubyLsp.rubyVersionManager","identifier"]' "\"$(laptop_tool_manager)\""
 fi
-
 

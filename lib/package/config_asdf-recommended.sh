@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_asdf_ensure_plugin"
+laptop_require "laptop_tool_manager"
+laptop_require "laptop_log"
 
 laptop_package_ensure__config:asdf-recommended() {
+  if [ "$(laptop_tool_manager)" != "asdf" ]; then
+    laptop_log info "Skipping asdf recommended configuration because asdf is not installed"
+    return 0
+  fi
 
   # Install ASDF plugins
   laptop_asdf_ensure_plugin "java" "https://github.com/halcyon/asdf-java.git"

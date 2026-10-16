@@ -16,7 +16,7 @@ _laptop_completion() {
   local -a global_opts=(-h --help -y --yes -v --version --color)
   local -a color_modes=(auto always never)
   local -a config_actions=(edit path view)
-  local -a config_types=(self asdf git npm ssh starship zimfw zsh)
+  local -a config_types=(self asdf git mise npm ssh starship zimfw zsh)
 
   if [[ "$cur" == --color=* ]]; then
     COMPREPLY=($(compgen -W "--color=auto --color=always --color=never" -- "$cur"))

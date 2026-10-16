@@ -7,7 +7,7 @@ laptop_package_ensure__pack:cli-tools() {
   laptop_package_ensure "adr-tools"
 
   laptop_package_ensure "gitmoji"
-  # laptop_package_ensure "google-cloud-sdk" -> TODO: Change method to use asdf install
+  # laptop_package_ensure "google-cloud-sdk"
   laptop_package_ensure "bat"
   laptop_package_ensure "fd"
   laptop_package_ensure "fzf"

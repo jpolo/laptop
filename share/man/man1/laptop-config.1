@@ -23,7 +23,10 @@ Print the resolved path of the specified configuration file.
 The laptop tool's own configuration file ($LAPTOP_USER_CONFIG_FILE).
 .TP
 .B asdf
-asdf versions file ($HOME/.tool-versions).
+Shared tool versions file ($HOME/.tool-versions), compatible with mise and asdf.
+.TP
+.B mise
+mise global configuration file ($MISE_CONFIG_DIR/config.toml, or $XDG_CONFIG_HOME/mise/config.toml).
 .TP
 .B git
 Git configuration file ($XDG_CONFIG_HOME/git/config).
@@ -66,7 +69,10 @@ View the starship prompt configuration file.
 View the zimfw module configuration file.
 .TP
 .B laptop config view asdf
-View the asdf versions file.
+View the shared tool versions file.
+.TP
+.B laptop config view mise
+View the mise configuration file.
 .TP
 .B laptop config edit self
 Edit the laptop configuration file in your default editor.
@@ -81,7 +87,10 @@ Edit the npm user configuration file in your default editor.
 Edit the zsh configuration file in your default editor.
 .TP
 .B laptop config edit asdf
-Edit the asdf versions file in your default editor.
+Edit the shared tool versions file in your default editor.
+.TP
+.B laptop config edit mise
+Edit the mise configuration file in your default editor.
 .TP
 .B laptop config path
 Print the laptop configuration file path (default).
@@ -96,7 +105,10 @@ Print the starship configuration file path.
 Print the zimfw module configuration file path.
 .TP
 .B laptop config path asdf
-Print the asdf versions file path.
+Print the shared tool versions file path.
+.TP
+.B laptop config path mise
+Print the mise configuration file path.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B EDITOR
@@ -104,6 +116,9 @@ The editor to use when editing configuration files (default: vi).
 .TP
 .B LAPTOP_USER_CONFIG_FILE
 Path to the laptop configuration file.
+.TP
+.B MISE_CONFIG_DIR
+Directory containing mise's global configuration file.
 .TP
 .B STARSHIP_CONFIG
 Path to the starship configuration file.

@@ -7,7 +7,7 @@ _laptop() {
   global_opts=(-h --help -y --yes -v --version --color)
   color_modes=(auto always never)
   config_actions=(edit path view)
-  config_types=(self asdf git npm ssh starship zimfw zsh)
+  config_types=(self asdf git mise npm ssh starship zimfw zsh)
 
   local cur_word="${words[CURRENT]}"
 

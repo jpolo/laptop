@@ -140,7 +140,7 @@ Try to install all software from the current profile (that was configured at fir
 
 ### `laptop upgrade`
 
-Detect many tools (`brew`, `asdf`, etc) and launch their respective update command.
+Detect many tools (`brew`, `mise`, `asdf` when installed, etc) and launch their respective update command.
 
 For zimfw, this updates installed modules and upgrades the zimfw manager itself. If zinit is detected instead, it runs `zinit update --all`.
 
@@ -160,7 +160,7 @@ Run this to quickly verify that your laptop installation is healthy and up to da
 
 ### `laptop cleanup`
 
-Detect many tools (`brew`, `asdf`, etc) and try to free disk space (in a "safe" manner) :
+Detect many tools (`brew`, `mise`, `asdf` when installed, etc) and try to free disk space (in a "safe" manner) :
 
 - Remove cache
 - Prune unused data
