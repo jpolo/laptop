@@ -3,8 +3,8 @@
 zmodule environment
 zmodule input
 
-# asdf, with auto install and optimized usage (replaces the OMZ asdf plugin, which crashes under zimfw)
-zmodule asdf
+# Keep the asdf module for existing asdf installations only.
+zmodule asdf --if-command asdf
 
 # Prompt integration. Starship itself is installed separately (brew or another package manager).
 if (( ${+commands[starship]} )); then
