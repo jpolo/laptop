@@ -2,6 +2,8 @@
 
 # Profile privacy settings
 LAPTOP_PROFILE_PRIVACY="${LAPTOP_PROFILE_PRIVACY:-strict}"
+# Tool manager settings
+LAPTOP_TOOL_MANAGER="${LAPTOP_TOOL_MANAGER:-mise}"
 # shellcheck disable=SC2034
 LAPTOP_INSTALL_BREW_PACKAGE="w5s/tap/laptop"
 # shellcheck disable=SC2034

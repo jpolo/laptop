@@ -11,8 +11,14 @@ laptop_package_ensure__pack:core() {
   laptop_package_ensure "moreutils"
   laptop_package_ensure "findutils"
   laptop_package_ensure "curl"
-  laptop_package_ensure "asdf" --status absent
-  laptop_package_ensure "mise"
+
+  for tool in "asdf" "mise"; do
+    if [ "$LAPTOP_TOOL_MANAGER" = "$tool" ]; then
+      laptop_package_ensure "$tool" --status present
+    else
+      laptop_package_ensure "$tool" --status absent
+    fi
+  done
   laptop_package_ensure "git"
   laptop_package_ensure "gnutls"
   laptop_package_ensure "gnupg"
