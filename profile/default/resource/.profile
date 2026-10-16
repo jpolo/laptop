@@ -64,9 +64,8 @@
 # jenv, rbenv, etc
 export ANSIBLE_HOME="$XDG_CONFIG_HOME/ansible"
 export ANSIBLE_GALAXY_CACHE_DIR="${XDG_CACHE_HOME}/ansible/galaxy_cache"
-# export ASDF_DIR="$XDG_DATA_HOME/asdf"
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
-export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+export ASDF_CONFIG_FILE="${ASDF_CONFIG_FILE:-$XDG_CONFIG_HOME/asdf/asdfrc}"
+export ASDF_DATA_DIR="${ASDF_DATA_DIR:-$XDG_DATA_HOME/asdf}"
 export AZURE_CONFIG_DIR="$XDG_DATA_HOME/azure"
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
@@ -98,6 +97,9 @@ export KUBECACHEDIR="$XDG_CACHE_HOME/kube"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
+export MISE_CONFIG_DIR="$XDG_CONFIG_HOME/mise"
+export MISE_DATA_DIR="$XDG_DATA_HOME/mise"
+export MISE_CACHE_DIR="$XDG_CACHE_HOME/mise"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/repl_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 # export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
@@ -180,6 +182,7 @@ fi
   local dir
 
   # 1. Higher-priority developer tools
+  .profile-add-candidate "$MISE_DATA_DIR/shims"
   .profile-add-candidate "$ASDF_DATA_DIR/shims"
   .profile-add-candidate "$XDG_BIN_HOME"
 
