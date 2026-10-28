@@ -11,7 +11,6 @@ laptop_package_ensure__pack:cli-tools() {
   laptop_package_ensure "bat"
   laptop_package_ensure "fd"
   laptop_package_ensure "fzf"
-  laptop_package_ensure "gh"
   laptop_package_ensure "pv"
   laptop_package_ensure "ripgrep"
   laptop_package_ensure "sops"
@@ -23,4 +22,8 @@ laptop_package_ensure__pack:cli-tools() {
   laptop_package_ensure "universal-ctags"
   # laptop_package_ensure "xeol"
   laptop_package_ensure "yq"
+
+  # Third party tools
+  laptop_package_ensure "gh"
+  laptop_package_ensure "atlassian-cli"
 }
