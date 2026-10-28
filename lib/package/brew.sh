@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_step_start_status"
-laptop_require "laptop_step_eval"
+laptop_require "laptop_step_exec"
 laptop_require "laptop_step_status"
+laptop_require "laptop_log"
 
 laptop_package_ensure__brew() {
   # Install Homebrew
@@ -17,15 +18,24 @@ laptop_package_ensure__brew() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      # shellcheck disable=SC2016
-      laptop_step_eval 'NONINTERACTIVE=1 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-      # if brew not found
-      for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"; do
-        if [ -f "$prefix/bin/brew" ]; then
-          eval "$("$prefix/bin/brew" shellenv)"
-          break
-        fi
-      done
+      # Download first so a failed curl does not become a successful empty bash -c.
+      # Run attached to the terminal (no NONINTERACTIVE/CI) so a fresh Mac can
+      # prompt for sudo; CI/non-TTY still auto-noninteractive via Homebrew itself.
+      local installer
+      if ! installer=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh); then
+        echo ""
+        laptop_step_status "fail"
+        laptop_log error "Failed to download Homebrew installer"
+      else
+        laptop_step_exec --interactive -- /bin/bash -c "$installer"
+        # if brew not found
+        for prefix in "/opt/homebrew" "/usr/local" "$HOME/.linuxbrew" "/home/linuxbrew/.linuxbrew"; do
+          if [ -f "$prefix/bin/brew" ]; then
+            eval "$("$prefix/bin/brew" shellenv)"
+            break
+          fi
+        done
+      fi
     else
       laptop_step_status "fail"
     fi
