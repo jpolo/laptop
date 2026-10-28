@@ -80,6 +80,19 @@ lint: dependencies lint.workflow-intro $(call core-hooks,.lint) ## Lint all sour
 	@:
 
 #-------------
+# TYPECHECK
+#-------------
+.PHONY: typecheck $(call core-hooks,.typecheck)
+typecheck: dependencies typecheck.workflow-intro $(call core-hooks,.typecheck) ## Typecheck all source files
+
+.typecheck.before::
+	@:
+.typecheck::
+	@:
+.typecheck.after::
+	@:
+
+#-------------
 # FORMAT
 #-------------
 .PHONY: format $(call core-hooks,.format)
@@ -243,7 +256,7 @@ endif
 #
 # MAKEFILE_VALIDATE_TARGETS += my-target-validate
 #
-MAKEFILE_VALIDATE_TARGETS := build lint test
+MAKEFILE_VALIDATE_TARGETS := build lint typecheck test
 
 .PHONY: validate $(call core-hooks,.validate)
 validate: validate.workflow-intro $(call core-hooks,.validate) ## Validate code for potential issues

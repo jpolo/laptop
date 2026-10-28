@@ -115,6 +115,10 @@ CI=1 make lint
 
 #### `make lint` : Run all linters (ESLint, rubocop, etc)
 
+#### `make typecheck` : Typecheck all source files
+
+#### `make validate` : Run build, lint, typecheck, and tests
+
 #### `make scan` : Scan code for issues (xeol, etc)
 
 ### Versioning an app

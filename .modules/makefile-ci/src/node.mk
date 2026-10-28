@@ -214,6 +214,15 @@ node-lint: node-dependencies
 .lint::	node-lint # Add `npm run lint` to `make lint`
 
 #
+# Run npm typecheck script (ex: npm run typecheck)
+#
+.PHONY: node-typecheck
+node-typecheck: node-dependencies
+	@$(call log,info,"[NodeJS] Typecheck sources...",1)
+	$(Q)$(NODEJS_RUN) typecheck
+.typecheck:: node-typecheck # Add `npm run typecheck` to `make typecheck`
+
+#
 # Run npm format script (ex: npm run format)
 #
 .PHONY: node-format
