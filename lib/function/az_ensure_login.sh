@@ -2,7 +2,7 @@
 
 laptop_require "laptop_step_start_status"
 laptop_require "laptop_step_status"
-laptop_require "laptop_step_eval"
+laptop_require "laptop_step_exec"
 
 # Ensure the user is logged into the Azure CLI (az).
 # Logs in when not already authenticated.
@@ -38,8 +38,8 @@ laptop_az_ensure_login() {
   if [ "$resource_current_status" = "$resource_status" ]; then
     laptop_step_status "ok"
   elif [ -n "$tenant" ]; then
-    laptop_step_eval "az login --tenant \"$tenant\""
+    laptop_step_exec --interactive -- az login --tenant "$tenant"
   else
-    laptop_step_eval "az login"
+    laptop_step_exec --interactive -- az login
   fi
 }
