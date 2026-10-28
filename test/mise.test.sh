@@ -7,6 +7,7 @@ mkdir -p "$MISE_TEST_PROFILE"
 printf 'nodejs 24.18.0\npython 3.14.6\n' >"$MISE_TEST_VERSIONS"
 : >"$MISE_TEST_CALLS"
 
+# shellcheck disable=SC2329 # invoked indirectly by laptop_mise_ensure_package
 mise() {
   printf '%s\n' "$*" >>"$MISE_TEST_CALLS"
 }
@@ -19,9 +20,8 @@ source "$LAPTOP_HOME/lib/package/mise.sh"
   laptop_brew_ensure_package() {
     printf 'brew %s\n' "$*" >>"$MISE_TEST_CALLS"
   }
-  LAPTOP_PACKAGE_MANAGER="brew"
-  laptop_package_ensure__mise mise
-  laptop_package_ensure__mise mise --status absent
+  LAPTOP_PACKAGE_MANAGER="brew" laptop_package_ensure__mise mise
+  LAPTOP_PACKAGE_MANAGER="brew" laptop_package_ensure__mise mise --status absent
 )
 assert "tail -n 2 '$MISE_TEST_CALLS'" $'brew mise mise\nbrew mise mise --status absent'
 
@@ -62,6 +62,7 @@ source "$LAPTOP_HOME/lib/package/profile_core.sh"
   laptop_asdf_ensure_package_list() {
     printf 'asdf\n' >>"$MISE_TEST_CALLS"
   }
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_tool_manager
   command() {
     if [[ "$1" == "-v" && "$2" == "mise" ]]; then
       return 0
@@ -89,6 +90,7 @@ assert "tail -n 1 '$MISE_TEST_CALLS'" "mise"
   laptop_asdf_ensure_package_list() {
     printf 'asdf\n' >>"$MISE_TEST_CALLS"
   }
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_tool_manager
   command() {
     if [[ "$1" == "-v" && "$2" == "mise" ]]; then
       return 1
@@ -116,6 +118,7 @@ assert "tail -n 1 '$MISE_TEST_CALLS'" "asdf"
   laptop_asdf_ensure_package_list() {
     printf 'asdf\n' >>"$MISE_TEST_CALLS"
   }
+  # shellcheck disable=SC2329 # invoked indirectly by laptop_tool_manager
   command() {
     if [[ "$1" == "-v" && "$2" == "mise" ]]; then
       return 0
