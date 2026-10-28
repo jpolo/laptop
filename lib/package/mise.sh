@@ -38,7 +38,7 @@ laptop_package_ensure__mise() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_eval "curl -fsSL https://mise.run | MISE_INSTALL_PATH=\"$mise_path\" sh"
+      laptop_step_eval "curl -fsSL https://mise.run | MISE_INSTALL_PATH=$(quote "$mise_path") sh"
     else
       laptop_step_exec "echo 'Not supported'; exit 1"
     fi

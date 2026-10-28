@@ -32,6 +32,10 @@ laptop_directory_ensure() {
     *) shift ;;
     esac
   done
+  if [[ -n "$mode" && ! "$mode" =~ ^[0-7]{3,4}$ ]]; then
+    printf 'Invalid directory mode: %s\n' "$mode" >&2
+    return 1
+  fi
   local current_resource_status
   current_resource_status=$(test -d "$directory" && echo "present" || echo "absent")
   local message
@@ -44,7 +48,7 @@ laptop_directory_ensure() {
       local command_script
       command_script="mkdir -p $(quote "$directory")"
       if [ ! -z "$mode" ]; then
-        command_script+=" && chmod $mode $(quote "$directory")"
+        command_script+=" && chmod $(quote "$mode") $(quote "$directory")"
       fi
       laptop_step_eval "$command_script"
     else

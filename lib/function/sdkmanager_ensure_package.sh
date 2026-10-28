@@ -35,9 +35,9 @@ laptop_sdkmanager_ensure_package() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_eval "sdkmanager --install '$package'"
+      laptop_step_exec sdkmanager --install "$package"
     else
-      laptop_step_eval "sdkmanager --uninstall '$package'"
+      laptop_step_exec sdkmanager --uninstall "$package"
     fi
   fi
 }

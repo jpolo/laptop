@@ -35,9 +35,9 @@ laptop_androidsdk_ensure_package() {
     laptop_step_status "ok"
   else
     if [ "$resource_status" = "present" ]; then
-      laptop_step_eval "android sdk install '$package'"
+      laptop_step_exec android sdk install "$package"
     else
-      laptop_step_eval "android sdk remove '$package'"
+      laptop_step_exec android sdk remove "$package"
     fi
   fi
 }

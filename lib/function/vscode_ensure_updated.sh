@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 laptop_require "laptop_step_upgrade_start"
-laptop_require "laptop_step_eval"
+laptop_require "laptop_step_exec"
 laptop_require "laptop_vscode_app_name"
 
 # Ensure VSCode is up to date
@@ -20,5 +20,5 @@ laptop_vscode_ensure_updated() {
   app_name=$(laptop_vscode_app_name "$executable")
 
   laptop_step_upgrade_start "$app_name updated"
-  laptop_step_eval "$executable --update-extensions"
+  laptop_step_exec "$executable" --update-extensions
 }

@@ -3,7 +3,7 @@
 laptop_require "laptop_package_ensure_default"
 laptop_require "laptop_directory_ensure"
 laptop_require "laptop_step_start"
-laptop_require "laptop_step_eval"
+laptop_require "laptop_step_exec"
 laptop_require "laptop_step_status"
 laptop_require "laptop_xdg_dir"
 
@@ -52,7 +52,7 @@ laptop_package_ensure__asdf() {
   else
     if [ ! -d "$asdf_dir" ]; then
       laptop_step_start "- Ensure asdf installed (via git)"
-      laptop_step_eval "git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.14.0"
+      laptop_step_exec git clone https://github.com/asdf-vm/asdf.git "$asdf_dir" --branch v0.14.0
       # shellcheck disable=SC1091
       source "$asdf_dir/asdf.sh"
     else

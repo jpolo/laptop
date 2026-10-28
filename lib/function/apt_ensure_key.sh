@@ -11,5 +11,5 @@ laptop_require "laptop_step_eval"
 laptop_apt_ensure_key() {
   local repo_key="$1"
   laptop_step_start "- Ensure apt key '$repo_key'"
-  laptop_step_eval "! wget -qO - '$repo_key' | sudo apt-key add -"
+  laptop_step_eval "! wget -qO - $(quote "$repo_key") | sudo apt-key add -"
 }

@@ -90,7 +90,7 @@ laptop_apt_ensure_repository() {
       if [ -n "$sources_list" ]; then
         laptop_step_eval "sudo rm -f $(quote "$sources_list")"
       else
-        laptop_step_eval "sudo sed -i '\\|$repo_url|d' /etc/apt/sources.list.d/custom.list"
+        laptop_step_eval "sudo sed -i $(quote "\\|$repo_url|d") /etc/apt/sources.list.d/custom.list"
       fi
     fi
   fi
