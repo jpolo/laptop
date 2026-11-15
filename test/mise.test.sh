@@ -15,6 +15,11 @@ mise() {
 laptop_mise_ensure_package_list "$MISE_TEST_VERSIONS" >/dev/null
 assert "cat '$MISE_TEST_CALLS'" $'use --global node@24.18.0\nuse --global python@3.14.6'
 
+printf 'java temurin-25.0.3+9.0.LTS\n' >"$MISE_TEST_VERSIONS"
+: >"$MISE_TEST_CALLS"
+laptop_mise_ensure_package_list "$MISE_TEST_VERSIONS" >/dev/null
+assert "cat '$MISE_TEST_CALLS'" 'use --global java@temurin-25.0.3+9.0.LTS'
+
 source "$LAPTOP_HOME/lib/package/mise.sh"
 (
   laptop_brew_ensure_package() {
